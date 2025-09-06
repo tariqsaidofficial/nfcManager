@@ -7,6 +7,7 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color // Import Color
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.nothingos.nfcmanager.ui.theme.NothingTextStyles
@@ -95,6 +96,13 @@ private fun EventItem(
     event: com.nothingos.nfcmanager.data.database.entities.NFCEventEntity,
     onDeleteClick: () -> Unit
 ) {
+    val eventTypeBackgroundColor = getEventTypeColor(event.eventType)
+    val badgeTextColor = when (event.eventType) {
+        "SETTINGS" -> MaterialTheme.colorScheme.onSecondary // PureBlack for MediumGray background
+        "SYSTEM" -> MaterialTheme.colorScheme.onTertiary   // PureBlack for LightGray background
+        else -> MaterialTheme.colorScheme.onPrimary        // PureWhite for other backgrounds (Red, LightRed, DarkGray)
+    }
+
     Card(
         modifier = Modifier.fillMaxWidth(),
         colors = CardDefaults.cardColors(
@@ -128,13 +136,13 @@ private fun EventItem(
             
             // Event Type Badge
             Surface(
-                color = getEventTypeColor(event.eventType),
+                color = eventTypeBackgroundColor,
                 shape = MaterialTheme.shapes.small
             ) {
                 Text(
                     text = event.eventType,
                     style = NothingTextStyles.Caption,
-                    color = MaterialTheme.colorScheme.onPrimary,
+                    color = badgeTextColor, // Use adaptive text color
                     modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp)
                 )
             }
@@ -143,7 +151,7 @@ private fun EventItem(
 }
 
 @Composable
-private fun getEventTypeColor(eventType: String): androidx.compose.ui.graphics.Color {
+private fun getEventTypeColor(eventType: String): Color {
     return when (eventType) {
         "NFC_STATE" -> MaterialTheme.colorScheme.primary
         "PRIVACY" -> MaterialTheme.colorScheme.error

@@ -1,7 +1,9 @@
 package com.nothingos.nfcmanager
 
+import android.graphics.Color // Required for Color.TRANSPARENT
 import android.os.Bundle
 import androidx.activity.ComponentActivity
+import androidx.activity.SystemBarStyle
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
@@ -9,11 +11,11 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.core.view.WindowCompat
+// import androidx.core.view.WindowCompat // No longer explicitly needed here
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.nothingos.nfcmanager.data.database.AppDatabase
 import com.nothingos.nfcmanager.data.repository.NFCRepository
-import com.nothingos.nfcmanager.ui.theme.NothingOSTheme // Updated import
+import com.nothingos.nfcmanager.ui.theme.NothingOSTheme
 import com.nothingos.nfcmanager.viewmodel.MainViewModel
 import com.nothingos.nfcmanager.viewmodel.ActivityViewModel
 import com.nothingos.nfcmanager.viewmodel.SettingsViewModel
@@ -31,9 +33,13 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         
-        // Enable edge-to-edge display (Android 15+ style)
-        enableEdgeToEdge()
-        WindowCompat.setDecorFitsSystemWindows(window, false)
+        // Configure edge-to-edge display for a dark-themed app
+        // NothingOSTheme defaults to darkTheme = true
+        enableEdgeToEdge(
+            statusBarStyle = SystemBarStyle.dark(Color.TRANSPARENT), // Light icons on transparent background
+            navigationBarStyle = SystemBarStyle.dark(Color.TRANSPARENT) // Light buttons on transparent background (if API level supports)
+        )
+        // WindowCompat.setDecorFitsSystemWindows(window, false) // This is implicitly handled by enableEdgeToEdge
         
         // Initialize Database and Repository
         setupDatabase()
@@ -59,10 +65,10 @@ class MainActivity : ComponentActivity() {
      */
     @Composable
     private fun NFCManagerApp() {
-        NothingOSTheme { // Updated theme name
+        NothingOSTheme { // Defaults to darkTheme = true
             Surface(
                 modifier = Modifier.fillMaxSize(),
-                color = MaterialTheme.colorScheme.background
+                color = MaterialTheme.colorScheme.background // Should be PureBlack in dark theme
             ) {
                 // Create ViewModels with repository
                 val mainViewModel: MainViewModel = viewModel {
