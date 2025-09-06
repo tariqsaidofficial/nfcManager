@@ -247,13 +247,16 @@ private fun SettingsItem(
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun ReminderIntervalSelector(
     currentInterval: Int,
     onIntervalChange: (Int) -> Unit
 ) {
-    val intervals = listOf(10, 30, 50) // Available intervals in seconds
-    
+    val intervals = listOf(5, 10, 15, 20, 30, 40, 50, 60) // Available intervals in seconds
+    val firstRowIntervals = intervals.subList(0, 4)
+    val secondRowIntervals = intervals.subList(4, 8)
+
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -273,11 +276,42 @@ private fun ReminderIntervalSelector(
             modifier = Modifier.padding(bottom = 16.dp)
         )
         
+        // First row of intervals
         Row(
             modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.spacedBy(12.dp)
+            horizontalArrangement = Arrangement.spacedBy(8.dp) // Reduced spacing
         ) {
-            intervals.forEach { interval ->
+            firstRowIntervals.forEach { interval ->
+                val isSelected = currentInterval == interval
+                
+                FilterChip(
+                    onClick = { onIntervalChange(interval) },
+                    label = {
+                        Text(
+                            text = "${interval}s",
+                            style = NothingTextStyles.ButtonText
+                        )
+                    },
+                    selected = isSelected,
+                    colors = FilterChipDefaults.filterChipColors(
+                        selectedContainerColor = MaterialTheme.colorScheme.primary,
+                        selectedLabelColor = MaterialTheme.colorScheme.onPrimary,
+                        containerColor = MaterialTheme.colorScheme.surface,
+                        labelColor = MaterialTheme.colorScheme.onSurface
+                    ),
+                    modifier = Modifier.weight(1f)
+                )
+            }
+        }
+
+        Spacer(modifier = Modifier.height(8.dp)) // Spacer between rows
+
+        // Second row of intervals
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.spacedBy(8.dp) // Reduced spacing
+        ) {
+            secondRowIntervals.forEach { interval ->
                 val isSelected = currentInterval == interval
                 
                 FilterChip(
@@ -303,7 +337,7 @@ private fun ReminderIntervalSelector(
         Spacer(modifier = Modifier.height(8.dp))
         
         Text(
-            text = "Current: ${currentInterval} seconds",
+            text = "Current: ${currentInterval}s",
             style = NothingTextStyles.Caption,
             color = MaterialTheme.colorScheme.primary,
             modifier = Modifier.align(Alignment.CenterHorizontally)
