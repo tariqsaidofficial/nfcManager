@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { Platform, AppState, AppStateStatus } from 'react-native';
 import NfcManager, { NfcTech, Ndef, NfcEvents } from 'react-native-nfc-manager';
 import { reportCrash, reportError } from '../utils/crashReporting';
+import { performanceMonitor, recordNFCCheck, setBackgroundState, getRecommendedInterval } from '../utils/performanceMonitor';
 
 interface ActivityLogEntry {
   id: number;
@@ -96,14 +97,35 @@ export const useNFCManager = () => {
     };
   }, [addLogEntry]);
 
+  // Monitor app state for battery optimization
+  useEffect(() => {
+    const handleAppStateChange = (nextAppState: AppStateStatus) => {
+      if (nextAppState === 'background') {
+        setBackgroundState(true);
+        addLogEntry('App moved to background, optimizing monitoring.', 'Battery');
+      } else if (nextAppState === 'active') {
+        setBackgroundState(false);
+        addLogEntry('App resumed, restoring normal monitoring.', 'Battery');
+      }
+    };
+
+    const subscription = AppState.addEventListener('change', handleAppStateChange);
+    return () => subscription?.remove();
+  }, [addLogEntry]);
+
   // Monitor NFC state changes
   useEffect(() => {
     let stateCheckInterval: NodeJS.Timeout;
 
     if (nfcSupported) {
-      // Check NFC state every 2 seconds
+      // Check NFC state with performance optimization
+      let checkInterval = getRecommendedInterval(2000);
+      
       stateCheckInterval = setInterval(async () => {
         try {
+          // Record NFC check for performance monitoring
+          recordNFCCheck();
+          
           const enabled = await NfcManager.isEnabled();
           
           if (enabled !== nfcEnabled) {
@@ -269,6 +291,11 @@ export const useNFCManager = () => {
     return `${Math.round(seconds / 3600)}h ago`;
   };
 
+  // Get performance statistics
+  const getPerformanceStats = useCallback(() => {
+    return performanceMonitor.getPerformanceStats();
+  }, []);
+
   return {
     nfcStatus,
     nfcSupported,
@@ -288,5 +315,6 @@ export const useNFCManager = () => {
     formatTime,
     formatRelativeTime,
     addLogEntry,
+    getPerformanceStats,
   };
 };

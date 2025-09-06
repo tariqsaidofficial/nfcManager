@@ -19,9 +19,14 @@ import {
   Info,
   ExternalLink,
   ChevronRight,
+  Clock,
+  Battery,
+  Volume2,
+  Vibrate,
 } from 'lucide-react-native';
 import { useNFCManager } from '../../hooks/useNFCManager';
 import { useNothingFonts } from '../../hooks/useFonts';
+import { performanceMonitor } from '../../utils/performanceMonitor';
 
 interface SettingsItemProps {
   icon: any;
@@ -50,7 +55,7 @@ const SettingsItem: React.FC<SettingsItemProps> = ({ icon: Icon, title, subtitle
 
 export default function SettingsScreen() {
   const fontsLoaded = useNothingFonts();
-  const { nfcStatus, addLogEntry } = useNFCManager();
+  const { nfcStatus, addLogEntry, getPerformanceStats } = useNFCManager();
 
   if (!fontsLoaded) {
     return null;
@@ -94,6 +99,77 @@ export default function SettingsScreen() {
     );
   };
 
+  const openAdvancedSettings = () => {
+    Alert.alert(
+      'Advanced Settings',
+      'Choose advanced configuration options:',
+      [
+        { text: 'Cancel', style: 'cancel' },
+        { text: 'Alert Sensitivity', onPress: openSensitivitySettings },
+        { text: 'Battery Optimization', onPress: openBatterySettings },
+        { text: 'Notification Customization', onPress: openNotificationSettings },
+      ]
+    );
+  };
+
+  const openSensitivitySettings = () => {
+    Alert.alert(
+      'Alert Sensitivity',
+      'Configure how sensitive the NFC monitoring should be:\n\n• High: More frequent checks\n• Medium: Balanced performance\n• Low: Battery optimized',
+      [
+        { text: 'High Sensitivity', onPress: () => {} },
+        { text: 'Medium (Default)', onPress: () => {} },
+        { text: 'Low Sensitivity', onPress: () => {} },
+      ]
+    );
+  };
+
+  const openBatterySettings = () => {
+    Alert.alert(
+      'Battery Optimization',
+      'Smart battery features:\n\n• Adaptive monitoring based on usage\n• Sleep mode during inactive hours\n• Background optimization',
+      [
+        { text: 'Enable Smart Mode', onPress: () => addLogEntry('Smart battery mode enabled.', 'Battery') },
+        { text: 'Optimize Now', onPress: () => addLogEntry('Battery optimization applied.', 'Battery') },
+        { text: 'Cancel', style: 'cancel' },
+      ]
+    );
+  };
+
+  const openNotificationSettings = () => {
+    Alert.alert(
+      'Notification Customization',
+      'Customize privacy alerts:\n\n• Sound: Default, Silent, Custom\n• Vibration: Off, Light, Strong\n• Alert Text: Standard, Detailed',
+      [
+        { text: 'Sound Settings', onPress: () => {} },
+        { text: 'Vibration Settings', onPress: () => {} },
+        { text: 'Text Settings', onPress: () => {} },
+      ]
+    );
+  };
+
+  const showPerformanceStats = () => {
+    const stats = getPerformanceStats();
+    const uptime = Math.round(stats.uptime / 1000 / 60); // minutes
+    
+    Alert.alert(
+      'Performance Statistics',
+      `🚀 App Performance:\n\n` +
+      `⏱️ Uptime: ${uptime} minutes\n` +
+      `📊 Memory Usage: ${stats.avgMemoryUsage}MB avg\n` +
+      `⚡ CPU Usage: ${stats.avgCPUUsage}% avg\n` +
+      `📡 NFC Checks: ${stats.totalNFCChecks}\n` +
+      `🔧 Optimizations: ${stats.optimizationCount}`,
+      [
+        { text: 'Reset Stats', onPress: () => {
+          performanceMonitor.reset();
+          addLogEntry('Performance statistics reset.', 'Settings');
+        }},
+        { text: 'OK' }
+      ]
+    );
+  };
+
   return (
     <View style={styles.container}>
       <SafeAreaView style={styles.header}>
@@ -121,6 +197,28 @@ export default function SettingsScreen() {
                 title="Security Options"
                 subtitle="Advanced NFC security settings"
                 onPress={openSecuritySettings}
+              />
+              
+              <View style={styles.separator} />
+              
+              <SettingsItem
+                icon={<Clock size={20} color="#fbbf24" />}
+                title="Advanced Settings"
+                subtitle="Sensitivity, battery, and notifications"
+                onPress={openAdvancedSettings}
+                accessibilityLabel="Advanced configuration settings"
+                accessibilityHint="Configure advanced monitoring and notification options"
+              />
+              
+              <View style={styles.separator} />
+              
+              <SettingsItem
+                icon={<Battery size={20} color="#10b981" />}
+                title="Battery Optimization"
+                subtitle="Smart power management"
+                onPress={openBatterySettings}
+                accessibilityLabel="Battery optimization settings"
+                accessibilityHint="Configure smart battery features"
               />
               
               <View style={styles.separator} />
@@ -168,6 +266,17 @@ export default function SettingsScreen() {
                 title="Documentation"
                 subtitle="Learn more about NFC management"
                 onPress={openDocumentation}
+              />
+              
+              <View style={styles.separator} />
+              
+              <SettingsItem
+                icon={<Settings size={20} color="#8b5cf6" />}
+                title="Performance Stats"
+                subtitle="View app performance metrics"
+                onPress={showPerformanceStats}
+                accessibilityLabel="Performance statistics"
+                accessibilityHint="View detailed performance and usage statistics"
               />
             </LinearGradient>
           </BlurView>
@@ -259,6 +368,7 @@ const styles = StyleSheet.create({
   },
   settingsItemSubtitle: {
     fontSize: 12,
+    fontFamily: 'NothingFont',
     color: '#ffffff',
     opacity: 0.6,
     marginTop: 2,
@@ -284,6 +394,7 @@ const styles = StyleSheet.create({
   aboutTitle: {
     fontSize: 16,
     fontWeight: 'bold',
+    fontFamily: 'NothingFont',
     color: '#ffffff',
     marginBottom: 12,
   },

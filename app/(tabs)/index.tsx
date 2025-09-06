@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   View,
   Text,
@@ -8,6 +8,8 @@ import {
   Dimensions,
   Modal,
   StatusBar,
+  TextInput,
+  Alert,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { LinearGradient } from 'expo-linear-gradient';
@@ -46,6 +48,11 @@ export default function NFCManager() {
 
   const { nfcAvailable, nfcEnabled: permNfcEnabled, permissionGranted, requestPermissions, showNFCGuide } = usePermissions();
   const [showPrivacyModal, setShowPrivacyModal] = React.useState(!permissionGranted);
+  
+  // Custom interval states
+  const reminderIntervals = [10, 30, 50];
+  const [showCustomInterval, setShowCustomInterval] = useState(false);
+  const [customInterval, setCustomInterval] = useState('');
 
   // Don't render until fonts are loaded
   if (!fontsLoaded) {
@@ -56,6 +63,30 @@ export default function NFCManager() {
     setShowPrivacyModal(false);
     if (!permissionGranted) {
       await requestPermissions();
+    }
+  };
+
+  const handleCustomInterval = () => {
+    setShowCustomInterval(true);
+  };
+
+  const saveCustomInterval = () => {
+    const interval = parseInt(customInterval);
+    if (interval >= 5 && interval <= 300) {
+      setReminderInterval(interval);
+      setShowCustomInterval(false);
+      setCustomInterval('');
+      Alert.alert(
+        'Custom Interval Set',
+        `Privacy alert will trigger after ${interval} seconds`,
+        [{ text: 'OK' }]
+      );
+    } else {
+      Alert.alert(
+        'Invalid Interval',
+        'Please enter a value between 5 and 300 seconds',
+        [{ text: 'OK' }]
+      );
     }
   };
   return (
@@ -145,7 +176,7 @@ export default function NFCManager() {
                   <Text style={styles.intervalLabel}>Interval</Text>
                 </View>
                 <View style={styles.intervalButtons}>
-                  {[10, 30, 50].map((interval) => (
+                  {reminderIntervals.map((interval) => (
                     <AccessibilityWrapper
                       key={interval}
                       label={`${interval} seconds interval`}
@@ -170,11 +201,41 @@ export default function NFCManager() {
                             },
                           ]}
                         >
-                          {interval}
+                          {interval}s
                         </Text>
                       </TouchableOpacity>
                     </AccessibilityWrapper>
                   ))}
+                  
+                  {/* Custom Interval Button */}
+                  <AccessibilityWrapper
+                    label="Custom interval"
+                    hint={!reminderIntervals.includes(reminderInterval) ? 'Currently using custom interval' : 'Tap to set custom interval'}
+                    role="button"
+                    state={{ selected: !reminderIntervals.includes(reminderInterval) }}
+                  >
+                    <TouchableOpacity
+                      onPress={handleCustomInterval}
+                      style={[
+                        styles.intervalButton,
+                        {
+                          backgroundColor: !reminderIntervals.includes(reminderInterval) ? '#ef4444' : '#1f2937',
+                        },
+                      ]}
+                    >
+                      <Text
+                        style={[
+                          styles.intervalButtonText,
+                          {
+                            color: !reminderIntervals.includes(reminderInterval) ? '#ffffff' : '#6b7280',
+                            fontSize: 12,
+                          },
+                        ]}
+                      >
+                        {!reminderIntervals.includes(reminderInterval) ? `${reminderInterval}s` : 'Custom'}
+                      </Text>
+                    </TouchableOpacity>
+                  </AccessibilityWrapper>
                 </View>
               </View>
             )}
@@ -254,6 +315,57 @@ export default function NFCManager() {
           </View>
         </BlurView>
       </Modal>
+
+      {/* Custom Interval Modal */}
+      <Modal
+        visible={showCustomInterval}
+        transparent={true}
+        animationType="fade"
+        onRequestClose={() => setShowCustomInterval(false)}
+      >
+        <BlurView intensity={40} style={styles.modalOverlay}>
+          <View style={styles.modalContainer}>
+            <LinearGradient colors={['#111111ee', '#1f2937ee']} style={styles.modalContent}>
+              <Text style={[styles.modalTitle, { fontFamily: 'NothingFont' }]}>
+                Custom Interval
+              </Text>
+              <Text style={styles.modalMessage}>
+                Enter a custom privacy alert interval (5-300 seconds):
+              </Text>
+              
+              <TextInput
+                style={[styles.customInput, { fontFamily: 'NothingFont' }]}
+                value={customInterval}
+                onChangeText={setCustomInterval}
+                placeholder="Enter seconds..."
+                placeholderTextColor="#6b7280"
+                keyboardType="numeric"
+                maxLength={3}
+                autoFocus={true}
+              />
+              
+              <View style={styles.modalButtons}>
+                <TouchableOpacity 
+                  onPress={() => setShowCustomInterval(false)} 
+                  style={styles.secondaryButton}
+                >
+                  <Text style={[styles.secondaryButtonText, { fontFamily: 'NothingFont' }]}>
+                    Cancel
+                  </Text>
+                </TouchableOpacity>
+                <TouchableOpacity 
+                  onPress={saveCustomInterval} 
+                  style={styles.primaryButton}
+                >
+                  <Text style={[styles.primaryButtonText, { fontFamily: 'NothingFont' }]}>
+                    Save
+                  </Text>
+                </TouchableOpacity>
+              </View>
+            </LinearGradient>
+          </View>
+        </BlurView>
+      </Modal>
     </View>
   );
 }
@@ -313,6 +425,7 @@ const styles = StyleSheet.create({
   statusLabel: {
     fontSize: 12,
     fontWeight: '500',
+    fontFamily: 'NothingFont',
     color: '#ffffff',
     opacity: 0.5,
     letterSpacing: 1,
@@ -380,6 +493,7 @@ const styles = StyleSheet.create({
   },
   reminderSubtitle: {
     fontSize: 12,
+    fontFamily: 'NothingFont',
     color: '#ffffff',
     opacity: 0.5,
   },
@@ -530,5 +644,22 @@ const styles = StyleSheet.create({
   secondaryButtonText: {
     fontSize: 14,
     color: '#ffffff',
+  },
+  customInput: {
+    backgroundColor: '#1f2937',
+    borderWidth: 1,
+    borderColor: '#374151',
+    borderRadius: 12,
+    paddingVertical: 12,
+    paddingHorizontal: 16,
+    color: '#ffffff',
+    fontSize: 16,
+    textAlign: 'center',
+    marginVertical: 20,
+  },
+  modalButtons: {
+    flexDirection: 'row',
+    gap: 12,
+    marginTop: 24,
   },
 });

@@ -111,6 +111,7 @@ const styles = StyleSheet.create({
   },
   headerSubtitle: {
     fontSize: 14,
+    fontFamily: 'NothingFont',
     color: '#ffffff',
     opacity: 0.7,
     marginTop: 4,

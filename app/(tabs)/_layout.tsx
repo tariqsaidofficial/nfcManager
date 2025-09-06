@@ -1,7 +1,14 @@
 import { Tabs } from 'expo-router';
 import { Nfc, Settings, History, Shield } from 'lucide-react-native';
+import { useNothingFonts } from '../../hooks/useFonts';
 
 export default function TabLayout() {
+  const fontsLoaded = useNothingFonts();
+
+  if (!fontsLoaded) {
+    return null;
+  }
+
   return (
     <Tabs
       screenOptions={{
@@ -18,6 +25,7 @@ export default function TabLayout() {
         tabBarLabelStyle: {
           fontSize: 10,
           fontWeight: 'bold',
+          fontFamily: 'NothingFont',
           letterSpacing: 0.5,
         },
       }}>
