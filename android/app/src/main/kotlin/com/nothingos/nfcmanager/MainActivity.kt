@@ -13,7 +13,7 @@ import androidx.core.view.WindowCompat
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.nothingos.nfcmanager.data.database.AppDatabase
 import com.nothingos.nfcmanager.data.repository.NFCRepository
-import com.nothingos.nfcmanager.ui.theme.NFCManagerTheme
+import com.nothingos.nfcmanager.ui.theme.NothingOSTheme // Updated import
 import com.nothingos.nfcmanager.viewmodel.MainViewModel
 import com.nothingos.nfcmanager.viewmodel.ActivityViewModel
 import com.nothingos.nfcmanager.viewmodel.SettingsViewModel
@@ -59,7 +59,7 @@ class MainActivity : ComponentActivity() {
      */
     @Composable
     private fun NFCManagerApp() {
-        NFCManagerTheme {
+        NothingOSTheme { // Updated theme name
             Surface(
                 modifier = Modifier.fillMaxSize(),
                 color = MaterialTheme.colorScheme.background

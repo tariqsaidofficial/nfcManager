@@ -49,7 +49,7 @@ fun NFCManagerNavigation(
                         label = {
                             Text(
                                 text = item.title,
-                                style = NothingTextStyles.Caption
+                                style = NothingTextStyles.HeaderTitle // Updated to use HeaderTitle
                             )
                         },
                         selected = currentDestination?.hierarchy?.any { it.route == item.route } == true,

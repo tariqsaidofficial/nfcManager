@@ -15,60 +15,24 @@ import javax.inject.Inject
 class SettingsViewModel @Inject constructor(
     private val repository: NFCRepository
 ) : ViewModel() {
-    
+
     // ==================== UI STATE ====================
-    
+
     private val _uiState = MutableStateFlow(SettingsUiState())
     val uiState: StateFlow<SettingsUiState> = _uiState.asStateFlow()
-    
+
     // ==================== SETTINGS DATA ====================
-    
+
     // Complete settings object
     val settings = repository.getSettings()
         .stateIn(
             scope = viewModelScope,
             started = SharingStarted.WhileSubscribed(5000),
-            initialValue = NFCSettingsEntity()
+            initialValue = NFCSettingsEntity(reminderInterval = 10) // Set default reminder interval to 10
         )
-    
-    // Individual setting flows for optimized UI updates
-    val isAutoReminderEnabled = repository.isAutoReminderEnabled()
-        .stateIn(
-            scope = viewModelScope,
-            started = SharingStarted.WhileSubscribed(5000),
-            initialValue = false
-        )
-    
-    val reminderInterval = repository.getReminderInterval()
-        .stateIn(
-            scope = viewModelScope,
-            started = SharingStarted.WhileSubscribed(5000),
-            initialValue = 30
-        )
-    
-    val areNotificationsEnabled = repository.areNotificationsEnabled()
-        .stateIn(
-            scope = viewModelScope,
-            started = SharingStarted.WhileSubscribed(5000),
-            initialValue = true
-        )
-    
-    val isDarkModeEnabled = repository.isDarkModeEnabled()
-        .stateIn(
-            scope = viewModelScope,
-            started = SharingStarted.WhileSubscribed(5000),
-            initialValue = true
-        )
-    
-    val isBatteryOptimized = repository.isBatteryOptimized()
-        .stateIn(
-            scope = viewModelScope,
-            started = SharingStarted.WhileSubscribed(5000),
-            initialValue = false
-        )
-    
+
     // ==================== NFC SETTINGS ====================
-    
+
     /**
      * Toggle auto-reminder feature
      */
@@ -76,16 +40,16 @@ class SettingsViewModel @Inject constructor(
         viewModelScope.launch {
             try {
                 updateLoading(true)
-                val currentState = isAutoReminderEnabled.value
+                val currentState = settings.value.autoReminderEnabled // Read from settings.value
                 repository.updateAutoReminderEnabled(!currentState)
-                
+
                 // Log the change
                 repository.logEvent(
                     "SETTINGS",
                     "Auto-reminder ${if (!currentState) "enabled" else "disabled"}",
                     "Bell"
                 )
-                
+
                 updateSuccess("Auto-reminder ${if (!currentState) "enabled" else "disabled"}")
             } catch (e: Exception) {
                 updateError("Failed to toggle auto-reminder: ${e.message}")
@@ -94,7 +58,7 @@ class SettingsViewModel @Inject constructor(
             }
         }
     }
-    
+
     /**
      * Update reminder interval
      */
@@ -103,18 +67,18 @@ class SettingsViewModel @Inject constructor(
             updateError("Interval must be between 5 and 300 seconds")
             return
         }
-        
+
         viewModelScope.launch {
             try {
                 updateLoading(true)
                 repository.updateReminderInterval(interval)
-                
+
                 repository.logEvent(
                     "SETTINGS",
                     "Reminder interval set to ${interval}s",
                     "Clock"
                 )
-                
+
                 updateSuccess("Reminder interval updated to ${interval} seconds")
             } catch (e: Exception) {
                 updateError("Failed to update interval: ${e.message}")
@@ -123,9 +87,9 @@ class SettingsViewModel @Inject constructor(
             }
         }
     }
-    
+
     // ==================== NOTIFICATION SETTINGS ====================
-    
+
     /**
      * Toggle notifications
      */
@@ -133,15 +97,15 @@ class SettingsViewModel @Inject constructor(
         viewModelScope.launch {
             try {
                 updateLoading(true)
-                val currentState = areNotificationsEnabled.value
+                val currentState = settings.value.showNotifications // Read from settings.value
                 repository.updateNotificationsEnabled(!currentState)
-                
+
                 repository.logEvent(
                     "SETTINGS",
                     "Notifications ${if (!currentState) "enabled" else "disabled"}",
                     "Bell"
                 )
-                
+
                 updateSuccess("Notifications ${if (!currentState) "enabled" else "disabled"}")
             } catch (e: Exception) {
                 updateError("Failed to toggle notifications: ${e.message}")
@@ -150,7 +114,7 @@ class SettingsViewModel @Inject constructor(
             }
         }
     }
-    
+
     /**
      * Toggle vibration
      */
@@ -160,13 +124,13 @@ class SettingsViewModel @Inject constructor(
                 updateLoading(true)
                 val currentState = settings.value.vibrationEnabled
                 repository.updateVibrationEnabled(!currentState)
-                
+
                 repository.logEvent(
                     "SETTINGS",
                     "Vibration ${if (!currentState) "enabled" else "disabled"}",
                     "Vibrate"
                 )
-                
+
                 updateSuccess("Vibration ${if (!currentState) "enabled" else "disabled"}")
             } catch (e: Exception) {
                 updateError("Failed to toggle vibration: ${e.message}")
@@ -175,7 +139,7 @@ class SettingsViewModel @Inject constructor(
             }
         }
     }
-    
+
     /**
      * Toggle sound notifications
      */
@@ -186,13 +150,13 @@ class SettingsViewModel @Inject constructor(
                 val currentSettings = repository.getSettingsSync()
                 val newSettings = currentSettings.copy(soundEnabled = !currentSettings.soundEnabled)
                 repository.updateSettings(newSettings)
-                
+
                 repository.logEvent(
                     "SETTINGS",
                     "Sound ${if (newSettings.soundEnabled) "enabled" else "disabled"}",
                     "Volume2"
                 )
-                
+
                 updateSuccess("Sound ${if (newSettings.soundEnabled) "enabled" else "disabled"}")
             } catch (e: Exception) {
                 updateError("Failed to toggle sound: ${e.message}")
@@ -201,9 +165,9 @@ class SettingsViewModel @Inject constructor(
             }
         }
     }
-    
+
     // ==================== THEME SETTINGS ====================
-    
+
     /**
      * Toggle dark mode
      */
@@ -211,15 +175,15 @@ class SettingsViewModel @Inject constructor(
         viewModelScope.launch {
             try {
                 updateLoading(true)
-                val currentState = isDarkModeEnabled.value
+                val currentState = settings.value.isDarkMode // Read from settings.value
                 repository.updateDarkMode(!currentState)
-                
+
                 repository.logEvent(
                     "SETTINGS",
                     "${if (!currentState) "Dark" else "Light"} mode enabled",
                     "Settings"
                 )
-                
+
                 updateSuccess("${if (!currentState) "Dark" else "Light"} mode enabled")
             } catch (e: Exception) {
                 updateError("Failed to toggle theme: ${e.message}")
@@ -228,7 +192,7 @@ class SettingsViewModel @Inject constructor(
             }
         }
     }
-    
+
     /**
      * Update accent color
      */
@@ -239,13 +203,13 @@ class SettingsViewModel @Inject constructor(
                 val currentSettings = repository.getSettingsSync()
                 val newSettings = currentSettings.copy(accentColor = color)
                 repository.updateSettings(newSettings)
-                
+
                 repository.logEvent(
                     "SETTINGS",
                     "Accent color updated",
                     "Settings"
                 )
-                
+
                 updateSuccess("Accent color updated")
             } catch (e: Exception) {
                 updateError("Failed to update color: ${e.message}")
@@ -254,9 +218,9 @@ class SettingsViewModel @Inject constructor(
             }
         }
     }
-    
+
     // ==================== PERFORMANCE SETTINGS ====================
-    
+
     /**
      * Toggle battery optimization
      */
@@ -264,15 +228,15 @@ class SettingsViewModel @Inject constructor(
         viewModelScope.launch {
             try {
                 updateLoading(true)
-                val currentState = isBatteryOptimized.value
+                val currentState = settings.value.batteryOptimized // Read from settings.value
                 repository.updateBatteryOptimized(!currentState)
-                
+
                 repository.logEvent(
                     "SETTINGS",
                     "Battery optimization ${if (!currentState) "enabled" else "disabled"}",
                     "Battery"
                 )
-                
+
                 updateSuccess("Battery optimization ${if (!currentState) "enabled" else "disabled"}")
             } catch (e: Exception) {
                 updateError("Failed to toggle battery optimization: ${e.message}")
@@ -281,7 +245,7 @@ class SettingsViewModel @Inject constructor(
             }
         }
     }
-    
+
     /**
      * Update monitoring interval
      */
@@ -290,20 +254,20 @@ class SettingsViewModel @Inject constructor(
             updateError("Monitoring interval must be between 1000 and 10000 milliseconds")
             return
         }
-        
+
         viewModelScope.launch {
             try {
                 updateLoading(true)
                 val currentSettings = repository.getSettingsSync()
                 val newSettings = currentSettings.copy(monitoringInterval = interval)
                 repository.updateSettings(newSettings)
-                
+
                 repository.logEvent(
                     "SETTINGS",
                     "Monitoring interval set to ${interval}ms",
                     "Clock"
                 )
-                
+
                 updateSuccess("Monitoring interval updated")
             } catch (e: Exception) {
                 updateError("Failed to update monitoring interval: ${e.message}")
@@ -312,9 +276,9 @@ class SettingsViewModel @Inject constructor(
             }
         }
     }
-    
+
     // ==================== PRIVACY & SECURITY ====================
-    
+
     /**
      * Toggle privacy mode
      */
@@ -325,14 +289,14 @@ class SettingsViewModel @Inject constructor(
                 val currentSettings = repository.getSettingsSync()
                 val newSettings = currentSettings.copy(isPrivacyModeEnabled = !currentSettings.isPrivacyModeEnabled)
                 repository.updateSettings(newSettings)
-                
+
                 repository.logEvent(
                     "SECURITY",
                     "Privacy mode ${if (newSettings.isPrivacyModeEnabled) "enabled" else "disabled"}",
                     "Shield",
                     isImportant = true
                 )
-                
+
                 updateSuccess("Privacy mode ${if (newSettings.isPrivacyModeEnabled) "enabled" else "disabled"}")
             } catch (e: Exception) {
                 updateError("Failed to toggle privacy mode: ${e.message}")
@@ -341,7 +305,7 @@ class SettingsViewModel @Inject constructor(
             }
         }
     }
-    
+
     /**
      * Toggle block unknown tags
      */
@@ -352,14 +316,14 @@ class SettingsViewModel @Inject constructor(
                 val currentSettings = repository.getSettingsSync()
                 val newSettings = currentSettings.copy(blockUnknownTags = !currentSettings.blockUnknownTags)
                 repository.updateSettings(newSettings)
-                
+
                 repository.logEvent(
                     "SECURITY",
                     "Block unknown tags ${if (newSettings.blockUnknownTags) "enabled" else "disabled"}",
                     "Shield",
                     isImportant = true
                 )
-                
+
                 updateSuccess("Unknown tag blocking ${if (newSettings.blockUnknownTags) "enabled" else "disabled"}")
             } catch (e: Exception) {
                 updateError("Failed to toggle unknown tag blocking: ${e.message}")
@@ -368,9 +332,9 @@ class SettingsViewModel @Inject constructor(
             }
         }
     }
-    
+
     // ==================== DATA MANAGEMENT ====================
-    
+
     /**
      * Export settings
      */
@@ -388,7 +352,7 @@ class SettingsViewModel @Inject constructor(
             }
         }
     }
-    
+
     /**
      * Reset all settings to defaults
      */
@@ -397,14 +361,14 @@ class SettingsViewModel @Inject constructor(
             try {
                 updateLoading(true)
                 repository.resetAllSettings()
-                
+
                 repository.logEvent(
                     "SETTINGS",
                     "All settings reset to defaults",
                     "Settings",
                     isImportant = true
                 )
-                
+
                 updateSuccess("All settings reset to defaults")
             } catch (e: Exception) {
                 updateError("Failed to reset settings: ${e.message}")
@@ -413,7 +377,7 @@ class SettingsViewModel @Inject constructor(
             }
         }
     }
-    
+
     /**
      * Clean up old data
      */
@@ -422,13 +386,13 @@ class SettingsViewModel @Inject constructor(
             try {
                 updateLoading(true)
                 repository.cleanupOldEvents(daysToKeep)
-                
+
                 repository.logEvent(
                     "SETTINGS",
                     "Old data cleanup completed (${daysToKeep} days)",
                     "Settings"
                 )
-                
+
                 updateSuccess("Old data cleaned up successfully")
             } catch (e: Exception) {
                 updateError("Failed to cleanup data: ${e.message}")
@@ -437,16 +401,16 @@ class SettingsViewModel @Inject constructor(
             }
         }
     }
-    
+
     // ==================== UI STATE HELPERS ====================
-    
+
     /**
      * Update loading state
      */
     private fun updateLoading(isLoading: Boolean) {
         _uiState.value = _uiState.value.copy(isLoading = isLoading)
     }
-    
+
     /**
      * Update error message
      */
@@ -456,7 +420,7 @@ class SettingsViewModel @Inject constructor(
             isLoading = false
         )
     }
-    
+
     /**
      * Update success message
      */
@@ -466,7 +430,7 @@ class SettingsViewModel @Inject constructor(
             isLoading = false
         )
     }
-    
+
     /**
      * Clear messages
      */
@@ -476,9 +440,9 @@ class SettingsViewModel @Inject constructor(
             successMessage = null
         )
     }
-    
+
     // ==================== VALIDATION ====================
-    
+
     /**
      * Validate reminder interval
      */
@@ -490,7 +454,7 @@ class SettingsViewModel @Inject constructor(
             false
         }
     }
-    
+
     /**
      * Validate monitoring interval
      */
@@ -502,7 +466,7 @@ class SettingsViewModel @Inject constructor(
             false
         }
     }
-    
+
     /**
      * Validate color hex code
      */

@@ -1,213 +1,170 @@
 package com.nothingos.nfcmanager.ui.theme
 
+import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
-import androidx.compose.material3.*
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.darkColorScheme
+import androidx.compose.material3.dynamicDarkColorScheme
+import androidx.compose.material3.dynamicLightColorScheme
+import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.CompositionLocalProvider
-import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 
-/**
- * Nothing OS Theme for NFC Manager
- * Follows official Material Design 3 patterns with Nothing OS aesthetics
- */
-
-// Dark Color Scheme (Primary theme for Nothing OS)
-private val DarkColorScheme = darkColorScheme(
+// Light Theme Color Scheme
+private val NothingLightColorScheme = lightColorScheme(
     // Primary colors
-    primary = NothingRed,
-    onPrimary = NothingWhite,
-    primaryContainer = Color(0xFF2D1B1B),
-    onPrimaryContainer = Color(0xFFFFDADA),
-    
+    primary = NothingColors.NothingRed,
+    onPrimary = NothingColors.PureWhite,
+    primaryContainer = NothingColors.NothingRedLight,
+    onPrimaryContainer = NothingColors.PureWhite,
+
     // Secondary colors
-    secondary = Gray400,
-    onSecondary = NothingBlack,
-    secondaryContainer = Gray800,
-    onSecondaryContainer = Gray200,
-    
+    secondary = NothingColors.DarkGray,
+    onSecondary = NothingColors.PureWhite,
+    secondaryContainer = NothingColors.MediumGray,
+    onSecondaryContainer = NothingColors.DarkGray,
+
     // Tertiary colors
-    tertiary = InfoBlue,
-    onTertiary = NothingWhite,
-    tertiaryContainer = Color(0xFF1E3A8A),
-    onTertiaryContainer = Color(0xFFDEEAFF),
-    
+    tertiary = NothingColors.CharcoalGray,
+    onTertiary = NothingColors.PureWhite,
+    tertiaryContainer = NothingColors.LightGray,
+    onTertiaryContainer = NothingColors.CharcoalGray,
+
     // Error colors
-    error = ErrorRed,
-    onError = NothingWhite,
-    errorContainer = Color(0xFF2D1B1B),
-    onErrorContainer = Color(0xFFFFDADA),
-    
+    error = NothingColors.Error,
+    onError = NothingColors.PureWhite,
+    errorContainer = NothingColors.NothingRedLight,
+    onErrorContainer = NothingColors.PureWhite,
+
     // Background colors
-    background = NothingBlack,
-    onBackground = NothingWhite,
-    
+    background = NothingColors.PureWhite,
+    onBackground = NothingColors.LightOnSurface,
+
     // Surface colors
-    surface = NothingSurface,
-    onSurface = NothingWhite,
-    surfaceVariant = Gray900,
-    onSurfaceVariant = Gray300,
-    
-    // Outline colors
-    outline = NothingBorder,
-    outlineVariant = Gray800,
-    
-    // Container colors
-    surfaceContainer = Gray950,
-    surfaceContainerHigh = Gray900,
-    surfaceContainerHighest = Gray800,
-    surfaceContainerLow = Gray950,
-    surfaceContainerLowest = NothingBlack,
-    
+    surface = NothingColors.LightSurface,
+    onSurface = NothingColors.LightOnSurface,
+    surfaceVariant = NothingColors.LightSurfaceVariant,
+    onSurfaceVariant = NothingColors.LightOnSurfaceVariant,
+    surfaceTint = NothingColors.NothingRed,
+
     // Inverse colors
-    inverseSurface = Gray100,
-    inverseOnSurface = Gray900,
-    inversePrimary = NothingRed,
-    
+    inverseSurface = NothingColors.CharcoalGray,
+    inverseOnSurface = NothingColors.PureWhite,
+    inversePrimary = NothingColors.NothingRedLight,
+
+    // Outline colors
+    outline = NothingColors.MediumGray,
+    outlineVariant = NothingColors.LightGray,
+
+    // Surface container colors
+    surfaceContainer = NothingColors.LightSurface,
+    surfaceContainerHigh = NothingColors.LightSurfaceVariant,
+    surfaceContainerHighest = NothingColors.MediumGray,
+    surfaceContainerLow = NothingColors.PureWhite,
+    surfaceContainerLowest = NothingColors.PureWhite,
+
     // Scrim
-    scrim = BlackOverlay50
+    scrim = NothingColors.BlackOverlay
 )
 
-// Light Color Scheme (Optional, Nothing OS is primarily dark)
-private val LightColorScheme = lightColorScheme(
+// Dark Theme Color Scheme
+private val NothingDarkColorScheme = darkColorScheme(
     // Primary colors
-    primary = NothingRed,
-    onPrimary = NothingWhite,
-    primaryContainer = Color(0xFFFFDADA),
-    onPrimaryContainer = Color(0xFF2D1B1B),
-    
+    primary = NothingColors.NothingRed,
+    onPrimary = NothingColors.PureWhite,
+    primaryContainer = NothingColors.NothingRedDark,
+    onPrimaryContainer = NothingColors.PureWhite,
+
     // Secondary colors
-    secondary = Gray600,
-    onSecondary = NothingWhite,
-    secondaryContainer = Gray200,
-    onSecondaryContainer = Gray800,
-    
+    secondary = NothingColors.MediumGray,
+    onSecondary = NothingColors.PureBlack,
+    secondaryContainer = NothingColors.DarkGray,
+    onSecondaryContainer = NothingColors.PureWhite,
+
     // Tertiary colors
-    tertiary = InfoBlue,
-    onTertiary = NothingWhite,
-    tertiaryContainer = Color(0xFFDEEAFF),
-    onTertiaryContainer = Color(0xFF1E3A8A),
-    
+    tertiary = NothingColors.LightGray,
+    onTertiary = NothingColors.PureBlack,
+    tertiaryContainer = NothingColors.CharcoalGray,
+    onTertiaryContainer = NothingColors.LightGray,
+
     // Error colors
-    error = ErrorRed,
-    onError = NothingWhite,
-    errorContainer = Color(0xFFFFDADA),
-    onErrorContainer = Color(0xFF2D1B1B),
-    
+    error = NothingColors.NothingRedLight,
+    onError = NothingColors.PureWhite,
+    errorContainer = NothingColors.NothingRedDark,
+    onErrorContainer = NothingColors.PureWhite,
+
     // Background colors
-    background = NothingWhite,
-    onBackground = NothingBlack,
-    
+    background = NothingColors.PureBlack,
+    onBackground = NothingColors.DarkOnSurface,
+
     // Surface colors
-    surface = Gray50,
-    onSurface = NothingBlack,
-    surfaceVariant = Gray100,
-    onSurfaceVariant = Gray700,
-    
-    // Outline colors
-    outline = Gray300,
-    outlineVariant = Gray200,
-    
-    // Container colors
-    surfaceContainer = Gray100,
-    surfaceContainerHigh = Gray200,
-    surfaceContainerHighest = Gray300,
-    surfaceContainerLow = Gray50,
-    surfaceContainerLowest = NothingWhite,
-    
+    surface = NothingColors.DarkSurface,
+    onSurface = NothingColors.DarkOnSurface,
+    surfaceVariant = NothingColors.DarkSurfaceVariant,
+    onSurfaceVariant = NothingColors.DarkOnSurfaceVariant,
+    surfaceTint = NothingColors.NothingRed,
+
     // Inverse colors
-    inverseSurface = Gray900,
-    inverseOnSurface = Gray100,
-    inversePrimary = NothingRed,
-    
+    inverseSurface = NothingColors.LightGray,
+    inverseOnSurface = NothingColors.PureBlack,
+    inversePrimary = NothingColors.NothingRedDark,
+
+    // Outline colors
+    outline = NothingColors.DarkGray,
+    outlineVariant = NothingColors.CharcoalGray,
+
+    // Surface container colors
+    surfaceContainer = NothingColors.DarkSurface,
+    surfaceContainerHigh = NothingColors.DarkSurfaceVariant,
+    surfaceContainerHighest = NothingColors.DarkGray,
+    surfaceContainerLow = NothingColors.PureBlack,
+    surfaceContainerLowest = NothingColors.PureBlack,
+
     // Scrim
-    scrim = BlackOverlay50
+    scrim = NothingColors.BlackOverlay
 )
 
-// Custom Nothing OS color extensions
-data class NothingColors(
-    val nfcActive: Color,
-    val nfcInactive: Color,
-    val nfcWarning: Color,
-    val nfcSuccess: Color,
-    val gradientStart: Color,
-    val gradientEnd: Color,
-    val overlay10: Color,
-    val overlay20: Color,
-    val overlay50: Color
-)
-
-// Dark theme Nothing colors
-private val DarkNothingColors = NothingColors(
-    nfcActive = NFCActive,
-    nfcInactive = NFCInactive,
-    nfcWarning = NFCWarning,
-    nfcSuccess = NFCSuccess,
-    gradientStart = GradientStart,
-    gradientEnd = GradientEnd,
-    overlay10 = BlackOverlay10,
-    overlay20 = BlackOverlay20,
-    overlay50 = BlackOverlay50
-)
-
-// Light theme Nothing colors
-private val LightNothingColors = NothingColors(
-    nfcActive = NFCActive,
-    nfcInactive = NFCInactive,
-    nfcWarning = NFCWarning,
-    nfcSuccess = NFCSuccess,
-    gradientStart = Gray100,
-    gradientEnd = Gray300,
-    overlay10 = WhiteOverlay10,
-    overlay20 = WhiteOverlay20,
-    overlay50 = BlackOverlay50
-)
-
-// CompositionLocal for Nothing colors
-val LocalNothingColors = staticCompositionLocalOf { DarkNothingColors }
-
-/**
- * Main Nothing OS Theme Composable
- */
+// Theme Implementation
 @Composable
-fun NFCManagerTheme(
+fun NothingOSTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
-    dynamicColor: Boolean = false, // Nothing OS doesn't use dynamic colors
+    dynamicColor: Boolean = false, // Nothing OS uses fixed brand colors
     content: @Composable () -> Unit
 ) {
     val colorScheme = when {
-        darkTheme -> DarkColorScheme
-        else -> LightColorScheme
-    }
-    
-    val nothingColors = when {
-        darkTheme -> DarkNothingColors
-        else -> LightNothingColors
+        dynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> {
+            val context = LocalContext.current
+            if (darkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
+        }
+        darkTheme -> NothingDarkColorScheme
+        else -> NothingLightColorScheme
     }
 
-    CompositionLocalProvider(
-        LocalNothingColors provides nothingColors
-    ) {
-        MaterialTheme(
-            colorScheme = colorScheme,
-            typography = NothingTypography,
-            content = content
-        )
-    }
+    MaterialTheme(
+        colorScheme = colorScheme,
+        typography = NothingTypography, // Corrected to use NothingTypography
+        content = content
+    )
 }
 
-/**
- * Access Nothing OS specific colors
- */
-object NothingTheme {
-    val colors: NothingColors
-        @Composable
-        get() = LocalNothingColors.current
-}
+// Additional utility colors for Nothing OS specific elements
+object NothingUIColors {
+    // Dot Matrix Pattern Colors
+    val DotPatternLight = Color(0xFF9E9E9E)
+    val DotPatternDark = Color(0xFF616161)
 
-/**
- * Helper extensions for Material3 Theme
- */
-val MaterialTheme.nothingColors: NothingColors
-    @Composable
-    get() = LocalNothingColors.current
+    // Widget specific colors
+    val WidgetBackgroundLight = Color(0xFFF8F8F8)
+    val WidgetBackgroundDark = Color(0xFF1E1E1E)
+
+    // Quick Settings Toggle Colors
+    val ToggleActiveLight = NothingColors.NothingRed
+    val ToggleActiveDark = NothingColors.NothingRed
+    val ToggleInactiveLight = Color(0xFFE0E0E0)
+    val ToggleInactiveDark = Color(0xFF424242)
+
+    // Status Bar Colors
+    val StatusBarLight = Color(0xFFFAFAFA)
+    val StatusBarDark = Color(0xFF1A1A1A)
+}
