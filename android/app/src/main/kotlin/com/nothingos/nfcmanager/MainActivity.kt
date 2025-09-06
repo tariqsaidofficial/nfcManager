@@ -1,17 +1,21 @@
 package com.nothingos.nfcmanager
 
-import android.graphics.Color // Required for Color.TRANSPARENT
+import android.app.Activity // Required for context cast
 import android.os.Bundle
 import androidx.activity.ComponentActivity
-import androidx.activity.SystemBarStyle
+// import androidx.activity.SystemBarStyle // No longer directly used in onCreate for dynamic changes
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.SideEffect // Required for ApplySystemBarColors
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-// import androidx.core.view.WindowCompat // No longer explicitly needed here
+import androidx.compose.ui.platform.LocalView // Required for ApplySystemBarColors
+import androidx.core.view.WindowInsetsControllerCompat // Required for ApplySystemBarColors
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.nothingos.nfcmanager.data.database.AppDatabase
 import com.nothingos.nfcmanager.data.repository.NFCRepository
@@ -33,19 +37,15 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         
-        // Configure edge-to-edge display for a dark-themed app
-        // NothingOSTheme defaults to darkTheme = true
-        enableEdgeToEdge(
-            statusBarStyle = SystemBarStyle.dark(Color.TRANSPARENT), // Light icons on transparent background
-            navigationBarStyle = SystemBarStyle.dark(Color.TRANSPARENT) // Light buttons on transparent background (if API level supports)
-        )
-        // WindowCompat.setDecorFitsSystemWindows(window, false) // This is implicitly handled by enableEdgeToEdge
+        // Enable edge-to-edge display. System bar icon colors will be handled dynamically.
+        enableEdgeToEdge()
         
         // Initialize Database and Repository
         setupDatabase()
         
         setContent {
-            NFCManagerApp()
+            // Pass the repository to NFCManagerApp so it can be provided to ViewModels
+            NFCManagerApp(repository)
         }
     }
     
@@ -64,28 +64,34 @@ class MainActivity : ComponentActivity() {
      * Main Compose App
      */
     @Composable
-    private fun NFCManagerApp() {
-        NothingOSTheme { // Defaults to darkTheme = true
+    private fun NFCManagerApp(appRepository: NFCRepository) { // Accept repository
+        // Obtain SettingsViewModel to access theme settings
+        val settingsViewModel: SettingsViewModel = viewModel {
+            SettingsViewModel(appRepository)
+        }
+        val settings by settingsViewModel.settings.collectAsState()
+        val isCurrentlyDarkTheme = settings.isDarkMode
+
+        NothingOSTheme(darkTheme = isCurrentlyDarkTheme) {
+            // Apply dynamic system bar colors (icon appearance)
+            ApplySystemBarColors(isDarkTheme = isCurrentlyDarkTheme)
+
             Surface(
                 modifier = Modifier.fillMaxSize(),
-                color = MaterialTheme.colorScheme.background // Should be PureBlack in dark theme
+                color = MaterialTheme.colorScheme.background
             ) {
-                // Create ViewModels with repository
+                // Create other ViewModels, passing the same repository
                 val mainViewModel: MainViewModel = viewModel {
-                    MainViewModel(repository)
+                    MainViewModel(appRepository)
                 }
                 val activityViewModel: ActivityViewModel = viewModel {
-                    ActivityViewModel(repository)
-                }
-                val settingsViewModel: SettingsViewModel = viewModel {
-                    SettingsViewModel(repository)
+                    ActivityViewModel(appRepository)
                 }
                 
-                // Main app navigation will go here
                 NFCManagerNavigation(
                     mainViewModel = mainViewModel,
                     activityViewModel = activityViewModel,
-                    settingsViewModel = settingsViewModel
+                    settingsViewModel = settingsViewModel // Pass the already created SettingsViewModel
                 )
             }
         }
@@ -93,13 +99,26 @@ class MainActivity : ComponentActivity() {
     
     override fun onDestroy() {
         super.onDestroy()
-        // Clean up database connection if needed
         if (::database.isInitialized) {
-            // Database will be cleaned up automatically by Room
+            // Database cleanup is handled by Room
         }
     }
 }
 
 /**
- * Import Navigation Component
+ * Composable to dynamically set system bar icon colors based on the current theme.
  */
+@Composable
+private fun ApplySystemBarColors(isDarkTheme: Boolean) {
+    val view = LocalView.current
+    if (!view.isInEditMode) {
+        SideEffect {
+            val window = (view.context as Activity).window
+            val insetsController = WindowInsetsControllerCompat(window, view)
+            // Set status bar icons to dark if light theme, light if dark theme
+            insetsController.isAppearanceLightStatusBars = !isDarkTheme
+            // Set navigation bar icons to dark if light theme, light if dark theme
+            insetsController.isAppearanceLightNavigationBars = !isDarkTheme
+        }
+    }
+}

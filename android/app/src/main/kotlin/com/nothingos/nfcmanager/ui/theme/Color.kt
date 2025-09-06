@@ -10,17 +10,17 @@ object NothingColors {
     val NothingRedLight = Color(0xFFFF5252)
 
     // Grayscale System & Core Blacks/Whites
-    val PureWhite = Color(0xFFFFFFFF)       // Primary Text
-    val PureBlack = Color(0xFF000000)       // DeepBlack, Main Background
+    val PureWhite = Color(0xFFFFFFFF)       // Primary Text in Dark Mode
+    val PureBlack = Color(0xFF000000)       // DeepBlack, Main Background in Dark Mode
     val LightGray = Color(0xFFF5F5F5)
     val MediumGray = Color(0xFFE0E0E0)
     val DarkGray = Color(0xFF424242)
     val CharcoalGray = Color(0xFF2E2E2E)
 
     // Specific Surface/UI Element Colors
-    val DarkSurface = Color(0xFF1A1A1A)       // Matches your code definition, described as Quick settings panels #0A0A0A (using 1A1A1A)
-    val DarkElevated = Color(0xFF1C1C1C)     // For Cards and elevated surfaces
-    val DarkSurfaceVariant = Color(0xFF2A2A2A) // Also used for DarkBorder and Inactive Toggles
+    val DarkSurface = Color(0xFF1A1A1A)
+    val DarkElevated = Color(0xFF1C1C1C)
+    val DarkSurfaceVariant = Color(0xFF2A2A2A)
     val LightSurface = Color(0xFFFAFAFA)
     val LightSurfaceVariant = Color(0xFFF0F0F0)
 
@@ -31,6 +31,10 @@ object NothingColors {
     val TextDisabled = Color(0xFF666666)      // Disabled text (dark gray)
     val LightOnSurfaceVariant = Color(0xFF757575)
     val DarkOnSurfaceVariant = Color(0xFFBDBDBD)
+
+    // ADDED: Light theme specific text colors from the guide
+    val LightPrimaryText = Color(0xFF1A1A1A) // Same as LightOnSurface for primary text on light backgrounds
+    val LightSecondaryText = Color(0xFF757575) // Same as LightOnSurfaceVariant for secondary text
 
     // System Colors
     val Success = Color(0xFF4CAF50)

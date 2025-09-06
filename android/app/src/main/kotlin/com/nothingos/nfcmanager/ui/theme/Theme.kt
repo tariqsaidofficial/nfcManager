@@ -55,7 +55,7 @@ private val NothingDarkColorScheme = darkColorScheme(
     onPrimary = NothingColors.PureWhite, // Primary Text
     primaryContainer = NothingColors.NothingRedDark,
     onPrimaryContainer = NothingColors.PureWhite,
-    secondary = NothingColors.MediumGray, // Or a more specific secondary like TextSecondary if used as onSecondary for some components
+    secondary = NothingColors.MediumGray, 
     onSecondary = NothingColors.PureBlack,
     secondaryContainer = NothingColors.DarkGray,
     onSecondaryContainer = NothingColors.PureWhite,
@@ -63,22 +63,22 @@ private val NothingDarkColorScheme = darkColorScheme(
     onTertiary = NothingColors.PureBlack,
     tertiaryContainer = NothingColors.CharcoalGray,
     onTertiaryContainer = NothingColors.LightGray,
-    error = NothingColors.NothingRedLight, // Error color is light red in dark theme as per your spec
+    error = NothingColors.NothingRedLight, 
     onError = NothingColors.PureWhite,
     errorContainer = NothingColors.NothingRedDark,
     onErrorContainer = NothingColors.PureWhite,
     background = NothingColors.PureBlack,      // DeepBlack (#000000) - Main background
     onBackground = NothingColors.PureWhite,    // Primary Text on background
-    surface = NothingColors.DarkSurface,        // DarkSurface (#0A0A0A or #1A1A1A as per your Color.kt) - used for Quick settings panels in description
+    surface = NothingColors.DarkSurface,        
     onSurface = NothingColors.PureWhite,       // Primary Text on surface
-    surfaceVariant = NothingColors.DarkSurfaceVariant, // #2A2A2A - Borders and inactive toggles, also general surface variant
+    surfaceVariant = NothingColors.DarkSurfaceVariant, 
     onSurfaceVariant = NothingColors.TextSecondary,    // Secondary text on surface variants
     surfaceTint = NothingColors.NothingRed,
     inverseSurface = NothingColors.LightGray,
     inverseOnSurface = NothingColors.PureBlack,
     inversePrimary = NothingColors.NothingRedDark,
     outline = NothingColors.DarkGray,           // General outline
-    outlineVariant = NothingColors.CharcoalGray, // DarkBorder (#2A2A2A) -> this is DarkSurfaceVariant
+    outlineVariant = NothingColors.CharcoalGray, 
     surfaceContainer = NothingColors.DarkSurface, // Base for containers
     surfaceContainerHigh = NothingColors.DarkElevated, // DarkElevated (#1C1C1C) - Cards and elevated surfaces
     surfaceContainerHighest = NothingColors.DarkGray, // A bit lighter than DarkElevated
@@ -97,16 +97,15 @@ fun NothingOSTheme(
     val colorScheme = when {
         dynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> {
             val context = LocalContext.current
-            // Dynamic color is false by default, but if ever enabled:
             if (darkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
         }
         darkTheme -> NothingDarkColorScheme
-        else -> NothingLightColorScheme // Retain light theme option if darkTheme is explicitly set to false
+        else -> NothingLightColorScheme 
     }
 
     MaterialTheme(
         colorScheme = colorScheme,
-        typography = NothingTypography, // Using the Typography from Typography.kt
+        typography = NothingTypography, 
         content = content
     )
 }
@@ -115,43 +114,45 @@ fun NothingOSTheme(
 object NothingUIColors {
     // Quick Settings Toggle Colors (matching screenshots)
     val ToggleActiveBg = NothingColors.NothingRed
-    val ToggleActiveText = NothingColors.PureWhite // Was PrimaryText
-    val ToggleInactiveBg = NothingColors.DarkSurfaceVariant // Color(0xFF2A2A2A)
-    val ToggleInactiveText = NothingColors.TextSecondary // Was SecondaryText
+    val ToggleActiveText = NothingColors.PureWhite 
+    val ToggleInactiveBg = NothingColors.DarkSurfaceVariant 
+    val ToggleInactiveText = NothingColors.TextSecondary 
 
     // Widget & Card Backgrounds
     val QuickSettingsBg = NothingColors.DarkSurface
-    val LockScreenWidgetBg = Color(0x60000000) // Semi-transparent black
-    val CardBg = NothingColors.DarkElevated
+    val LockScreenWidgetBg = Color(0x60000000) 
+    val CardBg = NothingColors.DarkElevated // Default Card background for Dark Theme
+    val LightCardBackground = Color(0xFFF8F8F8) 
 
     // Dot Matrix Pattern Colors
-    val DotPatternActive = NothingColors.PureWhite // Was PrimaryText
+    val DotPatternActive = NothingColors.PureWhite 
     val DotPatternInactive = Color(0xFF333333)
 
     // Status Bar & Navigation
-    val StatusBarBg = NothingColors.PureBlack // Was DeepBlack
-    val NavBarBg = NothingColors.PureBlack     // Was DeepBlack
+    val StatusBarBg = NothingColors.PureBlack // For Dark Theme
+    val LightStatusBarBg = NothingColors.PureWhite // For Light Theme
+    val NavBarBg = NothingColors.PureBlack     // For Dark Theme (can add LightNavBarBg if needed)
 
     // Button States
-    val ButtonPressed = Color(0xFF1A1A1A) // This is NothingColors.DarkSurface
+    val ButtonPressed = Color(0xFF1A1A1A) 
     val ButtonDisabled = Color(0xFF333333)
 
     // Slider Colors
     val SliderActive = NothingColors.NothingRed
     val SliderInactive = Color(0xFF404040)
-    val SliderThumb = NothingColors.PureWhite // Was PrimaryText
+    val SliderThumb = NothingColors.PureWhite 
 
     // Dividers & Borders
-    val DividerColor = NothingColors.DarkSurfaceVariant // Color(0xFF2A2A2A)
-    val BorderColor = Color(0xFF404040) // This is DarkGray
+    val DividerColor = NothingColors.DarkSurfaceVariant 
+    val BorderColor = Color(0xFF404040) 
 
     // Special Elements
-    val ClockText = NothingColors.PureWhite // Was PrimaryText
+    val ClockText = NothingColors.PureWhite 
     val DateText = NothingColors.TextSecondary
     val WeatherText = NothingColors.TextSecondary
 
     // Media Player Colors
-    val MediaBg = NothingColors.DarkSurface // Color(0xFF1A1A1A)
+    val MediaBg = NothingColors.DarkSurface 
     val MediaProgress = NothingColors.NothingRed
-    val MediaControls = NothingColors.PureWhite // Was PrimaryText
+    val MediaControls = NothingColors.PureWhite 
 }
