@@ -1,35 +1,73 @@
-# dependencies
-node_modules/
+# Android Studio / IntelliJ IDEA
+.idea/
+*.iml
+*.iws
+*.ipr
+.gradle/
+local.properties
 
-# expo
-.expo/
-dist/
-web-build/
-expo-env.d.ts
+# Android Build
+android/app/build/
+android/build/
+android/.gradle/
+android/captures/
+android/keystore.jks
+*.apk
+*.aab
 
-# native
-*.orig.*
-*.jks
+# Gradle Wrapper
+!android/gradle/wrapper/gradle-wrapper.jar
+
+# Logs
+*.log
+
+# OS Files
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.temp
+*.swp
+*~
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# IDE settings
+.vscode/
+.fleet/
+
+# Backup files
+*.bak
+*.backup
+
+# Testing
+android/app/src/test/
+android/app/src/androidTest/
+
+# NDK
+obj/
+
+# Certificates
+*.pem
 *.p8
 *.p12
 *.key
 *.mobileprovision
+*.jks
 
-# metro
-.metro-health-check*
-
-# debug
+# Legacy React Native (if keeping parallel development)
+node_modules/
 npm-debug.*
 yarn-debug.*
 yarn-error.*
-
-# macos
-.DS_Store
-*.pem
-
-# local env files
-.env*.local
-.env
-
-# typescript
+.expo/
+dist/
+web-build/
+expo-env.d.ts
+.metro-health-check*
+*.orig.*
 *.tsbuildinfo

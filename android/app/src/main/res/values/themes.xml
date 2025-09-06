@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your theme here. For example: -->
+        <!-- <item name="colorPrimary">@color/your_primary_color</item> -->
+    </style>
+
+    <!-- Splash Screen Theme -->
+    <!-- Ensure you have the 'androidx.core:core-splashscreen' dependency for Theme.SplashScreen -->
+    <style name="Theme.App.SplashScreen" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@android:color/white</item>
+        <!-- Make sure you have a drawable named ic_launcher_foreground -->
+        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_launcher_foreground</item>
+        <item name="postSplashScreenTheme">@style/AppTheme</item>
+    </style>
+</resources>

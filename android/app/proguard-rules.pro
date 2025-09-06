@@ -20,17 +20,11 @@
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
 
-# React Native ProGuard rules
--keep class com.facebook.react.** { *; }
--keep class com.facebook.jni.** { *; }
+# NFC Manager specific rules for native Android
+-keep class com.nothingos.nfcmanager.** { *; }
 
-# NFC Manager specific rules
--keep class com.novadart.reactnativenfcmanager.** { *; }
+# Android NFC specific rules
 -keep class android.nfc.** { *; }
-
-# Expo specific rules
--keep class expo.modules.** { *; }
--keep class com.facebook.react.bridge.** { *; }
 
 # Keep native methods
 -keepclasseswithmembernames class * {
