@@ -109,6 +109,21 @@ class MainViewModel @Inject constructor(
             }
         }
     }
+
+    /**
+     * Logs a real NFC tag scan event.
+     * Called from MainActivity when a tag is discovered via foreground dispatch.
+     */
+    fun logRealNfcTagScan(tagIdHex: String, action: String) {
+        logEvent(
+            eventType = "NFC_SCAN",
+            message = "Tag Scanned: $tagIdHex (Action: $action)",
+            icon = "NFCTag", // Using a generic icon, replace if a specific one exists
+            tagId = tagIdHex,
+            tagType = action, // Store the intent action as the tag type for now
+            isImportant = true
+        )
+    }
     
     fun deleteEvent(event: NFCEventEntity) {
         viewModelScope.launch {

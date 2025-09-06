@@ -363,7 +363,7 @@ Contributions welcome! Please read our contributing guidelines and code of condu
 
 ## 📝 Changelog
 
-### Phase 1 (Completed) - January 2024
+### Phase 1 (Completed) - September 2024
 - ✅ **Android 11+ Support**: Updated minimum SDK from API 21 to API 30
 - ✅ **App Rebranding**: Changed from "NFC Glyph Manager" to "NFC Manager"
 - ✅ **Privacy Enhancement**: Default alert interval reduced to 10 seconds
@@ -379,9 +379,9 @@ Contributions welcome! Please read our contributing guidelines and code of condu
 
 ### Phase 2 (Planned) - Real NFC Integration
 - ✅ **NFC Status Handling**: Implemented checks for NFC adapter availability and enabled state, with user guidance to system settings and status display on the Home screen.
-- 🔄 **Real NFC APIs**: Replace simulation with actual NFC monitoring
+- 🟡 **Real NFC APIs**: Foreground NFC tag scanning and logging implemented. (Next: Detailed tag parsing & background monitoring).
 - 🔄 **Background Service**: Continuous NFC state monitoring
-- 🔄 **Permissions**: Runtime permission handling (Note: Basic permission declaration is in Manifest, further runtime checks for specific features might still be needed beyond adapter status).
+- 🟡 **Permissions**: Runtime permission handling (POST_NOTIFICATIONS request implemented; basic NFC permission in Manifest).
 - 🔄 **Notifications**: Real privacy alerts and warnings
 
 ### Phase 3 (Planned) - Design Polish

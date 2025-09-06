@@ -2,7 +2,14 @@ package com.nothingos.nfcmanager
 
 import android.app.Activity // Required for context cast
 import android.app.Application // Required for ViewModel instantiation
+import android.app.PendingIntent // Required for NFC Foreground Dispatch
+import android.content.Intent // Required for NFC Intent Handling
+import android.content.IntentFilter // Required for NFC Foreground Dispatch
+import android.nfc.NfcAdapter // Required for NFC
+import android.nfc.Tag // Required for NFC Tag data
+import android.os.Build // Required for PendingIntent flags
 import android.os.Bundle
+import android.util.Log // For temporary logging
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -32,19 +39,23 @@ import com.nothingos.nfcmanager.ui.components.NFCManagerNavigation
  * Entry point for the NFC Manager app with Jetpack Compose
  */
 class MainActivity : ComponentActivity() {
-    
+
     private lateinit var database: AppDatabase
     private lateinit var repository: NFCRepository
     private lateinit var mainViewModel: MainViewModel
-    private lateinit var settingsViewModel: SettingsViewModel // Hoist for factory instantiation
+    private lateinit var settingsViewModel: SettingsViewModel
+
+    private var nfcAdapter: NfcAdapter? = null
+    private lateinit var pendingIntent: PendingIntent
+    private lateinit var nfcIntentFilters: Array<IntentFilter>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        
+
         enableEdgeToEdge()
         setupDatabase()
+        setupNFC()
 
-        // Create ViewModels that require Application context using factories
         mainViewModel = ViewModelProvider(
             this,
             MainViewModelFactory(application, repository)
@@ -54,13 +65,12 @@ class MainActivity : ComponentActivity() {
             this,
             SettingsViewModelFactory(application, repository)
         ).get(SettingsViewModel::class.java)
-        
+
         setContent {
-            // Pass application, repository, and pre-created ViewModels
             NFCManagerApp(application, repository, mainViewModel, settingsViewModel)
         }
     }
-    
+
     private fun setupDatabase() {
         database = AppDatabase.getDatabase(this)
         repository = NFCRepository(
@@ -68,16 +78,87 @@ class MainActivity : ComponentActivity() {
             nfcSettingsDao = database.nfcSettingsDao()
         )
     }
-    
-    /**
-     * Main Compose App
-     */
+
+    private fun setupNFC() {
+        nfcAdapter = NfcAdapter.getDefaultAdapter(this)
+
+        // Create a PendingIntent to handle NFC intents when the app is in the foreground
+        val intent = Intent(this, javaClass).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
+        val pendingIntentFlag = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            PendingIntent.FLAG_MUTABLE
+        } else {
+            PendingIntent.FLAG_UPDATE_CURRENT
+        }
+        pendingIntent = PendingIntent.getActivity(this, 0, intent, pendingIntentFlag)
+
+        // Define intent filters for NFC tag discovery
+        val ndefIntentFilter = IntentFilter(NfcAdapter.ACTION_NDEF_DISCOVERED).apply {
+            try {
+                // Add MIME type if you want to filter for specific NDEF records, e.g., "text/plain"
+                // addDataType("*/*")
+            } catch (e: IntentFilter.MalformedMimeTypeException) {
+                throw RuntimeException("Failed to add MIME type.", e)
+            }
+        }
+        val tagIntentFilter = IntentFilter(NfcAdapter.ACTION_TAG_DISCOVERED)
+        // You can also add IntentFilter(NfcAdapter.ACTION_TECH_DISCOVERED)
+        nfcIntentFilters = arrayOf(ndefIntentFilter, tagIntentFilter)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        // Enable foreground dispatch for NFC intents
+        nfcAdapter?.enableForegroundDispatch(this, pendingIntent, nfcIntentFilters, null)
+        // Refresh NFC status when app resumes
+        mainViewModel.refreshNfcStatus() // Corrected method call
+    }
+
+    override fun onPause() {
+        super.onPause()
+        // Disable foreground dispatch when the app is paused
+        nfcAdapter?.disableForegroundDispatch(this)
+    }
+
+    override fun onNewIntent(intent: Intent) {
+        super.onNewIntent(intent)
+        Log.d("NFCManager", "New Intent: $intent, Action: ${intent.action}")
+        // Process the NFC intent
+        when (intent.action) {
+            NfcAdapter.ACTION_NDEF_DISCOVERED,
+            NfcAdapter.ACTION_TAG_DISCOVERED,
+            NfcAdapter.ACTION_TECH_DISCOVERED -> {
+                val tag: Tag? = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                    intent.getParcelableExtra(NfcAdapter.EXTRA_TAG, Tag::class.java)
+                } else {
+                    @Suppress("DEPRECATION")
+                    intent.getParcelableExtra(NfcAdapter.EXTRA_TAG)
+                }
+                tag?.let {
+                    val tagIdHex = bytesToHexString(it.id)
+                    Log.i("NFCManager", "NFC Tag Scanned: ID - $tagIdHex, Action: ${intent.action}")
+                    mainViewModel.logRealNfcTagScan(tagIdHex, intent.action ?: "Unknown Action")
+                    // We will enhance this logging in MainViewModel later
+                }
+            }
+        }
+    }
+
+    private fun bytesToHexString(bytes: ByteArray): String {
+        val hexChars = CharArray(bytes.size * 2)
+        for (j in bytes.indices) {
+            val v = bytes[j].toInt() and 0xFF
+            hexChars[j * 2] = "0123456789ABCDEF"[v ushr 4]
+            hexChars[j * 2 + 1] = "0123456789ABCDEF"[v and 0x0F]
+        }
+        return String(hexChars)
+    }
+
     @Composable
     private fun NFCManagerApp(
-        app: Application, // Pass application
-        appRepository: NFCRepository, 
-        mainViewModelInstance: MainViewModel, // Pass the MainViewModel instance
-        settingsViewModelInstance: SettingsViewModel // Pass the SettingsViewModel instance
+        app: Application,
+        appRepository: NFCRepository,
+        mainViewModelInstance: MainViewModel,
+        settingsViewModelInstance: SettingsViewModel
     ) {
         val settings by settingsViewModelInstance.settings.collectAsState()
         val isCurrentlyDarkTheme = settings.isDarkMode
@@ -89,28 +170,24 @@ class MainActivity : ComponentActivity() {
                 modifier = Modifier.fillMaxSize(),
                 color = MaterialTheme.colorScheme.background
             ) {
-                // ActivityViewModel doesn't require Application context in its constructor directly
                 val activityViewModel: ActivityViewModel = viewModel {
                     ActivityViewModel(appRepository)
                 }
-                
+
                 NFCManagerNavigation(
                     mainViewModel = mainViewModelInstance,
                     activityViewModel = activityViewModel,
-                    settingsViewModel = settingsViewModelInstance // Use the passed instance
+                    settingsViewModel = settingsViewModelInstance
                 )
             }
         }
     }
-    
+
     override fun onDestroy() {
         super.onDestroy()
     }
 }
 
-/**
- * Factory for creating MainViewModel with Application and Repository.
- */
 class MainViewModelFactory(
     private val application: Application,
     private val repository: NFCRepository
@@ -124,9 +201,6 @@ class MainViewModelFactory(
     }
 }
 
-/**
- * Factory for creating SettingsViewModel with Application and Repository.
- */
 class SettingsViewModelFactory(
     private val application: Application,
     private val repository: NFCRepository
