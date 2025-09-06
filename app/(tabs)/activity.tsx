@@ -17,6 +17,7 @@ import {
   Nfc,
 } from 'lucide-react-native';
 import { useNFCManager } from '../../hooks/useNFCManager';
+import { useNothingFonts } from '../../hooks/useFonts';
 
 const IconComponent = ({ name, ...props }) => {
   const icons = { Power, Bell, Shield, Settings, History, Nfc };
@@ -43,7 +44,12 @@ const ActivityItem = ({ item, formatRelativeTime }) => (
 );
 
 export default function ActivityScreen() {
+  const fontsLoaded = useNothingFonts();
   const { activityLog, formatRelativeTime } = useNFCManager();
+
+  if (!fontsLoaded) {
+    return null;
+  }
 
   const renderActivityItem = ({ item }) => (
     <ActivityItem item={item} formatRelativeTime={formatRelativeTime} />
@@ -98,6 +104,7 @@ const styles = StyleSheet.create({
   headerTitle: {
     fontSize: 12,
     fontWeight: 'bold',
+    fontFamily: 'NothingFont',
     color: '#ffffff',
     letterSpacing: 2,
     opacity: 0.5,
@@ -177,6 +184,7 @@ const styles = StyleSheet.create({
   emptyTitle: {
     fontSize: 18,
     fontWeight: 'bold',
+    fontFamily: 'NothingFont',
     color: '#ffffff',
     marginTop: 16,
     marginBottom: 8,

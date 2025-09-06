@@ -13,31 +13,44 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { LinearGradient } from 'expo-linear-gradient';
 import { BlurView } from 'expo-blur';
 import { Bell, BellOff, Clock } from 'lucide-react-native';
-import { GlyphInterface } from '../../components/GlyphInterface';
+import { NFCInterface } from '../../components/NFCInterface';
 import { NothingToggle } from '../../components/NothingToggle';
 import { PrivacyCompliance } from '../../components/PrivacyCompliance';
 import { AccessibilityWrapper } from '../../components/AccessibilityWrapper';
 import { useNFCManager } from '../../hooks/useNFCManager';
 import { usePermissions } from '../../hooks/usePermissions';
+import { useNothingFonts } from '../../hooks/useFonts';
 
 const { width } = Dimensions.get('window');
 
-export default function NFCGlyph() {
+export default function NFCManager() {
+  const fontsLoaded = useNothingFonts();
+
   const {
     nfcStatus,
+    nfcSupported,
+    nfcEnabled,
     autoReminderEnabled,
     reminderInterval,
     setReminderInterval,
     lastActivity,
     showNotification,
+    isAnimating,
+    error,
     toggleNFC,
     toggleAutoReminder,
     dismissNotification,
+    openNFCSettings,
     formatTime,
   } = useNFCManager();
 
-  const { nfcAvailable, permissionGranted, requestPermissions } = usePermissions();
+  const { nfcAvailable, nfcEnabled: permNfcEnabled, permissionGranted, requestPermissions, showNFCGuide } = usePermissions();
   const [showPrivacyModal, setShowPrivacyModal] = React.useState(!permissionGranted);
+
+  // Don't render until fonts are loaded
+  if (!fontsLoaded) {
+    return null;
+  }
 
   const handlePrivacyAccept = async () => {
     setShowPrivacyModal(false);
@@ -51,7 +64,7 @@ export default function NFCGlyph() {
       
       {/* Header */}
       <SafeAreaView style={styles.header}>
-        <Text style={styles.headerTitle}>NFC GLYPH</Text>
+        <Text style={styles.headerTitle}>NFC MANAGER</Text>
         <AccessibilityWrapper 
           label={`NFC Status: ${nfcStatus ? 'Active' : 'Inactive'}`}
           role="image"
@@ -72,17 +85,28 @@ export default function NFCGlyph() {
             style={styles.cardGradient}
           >
             <View style={styles.glyphContainer}>
-              <GlyphInterface isActive={nfcStatus} />
+              <NFCInterface isActive={nfcStatus} />
             </View>
             
             <View style={styles.statusContainer}>
               <Text style={styles.statusLabel}>NFC STATUS</Text>
-              <Text style={[styles.statusText, { color: nfcStatus ? '#ef4444' : '#6b7280' }]}>
-                {nfcStatus ? 'ACTIVE' : 'INACTIVE'}
-              </Text>
-              {nfcStatus && (
+              {!nfcSupported ? (
+                <Text style={[styles.statusText, { color: '#6b7280' }]}>
+                  NOT SUPPORTED
+                </Text>
+              ) : (
+                <Text style={[styles.statusText, { color: nfcEnabled ? '#ef4444' : '#6b7280' }]}>
+                  {nfcEnabled ? 'ENABLED' : 'DISABLED'}
+                </Text>
+              )}
+              {nfcEnabled && (
                 <Text style={styles.lastActivityText}>
-                  Last activity • {formatTime((Date.now() - lastActivity) / 1000)} ago
+                  Privacy monitoring • {formatTime((Date.now() - lastActivity) / 1000)} ago
+                </Text>
+              )}
+              {error && (
+                <Text style={styles.errorText}>
+                  {error}
                 </Text>
               )}
             </View>
@@ -100,9 +124,9 @@ export default function NFCGlyph() {
                     <Bell size={16} color="#ef4444" /> : 
                     <BellOff size={16} color="#6b7280" />
                   }
-                  <Text style={styles.reminderTitle}>Glyph Reminder</Text>
+                  <Text style={styles.reminderTitle}>NFC Reminder</Text>
                 </View>
-                <Text style={styles.reminderSubtitle}>Notify when NFC is idle.</Text>
+                <Text style={styles.reminderSubtitle}>Protect privacy by alerting when NFC stays enabled.</Text>
               </View>
               <AccessibilityWrapper
                 label="Auto Reminder Toggle"
@@ -121,7 +145,7 @@ export default function NFCGlyph() {
                   <Text style={styles.intervalLabel}>Interval</Text>
                 </View>
                 <View style={styles.intervalButtons}>
-                  {[30, 45, 60].map((interval) => (
+                  {[10, 30, 50].map((interval) => (
                     <AccessibilityWrapper
                       key={interval}
                       label={`${interval} seconds interval`}
@@ -157,17 +181,32 @@ export default function NFCGlyph() {
           </LinearGradient>
         </BlurView>
 
-        {/* Demo Controls */}
-        <View style={styles.demoContainer}>
-          <AccessibilityWrapper
-            label="Demo Toggle NFC"
-            hint="Tap to toggle NFC status for demonstration"
-            role="button"
-          >
-            <TouchableOpacity onPress={toggleNFC} style={styles.demoButton}>
-              <Text style={styles.demoButtonText}>DEMO: TOGGLE NFC</Text>
-            </TouchableOpacity>
-          </AccessibilityWrapper>
+        {/* NFC Controls */}
+        <View style={styles.controlsContainer}>
+          {!nfcSupported ? (
+            <View style={styles.warningContainer}>
+              <Text style={styles.warningTitle}>NFC Not Supported</Text>
+              <Text style={styles.warningText}>
+                This device doesn't support NFC functionality. This app requires NFC for privacy monitoring.
+              </Text>
+            </View>
+          ) : (
+            <AccessibilityWrapper
+              label={nfcEnabled ? "Open NFC Settings to Disable" : "Open NFC Settings to Enable"}
+              hint="Tap to open system NFC settings"
+              role="button"
+            >
+              <TouchableOpacity 
+                onPress={toggleNFC} 
+                style={[styles.nfcButton, { opacity: isAnimating ? 0.6 : 1 }]}
+                disabled={isAnimating}
+              >
+                <Text style={styles.nfcButtonText}>
+                  {isAnimating ? 'OPENING SETTINGS...' : 'OPEN NFC SETTINGS'}
+                </Text>
+              </TouchableOpacity>
+            </AccessibilityWrapper>
+          )}
         </View>
       </ScrollView>
 
@@ -186,9 +225,9 @@ export default function NFCGlyph() {
                 <Bell size={32} color="#ef4444" />
               </View>
               
-              <Text style={styles.notificationTitle}>Glyph Reminder</Text>
+              <Text style={styles.notificationTitle}>NFC Reminder</Text>
               <Text style={styles.notificationMessage}>
-                NFC idle for {reminderInterval}s. Consider turning off to save power.
+                NFC enabled for {reminderInterval}s. Turn off to protect privacy and save power.
               </Text>
               
               <View style={styles.notificationButtons}>
@@ -234,6 +273,7 @@ const styles = StyleSheet.create({
   headerTitle: {
     fontSize: 12,
     fontWeight: 'bold',
+    fontFamily: 'NothingFont',
     color: '#ffffff',
     letterSpacing: 2,
     opacity: 0.5,
@@ -261,11 +301,11 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
   },
   cardGradient: {
-    padding: 32,
+    padding: 24,
   },
   glyphContainer: {
     alignItems: 'center',
-    marginBottom: 24,
+    marginBottom: 16,
   },
   statusContainer: {
     alignItems: 'center',
@@ -281,13 +321,42 @@ const styles = StyleSheet.create({
   statusText: {
     fontSize: 48,
     fontWeight: 'bold',
-    letterSpacing: -2,
+    fontFamily: 'NothingFont',
+    letterSpacing: -1,
   },
   lastActivityText: {
     fontSize: 12,
     color: '#ffffff',
     opacity: 0.4,
     marginTop: 8,
+  },
+  warningText: {
+    fontSize: 14,
+    color: '#ff8800',
+    opacity: 0.8,
+    marginTop: 8,
+    textAlign: 'center',
+  },
+  infoText: {
+    fontSize: 14,
+    color: '#00ff88',
+    opacity: 0.8,
+    marginTop: 8,
+    textAlign: 'center',
+  },
+  errorContainer: {
+    backgroundColor: '#ff444420',
+    padding: 12,
+    borderRadius: 8,
+    marginTop: 12,
+    borderWidth: 1,
+    borderColor: '#ff444450',
+  },
+  errorText: {
+    fontSize: 12,
+    color: '#ff4444',
+    textAlign: 'center',
+    fontFamily: 'NothingFont',
   },
   reminderHeader: {
     flexDirection: 'row',
@@ -305,6 +374,7 @@ const styles = StyleSheet.create({
   reminderTitle: {
     fontSize: 16,
     fontWeight: 'bold',
+    fontFamily: 'NothingFont',
     color: '#ffffff',
     marginLeft: 12,
   },
@@ -323,6 +393,7 @@ const styles = StyleSheet.create({
   },
   intervalLabel: {
     fontSize: 12,
+    fontFamily: 'NothingFont',
     color: '#ffffff',
     opacity: 0.6,
     marginLeft: 8,
@@ -342,20 +413,55 @@ const styles = StyleSheet.create({
   intervalButtonText: {
     fontSize: 18,
     fontWeight: 'bold',
+    fontFamily: 'NothingFont',
   },
-  demoContainer: {
+  controlsContainer: {
     alignItems: 'center',
     paddingVertical: 16,
     marginBottom: 24,
   },
-  demoButton: {
+  nfcButton: {
+    backgroundColor: '#ef444420',
     paddingVertical: 12,
     paddingHorizontal: 24,
+    borderRadius: 12,
+    borderWidth: 1,
+    borderColor: '#ef444450',
   },
-  demoButtonText: {
+  nfcButtonText: {
+    fontSize: 12,
+    fontFamily: 'NothingFont',
+    color: '#ef4444',
+    fontWeight: 'bold',
+    letterSpacing: 1,
+  },
+  warningContainer: {
+    backgroundColor: '#37415120',
+    padding: 20,
+    borderRadius: 12,
+    borderWidth: 1,
+    borderColor: '#374151',
+    alignItems: 'center',
+  },
+  warningTitle: {
+    fontSize: 14,
+    fontWeight: 'bold',
+    color: '#ffffff',
+    marginBottom: 8,
+  },
+  warningText: {
     fontSize: 12,
     color: '#ffffff',
-    opacity: 0.4,
+    opacity: 0.7,
+    textAlign: 'center',
+    lineHeight: 18,
+  },
+  errorText: {
+    fontSize: 11,
+    color: '#ef4444',
+    opacity: 0.8,
+    marginTop: 8,
+    textAlign: 'center',
   },
   modalContainer: {
     flex: 1,

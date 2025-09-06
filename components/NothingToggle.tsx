@@ -8,10 +8,10 @@ interface NothingToggleProps {
 }
 
 export const NothingToggle: React.FC<NothingToggleProps> = ({ isEnabled, onToggle }) => {
-  const translateX = useSharedValue(isEnabled ? 52 : 4);
+  const translateX = useSharedValue(isEnabled ? 24 : 4);
 
   React.useEffect(() => {
-    translateX.value = withTiming(isEnabled ? 52 : 4, { duration: 300 });
+    translateX.value = withTiming(isEnabled ? 24 : 4, { duration: 300 });
   }, [isEnabled, translateX]);
 
   const animatedStyle = useAnimatedStyle(() => ({
@@ -36,20 +36,20 @@ export const NothingToggle: React.FC<NothingToggleProps> = ({ isEnabled, onToggl
 
 const styles = StyleSheet.create({
   container: {
-    width: 96,
-    height: 48,
-    borderRadius: 24,
+    width: 44,
+    height: 24,
+    borderRadius: 12,
     justifyContent: 'center',
     shadowOffset: { width: 0, height: 0 },
     shadowOpacity: 0.3,
-    shadowRadius: 10,
-    elevation: 5,
+    shadowRadius: 8,
+    elevation: 3,
   },
   knob: {
     position: 'absolute',
-    width: 40,
-    height: 40,
+    width: 16,
+    height: 16,
     backgroundColor: '#ffffff',
-    borderRadius: 20,
+    borderRadius: 8,
   },
 });

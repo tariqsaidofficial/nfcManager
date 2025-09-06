@@ -21,8 +21,17 @@ import {
   ChevronRight,
 } from 'lucide-react-native';
 import { useNFCManager } from '../../hooks/useNFCManager';
+import { useNothingFonts } from '../../hooks/useFonts';
 
-const SettingsItem = ({ icon: Icon, title, subtitle, onPress, showArrow = true }) => (
+interface SettingsItemProps {
+  icon: any;
+  title: string;
+  subtitle?: string;
+  onPress: () => void;
+  showArrow?: boolean;
+}
+
+const SettingsItem: React.FC<SettingsItemProps> = ({ icon: Icon, title, subtitle, onPress, showArrow = true }) => (
   <TouchableOpacity onPress={onPress} style={styles.settingsItem}>
     <View style={styles.settingsItemContent}>
       <View style={styles.settingsItemLeft}>
@@ -40,7 +49,12 @@ const SettingsItem = ({ icon: Icon, title, subtitle, onPress, showArrow = true }
 );
 
 export default function SettingsScreen() {
+  const fontsLoaded = useNothingFonts();
   const { nfcStatus, addLogEntry } = useNFCManager();
+
+  if (!fontsLoaded) {
+    return null;
+  }
 
   const openSystemNFCSettings = () => {
     Alert.alert(
@@ -67,7 +81,7 @@ export default function SettingsScreen() {
   const showAppInfo = () => {
     Alert.alert(
       'App Information',
-      'NFC Glyph Manager v1.0\n\nA Nothing OS inspired NFC management interface.',
+      'NFC Manager v1.0\n\nA Nothing OS inspired NFC management interface for privacy protection.',
       [{ text: 'OK' }]
     );
   };
@@ -184,6 +198,7 @@ const styles = StyleSheet.create({
   headerTitle: {
     fontSize: 12,
     fontWeight: 'bold',
+    fontFamily: 'NothingFont',
     color: '#ffffff',
     letterSpacing: 2,
     opacity: 0.5,
@@ -198,6 +213,7 @@ const styles = StyleSheet.create({
   sectionTitle: {
     fontSize: 12,
     fontWeight: 'bold',
+    fontFamily: 'NothingFont',
     color: '#ffffff',
     opacity: 0.5,
     letterSpacing: 1,
@@ -238,6 +254,7 @@ const styles = StyleSheet.create({
   settingsItemTitle: {
     fontSize: 16,
     fontWeight: '600',
+    fontFamily: 'NothingFont',
     color: '#ffffff',
   },
   settingsItemSubtitle: {

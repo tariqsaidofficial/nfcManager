@@ -1,42 +1,48 @@
 {
   "expo": {
-    "name": "NFC Glyph Manager",
-    "slug": "nfc-glyph-manager",
+    "name": "NFC Manager",
+    "slug": "nfc-manager",
     "version": "1.0.0",
-    "description": "Professional NFC management with Nothing OS design aesthetics",
+    "description": "Smart NFC management for privacy protection and security monitoring",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "myapp",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "privacy": "public",
-    "platforms": ["ios", "android", "web"],
-    "ios": {
-      "supportsTablet": true,
-      "bundleIdentifier": "com.nothingos.nfcmanager"
-    },
+    "platforms": ["android"],
     "android": {
       "package": "com.nothingos.nfcmanager",
       "versionCode": 1,
       "permissions": [
         "android.permission.NFC",
-        "android.permission.VIBRATE"
+        "android.permission.VIBRATE",
+        "android.permission.FOREGROUND_SERVICE",
+        "android.permission.WAKE_LOCK",
+        "android.permission.POST_NOTIFICATIONS"
       ],
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#000000"
       }
     },
-    "web": {
-      "bundler": "metro",
-      "output": "single",
-      "favicon": "./assets/images/favicon.png"
-    },
     "plugins": [
       "expo-router", 
-      "expo-font", 
+      [
+        "expo-font",
+        {
+          "fonts": ["./components/nothing-font-5x7.otf/nothing-font-5x7.otf"]
+        }
+      ],
       "expo-web-browser",
-      "expo-haptics"
+      [
+        "react-native-nfc-manager",
+        {
+          "includeNdefMessage": true,
+          "includeTechList": true,
+          "includeMaxTransceiveLength": true
+        }
+      ]
     ],
     "experiments": {
       "typedRoutes": true

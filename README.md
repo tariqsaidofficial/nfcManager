@@ -1,15 +1,16 @@
-# NFC Glyph Manager
+# NFC Manager
 
-A professional NFC management application inspired by Nothing OS design aesthetics, built with Expo and React Native.
+A smart NFC management application for privacy protection and security monitoring, inspired by Nothing OS design aesthetics, built with Expo and React Native.
 
 ## 🎨 Features
 
+- **Privacy Protection**: Smart alerts when NFC stays enabled to prevent unauthorized access
+- **Security Monitoring**: Real-time NFC status tracking with customizable intervals (10/30/50 seconds)
 - **Nothing OS Design**: Authentic Nothing OS visual language with clean lines and thoughtful animations
-- **NFC Management**: Professional NFC status monitoring and control interface
-- **Auto Reminders**: Customizable idle notifications to optimize power consumption
-- **Activity Logging**: Comprehensive activity tracking with timestamps
+- **Auto Reminders**: Privacy-focused notifications to protect against NFC vulnerabilities
+- **Activity Logging**: Comprehensive security activity tracking with timestamps
 - **Accessibility**: Full accessibility support with screen reader compatibility
-- **Privacy Compliant**: Google Play compliant with transparent privacy practices
+- **Privacy Compliant**: Google Play compliant with transparent privacy practices and no data collection
 
 ## 🏗️ Architecture
 
@@ -39,9 +40,9 @@ A professional NFC management application inspired by Nothing OS design aestheti
 
 ## 📱 Screens
 
-1. **NFC Glyph** - Main interface with animated glyph and status
-2. **Settings** - Configuration and system integration
-3. **Activity** - Detailed activity log and history
+1. **NFC Manager** - Main interface with real-time NFC monitoring and privacy alerts
+2. **Settings** - Security configuration and system integration options
+3. **Activity** - Detailed security activity log and privacy monitoring history
 
 ## 🔒 Privacy & Security
 

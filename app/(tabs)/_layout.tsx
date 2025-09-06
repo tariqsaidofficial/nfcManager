@@ -24,7 +24,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="index"
         options={{
-          title: 'NFC GLYPH',
+          title: 'NFC MANAGER',
           tabBarIcon: ({ size, color }) => (
             <Nfc size={size} color={color} />
           ),
