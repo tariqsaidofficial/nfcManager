@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- App Identity -->
+    <string name="app_name">NFC Manager</string>
+    
+    <!-- Main Interface -->
+    <string name="home_title">NFC Manager</string>
+    <string name="nfc_monitoring">NFC Monitoring</string>
+    <string name="privacy_protection">Privacy Protection</string>
+    
+    <!-- Settings -->
+    <string name="settings_title">Settings</string>
+    <string name="reminder_interval">Reminder Interval</string>
+    <string name="privacy_mode">Privacy Mode</string>
+    <string name="notifications">Notifications</string>
+    
+    <!-- Alert Intervals -->
+    <string name="interval_10_seconds">10 seconds</string>
+    <string name="interval_30_seconds">30 seconds</string>
+    <string name="interval_50_seconds">50 seconds</string>
+    <string name="custom_interval">Custom interval</string>
+    
+    <!-- Security Messages -->
+    <string name="nfc_enabled_too_long">NFC has been enabled for too long. Consider disabling it to protect your privacy.</string>
+    <string name="nfc_privacy_warning">NFC can be used for unauthorized payments or data access.</string>
+    
+    <!-- Activity -->
+    <string name="activity_title">Activity Log</string>
+    <string name="nfc_events">NFC Events</string>
+    
+    <!-- General -->
+    <string name="enabled">Enabled</string>
+    <string name="disabled">Disabled</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
+    <string name="save">Save</string>
+</resources>
