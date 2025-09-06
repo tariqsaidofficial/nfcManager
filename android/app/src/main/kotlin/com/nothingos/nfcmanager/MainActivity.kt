@@ -1,9 +1,9 @@
 package com.nothingos.nfcmanager
 
 import android.app.Activity // Required for context cast
+import android.app.Application // Required for ViewModel instantiation
 import android.os.Bundle
 import androidx.activity.ComponentActivity
-// import androidx.activity.SystemBarStyle // No longer directly used in onCreate for dynamic changes
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
@@ -14,9 +14,11 @@ import androidx.compose.runtime.SideEffect // Required for ApplySystemBarColors
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext // Required for getting current Activity
 import androidx.compose.ui.platform.LocalView // Required for ApplySystemBarColors
 import androidx.core.view.WindowInsetsControllerCompat // Required for ApplySystemBarColors
-import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewmodel.compose.viewModel // Still useful for ActivityViewModel
 import com.nothingos.nfcmanager.data.database.AppDatabase
 import com.nothingos.nfcmanager.data.repository.NFCRepository
 import com.nothingos.nfcmanager.ui.theme.NothingOSTheme
@@ -33,25 +35,32 @@ class MainActivity : ComponentActivity() {
     
     private lateinit var database: AppDatabase
     private lateinit var repository: NFCRepository
-    
+    private lateinit var mainViewModel: MainViewModel
+    private lateinit var settingsViewModel: SettingsViewModel // Hoist for factory instantiation
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         
-        // Enable edge-to-edge display. System bar icon colors will be handled dynamically.
         enableEdgeToEdge()
-        
-        // Initialize Database and Repository
         setupDatabase()
+
+        // Create ViewModels that require Application context using factories
+        mainViewModel = ViewModelProvider(
+            this,
+            MainViewModelFactory(application, repository)
+        ).get(MainViewModel::class.java)
+
+        settingsViewModel = ViewModelProvider(
+            this,
+            SettingsViewModelFactory(application, repository)
+        ).get(SettingsViewModel::class.java)
         
         setContent {
-            // Pass the repository to NFCManagerApp so it can be provided to ViewModels
-            NFCManagerApp(repository)
+            // Pass application, repository, and pre-created ViewModels
+            NFCManagerApp(application, repository, mainViewModel, settingsViewModel)
         }
     }
     
-    /**
-     * Initialize Room Database and Repository
-     */
     private fun setupDatabase() {
         database = AppDatabase.getDatabase(this)
         repository = NFCRepository(
@@ -64,34 +73,31 @@ class MainActivity : ComponentActivity() {
      * Main Compose App
      */
     @Composable
-    private fun NFCManagerApp(appRepository: NFCRepository) { // Accept repository
-        // Obtain SettingsViewModel to access theme settings
-        val settingsViewModel: SettingsViewModel = viewModel {
-            SettingsViewModel(appRepository)
-        }
-        val settings by settingsViewModel.settings.collectAsState()
+    private fun NFCManagerApp(
+        app: Application, // Pass application
+        appRepository: NFCRepository, 
+        mainViewModelInstance: MainViewModel, // Pass the MainViewModel instance
+        settingsViewModelInstance: SettingsViewModel // Pass the SettingsViewModel instance
+    ) {
+        val settings by settingsViewModelInstance.settings.collectAsState()
         val isCurrentlyDarkTheme = settings.isDarkMode
 
         NothingOSTheme(darkTheme = isCurrentlyDarkTheme) {
-            // Apply dynamic system bar colors (icon appearance)
             ApplySystemBarColors(isDarkTheme = isCurrentlyDarkTheme)
 
             Surface(
                 modifier = Modifier.fillMaxSize(),
                 color = MaterialTheme.colorScheme.background
             ) {
-                // Create other ViewModels, passing the same repository
-                val mainViewModel: MainViewModel = viewModel {
-                    MainViewModel(appRepository)
-                }
+                // ActivityViewModel doesn't require Application context in its constructor directly
                 val activityViewModel: ActivityViewModel = viewModel {
                     ActivityViewModel(appRepository)
                 }
                 
                 NFCManagerNavigation(
-                    mainViewModel = mainViewModel,
+                    mainViewModel = mainViewModelInstance,
                     activityViewModel = activityViewModel,
-                    settingsViewModel = settingsViewModel // Pass the already created SettingsViewModel
+                    settingsViewModel = settingsViewModelInstance // Use the passed instance
                 )
             }
         }
@@ -99,15 +105,41 @@ class MainActivity : ComponentActivity() {
     
     override fun onDestroy() {
         super.onDestroy()
-        if (::database.isInitialized) {
-            // Database cleanup is handled by Room
-        }
     }
 }
 
 /**
- * Composable to dynamically set system bar icon colors based on the current theme.
+ * Factory for creating MainViewModel with Application and Repository.
  */
+class MainViewModelFactory(
+    private val application: Application,
+    private val repository: NFCRepository
+) : ViewModelProvider.Factory {
+    override fun <T : androidx.lifecycle.ViewModel> create(modelClass: Class<T>): T {
+        if (modelClass.isAssignableFrom(MainViewModel::class.java)) {
+            @Suppress("UNCHECKED_CAST")
+            return MainViewModel(application, repository) as T
+        }
+        throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")
+    }
+}
+
+/**
+ * Factory for creating SettingsViewModel with Application and Repository.
+ */
+class SettingsViewModelFactory(
+    private val application: Application,
+    private val repository: NFCRepository
+) : ViewModelProvider.Factory {
+    override fun <T : androidx.lifecycle.ViewModel> create(modelClass: Class<T>): T {
+        if (modelClass.isAssignableFrom(SettingsViewModel::class.java)) {
+            @Suppress("UNCHECKED_CAST")
+            return SettingsViewModel(application, repository) as T
+        }
+        throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")
+    }
+}
+
 @Composable
 private fun ApplySystemBarColors(isDarkTheme: Boolean) {
     val view = LocalView.current
@@ -115,9 +147,7 @@ private fun ApplySystemBarColors(isDarkTheme: Boolean) {
         SideEffect {
             val window = (view.context as Activity).window
             val insetsController = WindowInsetsControllerCompat(window, view)
-            // Set status bar icons to dark if light theme, light if dark theme
             insetsController.isAppearanceLightStatusBars = !isDarkTheme
-            // Set navigation bar icons to dark if light theme, light if dark theme
             insetsController.isAppearanceLightNavigationBars = !isDarkTheme
         }
     }

@@ -1,12 +1,15 @@
 package com.nothingos.nfcmanager.viewmodel
 
-import androidx.lifecycle.ViewModel
+import android.app.Activity
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel // Changed from ViewModel to AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import com.nothingos.nfcmanager.data.repository.NFCRepository
 import com.nothingos.nfcmanager.data.database.entities.NFCEventEntity
 import com.nothingos.nfcmanager.data.database.entities.NFCSettingsEntity
+import com.nothingos.nfcmanager.utils.NFCUtils // Import NFCUtils
 import java.util.Date
 import javax.inject.Inject
 
@@ -15,8 +18,9 @@ import javax.inject.Inject
  * Manages UI state and business logic for the main NFC screen
  */
 class MainViewModel @Inject constructor(
+    application: Application, // Added Application context
     private val repository: NFCRepository
-) : ViewModel() {
+) : AndroidViewModel(application) { // Changed to AndroidViewModel
     
     // ==================== UI STATE ====================
     
@@ -25,7 +29,6 @@ class MainViewModel @Inject constructor(
     
     // ==================== DATA STREAMS ====================
     
-    // Settings as StateFlow for reactive UI
     val settings = repository.getSettings()
         .stateIn(
             scope = viewModelScope,
@@ -33,7 +36,6 @@ class MainViewModel @Inject constructor(
             initialValue = NFCSettingsEntity()
         )
     
-    // Today's events for main screen
     val todayEvents = repository.getTodayEvents()
         .stateIn(
             scope = viewModelScope,
@@ -41,7 +43,6 @@ class MainViewModel @Inject constructor(
             initialValue = emptyList()
         )
     
-    // Today's event count for statistics
     val todayEventCount = repository.getTodayEventCount()
         .stateIn(
             scope = viewModelScope,
@@ -49,7 +50,6 @@ class MainViewModel @Inject constructor(
             initialValue = 0
         )
     
-    // Auto-reminder enabled state
     val autoReminderEnabled = repository.isAutoReminderEnabled()
         .stateIn(
             scope = viewModelScope,
@@ -57,7 +57,6 @@ class MainViewModel @Inject constructor(
             initialValue = false
         )
     
-    // Reminder interval
     val reminderInterval = repository.getReminderInterval()
         .stateIn(
             scope = viewModelScope,
@@ -68,18 +67,20 @@ class MainViewModel @Inject constructor(
     // ==================== INITIALIZATION ====================
     
     init {
-        // Initialize settings if needed
         viewModelScope.launch {
             repository.initializeSettingsIfNeeded()
             logEvent("SYSTEM", "NFC Manager initialized", "Shield", isImportant = false)
+            // Initial NFC Status Check
+            val appContext = getApplication<Application>().applicationContext
+            updateNFCSupport(NFCUtils.hasNfcAdapter(appContext))
+            if (NFCUtils.hasNfcAdapter(appContext)) {
+                updateNFCStatus(NFCUtils.isNfcEnabled(appContext))
+            }
         }
     }
     
     // ==================== NFC EVENT LOGGING ====================
     
-    /**
-     * Log NFC event with proper error handling
-     */
     fun logEvent(
         eventType: String,
         message: String,
@@ -109,9 +110,6 @@ class MainViewModel @Inject constructor(
         }
     }
     
-    /**
-     * Delete specific event
-     */
     fun deleteEvent(event: NFCEventEntity) {
         viewModelScope.launch {
             try {
@@ -123,9 +121,6 @@ class MainViewModel @Inject constructor(
         }
     }
     
-    /**
-     * Clear all events
-     */
     fun clearAllEvents() {
         viewModelScope.launch {
             try {
@@ -140,9 +135,6 @@ class MainViewModel @Inject constructor(
     
     // ==================== SETTINGS MANAGEMENT ====================
     
-    /**
-     * Toggle auto-reminder feature
-     */
     fun toggleAutoReminder() {
         viewModelScope.launch {
             try {
@@ -159,9 +151,6 @@ class MainViewModel @Inject constructor(
         }
     }
     
-    /**
-     * Update reminder interval
-     */
     fun updateReminderInterval(interval: Int) {
         viewModelScope.launch {
             try {
@@ -173,9 +162,6 @@ class MainViewModel @Inject constructor(
         }
     }
     
-    /**
-     * Toggle notifications
-     */
     fun toggleNotifications() {
         viewModelScope.launch {
             try {
@@ -188,9 +174,6 @@ class MainViewModel @Inject constructor(
         }
     }
     
-    /**
-     * Toggle vibration
-     */
     fun toggleVibration() {
         viewModelScope.launch {
             try {
@@ -206,32 +189,59 @@ class MainViewModel @Inject constructor(
     // ==================== NFC STATE MANAGEMENT ====================
     
     /**
-     * Update NFC status (called from NFC monitoring service)
+     * Refreshes NFC adapter availability and enabled status.
      */
-    fun updateNFCStatus(enabled: Boolean) {
+    fun refreshNfcStatus() {
+        viewModelScope.launch {
+            val appContext = getApplication<Application>().applicationContext
+            val hasAdapter = NFCUtils.hasNfcAdapter(appContext)
+            updateNFCSupport(hasAdapter)
+            if (hasAdapter) {
+                val isEnabled = NFCUtils.isNfcEnabled(appContext)
+                // Only update and log if the status changed to avoid redundant logs from NFC monitoring service
+                if (_uiState.value.isNFCEnabled != isEnabled) {
+                    updateNFCStatus(isEnabled) // This method already logs
+                } else {
+                     _uiState.value = _uiState.value.copy(isNFCEnabled = isEnabled)
+                }
+            } else {
+                 _uiState.value = _uiState.value.copy(isNFCEnabled = false)
+            }
+        }
+    }
+
+    /**
+     * Update NFC status (can be called from NFC monitoring service or refreshNfcStatus)
+     */
+    private fun updateNFCStatus(enabled: Boolean) {
         _uiState.value = _uiState.value.copy(isNFCEnabled = enabled)
+        // Avoid logging here if refreshNfcStatus is the primary caller for user-initiated checks
+        // The NFC monitoring service (if active) would handle its own specific logs.
+        // However, for clarity that this specific update function was called:
         logEvent(
             "NFC_STATE", 
-            "NFC ${if (enabled) "enabled" else "disabled"}", 
+            "NFC hardware now ${if (enabled) "enabled" else "disabled"}", 
             "Power",
             isImportant = true
         )
         updateLastActivity()
     }
     
-    /**
-     * Update NFC support status
-     */
-    fun updateNFCSupport(supported: Boolean) {
+    private fun updateNFCSupport(supported: Boolean) {
         _uiState.value = _uiState.value.copy(isNFCSupported = supported)
         if (!supported) {
             logEvent("SYSTEM", "NFC not supported on this device", "Shield", isImportant = true)
         }
     }
-    
+
     /**
-     * Show/hide privacy notification
+     * Requests to open the system NFC settings.
+     * @param activity The current activity context to start the intent.
      */
+    fun requestOpenNfcSettings(activity: Activity) {
+        NFCUtils.openNfcSettings(activity)
+    }
+    
     fun showPrivacyNotification(show: Boolean) {
         _uiState.value = _uiState.value.copy(showPrivacyNotification = show)
         if (show) {
@@ -239,9 +249,6 @@ class MainViewModel @Inject constructor(
         }
     }
     
-    /**
-     * Dismiss privacy notification
-     */
     fun dismissPrivacyNotification() {
         _uiState.value = _uiState.value.copy(showPrivacyNotification = false)
         updateLastActivity()
@@ -250,16 +257,10 @@ class MainViewModel @Inject constructor(
     
     // ==================== UI STATE HELPERS ====================
     
-    /**
-     * Update loading state
-     */
     fun updateLoading(isLoading: Boolean) {
         _uiState.value = _uiState.value.copy(isLoading = isLoading)
     }
     
-    /**
-     * Update error message
-     */
     private fun updateError(message: String) {
         _uiState.value = _uiState.value.copy(
             errorMessage = message,
@@ -267,9 +268,6 @@ class MainViewModel @Inject constructor(
         )
     }
     
-    /**
-     * Update success message
-     */
     private fun updateSuccess(message: String) {
         _uiState.value = _uiState.value.copy(
             successMessage = message,
@@ -277,9 +275,6 @@ class MainViewModel @Inject constructor(
         )
     }
     
-    /**
-     * Clear messages
-     */
     fun clearMessages() {
         _uiState.value = _uiState.value.copy(
             errorMessage = null,
@@ -287,18 +282,12 @@ class MainViewModel @Inject constructor(
         )
     }
     
-    /**
-     * Update last activity timestamp
-     */
     private fun updateLastActivity() {
         _uiState.value = _uiState.value.copy(lastActivity = Date())
     }
     
     // ==================== UTILITY METHODS ====================
     
-    /**
-     * Format time duration (seconds to human readable)
-     */
     fun formatTime(seconds: Long): String {
         return when {
             seconds < 60 -> "${seconds}s"
@@ -307,9 +296,6 @@ class MainViewModel @Inject constructor(
         }
     }
     
-    /**
-     * Format relative time (e.g., "2m ago")
-     */
     fun formatRelativeTime(date: Date): String {
         val seconds = (System.currentTimeMillis() - date.time) / 1000
         return when {
@@ -320,9 +306,6 @@ class MainViewModel @Inject constructor(
         }
     }
     
-    /**
-     * Get performance statistics
-     */
     suspend fun getPerformanceStats(): Map<String, Any> {
         return try {
             val eventStats = repository.getEventStatistics()
@@ -345,8 +328,8 @@ class MainViewModel @Inject constructor(
  */
 data class MainUiState(
     val isLoading: Boolean = false,
-    val isNFCSupported: Boolean = false,
-    val isNFCEnabled: Boolean = false,
+    val isNFCSupported: Boolean = false, // True if NFC hardware exists
+    val isNFCEnabled: Boolean = false,   // True if NFC is turned on by the user
     val showPrivacyNotification: Boolean = false,
     val lastActivity: Date = Date(),
     val errorMessage: String? = null,

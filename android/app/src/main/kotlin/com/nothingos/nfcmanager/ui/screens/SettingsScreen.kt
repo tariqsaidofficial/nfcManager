@@ -1,5 +1,9 @@
 package com.nothingos.nfcmanager.ui.screens
 
+import android.Manifest // <-- Add this import
+import androidx.activity.compose.rememberLauncherForActivityResult // <-- Add this import
+import androidx.activity.result.contract.ActivityResultContracts // <-- Add this import
+import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
@@ -8,13 +12,17 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.hapticfeedback.HapticFeedbackType
+import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
-import com.nothingos.nfcmanager.ui.theme.NothingColors // Added for direct color access
+import androidx.lifecycle.viewmodel.compose.viewModel // Already here
+import com.nothingos.nfcmanager.ui.theme.NothingColors
 import com.nothingos.nfcmanager.ui.theme.NothingTextStyles
-import com.nothingos.nfcmanager.ui.theme.NothingUIColors // Added for UI specific colors
+import com.nothingos.nfcmanager.ui.theme.NothingUIColors
 import com.nothingos.nfcmanager.viewmodel.SettingsViewModel
+import kotlinx.coroutines.flow.collectLatest // <-- Add this import
 
 /**
  * Settings Screen with app configuration
@@ -23,11 +31,34 @@ import com.nothingos.nfcmanager.viewmodel.SettingsViewModel
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SettingsScreen(
-    viewModel: SettingsViewModel = viewModel()
+    viewModel: SettingsViewModel = viewModel() // This will now use the factory from MainActivity
 ) {
     val settings by viewModel.settings.collectAsState()
     val uiState by viewModel.uiState.collectAsState()
-    val isDarkTheme = settings.isDarkMode // Current theme state
+    val isDarkTheme = settings.isDarkMode
+
+    // Permission Launcher for Post Notifications
+    val notificationPermissionLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.RequestPermission(),
+        onResult = { isGranted: Boolean ->
+            if (isGranted) {
+                // Permission granted, you could log this or show a toast
+                // viewModel.logEvent("PERMISSION", "Notification permission granted", "CheckCircle")
+            } else {
+                // Permission denied, you could log this or show a toast explaining why it's needed
+                // viewModel.logEvent("PERMISSION", "Notification permission denied", "AlertCircle")
+                // Note: The setting will remain "on", but notifications won't appear.
+                // The user needs to grant it from system settings if they want notifications.
+            }
+        }
+    )
+
+    // Collect the permission request flow
+    LaunchedEffect(Unit) {
+        viewModel.requestNotificationPermissionFlow.collectLatest {
+            notificationPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
+        }
+    }
 
     Column(
         modifier = Modifier
@@ -53,10 +84,10 @@ fun SettingsScreen(
             ) {
                 Column(modifier = Modifier.padding(16.dp)) {
                     Text(
-                        text = "Theme", // Changed from "Display" to "Theme" as per screenshot context
+                        text = "Theme",
                         style = MaterialTheme.typography.headlineSmall,
                         color = if (isDarkTheme) NothingColors.PureWhite else NothingColors.LightPrimaryText,
-                        modifier = Modifier.padding(bottom = 8.dp) // Added padding
+                        modifier = Modifier.padding(bottom = 8.dp)
                     )
                     ThemeOption(
                         title = "Dark Mode",
@@ -98,7 +129,7 @@ fun SettingsScreen(
                 title = "Show Notifications",
                 subtitle = "Display privacy notifications",
                 checked = settings.showNotifications,
-                onCheckedChange = { viewModel.toggleNotifications() }
+                onCheckedChange = { viewModel.toggleNotifications() } // This will now trigger the permission flow
             )
             
             SettingsItem(
@@ -138,7 +169,6 @@ fun SettingsScreen(
                 checked = settings.batteryOptimized,
                 onCheckedChange = { viewModel.toggleBatteryOptimization() }
             )
-            // Removed Dark Mode toggle from here
         }
         
         Spacer(modifier = Modifier.height(32.dp))
@@ -177,7 +207,7 @@ fun SettingsScreen(
         Card(
             modifier = Modifier.fillMaxWidth(),
             colors = CardDefaults.cardColors(
-                containerColor = MaterialTheme.colorScheme.surface // This will adapt to theme
+                containerColor = MaterialTheme.colorScheme.surface
             )
         ) {
             Column(
@@ -186,7 +216,7 @@ fun SettingsScreen(
                 Text(
                     text = "Nothing OS Inspired Design",
                     style = MaterialTheme.typography.titleMedium,
-                    color = MaterialTheme.colorScheme.onSurface // Adapts to theme
+                    color = MaterialTheme.colorScheme.onSurface
                 )
                 
                 Spacer(modifier = Modifier.height(8.dp))
@@ -194,7 +224,7 @@ fun SettingsScreen(
                 Text(
                     text = "Built with official Android tools: Kotlin, Jetpack Compose, Room Database, and MVVM architecture.",
                     style = MaterialTheme.typography.bodyMedium,
-                    color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7f) // Adapts
+                    color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7f)
                 )
             }
         }
@@ -222,9 +252,7 @@ private fun SettingsSection(
             color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.6f),
             modifier = Modifier.padding(bottom = 16.dp)
         )
-        // The Card is now inside the new Display section for theme options
-        // For other sections, the content is directly under ColumnScope
-        if (title != "DISPLAY") { // Keep original card structure for other sections
+        if (title != "DISPLAY") { 
              Card(
                 modifier = Modifier.fillMaxWidth(),
                 colors = CardDefaults.cardColors(
@@ -238,7 +266,7 @@ private fun SettingsSection(
                 }
             }
         } else {
-            content() // Display section handles its own card
+            content()
         }
     }
 }
@@ -293,6 +321,7 @@ private fun ReminderIntervalSelector(
     val intervals = listOf(5, 10, 15, 20, 30, 40, 50, 60)
     val firstRowIntervals = intervals.subList(0, 4)
     val secondRowIntervals = intervals.subList(4, 8)
+    val haptic = LocalHapticFeedback.current
 
     Column(
         modifier = Modifier
@@ -319,8 +348,12 @@ private fun ReminderIntervalSelector(
         ) {
             firstRowIntervals.forEach { interval ->
                 val isSelected = currentInterval == interval
+                val scale by animateFloatAsState(targetValue = if (isSelected) 1.05f else 1.0f, label = "chipScale")
                 FilterChip(
-                    onClick = { onIntervalChange(interval) },
+                    onClick = { 
+                        haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
+                        onIntervalChange(interval) 
+                    },
                     label = { Text(text = "${interval}s", style = NothingTextStyles.ButtonText) },
                     selected = isSelected,
                     colors = FilterChipDefaults.filterChipColors(
@@ -329,7 +362,9 @@ private fun ReminderIntervalSelector(
                         containerColor = MaterialTheme.colorScheme.surface,
                         labelColor = MaterialTheme.colorScheme.onSurface
                     ),
-                    modifier = Modifier.weight(1f)
+                    modifier = Modifier
+                        .weight(1f)
+                        .scale(scale)
                 )
             }
         }
@@ -342,8 +377,12 @@ private fun ReminderIntervalSelector(
         ) {
             secondRowIntervals.forEach { interval ->
                 val isSelected = currentInterval == interval
+                val scale by animateFloatAsState(targetValue = if (isSelected) 1.05f else 1.0f, label = "chipScale")
                 FilterChip(
-                    onClick = { onIntervalChange(interval) },
+                    onClick = { 
+                        haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
+                        onIntervalChange(interval) 
+                    },
                     label = { Text(text = "${interval}s", style = NothingTextStyles.ButtonText) },
                     selected = isSelected,
                     colors = FilterChipDefaults.filterChipColors(
@@ -352,7 +391,9 @@ private fun ReminderIntervalSelector(
                         containerColor = MaterialTheme.colorScheme.surface,
                         labelColor = MaterialTheme.colorScheme.onSurface
                     ),
-                    modifier = Modifier.weight(1f)
+                    modifier = Modifier
+                        .weight(1f)
+                        .scale(scale)
                 )
             }
         }
@@ -368,20 +409,19 @@ private fun ReminderIntervalSelector(
     }
 }
 
-// Copied from the user's guide and adapted for existing NothingColors
 @Composable
 fun ThemeOption(
     title: String,
     subtitle: String,
     isSelected: Boolean,
     onClick: () -> Unit,
-    isDarkTheme: Boolean // To style the option itself based on the overall theme
+    isDarkTheme: Boolean
 ) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
             .clickable { onClick() }
-            .padding(vertical = 12.dp, horizontal = 4.dp), // Adjusted padding
+            .padding(vertical = 12.dp, horizontal = 4.dp), 
         verticalAlignment = Alignment.CenterVertically
     ) {
         RadioButton(

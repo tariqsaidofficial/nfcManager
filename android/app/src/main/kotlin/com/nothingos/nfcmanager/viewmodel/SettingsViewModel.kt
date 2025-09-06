@@ -1,6 +1,11 @@
 package com.nothingos.nfcmanager.viewmodel
 
-import androidx.lifecycle.ViewModel
+import android.Manifest // Required for Manifest.permission.POST_NOTIFICATIONS
+import android.app.Application // Required for AndroidViewModel and context
+import android.content.pm.PackageManager // Required for PackageManager.PERMISSION_GRANTED
+import android.os.Build // Required for Build.VERSION.SDK_INT
+import androidx.core.content.ContextCompat // Required for ContextCompat.checkSelfPermission
+import androidx.lifecycle.AndroidViewModel // Changed from ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
@@ -13,32 +18,30 @@ import javax.inject.Inject
  * Manages all app settings and preferences
  */
 class SettingsViewModel @Inject constructor(
+    private val app: Application, // Added Application context
     private val repository: NFCRepository
-) : ViewModel() {
+) : AndroidViewModel(app) { // Changed to AndroidViewModel
 
     // ==================== UI STATE ====================
 
     private val _uiState = MutableStateFlow(SettingsUiState())
     val uiState: StateFlow<SettingsUiState> = _uiState.asStateFlow()
 
+    // Channel to request notification permission from the UI
+    private val _requestNotificationPermissionChannel = MutableSharedFlow<Unit>(replay = 0)
+    val requestNotificationPermissionFlow = _requestNotificationPermissionChannel.asSharedFlow()
+
     // ==================== SETTINGS DATA ====================
 
-    // Complete settings object
     val settings = repository.getSettings()
         .stateIn(
             scope = viewModelScope,
             started = SharingStarted.WhileSubscribed(5000),
-            initialValue = NFCSettingsEntity(reminderInterval = 10, isDarkMode = true) // Default to dark theme
+            initialValue = NFCSettingsEntity(reminderInterval = 10, isDarkMode = true)
         )
-
-    // Removed individual isAutoReminderEnabled, reminderInterval, areNotificationsEnabled, isDarkModeEnabled, isBatteryOptimized flows
-    // We will use settings.value.propertyName directly in the UI and for updates
 
     // ==================== NFC SETTINGS ====================
 
-    /**
-     * Toggle auto-reminder feature
-     */
     fun toggleAutoReminder() {
         viewModelScope.launch {
             try {
@@ -59,9 +62,6 @@ class SettingsViewModel @Inject constructor(
         }
     }
 
-    /**
-     * Update reminder interval
-     */
     fun updateReminderInterval(interval: Int) {
         if (interval < 5 || interval > 300) {
             updateError("Interval must be between 5 and 300 seconds")
@@ -87,15 +87,26 @@ class SettingsViewModel @Inject constructor(
 
     // ==================== NOTIFICATION SETTINGS ====================
 
-    /**
-     * Toggle notifications
-     */
     fun toggleNotifications() {
         viewModelScope.launch {
             try {
                 updateLoading(true)
                 val newSetting = !settings.value.showNotifications
                 repository.updateNotificationsEnabled(newSetting)
+
+                if (newSetting) {
+                    // If notifications are being enabled, check and request permission if needed
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                        val permissionStatus = ContextCompat.checkSelfPermission(
+                            app.applicationContext,
+                            Manifest.permission.POST_NOTIFICATIONS
+                        )
+                        if (permissionStatus != PackageManager.PERMISSION_GRANTED) {
+                            _requestNotificationPermissionChannel.emit(Unit)
+                        }
+                    }
+                }
+
                 repository.logEvent(
                     "SETTINGS",
                     "Notifications ${if (newSetting) "enabled" else "disabled"}",
@@ -110,9 +121,6 @@ class SettingsViewModel @Inject constructor(
         }
     }
 
-    /**
-     * Toggle vibration
-     */
     fun toggleVibration() {
         viewModelScope.launch {
             try {
@@ -133,15 +141,11 @@ class SettingsViewModel @Inject constructor(
         }
     }
 
-    /**
-     * Toggle sound notifications
-     */
     fun toggleSound() {
         viewModelScope.launch {
             try {
                 updateLoading(true)
                 val newSetting = !settings.value.soundEnabled
-                // Assuming a direct repository update method exists or update via NFCSettingsEntity
                 repository.updateSettings(settings.value.copy(soundEnabled = newSetting))
                 repository.logEvent(
                     "SETTINGS",
@@ -159,14 +163,11 @@ class SettingsViewModel @Inject constructor(
 
     // ==================== THEME SETTINGS ====================
 
-    /**
-     * Set theme to Dark or Light
-     */
     fun setTheme(isDark: Boolean) {
         viewModelScope.launch {
             try {
                 updateLoading(true)
-                repository.updateDarkMode(isDark) // This updates the value in NFCSettingsEntity
+                repository.updateDarkMode(isDark)
                 repository.logEvent(
                     "SETTINGS",
                     if (isDark) "Dark mode enabled" else "Light mode enabled",
@@ -181,9 +182,6 @@ class SettingsViewModel @Inject constructor(
         }
     }
 
-    /**
-     * Update accent color
-     */
     fun updateAccentColor(color: String) {
         viewModelScope.launch {
             try {
@@ -205,9 +203,6 @@ class SettingsViewModel @Inject constructor(
 
     // ==================== PERFORMANCE SETTINGS ====================
 
-    /**
-     * Toggle battery optimization
-     */
     fun toggleBatteryOptimization() {
         viewModelScope.launch {
             try {
@@ -228,9 +223,6 @@ class SettingsViewModel @Inject constructor(
         }
     }
 
-    /**
-     * Update monitoring interval
-     */
     fun updateMonitoringInterval(interval: Int) {
         if (interval < 1000 || interval > 10000) {
             updateError("Monitoring interval must be between 1000 and 10000 milliseconds")
@@ -256,9 +248,6 @@ class SettingsViewModel @Inject constructor(
 
     // ==================== PRIVACY & SECURITY ====================
 
-    /**
-     * Toggle privacy mode
-     */
     fun togglePrivacyMode() {
         viewModelScope.launch {
             try {
@@ -280,9 +269,6 @@ class SettingsViewModel @Inject constructor(
         }
     }
 
-    /**
-     * Toggle block unknown tags
-     */
     fun toggleBlockUnknownTags() {
         viewModelScope.launch {
             try {
@@ -306,14 +292,10 @@ class SettingsViewModel @Inject constructor(
 
     // ==================== DATA MANAGEMENT ====================
 
-    /**
-     * Export settings
-     */
     fun exportSettings() {
         viewModelScope.launch {
             try {
                 updateLoading(true)
-                // Implementation for exporting settings
                 repository.logEvent("SETTINGS", "Settings exported", "Settings")
                 updateSuccess("Settings exported successfully")
             } catch (e: Exception) {
@@ -324,9 +306,6 @@ class SettingsViewModel @Inject constructor(
         }
     }
 
-    /**
-     * Reset all settings to defaults
-     */
     fun resetAllSettings() {
         viewModelScope.launch {
             try {
@@ -347,9 +326,6 @@ class SettingsViewModel @Inject constructor(
         }
     }
 
-    /**
-     * Clean up old data
-     */
     fun cleanupOldData(daysToKeep: Int = 30) {
         viewModelScope.launch {
             try {
@@ -382,7 +358,7 @@ class SettingsViewModel @Inject constructor(
         )
     }
 
-    private fun updateSuccess(message: String) { // Corrected: Added colon
+    private fun updateSuccess(message: String) {
         _uiState.value = _uiState.value.copy(
             successMessage = message,
             isLoading = false

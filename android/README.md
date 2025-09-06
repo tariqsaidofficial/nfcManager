@@ -59,7 +59,7 @@ A smart NFC management application for privacy protection and security monitorin
 - **Android Studio**: Latest version with Android SDK
 - **Kotlin Support**: Included in Android Studio  
 - **Java 11+**: **REQUIRED** for Android Gradle Plugin 7.2.2+
-- **Android 11+**: Minimum API level 30 (تم التحديث)
+- **Android 11+**: Minimum API level 30 (Updated)
 
 ### ⚠️ Java 11+ Requirement
 This project requires Java 11 or higher. Install it using:
@@ -118,7 +118,7 @@ cd android
 ./gradlew connectedAndroidTest
 ```
 
-## 🔄 Phase 1 Updates (مكتمل)
+## ✅ Phase 1 Updates (Completed)
 
 ### ✅ **Android 11+ Support**
 - **Minimum SDK**: Updated from API 21 to API 30 (Android 11+)
@@ -143,6 +143,12 @@ cd android
 - **Android Gradle Plugin**: 7.2.2 (Java 8+ compatible)
 - **Dependencies**: Updated to latest stable versions
 - **ProGuard**: Optimized rules for NFC Manager
+
+### ✅ **UI Enhancements & Theming**
+- **Theme Selection**: Implemented user-selectable Light and Dark themes with persistence.
+- **Dynamic System UI**: Status bar and navigation bar icons adapt to the selected theme.
+- **Visual Polish**: Improved text contrast for UI elements (e.g., badges) and resolved edge-to-edge display issues.
+- **Nothing Font**: Integrated Nothing OS typography (NothingFont.ttf, nothing-font-5x7.otf).
 
 ### ✅ **Project Structure**
 ```
@@ -243,7 +249,7 @@ nfcManager/
 - ✅ **Room Database**: Complete data persistence layer
 - ✅ **MVVM Architecture**: ViewModels with StateFlow
 - ✅ **Navigation Component**: Bottom navigation with type safety
-- ✅ **Nothing OS Theme**: Complete theming system
+- ✅ **Nothing OS Theme**: Complete theming system (Light/Dark modes, dynamic system UI)
 - ✅ **Material Design 3**: Latest design components
 
 ### **Code Quality**
@@ -357,7 +363,7 @@ Contributions welcome! Please read our contributing guidelines and code of condu
 
 ## 📝 Changelog
 
-### Phase 1 (مكتمل) - January 2024
+### Phase 1 (Completed) - January 2024
 - ✅ **Android 11+ Support**: Updated minimum SDK from API 21 to API 30
 - ✅ **App Rebranding**: Changed from "NFC Glyph Manager" to "NFC Manager"
 - ✅ **Privacy Enhancement**: Default alert interval reduced to 10 seconds
@@ -365,17 +371,21 @@ Contributions welcome! Please read our contributing guidelines and code of condu
 - ✅ **Build System**: Removed React Native dependencies, native Android only
 - ✅ **Gradle Configuration**: Updated to compatible versions with proper wrapper
 - ✅ **Documentation**: Comprehensive setup and troubleshooting guides
+- ✅ **Theme Selection & Persistence**: Implemented user-selectable Light and Dark themes.
+- ✅ **Dynamic System UI Theming**: Ensured system UI adapts to the selected theme.
+- ✅ **Visual Polish**: Improved text contrast and edge-to-edge display.
+- ✅ **Nothing Font**: Integrated Nothing OS typography.
+
 
 ### Phase 2 (Planned) - Real NFC Integration
+- ✅ **NFC Status Handling**: Implemented checks for NFC adapter availability and enabled state, with user guidance to system settings and status display on the Home screen.
 - 🔄 **Real NFC APIs**: Replace simulation with actual NFC monitoring
 - 🔄 **Background Service**: Continuous NFC state monitoring
-- 🔄 **Permissions**: Runtime permission handling
+- 🔄 **Permissions**: Runtime permission handling (Note: Basic permission declaration is in Manifest, further runtime checks for specific features might still be needed beyond adapter status).
 - 🔄 **Notifications**: Real privacy alerts and warnings
 
 ### Phase 3 (Planned) - Design Polish
-- 🔄 **Nothing Font**: Integration of Nothing OS typography
-- 🔄 **Animations**: Micro-interactions and transitions
-- 🔄 **Component Sizing**: Proper Nothing OS dimensions
+- 🟡 **Animations**: Micro-interactions and transitions (FilterChip haptic feedback & scale animation implemented).
 
 ---
 
