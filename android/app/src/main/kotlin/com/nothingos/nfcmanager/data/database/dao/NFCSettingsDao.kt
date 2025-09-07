@@ -36,6 +36,9 @@ interface NFCSettingsDao {
     
     @Query("SELECT batteryOptimized FROM nfc_settings WHERE id = 1")
     fun isBatteryOptimized(): Flow<Boolean>
+
+    @Query("SELECT backgroundServiceMonitoringEnabled FROM nfc_settings WHERE id = 1") // Added
+    fun isBackgroundServiceMonitoringEnabled(): Flow<Boolean> // Added
     
     // Insert/Update settings
     @Insert(onConflict = OnConflictStrategy.REPLACE)
@@ -65,6 +68,9 @@ interface NFCSettingsDao {
     
     @Query("UPDATE nfc_settings SET batteryOptimized = :enabled WHERE id = 1")
     suspend fun updateBatteryOptimized(enabled: Boolean)
+
+    @Query("UPDATE nfc_settings SET backgroundServiceMonitoringEnabled = :enabled WHERE id = 1") // Added
+    suspend fun updateBackgroundServiceMonitoringEnabled(enabled: Boolean) // Added
     
     @Query("UPDATE nfc_settings SET monitoringInterval = :interval WHERE id = 1")
     suspend fun updateMonitoringInterval(interval: Int)

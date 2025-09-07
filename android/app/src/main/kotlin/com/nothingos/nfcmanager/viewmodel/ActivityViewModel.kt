@@ -2,16 +2,18 @@ package com.nothingos.nfcmanager.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.nothingos.nfcmanager.data.database.entities.NFCEventEntity
+import com.nothingos.nfcmanager.data.repository.NFCRepository
+import dagger.hilt.android.lifecycle.HiltViewModel // Import HiltViewModel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
-import com.nothingos.nfcmanager.data.repository.NFCRepository
-import com.nothingos.nfcmanager.data.database.entities.NFCEventEntity
 import javax.inject.Inject
 
 /**
  * ViewModel for Activity/Events screen
  * Manages event history and filtering
  */
+@HiltViewModel // Add HiltViewModel annotation
 class ActivityViewModel @Inject constructor(
     private val repository: NFCRepository
 ) : ViewModel() {
@@ -34,7 +36,6 @@ class ActivityViewModel @Inject constructor(
     
     // ==================== DATA STREAMS ====================
     
-    // All events for comprehensive view
     val allEvents = repository.getAllEvents()
         .stateIn(
             scope = viewModelScope,
@@ -42,7 +43,6 @@ class ActivityViewModel @Inject constructor(
             initialValue = emptyList()
         )
     
-    // Today's events for quick access
     val todayEvents = repository.getTodayEvents()
         .stateIn(
             scope = viewModelScope,
@@ -50,7 +50,6 @@ class ActivityViewModel @Inject constructor(
             initialValue = emptyList()
         )
     
-    // Important events for alerts
     val importantEvents = repository.getImportantEvents()
         .stateIn(
             scope = viewModelScope,
@@ -58,7 +57,6 @@ class ActivityViewModel @Inject constructor(
             initialValue = emptyList()
         )
     
-    // Filtered events based on current filters
     val filteredEvents = combine(
         allEvents,
         searchQuery,
@@ -67,7 +65,6 @@ class ActivityViewModel @Inject constructor(
     ) { events, query, eventType, importantOnly ->
         var filtered = events
         
-        // Filter by search query
         if (query.isNotBlank()) {
             filtered = filtered.filter { event ->
                 event.message.contains(query, ignoreCase = true) ||
@@ -76,12 +73,10 @@ class ActivityViewModel @Inject constructor(
             }
         }
         
-        // Filter by event type
         eventType?.let { type ->
             filtered = filtered.filter { it.eventType == type }
         }
         
-        // Filter important only
         if (importantOnly) {
             filtered = filtered.filter { it.isImportant }
         }
@@ -93,7 +88,6 @@ class ActivityViewModel @Inject constructor(
         initialValue = emptyList()
     )
     
-    // Event statistics
     val eventStatistics = allEvents.map { events ->
         EventStatistics(
             totalEvents = events.size,
@@ -112,37 +106,22 @@ class ActivityViewModel @Inject constructor(
     
     // ==================== SEARCH FUNCTIONALITY ====================
     
-    /**
-     * Update search query
-     */
     fun updateSearchQuery(query: String) {
         _searchQuery.value = query
     }
     
-    /**
-     * Clear search
-     */
     fun clearSearch() {
         _searchQuery.value = ""
     }
     
-    /**
-     * Set event type filter
-     */
     fun setEventTypeFilter(eventType: String?) {
         _selectedEventType.value = eventType
     }
     
-    /**
-     * Toggle important events filter
-     */
     fun toggleImportantOnly() {
         _showImportantOnly.value = !_showImportantOnly.value
     }
     
-    /**
-     * Clear all filters
-     */
     fun clearAllFilters() {
         _searchQuery.value = ""
         _selectedEventType.value = null
@@ -151,9 +130,6 @@ class ActivityViewModel @Inject constructor(
     
     // ==================== EVENT MANAGEMENT ====================
     
-    /**
-     * Delete specific event
-     */
     fun deleteEvent(event: NFCEventEntity) {
         viewModelScope.launch {
             try {
@@ -165,15 +141,11 @@ class ActivityViewModel @Inject constructor(
         }
     }
     
-    /**
-     * Mark event as important
-     */
     fun toggleEventImportance(event: NFCEventEntity) {
         viewModelScope.launch {
             try {
                 val updatedEvent = event.copy(isImportant = !event.isImportant)
-                // Note: This would need an update method in the repository
-                // repository.updateEvent(updatedEvent)
+                // repository.updateEvent(updatedEvent) // This needs repository.updateEvent(event) or similar
                 updateSuccess("Event importance updated")
             } catch (e: Exception) {
                 updateError("Failed to update event: ${e.message}")
@@ -181,13 +153,9 @@ class ActivityViewModel @Inject constructor(
         }
     }
     
-    /**
-     * Export events (future feature)
-     */
     fun exportEvents(events: List<NFCEventEntity>) {
         viewModelScope.launch {
             try {
-                // Implementation for exporting events
                 updateSuccess("Events exported successfully")
             } catch (e: Exception) {
                 updateError("Failed to export events: ${e.message}")
@@ -195,9 +163,6 @@ class ActivityViewModel @Inject constructor(
         }
     }
     
-    /**
-     * Clear all events with confirmation
-     */
     fun clearAllEvents() {
         viewModelScope.launch {
             try {
@@ -209,9 +174,6 @@ class ActivityViewModel @Inject constructor(
         }
     }
     
-    /**
-     * Clean up old events
-     */
     fun cleanupOldEvents(daysToKeep: Int = 30) {
         viewModelScope.launch {
             try {
@@ -225,16 +187,10 @@ class ActivityViewModel @Inject constructor(
     
     // ==================== UI STATE HELPERS ====================
     
-    /**
-     * Update loading state
-     */
     fun updateLoading(isLoading: Boolean) {
         _uiState.value = _uiState.value.copy(isLoading = isLoading)
     }
     
-    /**
-     * Update error message
-     */
     private fun updateError(message: String) {
         _uiState.value = _uiState.value.copy(
             errorMessage = message,
@@ -242,9 +198,6 @@ class ActivityViewModel @Inject constructor(
         )
     }
     
-    /**
-     * Update success message
-     */
     private fun updateSuccess(message: String) {
         _uiState.value = _uiState.value.copy(
             successMessage = message,
@@ -252,9 +205,6 @@ class ActivityViewModel @Inject constructor(
         )
     }
     
-    /**
-     * Clear messages
-     */
     fun clearMessages() {
         _uiState.value = _uiState.value.copy(
             errorMessage = null,
@@ -262,9 +212,6 @@ class ActivityViewModel @Inject constructor(
         )
     }
     
-    /**
-     * Toggle selection mode for batch operations
-     */
     fun toggleSelectionMode() {
         _uiState.value = _uiState.value.copy(
             isSelectionMode = !_uiState.value.isSelectionMode,
@@ -272,9 +219,6 @@ class ActivityViewModel @Inject constructor(
         )
     }
     
-    /**
-     * Toggle event selection
-     */
     fun toggleEventSelection(eventId: Long) {
         val currentSelected = _uiState.value.selectedEvents
         val newSelected = if (currentSelected.contains(eventId)) {
@@ -285,26 +229,17 @@ class ActivityViewModel @Inject constructor(
         _uiState.value = _uiState.value.copy(selectedEvents = newSelected)
     }
     
-    /**
-     * Select all visible events
-     */
     fun selectAllEvents() {
         val visibleEventIds = filteredEvents.value.map { it.id }.toSet()
         _uiState.value = _uiState.value.copy(selectedEvents = visibleEventIds)
     }
     
-    /**
-     * Clear all selections
-     */
     fun clearSelections() {
         _uiState.value = _uiState.value.copy(selectedEvents = emptySet())
     }
     
     // ==================== UTILITY METHODS ====================
     
-    /**
-     * Check if date is today
-     */
     private fun isToday(date: java.util.Date): Boolean {
         val today = java.util.Calendar.getInstance()
         val targetDay = java.util.Calendar.getInstance().apply { time = date }
@@ -313,9 +248,6 @@ class ActivityViewModel @Inject constructor(
                 today.get(java.util.Calendar.DAY_OF_YEAR) == targetDay.get(java.util.Calendar.DAY_OF_YEAR)
     }
     
-    /**
-     * Format relative time for events
-     */
     fun formatRelativeTime(date: java.util.Date): String {
         val seconds = (System.currentTimeMillis() - date.time) / 1000
         return when {
@@ -327,9 +259,6 @@ class ActivityViewModel @Inject constructor(
     }
 }
 
-/**
- * UI State for Activity screen
- */
 data class ActivityUiState(
     val isLoading: Boolean = false,
     val errorMessage: String? = null,
@@ -338,9 +267,6 @@ data class ActivityUiState(
     val selectedEvents: Set<Long> = emptySet()
 )
 
-/**
- * Event statistics data class
- */
 data class EventStatistics(
     val totalEvents: Int = 0,
     val todayEvents: Int = 0,

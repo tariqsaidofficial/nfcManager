@@ -5,22 +5,25 @@ import android.app.Application // Required for AndroidViewModel and context
 import android.content.pm.PackageManager // Required for PackageManager.PERMISSION_GRANTED
 import android.os.Build // Required for Build.VERSION.SDK_INT
 import androidx.core.content.ContextCompat // Required for ContextCompat.checkSelfPermission
-import androidx.lifecycle.AndroidViewModel // Changed from ViewModel
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
+import com.nothingos.nfcmanager.data.database.entities.NFCSettingsEntity
+import com.nothingos.nfcmanager.data.repository.NFCRepository
+import com.nothingos.nfcmanager.services.NfcMonitoringService
+import dagger.hilt.android.lifecycle.HiltViewModel // Import HiltViewModel
+import javax.inject.Inject
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
-import com.nothingos.nfcmanager.data.repository.NFCRepository
-import com.nothingos.nfcmanager.data.database.entities.NFCSettingsEntity
-import javax.inject.Inject
 
 /**
  * ViewModel for Settings screen
  * Manages all app settings and preferences
  */
+@HiltViewModel // Add HiltViewModel annotation
 class SettingsViewModel @Inject constructor(
-    private val app: Application, // Added Application context
+    private val app: Application, 
     private val repository: NFCRepository
-) : AndroidViewModel(app) { // Changed to AndroidViewModel
+) : AndroidViewModel(app) {
 
     // ==================== UI STATE ====================
 
@@ -37,7 +40,7 @@ class SettingsViewModel @Inject constructor(
         .stateIn(
             scope = viewModelScope,
             started = SharingStarted.WhileSubscribed(5000),
-            initialValue = NFCSettingsEntity(reminderInterval = 10, isDarkMode = true)
+            initialValue = NFCSettingsEntity() // Ensure NFCSettingsEntity has default constructor or provide defaults
         )
 
     // ==================== NFC SETTINGS ====================
@@ -85,6 +88,36 @@ class SettingsViewModel @Inject constructor(
         }
     }
 
+    // ==================== BACKGROUND SERVICE SETTINGS ====================
+
+    fun toggleBackgroundServiceMonitoring() {
+        viewModelScope.launch {
+            try {
+                updateLoading(true)
+                val currentSetting = settings.value.backgroundServiceMonitoringEnabled
+                val newSetting = !currentSetting
+                repository.updateBackgroundServiceMonitoringEnabled(newSetting)
+
+                if (newSetting) {
+                    NfcMonitoringService.startService(app.applicationContext)
+                } else {
+                    NfcMonitoringService.stopService(app.applicationContext)
+                }
+
+                repository.logEvent(
+                    "SETTINGS",
+                    "Background NFC Monitoring ${if (newSetting) "enabled" else "disabled"}",
+                    if (newSetting) "Radar" else "RadarOff"
+                )
+                updateSuccess("Background NFC Monitoring ${if (newSetting) "enabled" else "disabled"}")
+            } catch (e: Exception) {
+                updateError("Failed to toggle background monitoring: ${e.message}")
+            } finally {
+                updateLoading(false)
+            }
+        }
+    }
+
     // ==================== NOTIFICATION SETTINGS ====================
 
     fun toggleNotifications() {
@@ -95,7 +128,6 @@ class SettingsViewModel @Inject constructor(
                 repository.updateNotificationsEnabled(newSetting)
 
                 if (newSetting) {
-                    // If notifications are being enabled, check and request permission if needed
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
                         val permissionStatus = ContextCompat.checkSelfPermission(
                             app.applicationContext,

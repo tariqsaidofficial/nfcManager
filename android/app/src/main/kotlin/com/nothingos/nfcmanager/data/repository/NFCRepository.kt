@@ -117,7 +117,7 @@ class NFCRepository @Inject constructor(
      * Get settings as Flow for reactive updates
      */
     fun getSettings(): Flow<NFCSettingsEntity> = nfcSettingsDao.getSettings().map { settings ->
-        settings ?: getDefaultSettings()
+        settings ?: getDefaultSettings().also { nfcSettingsDao.insertSettings(it) } // Ensure defaults are inserted if null
     }
     
     /**
@@ -172,6 +172,10 @@ class NFCRepository @Inject constructor(
     suspend fun updateBatteryOptimized(enabled: Boolean) {
         nfcSettingsDao.updateBatteryOptimized(enabled)
     }
+
+    suspend fun updateBackgroundServiceMonitoringEnabled(enabled: Boolean) { // Added
+        nfcSettingsDao.updateBackgroundServiceMonitoringEnabled(enabled)
+    }
     
     /**
      * Get specific settings as Flows for reactive UI
@@ -181,7 +185,8 @@ class NFCRepository @Inject constructor(
     fun areNotificationsEnabled(): Flow<Boolean> = nfcSettingsDao.areNotificationsEnabled()
     fun isDarkModeEnabled(): Flow<Boolean> = nfcSettingsDao.isDarkModeEnabled()
     fun isBatteryOptimized(): Flow<Boolean> = nfcSettingsDao.isBatteryOptimized()
-    
+    fun isBackgroundServiceMonitoringEnabled(): Flow<Boolean> = nfcSettingsDao.isBackgroundServiceMonitoringEnabled() // Added
+
     /**
      * Reset all settings to defaults
      */
@@ -200,11 +205,13 @@ class NFCRepository @Inject constructor(
             id = 1,
             isNFCMonitoringEnabled = true,
             autoReminderEnabled = false,
-            reminderInterval = 30,
+            reminderInterval = 10, // Defaulted to 10s as per previous README updates
             showNotifications = true,
             vibrationEnabled = true,
             isDarkMode = true,
-            accentColor = "#ef4444" // Nothing Red
+            accentColor = "#ef4444", // Nothing Red
+            backgroundServiceMonitoringEnabled = false // Ensure this is part of defaults
+            // Ensure all other NFCSettingsEntity fields are present with their defaults too
         )
     }
     

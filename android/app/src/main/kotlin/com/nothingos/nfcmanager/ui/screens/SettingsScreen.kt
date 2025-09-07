@@ -157,6 +157,13 @@ fun SettingsScreen(
                 checked = settings.blockUnknownTags,
                 onCheckedChange = { viewModel.toggleBlockUnknownTags() }
             )
+
+            SettingsItem( // Added for Background Service Monitoring
+                title = "Background NFC Monitoring",
+                subtitle = "Continuously monitors NFC status and alerts if it remains active. Requires a persistent notification.",
+                checked = settings.backgroundServiceMonitoringEnabled,
+                onCheckedChange = { viewModel.toggleBackgroundServiceMonitoring() }
+            )
         }
         
         Spacer(modifier = Modifier.height(24.dp))
