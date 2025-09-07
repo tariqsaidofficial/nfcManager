@@ -16,6 +16,7 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.hapticfeedback.HapticFeedbackType
@@ -178,8 +179,11 @@ fun SettingsScreen(
             SettingsItemClickable(
                 title = "Notification Sound",
                 subtitle = "Customize the specific sound for notifications",
+                enabled = settings.soundEnabled, // <-- Updated: Use enabled state
                 onClick = {
-                    navController.navigate(AppRoutes.NOTIFICATION_SOUND_SETTINGS)
+                    if (settings.soundEnabled) { // <-- Updated: Navigate only if enabled
+                        navController.navigate(AppRoutes.NOTIFICATION_SOUND_SETTINGS)
+                    }
                 }
             )
         }
@@ -362,13 +366,16 @@ fun SettingsItemClickable(
     title: String,
     subtitle: String,
     onClick: () -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    enabled: Boolean = true // <-- Updated: Added enabled parameter
 ) {
+    val alpha = if (enabled) 1f else 0.5f // Updated: For visual feedback of disabled state
     Row(
         modifier = modifier
             .fillMaxWidth()
-            .clickable(onClick = onClick)
-            .padding(horizontal = 20.dp, vertical = 16.dp), 
+            .clickable(onClick = onClick, enabled = enabled) // <-- Updated: Use enabled parameter
+            .padding(horizontal = 20.dp, vertical = 16.dp)
+            .alpha(alpha), // <-- Updated: Apply alpha for visual feedback
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
@@ -376,18 +383,18 @@ fun SettingsItemClickable(
             Text(
                 text = title,
                 style = MaterialTheme.typography.bodyLarge,
-                color = MaterialTheme.colorScheme.onSurface
+                color = MaterialTheme.colorScheme.onSurface.copy(alpha = alpha) // <-- Updated: Apply alpha
             )
             Text(
                 text = subtitle,
                 style = NothingTextStyles.Caption,
-                color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f)
+                color = MaterialTheme.colorScheme.onSurface.copy(alpha = if (enabled) 0.6f else 0.3f) // <-- Updated: Apply alpha
             )
         }
         Icon(
             imageVector = Icons.AutoMirrored.Filled.KeyboardArrowRight,
             contentDescription = "Navigate",
-            tint = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f)
+            tint = MaterialTheme.colorScheme.onSurface.copy(alpha = if (enabled) 0.6f else 0.3f) // <-- Updated: Apply alpha
         )
     }
 }
