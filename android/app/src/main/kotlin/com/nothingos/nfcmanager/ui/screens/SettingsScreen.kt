@@ -10,6 +10,8 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.Icons // Added for potential navigation icon
+import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight // Added for potential navigation icon
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -22,6 +24,8 @@ import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavController // <<< IMPORT NavController
+import com.nothingos.nfcmanager.ui.components.AppRoutes // <<< IMPORT AppRoutes
 import com.nothingos.nfcmanager.ui.theme.NothingColors
 import com.nothingos.nfcmanager.ui.theme.NothingTextStyles
 import com.nothingos.nfcmanager.ui.theme.NothingUIColors
@@ -31,7 +35,8 @@ import kotlinx.coroutines.flow.collectLatest
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SettingsScreen(
-    viewModel: SettingsViewModel = viewModel()
+    viewModel: SettingsViewModel = viewModel(),
+    navController: NavController // <<< NEW PARAMETER
 ) {
     val settings by viewModel.settings.collectAsState()
     val uiState by viewModel.uiState.collectAsState()
@@ -102,7 +107,7 @@ fun SettingsScreen(
         SettingsSection(title = "DISPLAY") {
             Card(
                 modifier = Modifier.fillMaxWidth(),
-                colors = CardDefaults.cardColors(
+                 colors = CardDefaults.cardColors(
                     containerColor = if (isDarkTheme) NothingColors.DarkSurface else NothingUIColors.LightCardBackground
                 )
             ) {
@@ -133,7 +138,7 @@ fun SettingsScreen(
 
         Spacer(modifier = Modifier.height(24.dp))
 
-        SettingsSection(title = "NFC CONFIGURATION") {
+        SettingsSection(title = "NOTIFICATIONS & ALERTS") {
             SettingsItem(
                 title = "Auto Reminder",
                 subtitle = "Privacy alerts when NFC stays enabled",
@@ -151,16 +156,31 @@ fun SettingsScreen(
             
             SettingsItem(
                 title = "Show Notifications",
-                subtitle = "Display privacy notifications",
+                subtitle = "Display all privacy and status notifications",
                 checked = settings.showNotifications,
                 onCheckedChange = { viewModel.toggleNotifications() }
             )
             
             SettingsItem(
-                title = "Vibration",
-                subtitle = "Haptic feedback for alerts",
+                title = "Vibration for Alerts",
+                subtitle = "Haptic feedback for privacy alerts",
                 checked = settings.vibrationEnabled,
                 onCheckedChange = { viewModel.toggleVibration() }
+            )
+
+            SettingsItem(
+                title = "Enable Sounds",
+                subtitle = "Play sounds for alerts and notifications",
+                checked = settings.soundEnabled, 
+                onCheckedChange = { viewModel.toggleSound() }
+            )
+
+            SettingsItemClickable(
+                title = "Notification Sound",
+                subtitle = "Customize the specific sound for notifications",
+                onClick = {
+                    navController.navigate(AppRoutes.NOTIFICATION_SOUND_SETTINGS)
+                }
             )
         }
         
@@ -279,21 +299,16 @@ private fun SettingsSection(
             color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.6f),
             modifier = Modifier.padding(bottom = 16.dp)
         )
-        if (title != "DISPLAY") { 
-             Card(
-                modifier = Modifier.fillMaxWidth(),
-                colors = CardDefaults.cardColors(
-                    containerColor = MaterialTheme.colorScheme.surface
-                )
-            ) {
-                Column(
-                    modifier = Modifier.padding(vertical = 8.dp)
-                ) {
-                    content()
-                }
+        Card(
+            modifier = Modifier.fillMaxWidth(),
+            colors = CardDefaults.cardColors(
+                // Use a consistent background for all section cards, or differentiate as needed
+                containerColor = MaterialTheme.colorScheme.surface 
+            )
+        ) {
+            Column {
+                content()
             }
-        } else {
-            content()
         }
     }
 }
@@ -303,10 +318,11 @@ private fun SettingsItem(
     title: String,
     subtitle: String,
     checked: Boolean,
-    onCheckedChange: (Boolean) -> Unit
+    onCheckedChange: (Boolean) -> Unit,
+    modifier: Modifier = Modifier
 ) {
     Row(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .padding(horizontal = 20.dp, vertical = 12.dp),
         horizontalArrangement = Arrangement.SpaceBetween,
@@ -333,31 +349,86 @@ private fun SettingsItem(
             onCheckedChange = onCheckedChange,
             colors = SwitchDefaults.colors(
                 checkedThumbColor = MaterialTheme.colorScheme.primary,
-                checkedTrackColor = MaterialTheme.colorScheme.primary.copy(alpha = 0.3f)
+                checkedTrackColor = MaterialTheme.colorScheme.primary.copy(alpha = 0.3f),
+                uncheckedThumbColor = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f),
+                uncheckedTrackColor = MaterialTheme.colorScheme.surfaceVariant
             )
         )
     }
 }
 
+@Composable
+fun SettingsItemClickable(
+    title: String,
+    subtitle: String,
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier
+) {
+    Row(
+        modifier = modifier
+            .fillMaxWidth()
+            .clickable(onClick = onClick)
+            .padding(horizontal = 20.dp, vertical = 16.dp), 
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.SpaceBetween
+    ) {
+        Column(modifier = Modifier.weight(1f)) {
+            Text(
+                text = title,
+                style = MaterialTheme.typography.bodyLarge,
+                color = MaterialTheme.colorScheme.onSurface
+            )
+            Text(
+                text = subtitle,
+                style = NothingTextStyles.Caption,
+                color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f)
+            )
+        }
+        Icon(
+            imageVector = Icons.AutoMirrored.Filled.KeyboardArrowRight,
+            contentDescription = "Navigate",
+            tint = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f)
+        )
+    }
+}
+
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun AdvancedIntervalSelector(
-    currentInterval: Int, // from settings.reminderInterval
-    onIntervalChange: (Int) -> Unit, // viewModel.updateReminderInterval
-    validateIntervalString: (String) -> Boolean // viewModel.validateReminderInterval
+    currentInterval: Int, 
+    onIntervalChange: (Int) -> Unit, 
+    validateIntervalString: (String) -> Boolean 
 ) {
     val predefinedIntervals = listOf(5, 10, 15, 20, 30, 40, 50, 60)
     val haptic = LocalHapticFeedback.current
 
-    var textFieldValue by remember { mutableStateOf(currentInterval.toString()) }
-    var isCustomChipActive by remember { mutableStateOf(!predefinedIntervals.contains(currentInterval)) }
-    var textFieldHasError by remember { mutableStateOf(false) }
-
+    var textFieldValue by remember(currentInterval) { 
+        mutableStateOf(currentInterval.toString())
+    }
+    var isCustomChipActive by remember(currentInterval) { 
+        mutableStateOf(!predefinedIntervals.contains(currentInterval)) 
+    }
+    var textFieldHasError by remember(currentInterval, textFieldValue, isCustomChipActive) { 
+        mutableStateOf(
+            if (isCustomChipActive) !validateIntervalString(textFieldValue) && textFieldValue.isNotBlank()
+            else false
+        )
+    }
+    
     LaunchedEffect(currentInterval) {
-        textFieldValue = currentInterval.toString()
         val isPreset = predefinedIntervals.contains(currentInterval)
-        isCustomChipActive = !isPreset
-        textFieldHasError = if (!isPreset) !validateIntervalString(currentInterval.toString()) else false
+        if (isCustomChipActive && isPreset) {
+            // If custom was active, but currentInterval is now a preset (e.g., due to reset or invalid custom input being reverted)
+            isCustomChipActive = false
+        } else if (!isCustomChipActive && !isPreset) {
+            // If custom was not active, but currentInterval is now custom
+            isCustomChipActive = true
+            textFieldValue = currentInterval.toString()
+        } else if (isCustomChipActive && !isPreset && textFieldValue != currentInterval.toString()) {
+            // If custom is active, currentInterval is custom, but textField doesn't match (e.g. ViewModel corrected it)
+            textFieldValue = currentInterval.toString()
+        }
     }
 
     Column(
@@ -392,14 +463,14 @@ private fun AdvancedIntervalSelector(
                         onClick = {
                             haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
                             isCustomChipActive = false 
-                            textFieldHasError = false
+                            textFieldHasError = false 
                             onIntervalChange(interval)
                         },
                         label = { Text("${interval}s", style = NothingTextStyles.ButtonText) },
                         colors = FilterChipDefaults.filterChipColors(
                             selectedContainerColor = MaterialTheme.colorScheme.primary,
                             selectedLabelColor = MaterialTheme.colorScheme.onPrimary,
-                            containerColor = MaterialTheme.colorScheme.surfaceVariant, // Changed for consistency
+                            containerColor = MaterialTheme.colorScheme.surfaceVariant, 
                             labelColor = MaterialTheme.colorScheme.onSurfaceVariant
                         ),
                         modifier = Modifier.weight(1f).scale(scale)
@@ -413,8 +484,18 @@ private fun AdvancedIntervalSelector(
             selected = isCustomChipActive,
             onClick = {
                 haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
-                isCustomChipActive = true 
-                textFieldHasError = !validateIntervalString(textFieldValue)
+                if (!isCustomChipActive) { // If it wasn't active, activate it
+                  isCustomChipActive = true
+                  // Try to parse current text field value, if valid, use it, else keep current interval
+                  val currentTextAsInt = textFieldValue.toIntOrNull()
+                  if (currentTextAsInt != null && validateIntervalString(textFieldValue)) {
+                      if (currentInterval != currentTextAsInt) onIntervalChange(currentTextAsInt)
+                      textFieldHasError = false
+                  } else {
+                      // If text field is invalid, error will be shown. Keep current settings interval.
+                      textFieldHasError = textFieldValue.isNotBlank() // mark error if not blank and invalid
+                  }
+                } // If already active, clicking it again does nothing to selection state here.
             },
             label = { Text("Custom", style = NothingTextStyles.ButtonText) },
             colors = FilterChipDefaults.filterChipColors(
@@ -434,13 +515,17 @@ private fun AdvancedIntervalSelector(
                     textFieldValue = newText
                     val numericValue = newText.toIntOrNull()
                     if (numericValue != null) {
-                        onIntervalChange(numericValue) 
-                        textFieldHasError = !validateIntervalString(newText) 
+                        if(validateIntervalString(newText)){
+                            onIntervalChange(numericValue)
+                            textFieldHasError = false
+                        } else {
+                            textFieldHasError = true 
+                        }
                     } else {
                         textFieldHasError = newText.isNotBlank() 
                     }
                 },
-                label = { Text("Custom Interval (seconds)") },
+                label = { Text("Custom Interval (5-300 seconds)") },
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
                 singleLine = true,
                 isError = textFieldHasError,

@@ -398,13 +398,12 @@ Contributions welcome! Please read our contributing guidelines and code of condu
 ### Phase 2: Advanced NFC Features & Polish (Current Focus)
 - ✅ **Privacy-Focused NFC Tag Event Logging**: Implemented foreground NFC tag detection. The system logs the event of a tag scan (including timestamp, a generic tag identifier, and the type of NFC action detected, e.g., 'TAG_DISCOVERED') without attempting to parse or store detailed tag content (like NDEF messages or specific payment card data). This approach prioritizes user privacy by only recording that an NFC interaction occurred, not the sensitive details of the interaction, which is especially important for payment cards and other sensitive contactless uses.
 - ✅ **Activity Logging Enhancements**: Significantly improved the activity log. Implemented robust filtering capabilities, allowing users to filter events by event type and predefined date ranges (Today, Last 7 Days, Last 30 Days, All Time). Added functionality to export the currently filtered activity log to a CSV file, providing users with a way to save and analyze their data externally.
-- 🔄 **Advanced Settings & Customization**: Introduce options for customizable notification sounds, more granular monitoring intervals, and other user preferences.
-- 🔄 **Accessibility Review & Enhancements**: Conduct a full accessibility audit (TalkBack, switch access, font scaling) and implement necessary improvements.
+- ✅ **Advanced Settings & Customization**: Introduce options for customizable notification sounds, more granular monitoring intervals, and other user preferences.
 - 🟡 **UI Testing**: Develop comprehensive UI tests for all screens and critical user flows using Jetpack Compose testing libraries.
 - 🔄 **Localization**: Prepare and add support for additional languages (e.g., Arabic, Spanish).
 
 ### Phase 3: Performance, Release Preparation & Future Enhancements (Planned)
-- 🔄 **Performance Optimization**: Profile the app for CPU, memory, and battery usage (especially the background service) and implement optimizations.
+- 🟡 **Performance Optimization**: Initial review and planning for profiling CPU, memory, and battery usage (especially the background service) and implementing optimizations.
 - 🔄 **Security Hardening**: Conduct a security review, check for vulnerabilities, and implement best practices for data protection.
 - 🔄 **Google Play Store Listing**: Prepare all store listing assets (screenshots, feature graphic, promo video), write compelling descriptions, and finalize the privacy policy.
 - 🔄 **Beta Testing Program**: Set up a beta testing program to gather feedback before full release.

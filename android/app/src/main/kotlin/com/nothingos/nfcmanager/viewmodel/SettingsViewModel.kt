@@ -2,7 +2,6 @@ package com.nothingos.nfcmanager.viewmodel
 
 import android.Manifest
 import android.app.Application
-import android.content.Context // Not strictly needed here anymore for NfcMonitoringService calls
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
@@ -32,6 +31,10 @@ class SettingsViewModel @Inject constructor(
     private val _requestNfcPermissionChannel = MutableSharedFlow<Unit>(replay = 0)
     val requestNfcPermissionFlow = _requestNfcPermissionChannel.asSharedFlow()
 
+    // For requesting storage permission to pick a custom sound
+    private val _requestStoragePermissionChannel = MutableSharedFlow<Unit>(replay = 0)
+    val requestStoragePermissionFlow = _requestStoragePermissionChannel.asSharedFlow()
+
     val settings = repository.getSettings()
         .stateIn(
             scope = viewModelScope,
@@ -44,6 +47,51 @@ class SettingsViewModel @Inject constructor(
             app.applicationContext,
             Manifest.permission.NFC
         ) == PackageManager.PERMISSION_GRANTED
+    }
+
+    // Function to check storage permission
+    private fun checkStoragePermission(): Boolean {
+        val permission = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            Manifest.permission.READ_MEDIA_AUDIO
+        } else {
+            Manifest.permission.READ_EXTERNAL_STORAGE
+        }
+        return ContextCompat.checkSelfPermission(
+            app.applicationContext,
+            permission
+        ) == PackageManager.PERMISSION_GRANTED
+    }
+
+    // Public function to be called from UI to initiate storage permission check for sound picker
+    fun requestStoragePermissionForSoundPicker(): Boolean { // Returns true if permission already granted
+        if (checkStoragePermission()) {
+            return true
+        }
+        viewModelScope.launch {
+            _requestStoragePermissionChannel.emit(Unit)
+        }
+        return false
+    }
+    
+    // Function to update the custom notification sound URI
+    fun updateCustomNotificationSound(soundUri: String?) {
+        viewModelScope.launch {
+            try {
+                updateLoading(true)
+                repository.updateCustomNotificationSoundUri(soundUri)
+                val message = if (soundUri != null) "Notification sound updated" else "Notification sound reset to default"
+                repository.logEvent(
+                    "SETTINGS",
+                    message,
+                    if (soundUri != null) "SoundOn" else "SoundOff" // Example icons
+                )
+                updateSuccess(message)
+            } catch (e: Exception) {
+                updateError("Failed to update notification sound: ${e.message}")
+            } finally {
+                updateLoading(false)
+            }
+        }
     }
 
     fun toggleBackgroundServiceMonitoring() {
@@ -88,7 +136,6 @@ class SettingsViewModel @Inject constructor(
                     val intent = Intent(context, NfcMonitoringService::class.java).apply {
                         action = NfcMonitoringService.ACTION_STOP_MONITORING
                     }
-                    // Service will call stopSelf(), no need for startForegroundService distinction here for stop
                     context.startService(intent) 
                     repository.logEvent(
                         "SETTINGS",
@@ -201,18 +248,20 @@ class SettingsViewModel @Inject constructor(
         }
     }
 
-    fun toggleSound() {
+    fun toggleSound() { // This toggles the general soundEnabled flag
         viewModelScope.launch {
             try {
                 updateLoading(true)
                 val newSetting = !settings.value.soundEnabled
-                repository.updateSettings(settings.value.copy(soundEnabled = newSetting))
+                // repository.updateSoundEnabled(newSetting) // Assuming a direct DAO method
+                // For now, using updateSettings as it was before, if no direct DAO method exists for soundEnabled by itself.
+                repository.updateSettings(settings.value.copy(soundEnabled = newSetting)) 
                 repository.logEvent(
                     "SETTINGS",
-                    "Sound ${if (newSetting) "enabled" else "disabled"}",
+                    "Sound (general) ${if (newSetting) "enabled" else "disabled"}",
                     "Volume2"
                 )
-                updateSuccess("Sound ${if (newSetting) "enabled" else "disabled"}")
+                updateSuccess("Sound (general) ${if (newSetting) "enabled" else "disabled"}")
             } catch (e: Exception) {
                 updateError("Failed to toggle sound: ${e.message}")
             } finally {

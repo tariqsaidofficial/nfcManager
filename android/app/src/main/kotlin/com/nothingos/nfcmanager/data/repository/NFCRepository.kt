@@ -128,6 +128,10 @@ class NFCRepository @Inject constructor(
         nfcSettingsDao.updateBackgroundServiceMonitoringEnabled(enabled)
     }
 
+    suspend fun updateCustomNotificationSoundUri(soundUri: String?) { // <<< NEW FUNCTION
+        nfcSettingsDao.updateCustomNotificationSoundUri(soundUri)      // <<< NEW FUNCTION
+    }                                                                 // <<< NEW FUNCTION
+
     fun isAutoReminderEnabled(): Flow<Boolean> = nfcSettingsDao.isAutoReminderEnabled()
     fun getReminderInterval(): Flow<Int> = nfcSettingsDao.getReminderInterval()
     fun areNotificationsEnabled(): Flow<Boolean> = nfcSettingsDao.areNotificationsEnabled()
@@ -152,7 +156,8 @@ class NFCRepository @Inject constructor(
             vibrationEnabled = true,
             isDarkMode = true,
             accentColor = "#ef4444",
-            backgroundServiceMonitoringEnabled = false
+            backgroundServiceMonitoringEnabled = false,
+            customNotificationSoundUri = null // Ensure new field is in default
         )
     }
 

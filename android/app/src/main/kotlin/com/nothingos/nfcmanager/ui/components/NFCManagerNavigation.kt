@@ -2,19 +2,28 @@ package com.nothingos.nfcmanager.ui.components
 
 import androidx.compose.foundation.layout.*
 // import androidx.compose.material.icons.Icons // Will use fully qualified name for Icons.Filled
-import androidx.compose.material.icons.filled.* // Re-added star import, fully qualified names will be used below
+import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavController // Added NavController import
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.*
 import com.nothingos.nfcmanager.ui.screens.*
 import com.nothingos.nfcmanager.ui.theme.NothingTextStyles
 import com.nothingos.nfcmanager.viewmodel.*
+
+// Route for the new screen
+object AppRoutes {
+    const val HOME = "home"
+    const val ACTIVITY = "activity"
+    const val SETTINGS = "settings"
+    const val NOTIFICATION_SOUND_SETTINGS = "notification_sound_settings" // <<< NEW ROUTE
+}
 
 /**
  * Main Navigation Component with Bottom Navigation
@@ -76,17 +85,27 @@ fun NFCManagerNavigation(
     ) { innerPadding ->
         NavHost(
             navController = navController,
-            startDestination = "home",
+            startDestination = AppRoutes.HOME, // Use constant
             modifier = Modifier.padding(innerPadding)
         ) {
-            composable("home") {
+            composable(AppRoutes.HOME) { // Use constant
                 HomeScreen(viewModel = mainViewModel)
             }
-            composable("activity") {
+            composable(AppRoutes.ACTIVITY) { // Use constant
                 ActivityScreen(viewModel = activityViewModel)
             }
-            composable("settings") {
-                SettingsScreen(viewModel = settingsViewModel)
+            composable(AppRoutes.SETTINGS) { // Use constant
+                SettingsScreen(
+                    viewModel = settingsViewModel,
+                    navController = navController // <<< PASS NAVCONTROLLER
+                )
+            }
+            // <<< NEW COMPOSABLE DESTINATION
+            composable(AppRoutes.NOTIFICATION_SOUND_SETTINGS) {
+                NotificationSoundSettingsScreen(
+                    viewModel = settingsViewModel, // Can reuse or create a dedicated one if needed
+                    onNavigateBack = { navController.popBackStack() }
+                )
             }
         }
     }
@@ -98,18 +117,18 @@ fun NFCManagerNavigation(
 private val bottomNavItems = listOf(
     BottomNavItem(
         title = "NFC MANAGER",
-        icon = androidx.compose.material.icons.Icons.Filled.Nfc, // Used fully qualified name
-        route = "home"
+        icon = androidx.compose.material.icons.Icons.Filled.Nfc, 
+        route = AppRoutes.HOME // Use constant
     ),
     BottomNavItem(
         title = "ACTIVITY",
-        icon = androidx.compose.material.icons.Icons.Filled.History, // Used fully qualified name
-        route = "activity"
+        icon = androidx.compose.material.icons.Icons.Filled.History, 
+        route = AppRoutes.ACTIVITY // Use constant
     ),
     BottomNavItem(
         title = "SETTINGS",
-        icon = androidx.compose.material.icons.Icons.Filled.Settings, // Used fully qualified name
-        route = "settings"
+        icon = androidx.compose.material.icons.Icons.Filled.Settings, 
+        route = AppRoutes.SETTINGS // Use constant
     )
 )
 

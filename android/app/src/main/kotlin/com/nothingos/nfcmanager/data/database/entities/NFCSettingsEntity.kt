@@ -13,10 +13,10 @@ data class NFCSettingsEntity(
     val id: Int = 1,
     
     // Main NFC settings
-    val isNFCMonitoringEnabled: Boolean = true, // General NFC monitoring (e.g., in-app UI)
+    val isNFCMonitoringEnabled: Boolean = true, 
     val isPrivacyModeEnabled: Boolean = false,
-    val autoReminderEnabled: Boolean = false, // This might be a good candidate for the background service's core logic
-    val reminderInterval: Int = 10, // seconds - used by background service for alert checks
+    val autoReminderEnabled: Boolean = false, 
+    val reminderInterval: Int = 10, // seconds
     
     // Privacy & Security
     val blockUnknownTags: Boolean = false,
@@ -24,18 +24,18 @@ data class NFCSettingsEntity(
     val logSensitiveData: Boolean = false,
     
     // UI & Notifications
-    val showNotifications: Boolean = true, // General notification toggle
+    val showNotifications: Boolean = true, 
     val vibrationEnabled: Boolean = true,
-    val soundEnabled: Boolean = true,
-    val notificationStyle: String = "standard", // "standard", "detailed", "minimal"
-    
+    val soundEnabled: Boolean = true, // General toggle for if custom/default sounds play
+    val notificationStyle: String = "standard", 
+    val customNotificationSoundUri: String? = null, // <<< NEW FIELD: URI for custom notification sound
+
     // Performance
     val batteryOptimized: Boolean = false,
-    val monitoringInterval: Int = 2000, // milliseconds - potentially for foreground UI updates
-    // Renamed and defaulted to false for explicit opt-in to the new background service
+    val monitoringInterval: Int = 2000, // milliseconds
     val backgroundServiceMonitoringEnabled: Boolean = false,
     
     // Theme (Nothing OS style)
     val isDarkMode: Boolean = true,
-    val accentColor: String = "#ef4444" // Nothing Red
+    val accentColor: String = "#ef4444" 
 )

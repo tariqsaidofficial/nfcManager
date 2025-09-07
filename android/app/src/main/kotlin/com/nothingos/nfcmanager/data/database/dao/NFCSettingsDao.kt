@@ -77,6 +77,9 @@ interface NFCSettingsDao {
     
     @Query("UPDATE nfc_settings SET accentColor = :color WHERE id = 1")
     suspend fun updateAccentColor(color: String)
+
+    @Query("UPDATE nfc_settings SET customNotificationSoundUri = :soundUri WHERE id = 1") // <<< NEW FUNCTION
+    suspend fun updateCustomNotificationSoundUri(soundUri: String?) // <<< NEW FUNCTION
     
     // Reset settings
     @Query("DELETE FROM nfc_settings WHERE id = 1")
