@@ -3,76 +3,137 @@ package com.nothingos.nfcmanager.services
 import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationManager
+import android.app.PendingIntent
 import android.app.Service
-import android.content.Context // Added for Context
 import android.content.Intent
 import android.nfc.NfcAdapter
 import android.os.Build
 import android.os.IBinder
 import android.util.Log
 import androidx.core.app.NotificationCompat
-// import com.nothingos.nfcmanager.R // Assuming R class is in this package and you have an icon
+import com.nothingos.nfcmanager.MainActivity
+// import com.nothingos.nfcmanager.R // Keep for your actual app icon
 
 class NfcMonitoringService : Service() {
-    
-    private val NOTIFICATION_ID = 1001
-    private val CHANNEL_ID = "NFC_MONITORING_CHANNEL"
+
     private var nfcAdapter: NfcAdapter? = null
-    
+    private var isMonitoring = false
+
     override fun onCreate() {
         super.onCreate()
         Log.d(TAG, "Service created")
         createNotificationChannel()
-        
+        initializeNfcAdapter()
+    }
+
+    private fun initializeNfcAdapter() {
         try {
             nfcAdapter = NfcAdapter.getDefaultAdapter(this)
+            if (nfcAdapter == null) {
+                Log.w(TAG, "Device doesn't support NFC")
+            } else {
+                Log.d(TAG, "NFC adapter initialized successfully")
+            }
         } catch (e: Exception) {
-            Log.e(TAG, "Failed to get NFC adapter", e)
+            Log.e(TAG, "Failed to initialize NFC adapter", e)
         }
     }
-    
+
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
-        Log.d(TAG, "Service started with intent action: ${intent?.action}")
-        
-        if (intent?.action == ACTION_STOP_SERVICE) {
-            Log.d(TAG, "Received stop action. Stopping service.")
+        Log.d(TAG, "onStartCommand received action: ${intent?.action}")
+
+        try {
+            if (intent?.action != ACTION_STOP_MONITORING) {
+                 startAsForegroundService("Initializing NFC monitoring...")
+            }
+
+            when (intent?.action) {
+                ACTION_START_MONITORING -> {
+                    startNfcMonitoring()
+                }
+                ACTION_STOP_MONITORING -> {
+                    stopNfcMonitoring()
+                    stopSelf()
+                    Log.d(TAG, "Service explicitly stopped via action.")
+                    return START_NOT_STICKY
+                }
+                else -> {
+                    Log.d(TAG, "Service started with no specific action, attempting to start monitoring.")
+                    startNfcMonitoring()
+                }
+            }
+        } catch (se: SecurityException) {
+            Log.e(TAG, "SecurityException in onStartCommand. Missing permissions?", se)
+            updateNotification("Permission error. Cannot monitor NFC.")
+            stopSelf()
+            return START_NOT_STICKY
+        } catch (e: Exception) {
+            Log.e(TAG, "Unexpected error in onStartCommand", e)
+            updateNotification("Error starting service.")
             stopSelf()
             return START_NOT_STICKY
         }
 
-        try {
-            val notification = createNotification()
-            startForeground(NOTIFICATION_ID, notification)
-            startNfcMonitoring()
-        } catch (e: Exception) {
-            Log.e(TAG, "Error starting service in foreground", e)
-            stopSelf()
-            return START_NOT_STICKY
-        }
-        
         return START_STICKY
     }
-    
-    private fun startNfcMonitoring() {
+
+    private fun startAsForegroundService(initialContentText: String) {
         try {
-            if (nfcAdapter != null && nfcAdapter!!.isEnabled) {
-                Log.d(TAG, "NFC monitoring started")
-                // Actual NFC monitoring logic should be implemented here.
-                // For example, you might register an NFC reader callback or periodically check status.
-            } else {
-                Log.w(TAG, "NFC not available or disabled. Service might not be useful.")
-                // Optionally, stop the service if NFC is essential and not available.
-                // stopSelf();
-            }
-        } catch (e: SecurityException) {
-            Log.e(TAG, "SecurityException in NFC monitoring. Check NFC permissions.", e)
-            // Stop service if permissions are missing, as it cannot function.
-            stopSelf()
+            val notification = createNotification(initialContentText)
+            startForeground(NOTIFICATION_ID, notification)
+            Log.d(TAG, "Service started in foreground.")
         } catch (e: Exception) {
-            Log.e(TAG, "Error in NFC monitoring logic", e)
+            Log.e(TAG, "Error starting service in foreground", e)
         }
     }
-    
+
+    private fun startNfcMonitoring() {
+        if (isMonitoring) {
+            Log.d(TAG, "NFC monitoring is already active.")
+            updateNotification("NFC monitoring is active.")
+            return
+        }
+
+        if (nfcAdapter == null) {
+            Log.w(TAG, "NFC adapter not available. Cannot start monitoring.")
+            updateNotification("NFC not supported on this device.")
+            isMonitoring = false
+            return
+        }
+
+        if (!nfcAdapter!!.isEnabled) {
+            Log.w(TAG, "NFC is disabled. Cannot start monitoring.")
+            updateNotification("NFC is disabled. Please enable it.")
+            isMonitoring = false
+            return
+        }
+
+        try {
+            isMonitoring = true
+            Log.d(TAG, "NFC monitoring started successfully.")
+            updateNotification("NFC monitoring is active.")
+        } catch (e: Exception) {
+            Log.e(TAG, "Error starting NFC monitoring operations", e)
+            updateNotification("Error enabling NFC monitoring.")
+            isMonitoring = false
+        }
+    }
+
+    private fun stopNfcMonitoring() {
+        if (!isMonitoring) {
+            Log.d(TAG, "NFC monitoring is not active or already stopped.")
+            return
+        }
+
+        try {
+            isMonitoring = false
+            Log.d(TAG, "NFC monitoring stopped.")
+            updateNotification("NFC monitoring stopped.")
+        } catch (e: Exception) {
+            Log.e(TAG, "Error stopping NFC monitoring operations", e)
+        }
+    }
+
     private fun createNotificationChannel() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             try {
@@ -81,76 +142,85 @@ class NfcMonitoringService : Service() {
                     "NFC Background Monitoring",
                     NotificationManager.IMPORTANCE_LOW
                 ).apply {
-                    description = "Monitors NFC activity in background"
+                    description = "Monitors NFC activity in the background."
                     setShowBadge(false)
+                    enableLights(false)
+                    enableVibration(false)
+                    setSound(null, null)
                 }
-                
                 val notificationManager = getSystemService(NotificationManager::class.java)
                 notificationManager?.createNotificationChannel(channel)
-                Log.d(TAG, "Notification channel created.")
+                Log.d(TAG, "Notification channel created/updated.")
             } catch (e: Exception) {
                 Log.e(TAG, "Failed to create notification channel", e)
             }
         }
     }
-    
-    private fun createNotification(): Notification {
-        // TODO: Replace with your actual app icon. Using a system icon as a placeholder.
-        // val icon = com.nothingos.nfcmanager.R.drawable.ic_nfc_active 
-        val icon = android.R.drawable.stat_sys_data_bluetooth // Temporary placeholder
+
+    private fun createNotification(contentText: String): Notification {
+        val intent = Intent(this, MainActivity::class.java).apply {
+            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        }
+        
+        val pendingIntentFlags = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
+        } else {
+            PendingIntent.FLAG_UPDATE_CURRENT
+        }
+        val pendingIntent = PendingIntent.getActivity(this, 0, intent, pendingIntentFlags)
+
+        val icon = android.R.drawable.stat_sys_data_bluetooth // Placeholder
 
         return NotificationCompat.Builder(this, CHANNEL_ID)
-            .setContentTitle("NFC Monitor Active")
-            .setContentText("Monitoring NFC status in background.")
+            .setContentTitle("NFC Manager")
+            .setContentText(contentText)
             .setSmallIcon(icon)
+            .setContentIntent(pendingIntent)
             .setOngoing(true)
             .setAutoCancel(false)
             .setPriority(NotificationCompat.PRIORITY_LOW)
+            .setCategory(NotificationCompat.CATEGORY_SERVICE)
             .build()
     }
-    
+
+    private fun updateNotification(contentText: String) {
+        try {
+            val notification = createNotification(contentText)
+            val notificationManager = getSystemService(NotificationManager::class.java)
+            notificationManager?.notify(NOTIFICATION_ID, notification)
+            Log.d(TAG, "Notification updated with text: $contentText")
+        } catch (e: Exception) {
+            Log.e(TAG, "Failed to update notification", e)
+        }
+    }
+
     override fun onDestroy() {
         super.onDestroy()
-        Log.d(TAG, "Service destroyed")
-        // The system calls stopForeground when the service is stopping if it was started with startForeground.
-        // Explicitly calling stopForeground(true) or stopForeground(STOP_FOREGROUND_REMOVE)
-        // is often redundant here if the service is simply being stopped.
-        // However, if you need to remove the notification immediately without waiting for the service to fully stop,
-        // or under specific conditions, it can be useful.
+        Log.d(TAG, "Service being destroyed.")
+        stopNfcMonitoring()
+        try {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                stopForeground(STOP_FOREGROUND_REMOVE)
+            } else {
+                @Suppress("DEPRECATION")
+                stopForeground(true)
+            }
+            Log.d(TAG, "Foreground state removed.")
+        } catch (e: Exception) {
+            Log.e(TAG, "Error ensuring foreground state is removed on destroy", e)
+        }
     }
-    
+
     override fun onBind(intent: Intent?): IBinder? = null
 
     companion object {
+        // Service-specific constants, private as they are only used within this class
         private const val TAG = "NfcMonitoringService"
-        const val ACTION_STOP_SERVICE = "com.nothingos.nfcmanager.services.ACTION_STOP_SERVICE"
+        private const val NOTIFICATION_ID = 1001
+        private const val CHANNEL_ID = "NFC_MONITORING_CHANNEL"
 
-        fun startService(context: Context) {
-            val intent = Intent(context, NfcMonitoringService::class.java)
-            try {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                    context.startForegroundService(intent)
-                    Log.d(TAG, "Starting foreground service (Oreo+)")
-                } else {
-                    context.startService(intent)
-                    Log.d(TAG, "Starting service (Pre-Oreo)")
-                }
-            } catch (e: Exception) {
-                Log.e(TAG, "Failed to start service", e)
-                // Handle cases where service cannot be started (e.g., background restrictions)
-            }
-        }
-
-        fun stopService(context: Context) {
-            val intent = Intent(context, NfcMonitoringService::class.java)
-            // Optional: Add an action to differentiate stop from other commands if needed in onStartCommand.
-            // intent.action = ACTION_STOP_SERVICE 
-            try {
-                context.stopService(intent)
-                Log.d(TAG, "Stopping service")
-            } catch (e: Exception) {
-                Log.e(TAG, "Failed to stop service", e)
-            }
-        }
+        // ACTION constants are public and used by other components like ViewModel
+        const val ACTION_START_MONITORING = "com.nothingos.nfcmanager.services.ACTION_START_MONITORING"
+        const val ACTION_STOP_MONITORING = "com.nothingos.nfcmanager.services.ACTION_STOP_MONITORING"
     }
 }

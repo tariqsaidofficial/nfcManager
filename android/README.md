@@ -4,23 +4,25 @@ A smart NFC management application for privacy protection and security monitorin
 
 ## 🎨 Features
 
-- **Privacy Protection**: Smart alerts when NFC stays enabled to prevent unauthorized access
-- **Security Monitoring**: Real-time NFC status tracking with customizable intervals
-- **Nothing OS Design**: Authentic Nothing OS visual language with clean lines and thoughtful animations
-- **Auto Reminders**: Privacy-focused notifications to protect against NFC vulnerabilities
-- **Activity Logging**: Comprehensive security activity tracking with timestamps
-- **Accessibility**: Full accessibility support with screen reader compatibility
-- **Privacy Compliant**: Google Play compliant with transparent privacy practices and no data collection
+- ✅ **Privacy Protection**: Smart alerts when NFC stays enabled to prevent unauthorized access
+- ✅ **Security Monitoring**: Real-time NFC status tracking with customizable intervals
+- ✅ **Background NFC Monitoring**: Continuous NFC status tracking via a foreground service with notification, permission handling, and robust lifecycle management.
+- ✅ **Nothing OS Design**: Authentic Nothing OS visual language with clean lines and thoughtful animations
+- ✅ **Auto Reminders**: Privacy-focused notifications to protect against NFC vulnerabilities
+- ✅ **Activity Logging**: Comprehensive security activity tracking with timestamps
+- ✅ **Accessibility**: Full accessibility support with screen reader compatibility
+- ✅ **Privacy Compliant**: Google Play compliant with transparent privacy practices and no data collection
 
 ## 🏗️ Architecture (Official Android Stack)
 
-- **Android Studio**: Official IDE with full debugging and profiling tools
-- **Kotlin**: Google's preferred language for Android development
-- **Jetpack Compose**: Modern declarative UI toolkit
-- **Room Database**: Official SQLite abstraction for local data storage
-- **MVVM Architecture**: Industry-standard pattern with ViewModel and Repository
-- **Navigation Component**: Official navigation framework
-- **Material Design 3**: Latest design system with Nothing OS theming
+- ✅ **Android Studio**: Official IDE with full debugging and profiling tools
+- ✅ **Kotlin**: Google's preferred language for Android development
+- ✅ **Jetpack Compose**: Modern declarative UI toolkit
+- ✅ **Room Database**: Official SQLite abstraction for local data storage
+- ✅ **MVVM Architecture**: Industry-standard pattern with ViewModel and Repository
+- ✅ **Navigation Component**: Official navigation framework
+- ✅ **Material Design 3**: Latest design system with Nothing OS theming
+- ✅ **Foreground Service**: For persistent background tasks like NFC monitoring.
 
 ## 🎯 Design System
 
@@ -42,16 +44,16 @@ A smart NFC management application for privacy protection and security monitorin
 
 ## 📱 Screens
 
-1. **NFC Manager** - Main interface with real-time NFC monitoring and privacy alerts
-2. **Settings** - Security configuration and system integration options
-3. **Activity** - Detailed security activity log and privacy monitoring history
+1. ✅ **NFC Manager** - Main interface with real-time NFC monitoring and privacy alerts
+2. ✅ **Settings** - Security configuration, theme selection, and background service management
+3. ✅ **Activity** - Detailed security activity log and privacy monitoring history
 
 ## 🔒 Privacy & Security
 
-- **Local Storage Only**: No data transmission or cloud storage
-- **No Analytics**: Zero tracking or user behavior monitoring
-- **Minimal Permissions**: Only NFC and vibration permissions
-- **Transparent**: Open source design with clear privacy policy
+- ✅ **Local Storage Only**: No data transmission or cloud storage
+- ✅ **No Analytics**: Zero tracking or user behavior monitoring
+- ✅ **Minimal Permissions**: `NFC`, `FOREGROUND_SERVICE`, `POST_NOTIFICATIONS` (Android 13+), and `VIBRATE` permissions.
+- ✅ **Transparent**: Open source design with clear privacy policy
 
 ## 🚀 Getting Started
 
@@ -159,6 +161,18 @@ cd android
 ✅ Clean build.gradle without React Native dependencies
 ```
 
+### ✅ **Background NFC Monitoring & Service Integration (Completed)**
+- **Foreground Service**: Implemented `NfcMonitoringService` as a foreground service for continuous NFC status monitoring.
+- **Service Lifecycle & Control**: Service managed via explicit Intent actions (`ACTION_START_MONITORING`, `ACTION_STOP_MONITORING`).
+- **ViewModel Integration**: `SettingsViewModel` updated to use Intents for starting/stopping the service, ensuring separation of concerns.
+- **Permission Handling**: Integrated NFC permission check in `SettingsViewModel` with a request flow to `SettingsScreen` (using `rememberLauncherForActivityResult`). `POST_NOTIFICATIONS` permission handled for Android 13+.
+- **Application Startup Logic**: `NfcManagerApplication` now correctly starts the service on app launch if it was previously enabled in settings, using the new Intent actions.
+- **Notification Enhancements**: 
+    - Service notification now includes a `PendingIntent` to open `MainActivity`.
+    - Notification content is dynamically updated to reflect the current monitoring status (e.g., "Initializing...", "NFC monitoring is active.", "NFC is disabled.").
+- **Robust Error Handling**: Added `try-catch` blocks in the service, ViewModel, and Application class for more resilient operation.
+- **Manifest Configuration**: Necessary permissions (`NFC`, `FOREGROUND_SERVICE`, `POST_NOTIFICATIONS`) and service declaration added to `AndroidManifest.xml`.
+
 ### 🚨 **Important Notes**
 - **Java 11+ Required**: For Android Gradle Plugin compatibility
 - **No Data Collection**: 100% local processing
@@ -168,7 +182,7 @@ cd android
 ## 🎯 Google Play Compliance
 
 - ✅ Privacy Policy included
-- ✅ Minimal permission requests
+- ✅ Minimal permission requests (`NFC`, `FOREGROUND_SERVICE`, `POST_NOTIFICATIONS` for Android 13+, `VIBRATE`)
 - ✅ No sensitive data collection
 - ✅ Accessibility standards met
 - ✅ Content rating appropriate
@@ -193,6 +207,8 @@ nfcManager/
 │   │   │   │   │   │   └── AppDatabase.kt      # Room Database
 │   │   │   │   │   └── repository/
 │   │   │   │   │       └── NFCRepository.kt    # Repository Pattern
+│   │   │   │   ├── services/                   # ⚙️ Background Services
+│   │   │   │   │   └── NfcMonitoringService.kt # NFC Status Monitoring
 │   │   │   │   ├── ui/                         # 🎨 UI Layer
 │   │   │   │   │   ├── components/
 │   │   │   │   │   │   └── NFCManagerNavigation.kt
@@ -209,6 +225,7 @@ nfcManager/
 │   │   │   │   │   ├── ActivityViewModel.kt   # Activity Screen Logic
 │   │   │   │   │   └── SettingsViewModel.kt   # Settings Logic
 │   │   │   │   ├── utils/                     # 🔧 Utilities
+│   │   │   │   ├── NfcManagerApplication.kt   # 📱 Application Class
 │   │   │   │   └── MainActivity.kt            # 📱 Entry Point
 │   │   │   ├── assets/fonts/                  # 🔤 Custom Fonts
 │   │   │   │   ├── NothingFont.ttf
@@ -232,17 +249,18 @@ nfcManager/
 ## 🛠️ Official Android Tools Used
 
 ### **Development Environment**
-- **Android Studio**: Primary IDE with Layout Inspector, Database Inspector
-- **Gradle Build System**: Official build automation
-- **Android SDK Tools**: ADB, device management
+- ✅ **Android Studio**: Primary IDE with Layout Inspector, Database Inspector
+- ✅ **Gradle Build System**: Official build automation
+- ✅ **Android SDK Tools**: ADB, device management
 
 ### **Core Libraries (Official)**
-- **Jetpack Compose BOM 2023.10.01**: Latest UI toolkit with Material 3
-- **Room Database 2.6.0**: Official SQLite abstraction for local data
-- **ViewModel & LiveData 2.7.0**: MVVM architecture components
-- **Navigation Component 2.7.5**: Type-safe navigation between screens
-- **WorkManager 2.8.1**: Background task management
-- **Kotlin Coroutines 1.7.3**: Asynchronous programming
+- ✅ **Jetpack Compose BOM 2023.10.01**: Latest UI toolkit with Material 3
+- ✅ **Room Database 2.6.0**: Official SQLite abstraction for local data
+- ✅ **ViewModel & LiveData 2.7.0**: MVVM architecture components (ViewModel with StateFlow used)
+- ✅ **Navigation Component 2.7.5**: Type-safe navigation between screens
+- ✅ **WorkManager 2.8.1**: Background task management (Foreground Service used for NFC monitoring)
+- ✅ **Kotlin Coroutines 1.7.3**: Asynchronous programming
+- ✅ **Hilt**: Dependency Injection
 
 ### **Features Implemented**
 - ✅ **3 Main Screens**: Home, Activity Log, Settings
@@ -251,18 +269,19 @@ nfcManager/
 - ✅ **Navigation Component**: Bottom navigation with type safety
 - ✅ **Nothing OS Theme**: Complete theming system (Light/Dark modes, dynamic system UI)
 - ✅ **Material Design 3**: Latest design components
+- ✅ **Background NFC Monitoring & Service**: Continuous NFC status tracking via a foreground service with notification, permission handling, and robust lifecycle management.
 
 ### **Code Quality**
-- **Kotlin**: 100% Kotlin codebase
-- **Coroutines**: Asynchronous programming
-- **Flow**: Reactive data streams
-- **StateFlow**: UI state management
+- ✅ **Kotlin**: 100% Kotlin codebase
+- ✅ **Coroutines & Flow**: Asynchronous and reactive data streams
+- ✅ **StateFlow**: UI state management
+- ✅ **Hilt**: For dependency injection, improving testability and modularity.
 
 ## 🌍 Internationalization
 
-- **RTL Support**: Full right-to-left language support
-- **Localization**: Ready for multiple language support with Android string resources
-- **Accessibility**: Screen reader compatible with TalkBack integration
+- ✅ **RTL Support**: Full right-to-left language support
+- ✅ **Localization**: Ready for multiple language support with Android string resources
+- ✅ **Accessibility**: Screen reader compatible with TalkBack integration
 
 ## 📱 Deployment
 
@@ -273,9 +292,9 @@ nfcManager/
 
 ### React Native Parallel Development
 ```bash
-# Continue React Native development
-npm run android
-npx expo prebuild --platform android --clean
+# Continue React Native development (If applicable)
+# npm run android
+# npx expo prebuild --platform android --clean
 ```
 
 ## 🔧 Troubleshooting
@@ -363,29 +382,32 @@ Contributions welcome! Please read our contributing guidelines and code of condu
 
 ## 📝 Changelog
 
-### Phase 1 (Completed) - September 2024
-- ✅ **Android 11+ Support**: Updated minimum SDK from API 21 to API 30
-- ✅ **App Rebranding**: Changed from "NFC Glyph Manager" to "NFC Manager"
-- ✅ **Privacy Enhancement**: Default alert interval reduced to 10 seconds
-- ✅ **UI Improvements**: Added FilterChips for interval selection
-- ✅ **Build System**: Removed React Native dependencies, native Android only
-- ✅ **Gradle Configuration**: Updated to compatible versions with proper wrapper
-- ✅ **Documentation**: Comprehensive setup and troubleshooting guides
-- ✅ **Theme Selection & Persistence**: Implemented user-selectable Light and Dark themes.
-- ✅ **Dynamic System UI Theming**: Ensured system UI adapts to the selected theme.
-- ✅ **Visual Polish**: Improved text contrast and edge-to-edge display.
-- ✅ **Nothing Font**: Integrated Nothing OS typography.
+### Phase 1: Foundation & Core Functionality (Completed) - September 2024
+- ✅ **Android 11+ Support**: Updated minimum SDK from API 21 to API 30 (Android 11+), Target SDK API 34.
+- ✅ **App Identity & Branding**: Renamed to "NFC Manager", updated package name, 100% native Android with Kotlin & Jetpack Compose.
+- ✅ **Privacy-Focused Alert System**: Default 10s interval, customizable options, FilterChips UI.
+- ✅ **Build System Improvements**: Stable Gradle versions, optimized ProGuard rules.
+- ✅ **UI Enhancements & Theming**: Light/Dark themes, dynamic system UI, visual polish, Nothing Font integration.
+- ✅ **Project Structure**: Cleaned and organized structure, proper Gradle configurations.
+- ✅ **Background NFC Monitoring & Service**: Integrated a foreground service for continuous NFC status monitoring with robust controls, comprehensive permission handling (NFC, Foreground Service, Post Notifications), dynamic notifications with PendingIntent, and resilient error handling.
+- ✅ **NFC Status Handling & User Guidance**: Implemented checks for NFC adapter availability and enabled state, guiding users to system settings, and displaying status on the Home screen.
+- ✅ **Initial Permission Model**: Comprehensive runtime permission requests and Manifest declarations for all core features and the background service.
 
+### Phase 2: Advanced NFC Features & Polish (Current Focus)
+- 🟡 **Real NFC APIs & Tag Interaction**: Implement foreground NFC tag scanning, detailed parsing of tag data (NDEF messages, records), and logging of scanned tag events. This is the primary focus for the next development cycle.
+- 🟡 **Activity Logging Enhancements**: Improve the activity log with more detailed event information, filtering capabilities (by event type, date), and potentially export options.
+- 🔄 **Advanced Settings & Customization**: Introduce options for customizable notification sounds, more granular monitoring intervals, and other user preferences.
+- 🔄 **Accessibility Review & Enhancements**: Conduct a full accessibility audit (TalkBack, switch access, font scaling) and implement necessary improvements.
+- 🟡 **UI Testing**: Develop comprehensive UI tests for all screens and critical user flows using Jetpack Compose testing libraries.
+- 🔄 **Localization**: Prepare and add support for additional languages (e.g., Arabic, Spanish).
 
-### Phase 2 (Planned) - Real NFC Integration
-- ✅ **NFC Status Handling**: Implemented checks for NFC adapter availability and enabled state, with user guidance to system settings and status display on the Home screen.
-- 🟡 **Real NFC APIs**: Foreground NFC tag scanning and logging implemented. (Next: Detailed tag parsing & background monitoring).
-- 🔄 **Background Service**: Continuous NFC state monitoring
-- 🟡 **Permissions**: Runtime permission handling (POST_NOTIFICATIONS request implemented; basic NFC permission in Manifest).
-- 🔄 **Notifications**: Real privacy alerts and warnings
-
-### Phase 3 (Planned) - Design Polish
-- 🟡 **Animations**: Micro-interactions and transitions (FilterChip haptic feedback & scale animation implemented).
+### Phase 3: Performance, Release Preparation & Future Enhancements (Planned)
+- 🔄 **Performance Optimization**: Profile the app for CPU, memory, and battery usage (especially the background service) and implement optimizations.
+- 🔄 **Security Hardening**: Conduct a security review, check for vulnerabilities, and implement best practices for data protection.
+- 🔄 **Google Play Store Listing**: Prepare all store listing assets (screenshots, feature graphic, promo video), write compelling descriptions, and finalize the privacy policy.
+- 🔄 **Beta Testing Program**: Set up a beta testing program to gather feedback before full release.
+- 🔄 **Future Feature: NFC Tag Writing**: Explore and implement functionality to write data to NFC tags.
+- 🔄 **Future Feature: NFC Event Automation**: Allow users to define actions based on specific NFC events (e.g., toggle Wi-Fi, open an app).
 
 ---
 

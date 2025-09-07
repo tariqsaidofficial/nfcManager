@@ -2,8 +2,8 @@ package com.nothingos.nfcmanager.viewmodel
 
 import android.Manifest
 import android.app.Application
-import android.content.Context // Added for Intent
-import android.content.Intent // Added for Intent
+import android.content.Context // Not strictly needed here anymore for NfcMonitoringService calls
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
 import androidx.core.content.ContextCompat
@@ -11,7 +11,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.nothingos.nfcmanager.data.database.entities.NFCSettingsEntity
 import com.nothingos.nfcmanager.data.repository.NFCRepository
-import com.nothingos.nfcmanager.services.NfcMonitoringService // Ensure this import is correct
+import com.nothingos.nfcmanager.services.NfcMonitoringService // For Action constants
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import kotlinx.coroutines.flow.*
@@ -29,7 +29,6 @@ class SettingsViewModel @Inject constructor(
     private val _requestNotificationPermissionChannel = MutableSharedFlow<Unit>(replay = 0)
     val requestNotificationPermissionFlow = _requestNotificationPermissionChannel.asSharedFlow()
 
-    // Channel to request NFC permission from the UI
     private val _requestNfcPermissionChannel = MutableSharedFlow<Unit>(replay = 0)
     val requestNfcPermissionFlow = _requestNfcPermissionChannel.asSharedFlow()
 
@@ -51,46 +50,54 @@ class SettingsViewModel @Inject constructor(
         viewModelScope.launch {
             val currentSetting = settings.value.backgroundServiceMonitoringEnabled
             val newSetting = !currentSetting
+            val context = app.applicationContext
 
             if (newSetting) { // Trying to enable the service
                 if (checkNfcPermissions()) {
                     updateLoading(true)
                     try {
                         repository.updateBackgroundServiceMonitoringEnabled(true)
-                        NfcMonitoringService.startService(app.applicationContext)
+                        val intent = Intent(context, NfcMonitoringService::class.java).apply {
+                            action = NfcMonitoringService.ACTION_START_MONITORING
+                        }
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                            context.startForegroundService(intent)
+                        } else {
+                            context.startService(intent)
+                        }
                         repository.logEvent(
                             "SETTINGS",
-                            "Background NFC Monitoring enabled",
+                            "Background NFC Monitoring enabled (via intent)",
                             "Radar"
                         )
                         updateSuccess("Background NFC Monitoring enabled")
                     } catch (e: Exception) {
                         updateError("Failed to enable background monitoring: ${e.message}")
-                        // Rollback if service start failed after updating setting
                         repository.updateBackgroundServiceMonitoringEnabled(false) 
                     } finally {
                         updateLoading(false)
                     }
                 } else {
-                    // Permission not granted, request it from UI
                     _requestNfcPermissionChannel.emit(Unit)
-                    // Do not change the setting state, UI should reflect that it's not enabled yet
                     updateError("NFC Permission required to enable background monitoring.")
                 }
             } else { // Trying to disable the service
                 updateLoading(true)
                 try {
                     repository.updateBackgroundServiceMonitoringEnabled(false)
-                    NfcMonitoringService.stopService(app.applicationContext)
+                    val intent = Intent(context, NfcMonitoringService::class.java).apply {
+                        action = NfcMonitoringService.ACTION_STOP_MONITORING
+                    }
+                    // Service will call stopSelf(), no need for startForegroundService distinction here for stop
+                    context.startService(intent) 
                     repository.logEvent(
                         "SETTINGS",
-                        "Background NFC Monitoring disabled",
+                        "Background NFC Monitoring disabled (via intent)",
                         "RadarOff"
                     )
                     updateSuccess("Background NFC Monitoring disabled")
                 } catch (e: Exception) {
                     updateError("Failed to disable background monitoring: ${e.message}")
-                     // Optionally rollback if service stop failed, though less critical for disabling
                 } finally {
                     updateLoading(false)
                 }
