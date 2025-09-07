@@ -9,6 +9,7 @@
     <!-- Background Service Permissions -->
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_DATA_SYNC" />
     
     <!-- Notification Permissions -->
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
@@ -64,7 +65,7 @@
             android:name=".services.NfcMonitoringService"
             android:enabled="true"
             android:exported="false"
-            android:foregroundServiceType="connectedDevice" />
+            android:foregroundServiceType="dataSync" />
 
     </application>
 

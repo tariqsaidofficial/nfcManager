@@ -1,49 +1,102 @@
 package com.nothingos.nfcmanager.viewmodel
 
-import android.Manifest // Required for Manifest.permission.POST_NOTIFICATIONS
-import android.app.Application // Required for AndroidViewModel and context
-import android.content.pm.PackageManager // Required for PackageManager.PERMISSION_GRANTED
-import android.os.Build // Required for Build.VERSION.SDK_INT
-import androidx.core.content.ContextCompat // Required for ContextCompat.checkSelfPermission
+import android.Manifest
+import android.app.Application
+import android.content.Context // Added for Intent
+import android.content.Intent // Added for Intent
+import android.content.pm.PackageManager
+import android.os.Build
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.nothingos.nfcmanager.data.database.entities.NFCSettingsEntity
 import com.nothingos.nfcmanager.data.repository.NFCRepository
-import com.nothingos.nfcmanager.services.NfcMonitoringService
-import dagger.hilt.android.lifecycle.HiltViewModel // Import HiltViewModel
+import com.nothingos.nfcmanager.services.NfcMonitoringService // Ensure this import is correct
+import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
-/**
- * ViewModel for Settings screen
- * Manages all app settings and preferences
- */
-@HiltViewModel // Add HiltViewModel annotation
+@HiltViewModel
 class SettingsViewModel @Inject constructor(
     private val app: Application, 
     private val repository: NFCRepository
 ) : AndroidViewModel(app) {
 
-    // ==================== UI STATE ====================
-
     private val _uiState = MutableStateFlow(SettingsUiState())
     val uiState: StateFlow<SettingsUiState> = _uiState.asStateFlow()
 
-    // Channel to request notification permission from the UI
     private val _requestNotificationPermissionChannel = MutableSharedFlow<Unit>(replay = 0)
     val requestNotificationPermissionFlow = _requestNotificationPermissionChannel.asSharedFlow()
 
-    // ==================== SETTINGS DATA ====================
+    // Channel to request NFC permission from the UI
+    private val _requestNfcPermissionChannel = MutableSharedFlow<Unit>(replay = 0)
+    val requestNfcPermissionFlow = _requestNfcPermissionChannel.asSharedFlow()
 
     val settings = repository.getSettings()
         .stateIn(
             scope = viewModelScope,
             started = SharingStarted.WhileSubscribed(5000),
-            initialValue = NFCSettingsEntity() // Ensure NFCSettingsEntity has default constructor or provide defaults
+            initialValue = NFCSettingsEntity()
         )
 
-    // ==================== NFC SETTINGS ====================
+    private fun checkNfcPermissions(): Boolean {
+        return ContextCompat.checkSelfPermission(
+            app.applicationContext,
+            Manifest.permission.NFC
+        ) == PackageManager.PERMISSION_GRANTED
+    }
+
+    fun toggleBackgroundServiceMonitoring() {
+        viewModelScope.launch {
+            val currentSetting = settings.value.backgroundServiceMonitoringEnabled
+            val newSetting = !currentSetting
+
+            if (newSetting) { // Trying to enable the service
+                if (checkNfcPermissions()) {
+                    updateLoading(true)
+                    try {
+                        repository.updateBackgroundServiceMonitoringEnabled(true)
+                        NfcMonitoringService.startService(app.applicationContext)
+                        repository.logEvent(
+                            "SETTINGS",
+                            "Background NFC Monitoring enabled",
+                            "Radar"
+                        )
+                        updateSuccess("Background NFC Monitoring enabled")
+                    } catch (e: Exception) {
+                        updateError("Failed to enable background monitoring: ${e.message}")
+                        // Rollback if service start failed after updating setting
+                        repository.updateBackgroundServiceMonitoringEnabled(false) 
+                    } finally {
+                        updateLoading(false)
+                    }
+                } else {
+                    // Permission not granted, request it from UI
+                    _requestNfcPermissionChannel.emit(Unit)
+                    // Do not change the setting state, UI should reflect that it's not enabled yet
+                    updateError("NFC Permission required to enable background monitoring.")
+                }
+            } else { // Trying to disable the service
+                updateLoading(true)
+                try {
+                    repository.updateBackgroundServiceMonitoringEnabled(false)
+                    NfcMonitoringService.stopService(app.applicationContext)
+                    repository.logEvent(
+                        "SETTINGS",
+                        "Background NFC Monitoring disabled",
+                        "RadarOff"
+                    )
+                    updateSuccess("Background NFC Monitoring disabled")
+                } catch (e: Exception) {
+                    updateError("Failed to disable background monitoring: ${e.message}")
+                     // Optionally rollback if service stop failed, though less critical for disabling
+                } finally {
+                    updateLoading(false)
+                }
+            }
+        }
+    }
 
     fun toggleAutoReminder() {
         viewModelScope.launch {
@@ -87,38 +140,6 @@ class SettingsViewModel @Inject constructor(
             }
         }
     }
-
-    // ==================== BACKGROUND SERVICE SETTINGS ====================
-
-    fun toggleBackgroundServiceMonitoring() {
-        viewModelScope.launch {
-            try {
-                updateLoading(true)
-                val currentSetting = settings.value.backgroundServiceMonitoringEnabled
-                val newSetting = !currentSetting
-                repository.updateBackgroundServiceMonitoringEnabled(newSetting)
-
-                if (newSetting) {
-                    NfcMonitoringService.startService(app.applicationContext)
-                } else {
-                    NfcMonitoringService.stopService(app.applicationContext)
-                }
-
-                repository.logEvent(
-                    "SETTINGS",
-                    "Background NFC Monitoring ${if (newSetting) "enabled" else "disabled"}",
-                    if (newSetting) "Radar" else "RadarOff"
-                )
-                updateSuccess("Background NFC Monitoring ${if (newSetting) "enabled" else "disabled"}")
-            } catch (e: Exception) {
-                updateError("Failed to toggle background monitoring: ${e.message}")
-            } finally {
-                updateLoading(false)
-            }
-        }
-    }
-
-    // ==================== NOTIFICATION SETTINGS ====================
 
     fun toggleNotifications() {
         viewModelScope.launch {
@@ -193,8 +214,6 @@ class SettingsViewModel @Inject constructor(
         }
     }
 
-    // ==================== THEME SETTINGS ====================
-
     fun setTheme(isDark: Boolean) {
         viewModelScope.launch {
             try {
@@ -232,8 +251,6 @@ class SettingsViewModel @Inject constructor(
             }
         }
     }
-
-    // ==================== PERFORMANCE SETTINGS ====================
 
     fun toggleBatteryOptimization() {
         viewModelScope.launch {
@@ -278,8 +295,6 @@ class SettingsViewModel @Inject constructor(
         }
     }
 
-    // ==================== PRIVACY & SECURITY ====================
-
     fun togglePrivacyMode() {
         viewModelScope.launch {
             try {
@@ -321,8 +336,6 @@ class SettingsViewModel @Inject constructor(
             }
         }
     }
-
-    // ==================== DATA MANAGEMENT ====================
 
     fun exportSettings() {
         viewModelScope.launch {
@@ -377,8 +390,6 @@ class SettingsViewModel @Inject constructor(
         }
     }
 
-    // ==================== UI STATE HELPERS ====================
-
     private fun updateLoading(isLoading: Boolean) {
         _uiState.value = _uiState.value.copy(isLoading = isLoading)
     }
@@ -404,8 +415,6 @@ class SettingsViewModel @Inject constructor(
         )
     }
 
-    // ==================== VALIDATION ====================
-
     fun validateReminderInterval(interval: String): Boolean {
         return try {
             val value = interval.toInt()
@@ -429,9 +438,6 @@ class SettingsViewModel @Inject constructor(
     }
 }
 
-/**
- * UI State for Settings screen
- */
 data class SettingsUiState(
     val isLoading: Boolean = false,
     val errorMessage: String? = null,

@@ -1,8 +1,9 @@
 package com.nothingos.nfcmanager.ui.screens
 
-import android.Manifest // <-- Add this import
-import androidx.activity.compose.rememberLauncherForActivityResult // <-- Add this import
-import androidx.activity.result.contract.ActivityResultContracts // <-- Add this import
+import android.Manifest
+import android.widget.Toast // Added for Toast
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -15,48 +16,76 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.hapticfeedback.HapticFeedbackType
+import androidx.compose.ui.platform.LocalContext // Added for Toast context
 import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel // Already here
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.nothingos.nfcmanager.ui.theme.NothingColors
 import com.nothingos.nfcmanager.ui.theme.NothingTextStyles
 import com.nothingos.nfcmanager.ui.theme.NothingUIColors
 import com.nothingos.nfcmanager.viewmodel.SettingsViewModel
-import kotlinx.coroutines.flow.collectLatest // <-- Add this import
+import kotlinx.coroutines.flow.collectLatest
 
-/**
- * Settings Screen with app configuration
- * Built with Jetpack Compose Material 3
- */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SettingsScreen(
-    viewModel: SettingsViewModel = viewModel() // This will now use the factory from MainActivity
+    viewModel: SettingsViewModel = viewModel()
 ) {
     val settings by viewModel.settings.collectAsState()
     val uiState by viewModel.uiState.collectAsState()
     val isDarkTheme = settings.isDarkMode
+    val context = LocalContext.current // Context for Toasts
 
-    // Permission Launcher for Post Notifications
     val notificationPermissionLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.RequestPermission(),
         onResult = { isGranted: Boolean ->
             if (isGranted) {
-                // Permission granted, you could log this or show a toast
-                // viewModel.logEvent("PERMISSION", "Notification permission granted", "CheckCircle")
+                Toast.makeText(context, "Notification permission granted", Toast.LENGTH_SHORT).show()
             } else {
-                // Permission denied, you could log this or show a toast explaining why it's needed
-                // viewModel.logEvent("PERMISSION", "Notification permission denied", "AlertCircle")
-                // Note: The setting will remain "on", but notifications won't appear.
-                // The user needs to grant it from system settings if they want notifications.
+                Toast.makeText(context, "Notification permission denied", Toast.LENGTH_SHORT).show()
             }
         }
     )
 
-    // Collect the permission request flow
+    // Launcher for NFC Permission
+    val nfcPermissionLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.RequestPermission(),
+        onResult = { isGranted: Boolean ->
+            if (isGranted) {
+                Toast.makeText(context, "NFC permission granted. Please toggle monitoring again if needed.", Toast.LENGTH_LONG).show()
+                // User might need to toggle the switch again to activate the service
+            } else {
+                Toast.makeText(context, "NFC permission denied. Background monitoring cannot be enabled.", Toast.LENGTH_LONG).show()
+            }
+        }
+    )
+
     LaunchedEffect(Unit) {
         viewModel.requestNotificationPermissionFlow.collectLatest {
             notificationPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
+        }
+    }
+
+    // Collect the NFC permission request flow
+    LaunchedEffect(Unit) {
+        viewModel.requestNfcPermissionFlow.collectLatest {
+            nfcPermissionLauncher.launch(Manifest.permission.NFC)
+        }
+    }
+    
+    // Collect UI error messages
+    LaunchedEffect(uiState.errorMessage) {
+        uiState.errorMessage?.let {
+            Toast.makeText(context, it, Toast.LENGTH_LONG).show()
+            viewModel.clearMessages() // Clear message after showing
+        }
+    }
+
+    // Collect UI success messages
+    LaunchedEffect(uiState.successMessage) {
+        uiState.successMessage?.let {
+            Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
+            viewModel.clearMessages() // Clear message after showing
         }
     }
 
@@ -66,7 +95,6 @@ fun SettingsScreen(
             .verticalScroll(rememberScrollState())
             .padding(24.dp)
     ) {
-        // Header
         Text(
             text = "SETTINGS",
             style = NothingTextStyles.HeaderTitle,
@@ -74,7 +102,6 @@ fun SettingsScreen(
             modifier = Modifier.padding(vertical = 16.dp)
         )
 
-        // Display Settings Section (New)
         SettingsSection(title = "DISPLAY") {
             Card(
                 modifier = Modifier.fillMaxWidth(),
@@ -109,7 +136,6 @@ fun SettingsScreen(
 
         Spacer(modifier = Modifier.height(24.dp))
 
-        // NFC Configuration Section
         SettingsSection(title = "NFC CONFIGURATION") {
             SettingsItem(
                 title = "Auto Reminder",
@@ -129,7 +155,7 @@ fun SettingsScreen(
                 title = "Show Notifications",
                 subtitle = "Display privacy notifications",
                 checked = settings.showNotifications,
-                onCheckedChange = { viewModel.toggleNotifications() } // This will now trigger the permission flow
+                onCheckedChange = { viewModel.toggleNotifications() }
             )
             
             SettingsItem(
@@ -142,7 +168,6 @@ fun SettingsScreen(
         
         Spacer(modifier = Modifier.height(24.dp))
         
-        // Privacy & Security Section
         SettingsSection(title = "PRIVACY & SECURITY") {
             SettingsItem(
                 title = "Privacy Mode",
@@ -158,17 +183,16 @@ fun SettingsScreen(
                 onCheckedChange = { viewModel.toggleBlockUnknownTags() }
             )
 
-            SettingsItem( // Added for Background Service Monitoring
+            SettingsItem(
                 title = "Background NFC Monitoring",
-                subtitle = "Continuously monitors NFC status and alerts if it remains active. Requires a persistent notification.",
+                subtitle = "Continuously monitors NFC status. Requires NFC permission.",
                 checked = settings.backgroundServiceMonitoringEnabled,
-                onCheckedChange = { viewModel.toggleBackgroundServiceMonitoring() }
+                onCheckedChange = { viewModel.toggleBackgroundServiceMonitoring() } // ViewModel now handles permission check
             )
         }
         
         Spacer(modifier = Modifier.height(24.dp))
         
-        // Performance Section
         SettingsSection(title = "PERFORMANCE") {
             SettingsItem(
                 title = "Battery Optimization",
@@ -180,7 +204,6 @@ fun SettingsScreen(
         
         Spacer(modifier = Modifier.height(32.dp))
         
-        // Action Buttons
         Column(
             verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
@@ -210,7 +233,6 @@ fun SettingsScreen(
         
         Spacer(modifier = Modifier.height(32.dp))
         
-        // App Information
         Card(
             modifier = Modifier.fillMaxWidth(),
             colors = CardDefaults.cardColors(
