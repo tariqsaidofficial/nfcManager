@@ -9,7 +9,7 @@ A smart NFC management application for privacy protection and security monitorin
 - ✅ **Background NFC Monitoring**: Continuous NFC status tracking via a foreground service with notification, permission handling, and robust lifecycle management.
 - ✅ **Nothing OS Design**: Authentic Nothing OS visual language with clean lines and thoughtful animations
 - ✅ **Auto Reminders**: Privacy-focused notifications to protect against NFC vulnerabilities
-- ✅ **Activity Logging**: Comprehensive security activity tracking with timestamps
+- ✅ **Enhanced Activity Logging**: Comprehensive security activity tracking with timestamps. Features robust filtering by event type and date range (Today, Last 7 Days, Last 30 Days, All Time), and allows exporting the filtered log to a CSV file for external analysis or record-keeping. Includes NFC tag scan events (privacy-focused).
 - ✅ **Accessibility**: Full accessibility support with screen reader compatibility
 - ✅ **Privacy Compliant**: Google Play compliant with transparent privacy practices and no data collection
 
@@ -46,7 +46,7 @@ A smart NFC management application for privacy protection and security monitorin
 
 1. ✅ **NFC Manager** - Main interface with real-time NFC monitoring and privacy alerts
 2. ✅ **Settings** - Security configuration, theme selection, and background service management
-3. ✅ **Activity** - Detailed security activity log and privacy monitoring history
+3. ✅ **Activity** - Detailed security activity log with advanced filtering (by type & date) and CSV export capabilities. Tracks privacy monitoring history.
 
 ## 🔒 Privacy & Security
 
@@ -54,6 +54,7 @@ A smart NFC management application for privacy protection and security monitorin
 - ✅ **No Analytics**: Zero tracking or user behavior monitoring
 - ✅ **Minimal Permissions**: `NFC`, `FOREGROUND_SERVICE`, `POST_NOTIFICATIONS` (Android 13+), and `VIBRATE` permissions.
 - ✅ **Transparent**: Open source design with clear privacy policy
+- ✅ **Privacy-First NFC Logging**: NFC tag scan events are logged without reading or storing sensitive tag data (like NDEF messages or payment card details).
 
 ## 🚀 Getting Started
 
@@ -175,15 +176,15 @@ cd android
 
 ### 🚨 **Important Notes**
 - **Java 11+ Required**: For Android Gradle Plugin compatibility
-- **No Data Collection**: 100% local processing
-- **Privacy First**: 10-second default alerts for maximum security
+- **No Data Collection**: 100% local processing, no sensitive tag data is read or stored.
+- **Privacy First**: 10-second default alerts for maximum security.
 - **Nothing OS Design**: Authentic design language maintained
 
 ## 🎯 Google Play Compliance
 
 - ✅ Privacy Policy included
 - ✅ Minimal permission requests (`NFC`, `FOREGROUND_SERVICE`, `POST_NOTIFICATIONS` for Android 13+, `VIBRATE`)
-- ✅ No sensitive data collection
+- ✅ No sensitive data collection (NFC tag content is not read/stored)
 - ✅ Accessibility standards met
 - ✅ Content rating appropriate
 - ✅ Security best practices
@@ -270,6 +271,7 @@ nfcManager/
 - ✅ **Nothing OS Theme**: Complete theming system (Light/Dark modes, dynamic system UI)
 - ✅ **Material Design 3**: Latest design components
 - ✅ **Background NFC Monitoring & Service**: Continuous NFC status tracking via a foreground service with notification, permission handling, and robust lifecycle management.
+- ✅ **Privacy-Focused NFC Tag Detection**: Logs NFC tag scan events without reading or storing sensitive tag data.
 
 ### **Code Quality**
 - ✅ **Kotlin**: 100% Kotlin codebase
@@ -382,7 +384,7 @@ Contributions welcome! Please read our contributing guidelines and code of condu
 
 ## 📝 Changelog
 
-### Phase 1: Foundation & Core Functionality (Completed) - September 2024
+### Phase 1: Foundation & Core Functionality (Completed) - September 2025
 - ✅ **Android 11+ Support**: Updated minimum SDK from API 21 to API 30 (Android 11+), Target SDK API 34.
 - ✅ **App Identity & Branding**: Renamed to "NFC Manager", updated package name, 100% native Android with Kotlin & Jetpack Compose.
 - ✅ **Privacy-Focused Alert System**: Default 10s interval, customizable options, FilterChips UI.
@@ -394,8 +396,8 @@ Contributions welcome! Please read our contributing guidelines and code of condu
 - ✅ **Initial Permission Model**: Comprehensive runtime permission requests and Manifest declarations for all core features and the background service.
 
 ### Phase 2: Advanced NFC Features & Polish (Current Focus)
-- 🟡 **Real NFC APIs & Tag Interaction**: Implement foreground NFC tag scanning, detailed parsing of tag data (NDEF messages, records), and logging of scanned tag events. This is the primary focus for the next development cycle.
-- 🟡 **Activity Logging Enhancements**: Improve the activity log with more detailed event information, filtering capabilities (by event type, date), and potentially export options.
+- ✅ **Privacy-Focused NFC Tag Event Logging**: Implemented foreground NFC tag detection. The system logs the event of a tag scan (including timestamp, a generic tag identifier, and the type of NFC action detected, e.g., 'TAG_DISCOVERED') without attempting to parse or store detailed tag content (like NDEF messages or specific payment card data). This approach prioritizes user privacy by only recording that an NFC interaction occurred, not the sensitive details of the interaction, which is especially important for payment cards and other sensitive contactless uses.
+- ✅ **Activity Logging Enhancements**: Significantly improved the activity log. Implemented robust filtering capabilities, allowing users to filter events by event type and predefined date ranges (Today, Last 7 Days, Last 30 Days, All Time). Added functionality to export the currently filtered activity log to a CSV file, providing users with a way to save and analyze their data externally.
 - 🔄 **Advanced Settings & Customization**: Introduce options for customizable notification sounds, more granular monitoring intervals, and other user preferences.
 - 🔄 **Accessibility Review & Enhancements**: Conduct a full accessibility audit (TalkBack, switch access, font scaling) and implement necessary improvements.
 - 🟡 **UI Testing**: Develop comprehensive UI tests for all screens and critical user flows using Jetpack Compose testing libraries.

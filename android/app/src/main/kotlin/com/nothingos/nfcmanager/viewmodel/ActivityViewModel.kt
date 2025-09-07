@@ -4,132 +4,161 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.nothingos.nfcmanager.data.database.entities.NFCEventEntity
 import com.nothingos.nfcmanager.data.repository.NFCRepository
-import dagger.hilt.android.lifecycle.HiltViewModel // Import HiltViewModel
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
+import java.text.SimpleDateFormat
+import java.util.Calendar
+import java.util.Date
+import java.util.Locale
 import javax.inject.Inject
 
-/**
- * ViewModel for Activity/Events screen
- * Manages event history and filtering
- */
-@HiltViewModel // Add HiltViewModel annotation
+// Enum for Date Filter Options
+enum class DateFilterOption(val displayName: String) {
+    TODAY("Today"),
+    LAST_7_DAYS("Last 7 Days"),
+    LAST_30_DAYS("Last 30 Days"),
+    ALL_TIME("All Time")
+}
+
+@HiltViewModel
 class ActivityViewModel @Inject constructor(
     private val repository: NFCRepository
 ) : ViewModel() {
-    
-    // ==================== UI STATE ====================
-    
+
+    // ==================== UI STATE ===================
+
     private val _uiState = MutableStateFlow(ActivityUiState())
     val uiState: StateFlow<ActivityUiState> = _uiState.asStateFlow()
-    
-    // ==================== SEARCH AND FILTER ====================
-    
+
+    // ==================== SEARCH AND FILTER ===================
+
     private val _searchQuery = MutableStateFlow("")
     val searchQuery: StateFlow<String> = _searchQuery.asStateFlow()
-    
+
     private val _selectedEventType = MutableStateFlow<String?>(null)
     val selectedEventType: StateFlow<String?> = _selectedEventType.asStateFlow()
-    
+
+    private val _selectedDateFilter = MutableStateFlow(DateFilterOption.ALL_TIME)
+    val selectedDateFilter: StateFlow<DateFilterOption> = _selectedDateFilter.asStateFlow()
+
     private val _showImportantOnly = MutableStateFlow(false)
     val showImportantOnly: StateFlow<Boolean> = _showImportantOnly.asStateFlow()
-    
-    // ==================== DATA STREAMS ====================
-    
-    val allEvents = repository.getAllEvents()
+
+    val distinctEventTypes: StateFlow<List<String>> = repository.getDistinctEventTypes()
         .stateIn(
             scope = viewModelScope,
-            started = SharingStarted.WhileSubscribed(5000),
+            started = SharingStarted.WhileSubscribed(5000L),
             initialValue = emptyList()
         )
-    
-    val todayEvents = repository.getTodayEvents()
+
+    // ==================== DATA STREAMS ===================
+
+    private val allEventsFlow: Flow<List<NFCEventEntity>> = repository.getAllEvents() // Private base flow
+
+    // New public StateFlow for the total unfiltered event count
+    val totalUnfilteredEventCount: StateFlow<Int> = allEventsFlow
+        .map { it.size }
         .stateIn(
             scope = viewModelScope,
-            started = SharingStarted.WhileSubscribed(5000),
-            initialValue = emptyList()
+            started = SharingStarted.WhileSubscribed(5000L),
+            initialValue = 0
         )
-    
-    val importantEvents = repository.getImportantEvents()
-        .stateIn(
-            scope = viewModelScope,
-            started = SharingStarted.WhileSubscribed(5000),
-            initialValue = emptyList()
-        )
-    
-    val filteredEvents = combine(
-        allEvents,
+
+    val filteredEvents: StateFlow<List<NFCEventEntity>> = combine(
+        allEventsFlow, // Use the private base flow here
         searchQuery,
         selectedEventType,
+        selectedDateFilter,
         showImportantOnly
-    ) { events, query, eventType, importantOnly ->
-        var filtered = events
-        
+    ) { events, query, eventType, dateFilter, importantOnly ->
+        var currentFilteredEvents = events
+
+        // Apply Date Filter
+        val calendar = Calendar.getInstance()
+        currentFilteredEvents = when (dateFilter) {
+            DateFilterOption.TODAY -> currentFilteredEvents.filter { isSameDay(it.timestamp, calendar.time) }
+            DateFilterOption.LAST_7_DAYS -> {
+                val sevenDaysAgo = Calendar.getInstance().apply { add(Calendar.DAY_OF_YEAR, -7); clearTime() }.time
+                currentFilteredEvents.filter { it.timestamp.after(sevenDaysAgo) || isSameDay(it.timestamp, sevenDaysAgo) }
+            }
+            DateFilterOption.LAST_30_DAYS -> {
+                val thirtyDaysAgo = Calendar.getInstance().apply { add(Calendar.DAY_OF_YEAR, -30); clearTime() }.time
+                currentFilteredEvents.filter { it.timestamp.after(thirtyDaysAgo) || isSameDay(it.timestamp, thirtyDaysAgo) }
+            }
+            DateFilterOption.ALL_TIME -> currentFilteredEvents
+        }
+
+        // Apply Search Query Filter
         if (query.isNotBlank()) {
-            filtered = filtered.filter { event ->
+            currentFilteredEvents = currentFilteredEvents.filter { event ->
                 event.message.contains(query, ignoreCase = true) ||
                 event.eventType.contains(query, ignoreCase = true) ||
                 event.tagId?.contains(query, ignoreCase = true) == true
             }
         }
-        
+
+        // Apply Event Type Filter
         eventType?.let { type ->
-            filtered = filtered.filter { it.eventType == type }
+            currentFilteredEvents = currentFilteredEvents.filter { it.eventType == type }
         }
-        
+
+        // Apply Important Only Filter
         if (importantOnly) {
-            filtered = filtered.filter { it.isImportant }
+            currentFilteredEvents = currentFilteredEvents.filter { it.isImportant }
         }
-        
-        filtered
+
+        currentFilteredEvents
     }.stateIn(
         scope = viewModelScope,
-        started = SharingStarted.WhileSubscribed(5000),
+        started = SharingStarted.WhileSubscribed(5000L),
         initialValue = emptyList()
     )
-    
-    val eventStatistics = allEvents.map { events ->
+
+    val eventStatistics: StateFlow<EventStatistics> = filteredEvents.map { events ->
         EventStatistics(
             totalEvents = events.size,
-            todayEvents = events.count { 
-                isToday(it.timestamp) 
-            },
+            todayEvents = events.count { isSameDay(it.timestamp, Calendar.getInstance().time) },
             importantEvents = events.count { it.isImportant },
             eventsByType = events.groupBy { it.eventType }.mapValues { it.value.size },
             recentActivity = events.take(5)
         )
     }.stateIn(
         scope = viewModelScope,
-        started = SharingStarted.WhileSubscribed(5000),
+        started = SharingStarted.WhileSubscribed(5000L),
         initialValue = EventStatistics()
     )
-    
-    // ==================== SEARCH FUNCTIONALITY ====================
-    
+
+    // ==================== FILTER UPDATE FUNCTIONS ====================
+
     fun updateSearchQuery(query: String) {
         _searchQuery.value = query
     }
-    
+
     fun clearSearch() {
-        _searchQuery.value = ""
+        updateSearchQuery("")
     }
-    
+
     fun setEventTypeFilter(eventType: String?) {
         _selectedEventType.value = eventType
     }
-    
+
+    fun setDateFilter(option: DateFilterOption) {
+        _selectedDateFilter.value = option
+    }
+
     fun toggleImportantOnly() {
         _showImportantOnly.value = !_showImportantOnly.value
     }
-    
+
     fun clearAllFilters() {
         _searchQuery.value = ""
         _selectedEventType.value = null
+        _selectedDateFilter.value = DateFilterOption.ALL_TIME
         _showImportantOnly.value = false
     }
-    
+
     // ==================== EVENT MANAGEMENT ====================
-    
     fun deleteEvent(event: NFCEventEntity) {
         viewModelScope.launch {
             try {
@@ -140,29 +169,53 @@ class ActivityViewModel @Inject constructor(
             }
         }
     }
-    
+
     fun toggleEventImportance(event: NFCEventEntity) {
         viewModelScope.launch {
             try {
-                val updatedEvent = event.copy(isImportant = !event.isImportant)
-                // repository.updateEvent(updatedEvent) // This needs repository.updateEvent(event) or similar
-                updateSuccess("Event importance updated")
+                // This requires a proper update function in DAO and Repository
+                // For example: repository.updateEvent(event.copy(isImportant = !event.isImportant))
+                // The DAO should have an @Update method.
+                // For now, this is a placeholder if the update mechanism isn't fully in place.
+                // val updatedEvent = event.copy(isImportant = !event.isImportant)
+                // repository.updateEvent(updatedEvent) // Ideal implementation
+                updateSuccess("Toggle importance for event ID ${event.id}. (Actual update TBD)")
             } catch (e: Exception) {
-                updateError("Failed to update event: ${e.message}")
+                updateError("Failed to update event importance: ${e.message}")
             }
         }
     }
-    
-    fun exportEvents(events: List<NFCEventEntity>) {
-        viewModelScope.launch {
-            try {
-                updateSuccess("Events exported successfully")
-            } catch (e: Exception) {
-                updateError("Failed to export events: ${e.message}")
-            }
+
+    fun exportEventsToCsv(): Flow<String> = flow {
+        val eventsToExport = filteredEvents.first() // Get current filtered list once
+        if (eventsToExport.isEmpty()) {
+            emit("") // Emit empty string if no events
+            return@flow
         }
+        val header = "ID,Timestamp,EventType,Message,TagID,TagType,Data,AppPackage,IsImportant,IsBlocked"
+        val csvData = StringBuilder()
+        csvData.appendLine(header)
+        val dateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
+        eventsToExport.forEach { event ->
+            csvData.appendLine(
+                listOfNotNull(
+                    event.id.toString(),
+                    dateFormat.format(event.timestamp),
+                    event.eventType,
+                    "\"${event.message.replace("\"", "\"\"")}\"", // Escape quotes in message
+                    event.tagId,
+                    event.tagType,
+                    event.data,
+                    event.appPackage,
+                    event.isImportant.toString(),
+                    event.isBlocked.toString()
+                ).joinToString(",")
+            )
+        }
+        emit(csvData.toString())
     }
-    
+
+
     fun clearAllEvents() {
         viewModelScope.launch {
             try {
@@ -173,7 +226,7 @@ class ActivityViewModel @Inject constructor(
             }
         }
     }
-    
+
     fun cleanupOldEvents(daysToKeep: Int = 30) {
         viewModelScope.launch {
             try {
@@ -184,41 +237,39 @@ class ActivityViewModel @Inject constructor(
             }
         }
     }
-    
     // ==================== UI STATE HELPERS ====================
-    
     fun updateLoading(isLoading: Boolean) {
         _uiState.value = _uiState.value.copy(isLoading = isLoading)
     }
-    
+
     private fun updateError(message: String) {
         _uiState.value = _uiState.value.copy(
             errorMessage = message,
             isLoading = false
         )
     }
-    
+
     private fun updateSuccess(message: String) {
         _uiState.value = _uiState.value.copy(
             successMessage = message,
             isLoading = false
         )
     }
-    
+
     fun clearMessages() {
         _uiState.value = _uiState.value.copy(
             errorMessage = null,
             successMessage = null
         )
     }
-    
+
     fun toggleSelectionMode() {
         _uiState.value = _uiState.value.copy(
             isSelectionMode = !_uiState.value.isSelectionMode,
             selectedEvents = if (_uiState.value.isSelectionMode) emptySet() else _uiState.value.selectedEvents
         )
     }
-    
+
     fun toggleEventSelection(eventId: Long) {
         val currentSelected = _uiState.value.selectedEvents
         val newSelected = if (currentSelected.contains(eventId)) {
@@ -228,26 +279,34 @@ class ActivityViewModel @Inject constructor(
         }
         _uiState.value = _uiState.value.copy(selectedEvents = newSelected)
     }
-    
+
     fun selectAllEvents() {
         val visibleEventIds = filteredEvents.value.map { it.id }.toSet()
         _uiState.value = _uiState.value.copy(selectedEvents = visibleEventIds)
     }
-    
+
     fun clearSelections() {
         _uiState.value = _uiState.value.copy(selectedEvents = emptySet())
     }
-    
     // ==================== UTILITY METHODS ====================
-    
-    private fun isToday(date: java.util.Date): Boolean {
-        val today = java.util.Calendar.getInstance()
-        val targetDay = java.util.Calendar.getInstance().apply { time = date }
-        
-        return today.get(java.util.Calendar.YEAR) == targetDay.get(java.util.Calendar.YEAR) &&
-                today.get(java.util.Calendar.DAY_OF_YEAR) == targetDay.get(java.util.Calendar.DAY_OF_YEAR)
+    private fun Calendar.clearTime() {
+        set(Calendar.HOUR_OF_DAY, 0)
+        set(Calendar.MINUTE, 0)
+        set(Calendar.SECOND, 0)
+        set(Calendar.MILLISECOND, 0)
     }
-    
+
+    private fun isSameDay(date1: Date, date2: Date): Boolean {
+        val cal1 = Calendar.getInstance().apply { time = date1; clearTime() }
+        val cal2 = Calendar.getInstance().apply { time = date2; clearTime() }
+        return cal1.timeInMillis == cal2.timeInMillis
+    }
+
+    // isToday is a specific case of isSameDay
+    private fun isToday(date: Date): Boolean {
+        return isSameDay(date, Calendar.getInstance().time)
+    }
+
     fun formatRelativeTime(date: java.util.Date): String {
         val seconds = (System.currentTimeMillis() - date.time) / 1000
         return when {

@@ -1,13 +1,14 @@
 package com.nothingos.nfcmanager.ui.screens
 
 import android.Manifest
-import android.widget.Toast // Added for Toast
+import android.widget.Toast
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -16,8 +17,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.hapticfeedback.HapticFeedbackType
-import androidx.compose.ui.platform.LocalContext // Added for Toast context
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalHapticFeedback
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.nothingos.nfcmanager.ui.theme.NothingColors
@@ -34,7 +36,7 @@ fun SettingsScreen(
     val settings by viewModel.settings.collectAsState()
     val uiState by viewModel.uiState.collectAsState()
     val isDarkTheme = settings.isDarkMode
-    val context = LocalContext.current // Context for Toasts
+    val context = LocalContext.current
 
     val notificationPermissionLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.RequestPermission(),
@@ -47,13 +49,11 @@ fun SettingsScreen(
         }
     )
 
-    // Launcher for NFC Permission
     val nfcPermissionLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.RequestPermission(),
         onResult = { isGranted: Boolean ->
             if (isGranted) {
                 Toast.makeText(context, "NFC permission granted. Please toggle monitoring again if needed.", Toast.LENGTH_LONG).show()
-                // User might need to toggle the switch again to activate the service
             } else {
                 Toast.makeText(context, "NFC permission denied. Background monitoring cannot be enabled.", Toast.LENGTH_LONG).show()
             }
@@ -66,26 +66,23 @@ fun SettingsScreen(
         }
     }
 
-    // Collect the NFC permission request flow
     LaunchedEffect(Unit) {
         viewModel.requestNfcPermissionFlow.collectLatest {
             nfcPermissionLauncher.launch(Manifest.permission.NFC)
         }
     }
     
-    // Collect UI error messages
     LaunchedEffect(uiState.errorMessage) {
         uiState.errorMessage?.let {
             Toast.makeText(context, it, Toast.LENGTH_LONG).show()
-            viewModel.clearMessages() // Clear message after showing
+            viewModel.clearMessages() 
         }
     }
 
-    // Collect UI success messages
     LaunchedEffect(uiState.successMessage) {
         uiState.successMessage?.let {
             Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
-            viewModel.clearMessages() // Clear message after showing
+            viewModel.clearMessages() 
         }
     }
 
@@ -145,9 +142,10 @@ fun SettingsScreen(
             )
             
             if (settings.autoReminderEnabled) {
-                ReminderIntervalSelector(
+                AdvancedIntervalSelector(
                     currentInterval = settings.reminderInterval,
-                    onIntervalChange = { viewModel.updateReminderInterval(it) }
+                    onIntervalChange = { viewModel.updateReminderInterval(it) },
+                    validateIntervalString = { viewModel.validateReminderInterval(it) }
                 )
             }
             
@@ -187,7 +185,7 @@ fun SettingsScreen(
                 title = "Background NFC Monitoring",
                 subtitle = "Continuously monitors NFC status. Requires NFC permission.",
                 checked = settings.backgroundServiceMonitoringEnabled,
-                onCheckedChange = { viewModel.toggleBackgroundServiceMonitoring() } // ViewModel now handles permission check
+                onCheckedChange = { viewModel.toggleBackgroundServiceMonitoring() } 
             )
         }
         
@@ -343,19 +341,29 @@ private fun SettingsItem(
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-private fun ReminderIntervalSelector(
-    currentInterval: Int,
-    onIntervalChange: (Int) -> Unit
+private fun AdvancedIntervalSelector(
+    currentInterval: Int, // from settings.reminderInterval
+    onIntervalChange: (Int) -> Unit, // viewModel.updateReminderInterval
+    validateIntervalString: (String) -> Boolean // viewModel.validateReminderInterval
 ) {
-    val intervals = listOf(5, 10, 15, 20, 30, 40, 50, 60)
-    val firstRowIntervals = intervals.subList(0, 4)
-    val secondRowIntervals = intervals.subList(4, 8)
+    val predefinedIntervals = listOf(5, 10, 15, 20, 30, 40, 50, 60)
     val haptic = LocalHapticFeedback.current
+
+    var textFieldValue by remember { mutableStateOf(currentInterval.toString()) }
+    var isCustomChipActive by remember { mutableStateOf(!predefinedIntervals.contains(currentInterval)) }
+    var textFieldHasError by remember { mutableStateOf(false) }
+
+    LaunchedEffect(currentInterval) {
+        textFieldValue = currentInterval.toString()
+        val isPreset = predefinedIntervals.contains(currentInterval)
+        isCustomChipActive = !isPreset
+        textFieldHasError = if (!isPreset) !validateIntervalString(currentInterval.toString()) else false
+    }
 
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = 20.dp, vertical = 12.dp)
+            .padding(horizontal = 20.dp, vertical = 12.dp) 
     ) {
         Text(
             text = "Reminder Interval",
@@ -371,60 +379,83 @@ private fun ReminderIntervalSelector(
             modifier = Modifier.padding(bottom = 16.dp)
         )
         
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.spacedBy(8.dp)
-        ) {
-            firstRowIntervals.forEach { interval ->
-                val isSelected = currentInterval == interval
-                val scale by animateFloatAsState(targetValue = if (isSelected) 1.05f else 1.0f, label = "chipScale")
-                FilterChip(
-                    onClick = { 
-                        haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
-                        onIntervalChange(interval) 
-                    },
-                    label = { Text(text = "${interval}s", style = NothingTextStyles.ButtonText) },
-                    selected = isSelected,
-                    colors = FilterChipDefaults.filterChipColors(
-                        selectedContainerColor = MaterialTheme.colorScheme.primary,
-                        selectedLabelColor = MaterialTheme.colorScheme.onPrimary,
-                        containerColor = MaterialTheme.colorScheme.surface,
-                        labelColor = MaterialTheme.colorScheme.onSurface
-                    ),
-                    modifier = Modifier
-                        .weight(1f)
-                        .scale(scale)
-                )
+        predefinedIntervals.chunked(4).forEach { rowIntervals ->
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.spacedBy(8.dp)
+            ) {
+                rowIntervals.forEach { interval ->
+                    val isSelected = !isCustomChipActive && currentInterval == interval
+                    val scale by animateFloatAsState(targetValue = if (isSelected) 1.05f else 1.0f, label = "chipScale_${interval}")
+                    FilterChip(
+                        selected = isSelected,
+                        onClick = {
+                            haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
+                            isCustomChipActive = false 
+                            textFieldHasError = false
+                            onIntervalChange(interval)
+                        },
+                        label = { Text("${interval}s", style = NothingTextStyles.ButtonText) },
+                        colors = FilterChipDefaults.filterChipColors(
+                            selectedContainerColor = MaterialTheme.colorScheme.primary,
+                            selectedLabelColor = MaterialTheme.colorScheme.onPrimary,
+                            containerColor = MaterialTheme.colorScheme.surfaceVariant, // Changed for consistency
+                            labelColor = MaterialTheme.colorScheme.onSurfaceVariant
+                        ),
+                        modifier = Modifier.weight(1f).scale(scale)
+                    )
+                }
             }
+            Spacer(modifier = Modifier.height(8.dp))
         }
 
-        Spacer(modifier = Modifier.height(8.dp))
+        FilterChip(
+            selected = isCustomChipActive,
+            onClick = {
+                haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
+                isCustomChipActive = true 
+                textFieldHasError = !validateIntervalString(textFieldValue)
+            },
+            label = { Text("Custom", style = NothingTextStyles.ButtonText) },
+            colors = FilterChipDefaults.filterChipColors(
+                selectedContainerColor = MaterialTheme.colorScheme.primary,
+                selectedLabelColor = MaterialTheme.colorScheme.onPrimary,
+                containerColor = MaterialTheme.colorScheme.surfaceVariant,
+                labelColor = MaterialTheme.colorScheme.onSurfaceVariant
+            ),
+            modifier = Modifier.fillMaxWidth()
+        )
 
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.spacedBy(8.dp)
-        ) {
-            secondRowIntervals.forEach { interval ->
-                val isSelected = currentInterval == interval
-                val scale by animateFloatAsState(targetValue = if (isSelected) 1.05f else 1.0f, label = "chipScale")
-                FilterChip(
-                    onClick = { 
-                        haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
-                        onIntervalChange(interval) 
-                    },
-                    label = { Text(text = "${interval}s", style = NothingTextStyles.ButtonText) },
-                    selected = isSelected,
-                    colors = FilterChipDefaults.filterChipColors(
-                        selectedContainerColor = MaterialTheme.colorScheme.primary,
-                        selectedLabelColor = MaterialTheme.colorScheme.onPrimary,
-                        containerColor = MaterialTheme.colorScheme.surface,
-                        labelColor = MaterialTheme.colorScheme.onSurface
-                    ),
-                    modifier = Modifier
-                        .weight(1f)
-                        .scale(scale)
+        if (isCustomChipActive) {
+            Spacer(modifier = Modifier.height(12.dp))
+            OutlinedTextField(
+                value = textFieldValue,
+                onValueChange = { newText ->
+                    textFieldValue = newText
+                    val numericValue = newText.toIntOrNull()
+                    if (numericValue != null) {
+                        onIntervalChange(numericValue) 
+                        textFieldHasError = !validateIntervalString(newText) 
+                    } else {
+                        textFieldHasError = newText.isNotBlank() 
+                    }
+                },
+                label = { Text("Custom Interval (seconds)") },
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+                singleLine = true,
+                isError = textFieldHasError,
+                supportingText = {
+                    if (textFieldHasError && textFieldValue.isNotBlank()) {
+                        Text("Interval must be a number between 5-300.")
+                    }
+                },
+                modifier = Modifier.fillMaxWidth(),
+                colors = OutlinedTextFieldDefaults.colors(
+                    focusedBorderColor = MaterialTheme.colorScheme.primary,
+                    unfocusedBorderColor = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.3f),
+                    errorBorderColor = MaterialTheme.colorScheme.error
                 )
-            }
+            )
         }
         
         Spacer(modifier = Modifier.height(8.dp))
@@ -432,7 +463,7 @@ private fun ReminderIntervalSelector(
         Text(
             text = "Current: ${currentInterval}s",
             style = NothingTextStyles.Caption,
-            color = MaterialTheme.colorScheme.primary,
+            color = if (textFieldHasError && isCustomChipActive) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.primary,
             modifier = Modifier.align(Alignment.CenterHorizontally)
         )
     }
