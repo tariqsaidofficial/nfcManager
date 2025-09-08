@@ -880,4 +880,23 @@ fun EventsList(viewModel: ActivityViewModel) {
 
 ---
 
+## 📞 API Support
+
+For questions about API usage or technical implementation:
+
+- **Email**: support@dxbmark.com
+- **Subject**: "API Documentation - NFC Manager"
+- **Response Time**: 24-48 hours for technical inquiries
+
+---
+
+**Built with ❤️ by Tariq Said - Nothing OS Inspired Design**
+
+*Technical Support & Contact: support@dxbmark.com*
+
+---
+
+*Licensed under the Apache License, Version 2.0*  
+*Copyright 2025 Tariq Said. All rights reserved.*
+
 *This API documentation is automatically generated and kept in sync with the codebase. For the most up-to-date information, refer to the source code and inline documentation.*

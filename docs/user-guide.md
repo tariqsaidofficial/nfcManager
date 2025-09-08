@@ -326,4 +326,24 @@ We value your feedback! Please:
 
 ---
 
+## 📞 User Support
+
+Need help or have questions?
+
+- **Email**: support@dxbmark.com
+- **Subject**: "User Guide - NFC Manager"
+- **Response Time**: 24-48 hours
+- **Languages**: English, Arabic
+
+---
+
+**Built with ❤️ by Tariq Said - Nothing OS Inspired Design**
+
+*Technical Support & Contact: support@dxbmark.com*
+
+---
+
+*Licensed under the Apache License, Version 2.0*  
+*Copyright 2025 Tariq Said. All rights reserved.*
+
 *Thank you for using NFC Manager! Stay secure and protect your privacy.* 🛡️

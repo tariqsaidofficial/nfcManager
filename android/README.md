@@ -284,7 +284,7 @@ nfcManager/
 ## 🌍 Internationalization
 
 - ✅ **RTL Support**: Full right-to-left language support
-- ✅ **Localization**: Ready for multiple language support with Android string resources
+- ✅ **Localization**: Implemented support for English, Arabic, Spanish, French, and German using Android string resources.
 - ✅ **Accessibility**: Screen reader compatible with TalkBack integration
 
 ## 📱 Deployment
@@ -403,8 +403,8 @@ Contributions welcome! Please read our contributing guidelines and code of condu
 - ✅ **Advanced Settings & Customization**:
     - Implemented options for more granular monitoring intervals.
     - **Enhanced Notification Sound Customization**: Users can now pick custom notification sounds from their device storage. The settings screen for notification sounds allows for playing/stopping the currently selected sound for preview. The "Use System Default Sound" button dynamically changes its appearance based on whether a custom sound is active. Sound playback automatically stops when navigating away from the screen, and error handling for sound playback has been improved.
-- 🟡 **UI Testing**: Develop comprehensive UI tests for all screens and critical user flows using Jetpack Compose testing libraries.
-- 🔄 **Localization**: Prepare and add support for additional languages (e.g., Arabic, Spanish).
+- 🚧 **UI Testing**: Manual UI testing in progress by the developer. Automated Jetpack Compose tests to be developed later.
+- ✅ **Localization**: Added support for German. App now supports English, Arabic, Spanish, French, and German. (Further languages like Chinese, Russian, Hindi, Filipino are planned for community contributions).
 
 ### Phase 3: Performance, Release Preparation & Future Enhancements (Planned)
 - 🟡 **Performance Optimization**: Initial review and planning for profiling CPU, memory, and battery usage (especially the background service) and implementing optimizations.

@@ -244,3 +244,30 @@ cd nfc-manager/android
 ---
 
 *For technical support, please include your device model, Android version, and app version in your inquiry.*
+
+
+---
+
+## 📞 Installation Support
+
+Need help with installation?
+
+- **Email**: support@dxbmark.com
+- **Subject**: \
+Installation
+Guide
+-
+NFC
+Manager\
+- **Response Time**: 24-48 hours
+
+---
+
+**Built with ❤️ by Tariq Said - Nothing OS Inspired Design**
+
+*Technical Support & Contact: support@dxbmark.com*
+
+---
+
+*Licensed under the Apache License, Version 2.0*  
+*Copyright 2025 Tariq Said. All rights reserved.*

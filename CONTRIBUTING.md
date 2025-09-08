@@ -1,360 +1,578 @@
 # Contributing to NFC Manager
 
-Thank you for your interest in contributing to NFC Manager! This document provides guidelines and information for contributors.
+Thank you for your interest in contributing to NFC Manager! We welcome contributions from the community and are excited to see what you can bring to this privacy-focused NFC management application.
 
-## Table of Contents
+## 🎯 Project Overview
 
-1. [Code of Conduct](#code-of-conduct)
-2. [Getting Started](#getting-started)
-3. [Development Setup](#development-setup)
-4. [Contributing Guidelines](#contributing-guidelines)
-5. [Pull Request Process](#pull-request-process)
-6. [Issue Reporting](#issue-reporting)
-7. [Development Standards](#development-standards)
-8. [Community](#community)
+NFC Manager is a privacy-focused Android application inspired by Nothing OS design aesthetics. The project aims to help users monitor and manage their NFC settings while maintaining complete privacy and security.
 
-## Code of Conduct
-
-### Our Pledge
-
-We are committed to providing a welcoming and inclusive environment for all contributors, regardless of background, experience level, or identity.
-
-### Expected Behavior
-
-- Be respectful and constructive
-- Focus on what's best for the community
-- Show empathy towards other contributors
-- Accept constructive criticism gracefully
-
-### Unacceptable Behavior
-
-- Harassment or discriminatory language
-- Personal attacks or trolling
-- Publishing private information
-- Inappropriate conduct
-
-## Getting Started
-
-### Prerequisites
-
-- **Android Studio**: Arctic Fox or newer
-- **Java**: JDK 17 or higher
-- **Android SDK**: API 30+ (Android 11+)
-- **Git**: For version control
-- **Device/Emulator**: With NFC support
-
-### Fork and Clone
-
-1. Fork the repository on GitHub
-2. Clone your fork locally:
-   ```bash
-   git clone https://github.com/YOUR_USERNAME/nfc-manager.git
-   cd nfc-manager
-   ```
-3. Add upstream remote:
-   ```bash
-   git remote add upstream https://github.com/ORIGINAL_OWNER/nfc-manager.git
-   ```
-
-## Development Setup
-
-### 1. Environment Setup
-
-```bash
-# Verify Java version (must be 17+)
-java -version
-
-# Set JAVA_HOME if needed
-export JAVA_HOME=/path/to/java17
-```
-
-### 2. Build Project
-
-```bash
-cd android
-./gradlew clean
-./gradlew assembleDebug
-```
-
-### 3. Run Tests
-
-```bash
-# Unit tests
-./gradlew test
-
-# Instrumented tests
-./gradlew connectedAndroidTest
-
-# Lint checks
-./gradlew lint
-```
-
-## Contributing Guidelines
+## 🤝 How to Contribute
 
 ### Types of Contributions
 
 We welcome various types of contributions:
 
-- 🐛 **Bug fixes**
-- ✨ **New features**
-- 📚 **Documentation improvements**
-- 🎨 **UI/UX enhancements**
-- 🔧 **Code refactoring**
-- 🧪 **Test improvements**
-- 🌐 **Translations**
+- 🐛 **Bug Reports**: Help us identify and fix issues
+- ✨ **Feature Requests**: Suggest new features or improvements
+- 💻 **Code Contributions**: Submit bug fixes or new features
+- 📚 **Documentation**: Improve or expand documentation
+- 🌍 **Translations**: Help localize the app for more languages
+- 🎨 **Design**: Contribute UI/UX improvements
+- 🧪 **Testing**: Help test the app on different devices
 
-### Contribution Workflow
+## 🚀 Getting Started
 
-1. **Check existing issues** - Avoid duplicate work
-2. **Create/discuss issue** - For significant changes
-3. **Fork and branch** - Create feature branch
-4. **Develop and test** - Follow coding standards
-5. **Submit pull request** - With clear description
-6. **Code review** - Address feedback
-7. **Merge** - After approval
+### Prerequisites
 
-### Branch Naming
+Before contributing, ensure you have:
 
-Use descriptive branch names:
+- **Android Studio**: Latest stable version
+- **JDK 11+**: Required for Android development
+- **Git**: For version control
+- **Android SDK**: API level 30+ (Android 11+)
+- **Device/Emulator**: With NFC capability for testing
+
+### Development Setup
+
+1. **Fork the Repository**
+   ```bash
+   # Fork the repo on GitHub, then clone your fork
+   git clone https://github.com/tariqsaidofficial/nfcManager.git
+   cd nfcManager
+   ```
+
+2. **Set Up Development Environment**
+   ```bash
+   # Navigate to Android project
+   cd android
+   
+   # Verify Java version
+   java -version  # Should be 11+
+   
+   # Clean and build
+   ./gradlew clean
+   ./gradlew assembleDebug
+   ```
+
+3. **Open in Android Studio**
+   - File → Open → Select `android/` folder
+   - Wait for Gradle sync to complete
+   - Build → Make Project
+
+4. **Test Your Setup**
+   ```bash
+   # Run tests
+   ./gradlew test
+   
+   # Run on device/emulator
+   ./gradlew installDebug
+   ```
+
+## 🏗️ Project Structure
+
+Understanding the project structure will help you contribute effectively:
 
 ```
-feature/nfc-background-monitoring
-bugfix/notification-permission-crash
-docs/update-installation-guide
-refactor/repository-layer-cleanup
+android/
+├── app/
+│   ├── src/main/kotlin/com/nothingos/nfcmanager/
+│   │   ├── data/                    # Data layer (Room, Repository)
+│   │   ├── services/                # Background services
+│   │   ├── ui/                      # UI layer (Compose screens)
+│   │   ├── viewmodel/               # MVVM ViewModels
+│   │   ├── utils/                   # Utility classes
+│   │   └── di/                      # Dependency injection (Hilt)
+│   └── src/main/res/                # Android resources
+├── build.gradle                     # App-level build configuration
+└── gradle/                          # Gradle wrapper
 ```
 
-### Commit Messages
+### Key Technologies
 
-Follow conventional commit format:
+- **Language**: Kotlin 1.9.22
+- **UI**: Jetpack Compose with Material Design 3
+- **Architecture**: MVVM with Repository pattern
+- **Database**: Room for local storage
+- **DI**: Hilt for dependency injection
+- **Async**: Kotlin Coroutines and StateFlow
 
+## 📝 Coding Standards
+
+### Code Style
+
+We follow the [Kotlin Coding Conventions](https://kotlinlang.org/docs/coding-conventions.html):
+
+- **Indentation**: 4 spaces (no tabs)
+- **Line Length**: 120 characters maximum
+- **Naming**: camelCase for variables, PascalCase for classes
+- **Imports**: Organize and remove unused imports
+
+### Architecture Guidelines
+
+- **MVVM Pattern**: Separate UI, business logic, and data layers
+- **Single Responsibility**: Each class should have one clear purpose
+- **Dependency Injection**: Use Hilt for all dependencies
+- **Reactive Programming**: Use StateFlow for UI state management
+- **Error Handling**: Proper exception handling with user-friendly messages
+
+### Compose Guidelines
+
+- **Composable Functions**: Keep them small and focused
+- **State Management**: Hoist state appropriately
+- **Performance**: Use `remember` and `LaunchedEffect` correctly
+- **Accessibility**: Include content descriptions for screen readers
+- **Nothing OS Design**: Follow the established design system
+
+## 🐛 Bug Reports
+
+When reporting bugs, please include:
+
+### Bug Report Template
+
+```markdown
+**Bug Description**
+A clear description of what the bug is.
+
+**Steps to Reproduce**
+1. Go to '...'
+2. Click on '...'
+3. See error
+
+**Expected Behavior**
+What you expected to happen.
+
+**Actual Behavior**
+What actually happened.
+
+**Screenshots**
+If applicable, add screenshots.
+
+**Device Information**
+- Device: [e.g. Samsung Galaxy S23]
+- OS Version: [e.g. Android 13]
+- App Version: [e.g. 1.0.0]
+- NFC Support: [Yes/No]
+
+**Additional Context**
+Any other context about the problem.
 ```
-type(scope): brief description
 
-Longer description if needed
+### Before Reporting
 
-Fixes #123
+- Check if the issue already exists
+- Try to reproduce the bug consistently
+- Test on multiple devices if possible
+- Include relevant logs if available
+
+## ✨ Feature Requests
+
+We love new ideas! When suggesting features:
+
+### Feature Request Template
+
+```markdown
+**Feature Description**
+A clear description of the feature you'd like to see.
+
+**Problem Statement**
+What problem does this feature solve?
+
+**Proposed Solution**
+How would you like this feature to work?
+
+**Alternatives Considered**
+Any alternative solutions you've considered.
+
+**Additional Context**
+Screenshots, mockups, or examples.
+
+**Privacy Impact**
+How does this feature affect user privacy?
 ```
 
-**Types:**
-- `feat`: New feature
-- `fix`: Bug fix
-- `docs`: Documentation
-- `style`: Code formatting
-- `refactor`: Code restructuring
-- `test`: Adding tests
-- `chore`: Maintenance
+### Feature Guidelines
 
-**Examples:**
-```
-feat(nfc): add background monitoring service
+- Align with our privacy-first approach
+- Consider Nothing OS design aesthetics
+- Think about battery and performance impact
+- Ensure accessibility compliance
 
-Implements continuous NFC state monitoring with
-configurable intervals and battery optimization.
+## 💻 Code Contributions
 
-Fixes #45
-```
+### Pull Request Process
 
-```
-fix(ui): resolve theme switching crash on Android 12
+1. **Create a Branch**
+   ```bash
+   git checkout -b feature/your-feature-name
+   # or
+   git checkout -b fix/bug-description
+   ```
 
-The theme switching was causing a crash due to
-improper context handling in the settings screen.
+2. **Make Your Changes**
+   - Write clean, well-documented code
+   - Follow coding standards
+   - Add tests for new functionality
+   - Update documentation if needed
 
-Closes #78
-```
+3. **Test Your Changes**
+   ```bash
+   # Run unit tests
+   ./gradlew test
+   
+   # Run lint checks
+   ./gradlew lint
+   
+   # Test on device
+   ./gradlew connectedAndroidTest
+   ```
 
-## Pull Request Process
+4. **Commit Your Changes**
+   ```bash
+   # Use conventional commits
+   git commit -m "feat: add custom notification sounds"
+   git commit -m "fix: resolve NFC detection issue"
+   git commit -m "docs: update installation guide"
+   ```
 
-### Before Submitting
+5. **Push and Create PR**
+   ```bash
+   git push origin feature/your-feature-name
+   # Create pull request on GitHub
+   ```
 
-- [ ] Code compiles without errors
-- [ ] All tests pass
-- [ ] Lint checks pass
-- [ ] Documentation updated
-- [ ] Screenshots for UI changes
-- [ ] Self-review completed
+### Commit Message Convention
 
-### PR Template
+We use [Conventional Commits](https://conventionalcommits.org/):
+
+- `feat:` New features
+- `fix:` Bug fixes
+- `docs:` Documentation changes
+- `style:` Code style changes (formatting, etc.)
+- `refactor:` Code refactoring
+- `test:` Adding or updating tests
+- `chore:` Maintenance tasks
+
+### Pull Request Template
 
 ```markdown
 ## Description
-Brief description of changes
+Brief description of changes made.
 
 ## Type of Change
 - [ ] Bug fix
 - [ ] New feature
 - [ ] Documentation update
-- [ ] Refactoring
+- [ ] Code refactoring
+- [ ] Performance improvement
 
 ## Testing
 - [ ] Unit tests added/updated
 - [ ] Manual testing completed
 - [ ] Tested on multiple devices
+- [ ] No breaking changes
 
-## Screenshots (if applicable)
-[Add screenshots for UI changes]
+## Screenshots
+If applicable, add screenshots of UI changes.
+
+## Privacy Impact
+Describe any privacy implications of your changes.
 
 ## Checklist
 - [ ] Code follows project style guidelines
 - [ ] Self-review completed
 - [ ] Documentation updated
-- [ ] Tests pass
+- [ ] No new warnings or errors
 ```
 
-### Review Process
+## 🌍 Translations
 
-1. **Automated checks** - CI/CD pipeline
-2. **Code review** - By maintainers
-3. **Testing** - Manual verification
-4. **Approval** - Required before merge
-5. **Merge** - Squash and merge preferred
+Help us make NFC Manager available in more languages!
 
-## Issue Reporting
+### Current Languages
 
-### Bug Reports
+- English (default)
+- العربية (Arabic) - RTL support
+- Español (Spanish)
+- Français (French)
+- Русский (Russian)
+- 中文 (Chinese Simplified)
+- हिन्दी (Hindi)
+- Filipino
 
-Use the bug report template:
+### Adding a New Language
 
-```markdown
-## Bug Description
-Clear description of the bug
+1. **Create Language Files**
+   ```
+   android/app/src/main/res/values-{language_code}/strings.xml
+   ```
 
-## Steps to Reproduce
-1. Step 1
-2. Step 2
-3. Step 3
+2. **Translate Strings**
+   - Copy from `values/strings.xml`
+   - Translate all string values
+   - Keep string keys unchanged
+   - Consider cultural context
 
-## Expected Behavior
-What should happen
+3. **Test Translation**
+   - Test UI layout with translated text
+   - Ensure text fits in UI components
+   - Test RTL languages properly
 
-## Actual Behavior
-What actually happens
+4. **Update Documentation**
+   - Add language to README.md
+   - Update supported languages list
 
-## Environment
-- Device: [e.g., Samsung Galaxy S21]
-- Android Version: [e.g., Android 12]
-- App Version: [e.g., 1.0.0]
+### Translation Guidelines
 
-## Screenshots/Logs
-[If applicable]
+- **Accuracy**: Maintain technical accuracy
+- **Context**: Consider UI context and space limitations
+- **Consistency**: Use consistent terminology
+- **Cultural**: Respect cultural differences
+- **RTL**: Properly support right-to-left languages
+
+## 🎨 Design Contributions
+
+### Nothing OS Design System
+
+Our design follows Nothing OS principles:
+
+- **Colors**: Primary red (#EF4444), pure black/white
+- **Typography**: Nothing Font family
+- **Spacing**: 8px grid system
+- **Animations**: 300ms interactions, custom bezier curves
+- **Components**: Clean lines, minimal shadows
+
+### Design Tools
+
+- **Figma**: For UI mockups and prototypes
+- **Android Studio**: Layout inspector and preview
+- **Material Theme Builder**: For color schemes
+
+### Design Process
+
+1. **Research**: Study Nothing OS design patterns
+2. **Wireframe**: Create low-fidelity layouts
+3. **Mockup**: Design high-fidelity screens
+4. **Prototype**: Interactive prototypes for complex flows
+5. **Implement**: Work with developers for implementation
+
+## 🧪 Testing
+
+### Testing Strategy
+
+- **Unit Tests**: Test individual components and functions
+- **Integration Tests**: Test component interactions
+- **UI Tests**: Test user interface and interactions
+- **Manual Testing**: Real device testing scenarios
+
+### Writing Tests
+
+```kotlin
+// Unit Test Example
+@Test
+fun `test NFC status detection`() {
+    // Given
+    val nfcAdapter = mockk<NfcAdapter>()
+    every { nfcAdapter.isEnabled } returns true
+    
+    // When
+    val isEnabled = NFCUtils.isNfcEnabled(context)
+    
+    // Then
+    assertTrue(isEnabled)
+}
+
+// Compose UI Test Example
+@Test
+fun `test home screen displays NFC status`() {
+    composeTestRule.setContent {
+        HomeScreen(viewModel = mockViewModel)
+    }
+    
+    composeTestRule
+        .onNodeWithText("NFC STATUS")
+        .assertIsDisplayed()
+}
 ```
 
-### Feature Requests
+### Manual Testing Checklist
 
-Use the feature request template:
+- [ ] NFC detection works correctly
+- [ ] Background service functions properly
+- [ ] Notifications display correctly
+- [ ] Settings save and load properly
+- [ ] Multi-language support works
+- [ ] Dark/light themes work
+- [ ] Accessibility features function
+- [ ] Performance is acceptable
 
-```markdown
-## Feature Description
-Clear description of the proposed feature
+## 📚 Documentation
 
-## Problem Statement
-What problem does this solve?
+### Documentation Types
 
-## Proposed Solution
-How should this be implemented?
+- **Code Documentation**: Inline comments and KDoc
+- **API Documentation**: Generated from code comments
+- **User Documentation**: Guides and tutorials
+- **Developer Documentation**: Setup and architecture guides
 
-## Alternatives Considered
-Other approaches considered
+### Writing Guidelines
 
-## Additional Context
-Any other relevant information
-```
+- **Clear**: Use simple, clear language
+- **Complete**: Cover all necessary information
+- **Current**: Keep documentation up to date
+- **Examples**: Include code examples and screenshots
 
-## Development Standards
+## 🔍 Code Review Process
 
-### Code Style
+### For Contributors
 
-Follow the project's code style guide:
+- Be open to feedback and suggestions
+- Respond promptly to review comments
+- Make requested changes thoroughly
+- Ask questions if something is unclear
 
-- **Kotlin**: Official Kotlin style guide
-- **Naming**: CamelCase for functions, PascalCase for classes
-- **Formatting**: 120 character line limit
-- **Documentation**: KDoc for public APIs
+### For Reviewers
 
-### Architecture
+- Be constructive and helpful
+- Focus on code quality and standards
+- Consider privacy and security implications
+- Test changes when possible
 
-- **Pattern**: MVVM with Clean Architecture
-- **DI**: Hilt for dependency injection
-- **UI**: Jetpack Compose
-- **Database**: Room
-- **Async**: Kotlin Coroutines + Flow
+### Review Checklist
 
-### Testing
+- [ ] Code follows project conventions
+- [ ] No privacy or security issues
+- [ ] Performance impact considered
+- [ ] Tests are adequate
+- [ ] Documentation updated
+- [ ] Accessibility maintained
 
-- **Unit Tests**: For ViewModels and Repository
-- **Integration Tests**: For database operations
-- **UI Tests**: For critical user flows
-- **Coverage**: Aim for 80%+ coverage
+## 🎉 Recognition
 
-### Security
+### Contributors
 
-- **Data**: Local-only storage
-- **Permissions**: Request minimal permissions
-- **Encryption**: Encrypt sensitive data
-- **Validation**: Validate all inputs
+We recognize contributors in several ways:
 
-## Community
+- **README Credits**: Listed in project README
+- **Release Notes**: Mentioned in version releases
+- **Hall of Fame**: Special recognition page
+- **Direct Communication**: Access to development team
 
-### Communication
+### Contribution Levels
 
-- **GitHub Issues**: Bug reports and feature requests
+- **First-time Contributors**: Welcome package and guidance
+- **Regular Contributors**: Enhanced recognition and access
+- **Core Contributors**: Decision-making participation
+- **Maintainers**: Full project access and responsibility
+
+## 📞 Getting Help
+
+### Communication Channels
+
+- **GitHub Issues**: Technical discussions and bug reports
 - **GitHub Discussions**: General questions and ideas
-- **Pull Requests**: Code contributions
-- **Email**: For security issues
+- **Email**: support@dxbmark.com for direct communication
+- **Discord**: Community chat (link in README)
 
-### Getting Help
+### Support Guidelines
 
-- Check existing documentation
-- Search closed issues
-- Ask in GitHub Discussions
-- Contact maintainers
+- **Be Respectful**: Maintain professional and friendly communication
+- **Be Patient**: Allow time for responses
+- **Be Specific**: Provide detailed information
+- **Search First**: Check existing issues and documentation
 
-### Recognition
+## ⚖️ Legal Guidelines
 
-Contributors are recognized:
+### Licensing
 
-- In the CHANGELOG.md
-- In the app's About section
-- Through GitHub contributor stats
-- Special mentions for significant contributions
+- All contributions are subject to Apache License 2.0
+- Contributors retain copyright of their contributions
+- Contributions must be original work or properly attributed
+- No proprietary or copyrighted code without permission
 
-## Development Phases
+### Code of Conduct
 
-### Current Focus (Phase 2)
+- **Respectful**: Treat all community members with respect
+- **Inclusive**: Welcome contributors from all backgrounds
+- **Professional**: Maintain professional communication
+- **Constructive**: Provide helpful feedback and suggestions
 
-- Real NFC integration
-- Background monitoring
-- Notification system
-- Permission handling
+## 🎯 Project Roadmap
 
-### Future Phases
+### Current Focus (v1.0.x)
 
-- Design polish (Phase 3)
-- Security enhancements (Phase 4)
-- Advanced features (Phase 5)
-- Testing & quality (Phase 6)
+- Bug fixes and stability improvements
+- Performance optimization
+- Enhanced accessibility
+- Additional language support
 
-## Resources
+### Future Plans (v1.1+)
 
-### Documentation
+- NFC tag writing capabilities
+- Advanced automation features
+- Enhanced analytics dashboard
+- Material You theming support
 
-- [Architecture Guide](docs/developer-guide.md)
-- [API Documentation](docs/api-documentation.md)
-- [User Guide](docs/user-guide.md)
-- [Troubleshooting](docs/troubleshooting.md)
+### Long-term Vision (v2.0+)
 
-### External Resources
+- Cross-platform support
+- Advanced security features
+- Community plugin system
+- Enterprise features
 
-- [Android Developer Docs](https://developer.android.com/)
-- [Jetpack Compose](https://developer.android.com/jetpack/compose)
-- [Material Design 3](https://m3.material.io/)
-- [Nothing OS Design](https://nothing.tech/)
+## 📋 Quick Reference
 
-## License
+### Useful Commands
 
-By contributing to NFC Manager, you agree that your contributions will be licensed under the same license as the project.
+```bash
+# Development
+./gradlew clean build
+./gradlew test
+./gradlew lint
+./gradlew assembleDebug
+
+# Testing
+./gradlew connectedAndroidTest
+./gradlew testDebugUnitTest
+
+# Code Quality
+./gradlew ktlintCheck
+./gradlew detekt
+```
+
+### Important Files
+
+- `android/app/build.gradle` - App configuration
+- `android/app/src/main/AndroidManifest.xml` - Permissions and components
+- `android/app/src/main/kotlin/` - Source code
+- `android/app/src/main/res/` - Resources and layouts
+
+### Coding Checklist
+
+- [ ] Code follows Kotlin conventions
+- [ ] Proper error handling implemented
+- [ ] Unit tests written
+- [ ] Documentation updated
+- [ ] Privacy considerations addressed
+- [ ] Accessibility features maintained
+- [ ] Performance impact considered
 
 ---
 
-**Thank you for contributing to NFC Manager! Together, we're building a better, more secure NFC experience for everyone.** 🚀
+## 📞 Contact
+
+For questions about contributing:
+
+- **Email**: support@dxbmark.com
+- **Subject**: "Contributing - NFC Manager"
+- **Response Time**: 24-48 hours
+
+---
+
+**Built with ❤️ by Tariq Said - Nothing OS Inspired Design**
+
+*Technical Support & Contact: support@dxbmark.com*
+
+---
+
+*Licensed under the Apache License, Version 2.0*  
+*Copyright 2025 Tariq Said. All rights reserved.*

@@ -21,7 +21,7 @@
 #-renamesourcefileattribute SourceFile
 
 # NFC Manager specific rules for native Android
--keep class com.nothingos.nfcmanager.** { *; }
+-keep class com.dxbmark.nfcmanager.** { *; }
 
 # Android NFC specific rules
 -keep class android.nfc.** { *; }
