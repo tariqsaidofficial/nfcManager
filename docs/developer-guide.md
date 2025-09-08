@@ -163,7 +163,7 @@ nfcManager/
 ### Package Structure
 
 ```kotlin
-com.nothingos.nfcmanager/
+com.dxbmark.nfcmanager/
 ├── data/
 │   ├── database/
 │   │   ├── entities/           # Room entities

@@ -29,7 +29,7 @@ NFC Manager follows modern Android development best practices with a focus on:
 ### Package Organization
 
 ```
-com.nothingos.nfcmanager/
+com.dxbmark.nfcmanager/
 ├── data/                           # Data layer
 │   ├── database/                   # Room database
 │   │   ├── entities/               # Database entities

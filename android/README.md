@@ -131,7 +131,7 @@ cd android
 
 ### ✅ **App Identity & Branding**
 - **App Name**: Changed from "NFC Glyph Manager" to "NFC Manager"
-- **Package Name**: `com.nothingos.nfcmanager`
+- **Package Name**: `com.dxbmark.nfcmanager`
 - **Clean Structure**: Removed all React Native/Expo dependencies
 - **Native Android**: 100% native Android with Kotlin & Jetpack Compose
 

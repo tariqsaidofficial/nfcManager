@@ -336,7 +336,7 @@ Special thanks to all contributors who have helped make this project better:
 ### **Downloads**
 - [Latest Release](https://github.com/tariqsaidofficial/nfcManager/releases/latest)
 - [Beta Releases](https://github.com/tariqsaidofficial/nfcManager/releases)
-- [F-Droid](https://f-droid.org/packages/com.nothingos.nfcmanager/) (Coming Soon)
+- [F-Droid](https://f-droid.org/packages/com.dxbmark.nfcmanager/) (Coming Soon)
 
 ### **Social Media**
 - [Twitter](https://twitter.com/nfcmanagerapp)

@@ -32,7 +32,7 @@
 
 #### Key Changes:
 - **Identity Change**: From "NFC Glyph Manager" to "NFC Manager"
-- **App Package**: `com.nothingos.nfcmanager`
+- **App Package**: `com.dxbmark.nfcmanager`
 - **Android 11+ Support**: Updated minimum from API 21 to API 30
 - **Alert System**: Default 10-second interval for maximum protection
 - **Clean Build**: Removed all React Native dependencies
