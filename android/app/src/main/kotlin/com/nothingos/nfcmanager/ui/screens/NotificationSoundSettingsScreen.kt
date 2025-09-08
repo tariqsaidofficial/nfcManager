@@ -3,11 +3,11 @@ package com.nothingos.nfcmanager.ui.screens
 import android.Manifest
 import android.content.Context
 import android.content.Intent
-import android.content.pm.PackageManager
+import android.media.Ringtone
 import android.media.RingtoneManager
 import android.net.Uri
 import android.os.Build
-import android.provider.Settings
+import android.widget.Toast
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.clickable
@@ -17,8 +17,8 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.MusicNote
+import androidx.compose.material.icons.filled.PlayArrow // Or VolumeUp
 import androidx.compose.material.icons.outlined.NotificationsActive
-import androidx.compose.material.icons.outlined.Save
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -27,7 +27,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.nothingos.nfcmanager.viewmodel.SettingsViewModel
-import com.nothingos.nfcmanager.ui.theme.NothingTextStyles
+import kotlinx.coroutines.flow.collectLatest
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -39,41 +39,48 @@ fun NotificationSoundSettingsScreen(
     val settings by viewModel.settings.collectAsState()
     val currentSoundUriString = settings.customNotificationSoundUri
 
-    // Launcher for picking a custom sound
+    var currentRingtone by remember { mutableStateOf<Ringtone?>(null) }
+    var isPlayingSound by remember { mutableStateOf(false) }
+
+    // Stop sound when the composable is disposed
+    DisposableEffect(Unit) {
+        onDispose {
+            currentRingtone?.stop()
+            isPlayingSound = false
+        }
+    }
+
     val pickSoundLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.GetContent(),
         onResult = { uri: Uri? ->
             uri?.let {
-                // Persist permission for this URI for long-term access
+                currentRingtone?.stop() // Stop any currently playing sound before changing
+                isPlayingSound = false
                 try {
                     val takeFlags: Int = Intent.FLAG_GRANT_READ_URI_PERMISSION
                     context.contentResolver.takePersistableUriPermission(it, takeFlags)
                     viewModel.updateCustomNotificationSound(it.toString())
                 } catch (e: SecurityException) {
-                    // Handle cases where persistable URI permission cannot be taken (e.g., non-document Uris from some pickers)
-                    // For now, just save it, but be aware it might not be accessible later if not persistable.
                     viewModel.updateCustomNotificationSound(it.toString())
-                    // Optionally show a toast about potential access issues if not persistable.
+                    Toast.makeText(context, "Could not persist sound access, it might not work later.", Toast.LENGTH_LONG).show()
                 }
             }
         }
     )
 
-    // Launcher for requesting storage permission
     val requestStoragePermissionLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.RequestPermission(),
         onResult = { isGranted: Boolean ->
             if (isGranted) {
                 pickSoundLauncher.launch("audio/*")
             } else {
-                // Inform user that permission is needed
-                // You can show a Snackbar or Toast here
+                Toast.makeText(context, "Storage permission is required to choose a custom sound.", Toast.LENGTH_LONG).show()
             }
         }
     )
 
     LaunchedEffect(Unit) {
-        viewModel.requestStoragePermissionFlow.collect {
+        viewModel.requestStoragePermissionFlow.collectLatest {
             val permission = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
                 Manifest.permission.READ_MEDIA_AUDIO
             } else {
@@ -88,7 +95,11 @@ fun NotificationSoundSettingsScreen(
             TopAppBar(
                 title = { Text("Notification Sound", style = MaterialTheme.typography.headlineSmall) },
                 navigationIcon = {
-                    IconButton(onClick = onNavigateBack) {
+                    IconButton(onClick = {
+                        currentRingtone?.stop()
+                        isPlayingSound = false
+                        onNavigateBack()
+                    }) {
                         Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back")
                     }
                 },
@@ -117,15 +128,47 @@ fun NotificationSoundSettingsScreen(
             SoundSettingItem(
                 title = "Current Sound",
                 soundName = getSoundName(context, currentSoundUriString),
-                onClick = { /* Maybe play the sound or open system settings if default? For now, just displays. */ }
+                isPlaying = isPlayingSound,
+                onClick = {
+                    if (isPlayingSound) {
+                        currentRingtone?.stop()
+                        isPlayingSound = false
+                    } else {
+                        currentRingtone?.stop() // Stop previous instance if any
+                        try {
+                            val soundUri = currentSoundUriString?.let { Uri.parse(it) } 
+                                ?: RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
+                            
+                            if (soundUri == null) {
+                                 Toast.makeText(context, "Cannot play sound: Default URI is null.", Toast.LENGTH_SHORT).show()
+                                 return@SoundSettingItem
+                            }
+
+                            currentRingtone = RingtoneManager.getRingtone(context, soundUri)
+                            currentRingtone?.let {
+                                it.play()
+                                isPlayingSound = true
+                                // RingtoneManager doesn't easily provide completion listener to reset isPlayingSound
+                                // For simplicity, user has to tap again to stop or play a new sound.
+                            } ?: run {
+                                Toast.makeText(context, "Cannot play sound: Ringtone not found or corrupted.", Toast.LENGTH_SHORT).show()
+                                isPlayingSound = false
+                            }
+                        } catch (e: Exception) {
+                            Toast.makeText(context, "Error playing sound: ${e.localizedMessage}", Toast.LENGTH_SHORT).show()
+                            isPlayingSound = false
+                        }
+                    }
+                }
             )
 
             Button(
                 onClick = {
+                    currentRingtone?.stop()
+                    isPlayingSound = false
                     if (viewModel.requestStoragePermissionForSoundPicker()) { // Checks if permission already granted
                         pickSoundLauncher.launch("audio/*")
                     }
-                    // If false, the LaunchedEffect for requestStoragePermissionFlow will trigger the permission request.
                 },
                 modifier = Modifier.fillMaxWidth()
             ) {
@@ -136,12 +179,15 @@ fun NotificationSoundSettingsScreen(
 
             Button(
                 onClick = {
+                    currentRingtone?.stop()
+                    isPlayingSound = false
                     viewModel.updateCustomNotificationSound(null) // Reset to default
                 },
                 modifier = Modifier.fillMaxWidth(),
                 colors = ButtonDefaults.buttonColors(
-                    containerColor = MaterialTheme.colorScheme.secondary
-                )
+                    containerColor = if (currentSoundUriString != null) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.secondary
+                ),
+                enabled = currentSoundUriString != null // Disable if already default
             ) {
                 Icon(Icons.Outlined.NotificationsActive, contentDescription = "Default Sound", modifier = Modifier.size(ButtonDefaults.IconSize))
                 Spacer(Modifier.size(ButtonDefaults.IconSpacing))
@@ -152,7 +198,12 @@ fun NotificationSoundSettingsScreen(
 }
 
 @Composable
-fun SoundSettingItem(title: String, soundName: String, onClick: () -> Unit) {
+fun SoundSettingItem(
+    title: String, 
+    soundName: String, 
+    isPlaying: Boolean, // Added to potentially change UI if needed, e.g., icon
+    onClick: () -> Unit
+) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -167,22 +218,32 @@ fun SoundSettingItem(title: String, soundName: String, onClick: () -> Unit) {
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
             Text(title, style = MaterialTheme.typography.titleMedium)
-            Text(soundName, style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.primary)
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                if (isPlaying) {
+                    // Optional: You can add a visual indicator like a small animated equalizer or a different icon
+                    // For now, keeping it simple as per user request.
+                     Icon(
+                        Icons.Filled.PlayArrow, // Using PlayArrow to indicate it IS playing, could be Stop icon too
+                        contentDescription = "Playing", 
+                        tint = MaterialTheme.colorScheme.primary,
+                        modifier = Modifier.size(20.dp).padding(end = 4.dp)
+                    )
+                }
+                Text(soundName, style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.primary)
+            }
         }
     }
 }
 
-// Helper function to get a displayable name from a URI string
 fun getSoundName(context: Context, uriString: String?): String {
     if (uriString == null) {
         return "System Default"
     }
     return try {
         val uri = Uri.parse(uriString)
-        // Try to get actual ringtone title
-        RingtoneManager.getRingtone(context, uri)?.getTitle(context) 
-            ?: uri.lastPathSegment // Fallback to last path segment if title not found
-            ?: "Custom Sound" // Ultimate fallback
+        RingtoneManager.getRingtone(context, uri)?.getTitle(context)?.takeIf { it.isNotBlank() }
+            ?: uri.lastPathSegment?.takeIf { it.isNotBlank() } 
+            ?: "Custom Sound"
     } catch (e: Exception) {
         "Custom Sound (Error)"
     }

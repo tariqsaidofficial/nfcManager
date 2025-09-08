@@ -52,7 +52,7 @@ A smart NFC management application for privacy protection and security monitorin
 
 - ✅ **Local Storage Only**: No data transmission or cloud storage
 - ✅ **No Analytics**: Zero tracking or user behavior monitoring
-- ✅ **Minimal Permissions**: `NFC`, `FOREGROUND_SERVICE`, `POST_NOTIFICATIONS` (Android 13+), and `VIBRATE` permissions.
+- ✅ **Minimal Permissions**: `NFC`, `READ_EXTERNAL_STORAGE`, `READ_MEDIA_AUDIO`, `FOREGROUND_SERVICE`, `POST_NOTIFICATIONS` (Android 13+), and `VIBRATE` permissions.
 - ✅ **Transparent**: Open source design with clear privacy policy
 - ✅ **Privacy-First NFC Logging**: NFC tag scan events are logged without reading or storing sensitive tag data (like NDEF messages or payment card details).
 
@@ -183,7 +183,7 @@ cd android
 ## 🎯 Google Play Compliance
 
 - ✅ Privacy Policy included
-- ✅ Minimal permission requests (`NFC`, `FOREGROUND_SERVICE`, `POST_NOTIFICATIONS` for Android 13+, `VIBRATE`)
+- ✅ Minimal permission requests (`NFC`, `READ_EXTERNAL_STORAGE`, `READ_MEDIA_AUDIO`, `FOREGROUND_SERVICE`, `POST_NOTIFICATIONS` for Android 13+, `VIBRATE`)
 - ✅ No sensitive data collection (NFC tag content is not read/stored)
 - ✅ Accessibility standards met
 - ✅ Content rating appropriate
@@ -216,7 +216,8 @@ nfcManager/
 │   │   │   │   │   ├── screens/               # Jetpack Compose Screens
 │   │   │   │   │   │   ├── HomeScreen.kt      # Main NFC Management
 │   │   │   │   │   │   ├── ActivityScreen.kt  # Event History
-│   │   │   │   │   │   └── SettingsScreen.kt  # App Settings
+│   │   │   │   │   │   ├── SettingsScreen.kt  # App Settings
+│   │   │   │   │   │   └── NotificationSoundSettingsScreen.kt # Notification Sound Customization
 │   │   │   │   │   └── theme/                 # Nothing OS Theming
 │   │   │   │   │       ├── Color.kt           # Color Palette
 │   │   │   │   │       ├── Typography.kt      # Text Styles
@@ -264,7 +265,7 @@ nfcManager/
 - ✅ **Hilt**: Dependency Injection
 
 ### **Features Implemented**
-- ✅ **3 Main Screens**: Home, Activity Log, Settings
+- ✅ **3 Main Screens**: Home, Activity Log, Settings (including a sub-screen for Notification Sound customization)
 - ✅ **Room Database**: Complete data persistence layer
 - ✅ **MVVM Architecture**: ViewModels with StateFlow
 - ✅ **Navigation Component**: Bottom navigation with type safety
@@ -272,6 +273,7 @@ nfcManager/
 - ✅ **Material Design 3**: Latest design components
 - ✅ **Background NFC Monitoring & Service**: Continuous NFC status tracking via a foreground service with notification, permission handling, and robust lifecycle management.
 - ✅ **Privacy-Focused NFC Tag Detection**: Logs NFC tag scan events without reading or storing sensitive tag data.
+- ✅ **Advanced Notification Sound Customization**: Users can pick custom sounds, preview them (play/stop), and reset to system default with enhanced UI feedback and error handling.
 
 ### **Code Quality**
 - ✅ **Kotlin**: 100% Kotlin codebase
@@ -398,7 +400,9 @@ Contributions welcome! Please read our contributing guidelines and code of condu
 ### Phase 2: Advanced NFC Features & Polish (Current Focus)
 - ✅ **Privacy-Focused NFC Tag Event Logging**: Implemented foreground NFC tag detection. The system logs the event of a tag scan (including timestamp, a generic tag identifier, and the type of NFC action detected, e.g., 'TAG_DISCOVERED') without attempting to parse or store detailed tag content (like NDEF messages or specific payment card data). This approach prioritizes user privacy by only recording that an NFC interaction occurred, not the sensitive details of the interaction, which is especially important for payment cards and other sensitive contactless uses.
 - ✅ **Activity Logging Enhancements**: Significantly improved the activity log. Implemented robust filtering capabilities, allowing users to filter events by event type and predefined date ranges (Today, Last 7 Days, Last 30 Days, All Time). Added functionality to export the currently filtered activity log to a CSV file, providing users with a way to save and analyze their data externally.
-- ✅ **Advanced Settings & Customization**: Introduce options for customizable notification sounds, more granular monitoring intervals, and other user preferences.
+- ✅ **Advanced Settings & Customization**:
+    - Implemented options for more granular monitoring intervals.
+    - **Enhanced Notification Sound Customization**: Users can now pick custom notification sounds from their device storage. The settings screen for notification sounds allows for playing/stopping the currently selected sound for preview. The "Use System Default Sound" button dynamically changes its appearance based on whether a custom sound is active. Sound playback automatically stops when navigating away from the screen, and error handling for sound playback has been improved.
 - 🟡 **UI Testing**: Develop comprehensive UI tests for all screens and critical user flows using Jetpack Compose testing libraries.
 - 🔄 **Localization**: Prepare and add support for additional languages (e.g., Arabic, Spanish).
 
