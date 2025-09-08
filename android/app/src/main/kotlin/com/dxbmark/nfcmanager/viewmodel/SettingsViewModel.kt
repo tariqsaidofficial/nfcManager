@@ -68,7 +68,7 @@ class SettingsViewModel @Inject constructor(
                 val newLanguageDisplayName = getDisplayName(languageCode)
 
                 if (oldLanguageCode == languageCode) {
-                    updateSuccess("Language is already set to $currentLanguageDisplayName.")
+                    updateSuccess(app.getString(R.string.language_already_set, currentLanguageDisplayName))
                     return@launch
                 }
 
@@ -78,13 +78,13 @@ class SettingsViewModel @Inject constructor(
 
                 repository.logEvent(
                     "SETTINGS",
-                    "Language changed from $currentLanguageDisplayName to $newLanguageDisplayName",
+                    app.getString(R.string.language_changed_log, currentLanguageDisplayName, newLanguageDisplayName),
                     "Language"
                 )
-                updateSuccess("Language updated to $newLanguageDisplayName. Restarting for changes to take effect.")
+                updateSuccess(app.getString(R.string.language_updated_success, newLanguageDisplayName))
                 _recreateActivityChannel.emit(Unit) 
             } catch (e: Exception) {
-                updateError("Failed to update language: ${e.message}")
+                updateError(app.getString(R.string.language_update_failed, e.message ?: "Unknown error"))
             } finally {
                 updateLoading(false)
             }
@@ -100,14 +100,14 @@ class SettingsViewModel @Inject constructor(
                 NfcManagerApplication.updateLanguageCode(app.applicationContext, null) 
                 repository.logEvent(
                     "SETTINGS",
-                    "All settings reset to defaults",
+                    app.getString(R.string.settings_reset_log),
                     "Settings",
                     isImportant = true
                 )
-                updateSuccess("All settings reset to defaults")
+                updateSuccess(app.getString(R.string.settings_reset_success))
                 _recreateActivityChannel.emit(Unit) // Also recreate on reset
             } catch (e: Exception) {
-                updateError("Failed to reset settings: ${e.message}")
+                updateError(app.getString(R.string.settings_reset_failed, e.message ?: "Unknown error"))
             } finally {
                 updateLoading(false)
             }
@@ -150,7 +150,7 @@ class SettingsViewModel @Inject constructor(
             try {
                 updateLoading(true)
                 repository.updateCustomNotificationSoundUri(soundUri)
-                val message = if (soundUri != null) "Notification sound updated" else "Notification sound reset to default"
+                val message = if (soundUri != null) app.getString(R.string.notification_sound_updated) else app.getString(R.string.notification_sound_reset)
                 repository.logEvent(
                     "SETTINGS",
                     message,
@@ -158,7 +158,7 @@ class SettingsViewModel @Inject constructor(
                 )
                 updateSuccess(message)
             } catch (e: Exception) {
-                updateError("Failed to update notification sound: ${e.message}")
+                updateError(app.getString(R.string.notification_sound_update_failed, e.message ?: "Unknown error"))
             } finally {
                 updateLoading(false)
             }
@@ -185,20 +185,20 @@ class SettingsViewModel @Inject constructor(
                             context.startService(intent)
                         }
                         repository.logEvent(
-                            "SETTINGS",
-                            "Background NFC Monitoring enabled (via intent)",
-                            "Radar"
+                        "SETTINGS",
+                        app.getString(R.string.background_monitoring_enabled_log),
+                        "Radar"
                         )
-                        updateSuccess("Background NFC Monitoring enabled")
+                        updateSuccess(app.getString(R.string.background_monitoring_enabled_success))
                     } catch (e: Exception) {
-                        updateError("Failed to enable background monitoring: ${e.message}")
+                        updateError(app.getString(R.string.background_monitoring_enable_failed, e.message ?: "Unknown error"))
                         repository.updateBackgroundServiceMonitoringEnabled(false)
                     } finally {
                         updateLoading(false)
                     }
                 } else {
                     _requestNfcPermissionChannel.emit(Unit)
-                    updateError("NFC Permission required to enable background monitoring.")
+                    updateError(app.getString(R.string.nfc_permission_required))
                 }
             } else {
                 updateLoading(true)
@@ -234,7 +234,8 @@ class SettingsViewModel @Inject constructor(
                     "Auto-reminder ${if (newSetting) "enabled" else "disabled"}",
                     "Bell"
                 )
-                updateSuccess("Auto-reminder ${if (newSetting) "enabled" else "disabled"}")
+                val statusText = if (newSetting) app.getString(R.string.enabled_status) else app.getString(R.string.disabled_status)
+                updateSuccess(app.getString(R.string.auto_reminder_toggled_success, statusText))
             } catch (e: Exception) {
                 updateError("Failed to toggle auto-reminder: ${e.message}")
             } finally {
@@ -245,7 +246,7 @@ class SettingsViewModel @Inject constructor(
 
     fun updateReminderInterval(interval: Int) {
         if (interval < 5 || interval > 300) {
-            updateError("Interval must be between 5 and 300 seconds")
+            updateError(app.getString(R.string.interval_out_of_range))
             return
         }
         viewModelScope.launch {

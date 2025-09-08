@@ -133,4 +133,116 @@
     <string name="activity_export_csv">تصدير CSV</string>
     <string name="activity_filter_date_range">النطاق الزمني</string>
 
+    <!-- Home Screen Strings -->
+    <string name="home_screen_title">مدير NFC</string>
+    <string name="nfc_status_title">حالة NFC</string>
+    <string name="nfc_not_supported">غير مدعوم</string>
+    <string name="nfc_hardware_not_found">لم يتم العثور على جهاز NFC في هذا الجهاز.</string>
+    <string name="nfc_status_enabled">مُفعّل</string>
+    <string name="privacy_monitoring_active">مراقبة الخصوصية نشطة</string>
+    <string name="nfc_status_disabled">مُعطّل</string>
+    <string name="tap_to_enable_nfc">اضغط هنا لتفعيل NFC في إعدادات النظام.</string>
+    <string name="todays_activity_title">نشاط اليوم</string>
+    <string name="events_logged_format">تم تسجيل %1$d أحداث</string>
+    <string name="enable_nfc_button">تفعيل NFC في الإعدادات</string>
+
+    <!-- Activity Screen Strings -->
+    <string name="activity_log_title">سجل الأنشطة</string>
+    <string name="export_success">تم تصدير الأحداث بنجاح</string>
+    <string name="export_error">خطأ في تصدير الأحداث: %1$s</string>
+    <string name="no_events_to_export">لا توجد أحداث للتصدير للفلتر الحالي</string>
+    <string name="no_events_to_export_simple">لا توجد أحداث للتصدير</string>
+    <string name="event_singular">حدث</string>
+    <string name="events_plural">أحداث</string>
+    <string name="no_matching_activity">لا توجد أنشطة مطابقة</string>
+    <string name="no_activity_yet">لا توجد أنشطة بعد</string>
+    <string name="adjust_filters_hint">جرب تعديل المرشحات.</string>
+    <string name="activity_logs_hint">ستظهر سجلات الأنشطة هنا.</string>
+    <string name="all_types_filter">جميع الأنواع</string>
+    <string name="events_found_format">تم العثور على %1$d %2$s</string>
+    <string name="events_recorded_format">تم تسجيل %1$d %2$s</string>
+
+    <!-- Notification Sound Settings Screen Strings -->
+    <string name="sound_access_warning">لا يمكن الاحتفاظ بإذن الوصول للصوت، قد لا يعمل لاحقاً.</string>
+    <string name="storage_permission_required">إذن التخزين مطلوب لاختيار صوت مخصص.</string>
+    <string name="notification_sound_screen_title">صوت الإشعار</string>
+    <string name="notification_sound_description">تخصيص الصوت المشغل لإشعارات مدير NFC. اختر صوت مخصص من جهازك أو استخدم الافتراضي للنظام.</string>
+    <string name="current_sound_label">الصوت الحالي</string>
+    <string name="sound_play_error_null">لا يمكن تشغيل الصوت: URI الافتراضي فارغ.</string>
+    <string name="sound_play_error_corrupted">لا يمكن تشغيل الصوت: النغمة غير موجودة أو تالفة.</string>
+    <string name="sound_play_error_general">خطأ في تشغيل الصوت: %1$s</string>
+    <string name="choose_custom_sound">اختيار صوت مخصص</string>
+    <string name="use_system_default_sound">استخدام صوت النظام الافتراضي</string>
+    <string name="sound_playing_indicator">قيد التشغيل</string>
+    <string name="system_default_sound">افتراضي النظام</string>
+    <string name="custom_sound_label">صوت مخصص</string>
+    <string name="custom_sound_error">صوت مخصص (خطأ)</string>
+    <string name="back_button">رجوع</string>
+    <string name="pick_sound_icon">اختيار صوت</string>
+    <string name="default_sound_icon">صوت افتراضي</string>
+
+    <!-- ViewModel Messages -->
+    <string name="language_already_set">اللغة مُعيّنة بالفعل إلى %1$s.</string>
+    <string name="language_changed_log">تم تغيير اللغة من %1$s إلى %2$s</string>
+    <string name="language_updated_success">تم تحديث اللغة إلى %1$s. إعادة تشغيل للتطبيق التغييرات.</string>
+    <string name="language_update_failed">فشل في تحديث اللغة: %1$s</string>
+    <string name="settings_reset_log">تم إعادة تعيين جميع الإعدادات إلى الافتراضيات</string>
+    <string name="settings_reset_success">تم إعادة تعيين جميع الإعدادات إلى الافتراضيات</string>
+    <string name="settings_reset_failed">فشل في إعادة تعيين الإعدادات: %1$s</string>
+    <string name="notification_sound_updated">تم تحديث صوت الإشعار</string>
+    <string name="notification_sound_reset">تم إعادة تعيين صوت الإشعار إلى الافتراضي</string>
+    <string name="notification_sound_update_failed">فشل في تحديث صوت الإشعار: %1$s</string>
+    <string name="background_monitoring_enabled_log">تم تفعيل مراقبة NFC في الخلفية (عبر النية)</string>
+    <string name="background_monitoring_enabled_success">تم تفعيل مراقبة NFC في الخلفية</string>
+    <string name="background_monitoring_enable_failed">فشل في تفعيل المراقبة في الخلفية: %1$s</string>
+    <string name="nfc_permission_required">إذن NFC مطلوب لتفعيل المراقبة في الخلفية.</string>
+    <string name="background_monitoring_disabled_log">تم تعطيل مراقبة NFC في الخلفية (عبر النية)</string>
+    <string name="background_monitoring_disabled_success">تم تعطيل مراقبة NFC في الخلفية</string>
+    <string name="background_monitoring_disable_failed">فشل في تعطيل المراقبة في الخلفية: %1$s</string>
+    <string name="auto_reminder_toggled_log">التذكير التلقائي %1$s</string>
+    <string name="auto_reminder_toggled_success">التذكير التلقائي %1$s</string>
+    <string name="auto_reminder_toggle_failed">فشل في تبديل التذكير التلقائي: %1$s</string>
+    <string name="interval_out_of_range">يجب أن يكون الفاصل الزمني بين 5 و300 ثانية</string>
+    <string name="reminder_interval_updated_log">تم تعيين الفاصل الزمني للتذكير إلى %1$d ث</string>
+    <string name="reminder_interval_updated_success">تم تحديث الفاصل الزمني للتذكير إلى %1$d ثانية</string>
+    <string name="reminder_interval_update_failed">فشل في تحديث الفاصل الزمني: %1$s</string>
+    <string name="notifications_toggled_log">الإشعارات %1$s</string>
+    <string name="notifications_toggled_success">الإشعارات %1$s</string>
+    <string name="notifications_toggle_failed">فشل في تبديل الإشعارات: %1$s</string>
+    <string name="vibration_toggled_log">الاهتزاز %1$s</string>
+    <string name="vibration_toggled_success">الاهتزاز %1$s</string>
+    <string name="vibration_toggle_failed">فشل في تبديل الاهتزاز: %1$s</string>
+    <string name="sound_toggled_log">الصوت (عام) %1$s</string>
+    <string name="sound_toggled_success">الصوت (عام) %1$s</string>
+    <string name="sound_toggle_failed">فشل في تبديل الصوت: %1$s</string>
+    <string name="theme_changed_log">تم تفعيل %1$s</string>
+    <string name="theme_changed_success">تم تفعيل %1$s</string>
+    <string name="theme_change_failed">فشل في تعيين المظهر: %1$s</string>
+    <string name="dark_mode_text">الوضع الداكن</string>
+    <string name="light_mode_text">الوضع الفاتح</string>
+    <string name="accent_color_updated_log">تم تحديث اللون المميز</string>
+    <string name="accent_color_updated_success">تم تحديث اللون المميز</string>
+    <string name="accent_color_update_failed">فشل في تحديث اللون: %1$s</string>
+    <string name="battery_optimization_toggled_log">تحسين البطارية %1$s</string>
+    <string name="battery_optimization_toggled_success">تحسين البطارية %1$s</string>
+    <string name="battery_optimization_toggle_failed">فشل في تبديل تحسين البطارية: %1$s</string>
+    <string name="monitoring_interval_out_of_range">يجب أن يكون فاصل المراقبة بين 1000 و10000 ميلي ثانية</string>
+    <string name="monitoring_interval_updated_log">تم تعيين فاصل المراقبة إلى %1$d مللي ثانية</string>
+    <string name="monitoring_interval_updated_success">تم تحديث فاصل المراقبة</string>
+    <string name="monitoring_interval_update_failed">فشل في تحديث فاصل المراقبة: %1$s</string>
+    <string name="privacy_mode_toggled_log">وضع الخصوصية %1$s</string>
+    <string name="privacy_mode_toggled_success">وضع الخصوصية %1$s</string>
+    <string name="privacy_mode_toggle_failed">فشل في تبديل وضع الخصوصية: %1$s</string>
+    <string name="block_unknown_tags_toggled_log">حظر العلامات غير المعروفة %1$s</string>
+    <string name="block_unknown_tags_toggled_success">حظر العلامات غير المعروفة %1$s</string>
+    <string name="block_unknown_tags_toggle_failed">فشل في تبديل حظر العلامات غير المعروفة: %1$s</string>
+    <string name="settings_exported_log">تم تصدير الإعدادات</string>
+    <string name="settings_exported_success">تم تصدير الإعدادات بنجاح</string>
+    <string name="settings_export_failed">فشل في تصدير الإعدادات: %1$s</string>
+    <string name="data_cleanup_log">تم إكمال تنظيف البيانات القديمة (%1$d أيام)</string>
+    <string name="data_cleanup_success">تم تنظيف البيانات القديمة بنجاح</string>
+    <string name="data_cleanup_failed">فشل في تنظيف البيانات: %1$s</string>
+    <string name="enabled_status">مُفعّل</string>
+    <string name="disabled_status">مُعطّل</string>
+
 </resources>

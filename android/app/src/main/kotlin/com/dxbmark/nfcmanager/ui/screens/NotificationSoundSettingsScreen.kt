@@ -24,8 +24,10 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.dxbmark.nfcmanager.R
 import com.dxbmark.nfcmanager.viewmodel.SettingsViewModel
 import kotlinx.coroutines.flow.collectLatest
 
@@ -62,7 +64,7 @@ fun NotificationSoundSettingsScreen(
                     viewModel.updateCustomNotificationSound(it.toString())
                 } catch (e: SecurityException) {
                     viewModel.updateCustomNotificationSound(it.toString())
-                    Toast.makeText(context, "Could not persist sound access, it might not work later.", Toast.LENGTH_LONG).show()
+                    Toast.makeText(context, context.getString(R.string.sound_access_warning), Toast.LENGTH_LONG).show()
                 }
             }
         }
@@ -74,7 +76,7 @@ fun NotificationSoundSettingsScreen(
             if (isGranted) {
                 pickSoundLauncher.launch("audio/*")
             } else {
-                Toast.makeText(context, "Storage permission is required to choose a custom sound.", Toast.LENGTH_LONG).show()
+                Toast.makeText(context, context.getString(R.string.storage_permission_required), Toast.LENGTH_LONG).show()
             }
         }
     )
@@ -93,14 +95,14 @@ fun NotificationSoundSettingsScreen(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Notification Sound", style = MaterialTheme.typography.headlineSmall) },
+                title = { Text(stringResource(R.string.notification_sound_screen_title), style = MaterialTheme.typography.headlineSmall) },
                 navigationIcon = {
                     IconButton(onClick = {
                         currentRingtone?.stop()
                         isPlayingSound = false
                         onNavigateBack()
                     }) {
-                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back")
+                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = stringResource(R.string.back_button))
                     }
                 },
                 colors = TopAppBarDefaults.topAppBarColors(
@@ -120,13 +122,13 @@ fun NotificationSoundSettingsScreen(
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
             Text(
-                text = "Customize the sound played for NFC Manager notifications. Choose a custom sound from your device or use the system default.",
+                text = stringResource(R.string.notification_sound_description),
                 style = MaterialTheme.typography.bodyMedium,
                 modifier = Modifier.padding(bottom = 16.dp)
             )
 
             SoundSettingItem(
-                title = "Current Sound",
+                title = stringResource(R.string.current_sound_label),
                 soundName = getSoundName(context, currentSoundUriString),
                 isPlaying = isPlayingSound,
                 onClick = {
@@ -140,7 +142,7 @@ fun NotificationSoundSettingsScreen(
                                 ?: RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
                             
                             if (soundUri == null) {
-                                 Toast.makeText(context, "Cannot play sound: Default URI is null.", Toast.LENGTH_SHORT).show()
+                                 Toast.makeText(context, context.getString(R.string.sound_play_error_null), Toast.LENGTH_SHORT).show()
                                  return@SoundSettingItem
                             }
 
@@ -151,11 +153,11 @@ fun NotificationSoundSettingsScreen(
                                 // RingtoneManager doesn't easily provide completion listener to reset isPlayingSound
                                 // For simplicity, user has to tap again to stop or play a new sound.
                             } ?: run {
-                                Toast.makeText(context, "Cannot play sound: Ringtone not found or corrupted.", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(context, context.getString(R.string.sound_play_error_corrupted), Toast.LENGTH_SHORT).show()
                                 isPlayingSound = false
                             }
                         } catch (e: Exception) {
-                            Toast.makeText(context, "Error playing sound: ${e.localizedMessage}", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(context, context.getString(R.string.sound_play_error_general, e.localizedMessage ?: "Unknown error"), Toast.LENGTH_SHORT).show()
                             isPlayingSound = false
                         }
                     }
@@ -172,9 +174,9 @@ fun NotificationSoundSettingsScreen(
                 },
                 modifier = Modifier.fillMaxWidth()
             ) {
-                Icon(Icons.Filled.MusicNote, contentDescription = "Pick Sound", modifier = Modifier.size(ButtonDefaults.IconSize))
+                Icon(Icons.Filled.MusicNote, contentDescription = stringResource(R.string.pick_sound_icon), modifier = Modifier.size(ButtonDefaults.IconSize))
                 Spacer(Modifier.size(ButtonDefaults.IconSpacing))
-                Text("Choose Custom Sound")
+                Text(stringResource(R.string.choose_custom_sound))
             }
 
             Button(
@@ -189,9 +191,9 @@ fun NotificationSoundSettingsScreen(
                 ),
                 enabled = currentSoundUriString != null // Disable if already default
             ) {
-                Icon(Icons.Outlined.NotificationsActive, contentDescription = "Default Sound", modifier = Modifier.size(ButtonDefaults.IconSize))
+                Icon(Icons.Outlined.NotificationsActive, contentDescription = stringResource(R.string.default_sound_icon), modifier = Modifier.size(ButtonDefaults.IconSize))
                 Spacer(Modifier.size(ButtonDefaults.IconSpacing))
-                Text("Use System Default Sound")
+                Text(stringResource(R.string.use_system_default_sound))
             }
         }
     }
@@ -224,7 +226,7 @@ fun SoundSettingItem(
                     // For now, keeping it simple as per user request.
                      Icon(
                         Icons.Filled.PlayArrow, // Using PlayArrow to indicate it IS playing, could be Stop icon too
-                        contentDescription = "Playing", 
+                        contentDescription = stringResource(R.string.sound_playing_indicator), 
                         tint = MaterialTheme.colorScheme.primary,
                         modifier = Modifier.size(20.dp).padding(end = 4.dp)
                     )
@@ -237,14 +239,14 @@ fun SoundSettingItem(
 
 fun getSoundName(context: Context, uriString: String?): String {
     if (uriString == null) {
-        return "System Default"
+        return context.getString(R.string.system_default_sound)
     }
     return try {
         val uri = Uri.parse(uriString)
         RingtoneManager.getRingtone(context, uri)?.getTitle(context)?.takeIf { it.isNotBlank() }
             ?: uri.lastPathSegment?.takeIf { it.isNotBlank() } 
-            ?: "Custom Sound"
+            ?: context.getString(R.string.custom_sound_label)
     } catch (e: Exception) {
-        "Custom Sound (Error)"
+        context.getString(R.string.custom_sound_error)
     }
 }

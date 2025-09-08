@@ -132,4 +132,119 @@
     <!-- Content Descriptions -->
     <string name="settings_cd_navigate">Navigieren</string>
 
+    <!-- Missing Section Title -->
+    <string name="settings_section_language_region_title">SPRACHE &amp; REGION</string>
+
+    <!-- Home Screen Strings -->
+    <string name="home_screen_title">NFC MANAGER</string>
+    <string name="nfc_status_title">NFC STATUS</string>
+    <string name="nfc_not_supported">NICHT UNTERSTÜTZT</string>
+    <string name="nfc_hardware_not_found">NFC-Hardware auf diesem Gerät nicht gefunden.</string>
+    <string name="nfc_status_enabled">AKTIVIERT</string>
+    <string name="privacy_monitoring_active">Datenschutzüberwachung aktiv</string>
+    <string name="nfc_status_disabled">DEAKTIVIERT</string>
+    <string name="tap_to_enable_nfc">Hier tippen, um NFC in den Systemeinstellungen zu aktivieren.</string>
+    <string name="todays_activity_title">HEUTIGE AKTIVITÄT</string>
+    <string name="events_logged_format">%1$d Ereignisse protokolliert</string>
+    <string name="enable_nfc_button">NFC IN EINSTELLUNGEN AKTIVIEREN</string>
+
+    <!-- Activity Screen Strings -->
+    <string name="activity_log_title">AKTIVITÄTSPROTOKOLL</string>
+    <string name="export_success">Ereignisse erfolgreich exportiert</string>
+    <string name="export_error">Fehler beim Exportieren der Ereignisse: %1$s</string>
+    <string name="no_events_to_export">Keine Ereignisse zum Exportieren für den aktuellen Filter</string>
+    <string name="no_events_to_export_simple">Keine Ereignisse zum Exportieren</string>
+    <string name="event_singular">Ereignis</string>
+    <string name="events_plural">Ereignisse</string>
+    <string name="no_matching_activity">Keine passende Aktivität</string>
+    <string name="no_activity_yet">Noch keine Aktivität</string>
+    <string name="adjust_filters_hint">Versuchen Sie, Ihre Filter anzupassen.</string>
+    <string name="activity_logs_hint">Aktivitätsprotokolle erscheinen hier.</string>
+    <string name="all_types_filter">Alle Typen</string>
+    <string name="events_found_format">%1$d %2$s gefunden</string>
+    <string name="events_recorded_format">%1$d %2$s aufgezeichnet</string>
+
+    <!-- Notification Sound Settings Screen Strings -->
+    <string name="sound_access_warning">Konnte Soundzugriff nicht dauerhaft speichern, funktioniert möglicherweise später nicht.</string>
+    <string name="storage_permission_required">Speicherberechtigung ist erforderlich, um einen benutzerdefinierten Sound zu wählen.</string>
+    <string name="notification_sound_screen_title">Benachrichtigungston</string>
+    <string name="notification_sound_description">Passen Sie den Sound für NFC Manager-Benachrichtigungen an. Wählen Sie einen benutzerdefinierten Sound von Ihrem Gerät oder verwenden Sie den Systemstandard.</string>
+    <string name="current_sound_label">Aktueller Sound</string>
+    <string name="sound_play_error_null">Sound kann nicht abgespielt werden: Standard-URI ist null.</string>
+    <string name="sound_play_error_corrupted">Sound kann nicht abgespielt werden: Klingelton nicht gefunden oder beschädigt.</string>
+    <string name="sound_play_error_general">Fehler beim Abspielen des Sounds: %1$s</string>
+    <string name="choose_custom_sound">Benutzerdefinierten Sound wählen</string>
+    <string name="use_system_default_sound">Systemstandardton verwenden</string>
+    <string name="sound_playing_indicator">Wird abgespielt</string>
+    <string name="system_default_sound">Systemstandard</string>
+    <string name="custom_sound_label">Benutzerdefinierter Sound</string>
+    <string name="custom_sound_error">Benutzerdefinierter Sound (Fehler)</string>
+    <string name="back_button">Zurück</string>
+    <string name="pick_sound_icon">Sound auswählen</string>
+    <string name="default_sound_icon">Standardsound</string>
+
+    <!-- ViewModel Messages -->
+    <string name="language_already_set">Sprache ist bereits auf %1$s eingestellt.</string>
+    <string name="language_changed_log">Sprache von %1$s zu %2$s geändert</string>
+    <string name="language_updated_success">Sprache auf %1$s aktualisiert. Neustart für Änderungen erforderlich.</string>
+    <string name="language_update_failed">Fehler beim Aktualisieren der Sprache: %1$s</string>
+    <string name="settings_reset_log">Alle Einstellungen auf Standard zurückgesetzt</string>
+    <string name="settings_reset_success">Alle Einstellungen auf Standard zurückgesetzt</string>
+    <string name="settings_reset_failed">Fehler beim Zurücksetzen der Einstellungen: %1$s</string>
+    <string name="notification_sound_updated">Benachrichtigungston aktualisiert</string>
+    <string name="notification_sound_reset">Benachrichtigungston auf Standard zurückgesetzt</string>
+    <string name="notification_sound_update_failed">Fehler beim Aktualisieren des Benachrichtigungstons: %1$s</string>
+    <string name="background_monitoring_enabled_log">NFC-Hintergrundüberwachung aktiviert (über Intent)</string>
+    <string name="background_monitoring_enabled_success">NFC-Hintergrundüberwachung aktiviert</string>
+    <string name="background_monitoring_enable_failed">Fehler beim Aktivieren der Hintergrundüberwachung: %1$s</string>
+    <string name="nfc_permission_required">NFC-Berechtigung erforderlich für Hintergrundüberwachung.</string>
+    <string name="background_monitoring_disabled_log">NFC-Hintergrundüberwachung deaktiviert (über Intent)</string>
+    <string name="background_monitoring_disabled_success">NFC-Hintergrundüberwachung deaktiviert</string>
+    <string name="background_monitoring_disable_failed">Fehler beim Deaktivieren der Hintergrundüberwachung: %1$s</string>
+    <string name="auto_reminder_toggled_log">Auto-Erinnerung %1$s</string>
+    <string name="auto_reminder_toggled_success">Auto-Erinnerung %1$s</string>
+    <string name="auto_reminder_toggle_failed">Fehler beim Umschalten der Auto-Erinnerung: %1$s</string>
+    <string name="interval_out_of_range">Intervall muss zwischen 5 und 300 Sekunden liegen</string>
+    <string name="reminder_interval_updated_log">Erinnerungsintervall auf %1$ds eingestellt</string>
+    <string name="reminder_interval_updated_success">Erinnerungsintervall auf %1$d Sekunden aktualisiert</string>
+    <string name="reminder_interval_update_failed">Fehler beim Aktualisieren des Intervalls: %1$s</string>
+    <string name="notifications_toggled_log">Benachrichtigungen %1$s</string>
+    <string name="notifications_toggled_success">Benachrichtigungen %1$s</string>
+    <string name="notifications_toggle_failed">Fehler beim Umschalten der Benachrichtigungen: %1$s</string>
+    <string name="vibration_toggled_log">Vibration %1$s</string>
+    <string name="vibration_toggled_success">Vibration %1$s</string>
+    <string name="vibration_toggle_failed">Fehler beim Umschalten der Vibration: %1$s</string>
+    <string name="sound_toggled_log">Sound (allgemein) %1$s</string>
+    <string name="sound_toggled_success">Sound (allgemein) %1$s</string>
+    <string name="sound_toggle_failed">Fehler beim Umschalten des Sounds: %1$s</string>
+    <string name="theme_changed_log">%1$s aktiviert</string>
+    <string name="theme_changed_success">%1$s aktiviert</string>
+    <string name="theme_change_failed">Fehler beim Einstellen des Designs: %1$s</string>
+    <string name="dark_mode_text">Dunkelmodus</string>
+    <string name="light_mode_text">Heller Modus</string>
+    <string name="accent_color_updated_log">Akzentfarbe aktualisiert</string>
+    <string name="accent_color_updated_success">Akzentfarbe aktualisiert</string>
+    <string name="accent_color_update_failed">Fehler beim Aktualisieren der Farbe: %1$s</string>
+    <string name="battery_optimization_toggled_log">Akkuoptimierung %1$s</string>
+    <string name="battery_optimization_toggled_success">Akkuoptimierung %1$s</string>
+    <string name="battery_optimization_toggle_failed">Fehler beim Umschalten der Akkuoptimierung: %1$s</string>
+    <string name="monitoring_interval_out_of_range">Überwachungsintervall muss zwischen 1000 und 10000 Millisekunden liegen</string>
+    <string name="monitoring_interval_updated_log">Überwachungsintervall auf %1$dms eingestellt</string>
+    <string name="monitoring_interval_updated_success">Überwachungsintervall aktualisiert</string>
+    <string name="monitoring_interval_update_failed">Fehler beim Aktualisieren des Überwachungsintervalls: %1$s</string>
+    <string name="privacy_mode_toggled_log">Datenschutzmodus %1$s</string>
+    <string name="privacy_mode_toggled_success">Datenschutzmodus %1$s</string>
+    <string name="privacy_mode_toggle_failed">Fehler beim Umschalten des Datenschutzmodus: %1$s</string>
+    <string name="block_unknown_tags_toggled_log">Unbekannte Tags blockieren %1$s</string>
+    <string name="block_unknown_tags_toggled_success">Blockierung unbekannter Tags %1$s</string>
+    <string name="block_unknown_tags_toggle_failed">Fehler beim Umschalten der Blockierung unbekannter Tags: %1$s</string>
+    <string name="settings_exported_log">Einstellungen exportiert</string>
+    <string name="settings_exported_success">Einstellungen erfolgreich exportiert</string>
+    <string name="settings_export_failed">Fehler beim Exportieren der Einstellungen: %1$s</string>
+    <string name="data_cleanup_log">Alte Daten bereinigt (%1$d Tage)</string>
+    <string name="data_cleanup_success">Alte Daten erfolgreich bereinigt</string>
+    <string name="data_cleanup_failed">Fehler beim Bereinigen der Daten: %1$s</string>
+    <string name="enabled_status">aktiviert</string>
+    <string name="disabled_status">deaktiviert</string>
+
 </resources>

@@ -14,6 +14,8 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.compose.ui.res.stringResource
+import com.dxbmark.nfcmanager.R
 import com.dxbmark.nfcmanager.ui.theme.NothingTextStyles
 import com.dxbmark.nfcmanager.viewmodel.MainViewModel
 
@@ -52,7 +54,7 @@ fun HomeScreen(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(
-            text = "NFC MANAGER",
+            text = stringResource(R.string.home_screen_title),
             style = NothingTextStyles.HeaderTitle,
             color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.5f),
             modifier = Modifier.padding(vertical = 16.dp)
@@ -83,7 +85,7 @@ fun HomeScreen(
                 verticalArrangement = Arrangement.Center
             ) {
                 Text(
-                    text = "NFC STATUS",
+                    text = stringResource(R.string.nfc_status_title),
                     style = NothingTextStyles.SmallCaps,
                     color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f)
                 )
@@ -93,13 +95,13 @@ fun HomeScreen(
                 when {
                     !uiState.isNFCSupported -> {
                         Text(
-                            text = "NOT SUPPORTED",
+                            text = stringResource(R.string.nfc_not_supported),
                             style = NothingTextStyles.NFCStatusLarge,
                             color = MaterialTheme.colorScheme.error,
                             textAlign = TextAlign.Center
                         )
                         Text(
-                            text = "NFC hardware not found on this device.",
+                            text = stringResource(R.string.nfc_hardware_not_found),
                             style = NothingTextStyles.Caption,
                             color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f),
                             textAlign = TextAlign.Center
@@ -107,28 +109,28 @@ fun HomeScreen(
                     }
                     uiState.isNFCEnabled -> {
                         Text(
-                            text = "ENABLED",
+                            text = stringResource(R.string.nfc_status_enabled),
                             style = NothingTextStyles.NFCStatusLarge,
                             color = MaterialTheme.colorScheme.primary,
                             textAlign = TextAlign.Center
                         )
                         Spacer(modifier = Modifier.height(8.dp))
                         Text(
-                            text = "Privacy monitoring active",
+                            text = stringResource(R.string.privacy_monitoring_active),
                             style = NothingTextStyles.Caption,
                             color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f)
                         )
                     }
                     else -> { // Supported but Disabled
                         Text(
-                            text = "DISABLED",
+                            text = stringResource(R.string.nfc_status_disabled),
                             style = NothingTextStyles.NFCStatusLarge,
                             color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.4f),
                             textAlign = TextAlign.Center
                         )
                         Spacer(modifier = Modifier.height(8.dp))
                         Text(
-                            text = "Tap here to enable NFC in system settings.",
+                            text = stringResource(R.string.tap_to_enable_nfc),
                             style = NothingTextStyles.Caption,
                             color = MaterialTheme.colorScheme.primary.copy(alpha = 0.8f),
                             textAlign = TextAlign.Center
@@ -150,13 +152,13 @@ fun HomeScreen(
                 modifier = Modifier.padding(20.dp)
             ) {
                 Text(
-                    text = "TODAY'S ACTIVITY",
+                    text = stringResource(R.string.todays_activity_title),
                     style = NothingTextStyles.SmallCaps,
                     color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f)
                 )
                 Spacer(modifier = Modifier.height(8.dp))
                 Text(
-                    text = "$todayEventCount events logged",
+                    text = stringResource(R.string.events_logged_format, todayEventCount),
                     style = MaterialTheme.typography.titleMedium,
                     color = MaterialTheme.colorScheme.onSurface
                 )
@@ -181,7 +183,7 @@ fun HomeScreen(
                 )
             ) {
                 Text(
-                    text = "ENABLE NFC IN SETTINGS",
+                    text = stringResource(R.string.enable_nfc_button),
                     style = NothingTextStyles.ButtonText
                 )
             }

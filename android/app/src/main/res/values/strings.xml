@@ -134,4 +134,116 @@
     <!-- Content Descriptions -->
     <string name="settings_cd_navigate">Navigate</string> <!-- For KeyboardArrowRight icon -->
 
+    <!-- Home Screen Strings -->
+    <string name="home_screen_title">NFC MANAGER</string>
+    <string name="nfc_status_title">NFC STATUS</string>
+    <string name="nfc_not_supported">NOT SUPPORTED</string>
+    <string name="nfc_hardware_not_found">NFC hardware not found on this device.</string>
+    <string name="nfc_status_enabled">ENABLED</string>
+    <string name="privacy_monitoring_active">Privacy monitoring active</string>
+    <string name="nfc_status_disabled">DISABLED</string>
+    <string name="tap_to_enable_nfc">Tap here to enable NFC in system settings.</string>
+    <string name="todays_activity_title">TODAY\'S ACTIVITY</string>
+    <string name="events_logged_format">%1$d events logged</string>
+    <string name="enable_nfc_button">ENABLE NFC IN SETTINGS</string>
+
+    <!-- Activity Screen Strings -->
+    <string name="activity_log_title">ACTIVITY LOG</string>
+    <string name="export_success">Events exported successfully</string>
+    <string name="export_error">Error exporting events: %1$s</string>
+    <string name="no_events_to_export">No events to export for the current filter</string>
+    <string name="no_events_to_export_simple">No events to export</string>
+    <string name="event_singular">event</string>
+    <string name="events_plural">events</string>
+    <string name="no_matching_activity">No Matching Activity</string>
+    <string name="no_activity_yet">No Activity Yet</string>
+    <string name="adjust_filters_hint">Try adjusting your filters.</string>
+    <string name="activity_logs_hint">Activity logs will appear here.</string>
+    <string name="all_types_filter">All Types</string>
+    <string name="events_found_format">%1$d %2$s found</string>
+    <string name="events_recorded_format">%1$d %2$s recorded</string>
+
+    <!-- Notification Sound Settings Screen Strings -->
+    <string name="sound_access_warning">Could not persist sound access, it might not work later.</string>
+    <string name="storage_permission_required">Storage permission is required to choose a custom sound.</string>
+    <string name="notification_sound_screen_title">Notification Sound</string>
+    <string name="notification_sound_description">Customize the sound played for NFC Manager notifications. Choose a custom sound from your device or use the system default.</string>
+    <string name="current_sound_label">Current Sound</string>
+    <string name="sound_play_error_null">Cannot play sound: Default URI is null.</string>
+    <string name="sound_play_error_corrupted">Cannot play sound: Ringtone not found or corrupted.</string>
+    <string name="sound_play_error_general">Error playing sound: %1$s</string>
+    <string name="choose_custom_sound">Choose Custom Sound</string>
+    <string name="use_system_default_sound">Use System Default Sound</string>
+    <string name="sound_playing_indicator">Playing</string>
+    <string name="system_default_sound">System Default</string>
+    <string name="custom_sound_label">Custom Sound</string>
+    <string name="custom_sound_error">Custom Sound (Error)</string>
+    <string name="back_button">Back</string>
+    <string name="pick_sound_icon">Pick Sound</string>
+    <string name="default_sound_icon">Default Sound</string>
+
+    <!-- ViewModel Messages -->
+    <string name="language_already_set">Language is already set to %1$s.</string>
+    <string name="language_changed_log">Language changed from %1$s to %2$s</string>
+    <string name="language_updated_success">Language updated to %1$s. Restarting for changes to take effect.</string>
+    <string name="language_update_failed">Failed to update language: %1$s</string>
+    <string name="settings_reset_log">All settings reset to defaults</string>
+    <string name="settings_reset_success">All settings reset to defaults</string>
+    <string name="settings_reset_failed">Failed to reset settings: %1$s</string>
+    <string name="notification_sound_updated">Notification sound updated</string>
+    <string name="notification_sound_reset">Notification sound reset to default</string>
+    <string name="notification_sound_update_failed">Failed to update notification sound: %1$s</string>
+    <string name="background_monitoring_enabled_log">Background NFC Monitoring enabled (via intent)</string>
+    <string name="background_monitoring_enabled_success">Background NFC Monitoring enabled</string>
+    <string name="background_monitoring_enable_failed">Failed to enable background monitoring: %1$s</string>
+    <string name="nfc_permission_required">NFC Permission required to enable background monitoring.</string>
+    <string name="background_monitoring_disabled_log">Background NFC Monitoring disabled (via intent)</string>
+    <string name="background_monitoring_disabled_success">Background NFC Monitoring disabled</string>
+    <string name="background_monitoring_disable_failed">Failed to disable background monitoring: %1$s</string>
+    <string name="auto_reminder_toggled_log">Auto-reminder %1$s</string>
+    <string name="auto_reminder_toggled_success">Auto-reminder %1$s</string>
+    <string name="auto_reminder_toggle_failed">Failed to toggle auto-reminder: %1$s</string>
+    <string name="interval_out_of_range">Interval must be between 5 and 300 seconds</string>
+    <string name="reminder_interval_updated_log">Reminder interval set to %1$ds</string>
+    <string name="reminder_interval_updated_success">Reminder interval updated to %1$d seconds</string>
+    <string name="reminder_interval_update_failed">Failed to update interval: %1$s</string>
+    <string name="notifications_toggled_log">Notifications %1$s</string>
+    <string name="notifications_toggled_success">Notifications %1$s</string>
+    <string name="notifications_toggle_failed">Failed to toggle notifications: %1$s</string>
+    <string name="vibration_toggled_log">Vibration %1$s</string>
+    <string name="vibration_toggled_success">Vibration %1$s</string>
+    <string name="vibration_toggle_failed">Failed to toggle vibration: %1$s</string>
+    <string name="sound_toggled_log">Sound (general) %1$s</string>
+    <string name="sound_toggled_success">Sound (general) %1$s</string>
+    <string name="sound_toggle_failed">Failed to toggle sound: %1$s</string>
+    <string name="theme_changed_log">%1$s enabled</string>
+    <string name="theme_changed_success">%1$s enabled</string>
+    <string name="theme_change_failed">Failed to set theme: %1$s</string>
+    <string name="dark_mode_text">Dark mode</string>
+    <string name="light_mode_text">Light mode</string>
+    <string name="accent_color_updated_log">Accent color updated</string>
+    <string name="accent_color_updated_success">Accent color updated</string>
+    <string name="accent_color_update_failed">Failed to update color: %1$s</string>
+    <string name="battery_optimization_toggled_log">Battery optimization %1$s</string>
+    <string name="battery_optimization_toggled_success">Battery optimization %1$s</string>
+    <string name="battery_optimization_toggle_failed">Failed to toggle battery optimization: %1$s</string>
+    <string name="monitoring_interval_out_of_range">Monitoring interval must be between 1000 and 10000 milliseconds</string>
+    <string name="monitoring_interval_updated_log">Monitoring interval set to %1$dms</string>
+    <string name="monitoring_interval_updated_success">Monitoring interval updated</string>
+    <string name="monitoring_interval_update_failed">Failed to update monitoring interval: %1$s</string>
+    <string name="privacy_mode_toggled_log">Privacy mode %1$s</string>
+    <string name="privacy_mode_toggled_success">Privacy mode %1$s</string>
+    <string name="privacy_mode_toggle_failed">Failed to toggle privacy mode: %1$s</string>
+    <string name="block_unknown_tags_toggled_log">Block unknown tags %1$s</string>
+    <string name="block_unknown_tags_toggled_success">Unknown tag blocking %1$s</string>
+    <string name="block_unknown_tags_toggle_failed">Failed to toggle unknown tag blocking: %1$s</string>
+    <string name="settings_exported_log">Settings exported</string>
+    <string name="settings_exported_success">Settings exported successfully</string>
+    <string name="settings_export_failed">Failed to export settings: %1$s</string>
+    <string name="data_cleanup_log">Old data cleanup completed (%1$d days)</string>
+    <string name="data_cleanup_success">Old data cleaned up successfully</string>
+    <string name="data_cleanup_failed">Failed to cleanup data: %1$s</string>
+    <string name="enabled_status">enabled</string>
+    <string name="disabled_status">disabled</string>
+
 </resources>

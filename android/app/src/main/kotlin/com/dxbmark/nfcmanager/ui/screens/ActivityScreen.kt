@@ -17,8 +17,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.dxbmark.nfcmanager.R
 import com.dxbmark.nfcmanager.ui.theme.NothingTextStyles
 import com.dxbmark.nfcmanager.viewmodel.ActivityViewModel
 import com.dxbmark.nfcmanager.viewmodel.DateFilterOption
@@ -57,12 +59,12 @@ fun ActivityScreen(
                             context.contentResolver.openOutputStream(it)?.use { outputStream ->
                                 outputStream.write(csvData.toByteArray())
                             }
-                            Toast.makeText(context, "Events exported successfully", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(context, context.getString(R.string.export_success), Toast.LENGTH_SHORT).show()
                         } catch (e: IOException) {
-                            Toast.makeText(context, "Error exporting events: ${e.message}", Toast.LENGTH_LONG).show()
+                            Toast.makeText(context, context.getString(R.string.export_error, e.message), Toast.LENGTH_LONG).show()
                         }
                     } else {
-                        Toast.makeText(context, "No events to export for the current filter", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(context, context.getString(R.string.no_events_to_export), Toast.LENGTH_SHORT).show()
                     }
                 }
             }
@@ -96,7 +98,7 @@ fun ActivityScreen(
             verticalAlignment = Alignment.CenterVertically
         ) {
             Text(
-                text = "ACTIVITY LOG",
+                text = stringResource(R.string.activity_log_title),
                 style = NothingTextStyles.HeaderTitle,
                 color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.5f)
             )
@@ -135,14 +137,14 @@ fun ActivityScreen(
                     if (filteredEvents.isNotEmpty()) { // Still good to check here to avoid unnecessary launcher.launch
                          createDocumentLauncher.launch(fileName)
                     } else {
-                        Toast.makeText(context, "No events to export", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(context, context.getString(R.string.no_events_to_export_simple), Toast.LENGTH_SHORT).show()
                     }
                 },
                 enabled = filteredEvents.isNotEmpty()
             ) {
                 Icon(Icons.Outlined.Share, contentDescription = "Export to CSV", modifier = Modifier.size(18.dp))
                 Spacer(Modifier.width(8.dp))
-                Text("Export CSV")
+                Text(stringResource(R.string.activity_export_csv))
             }
 
             OutlinedButton(
@@ -155,7 +157,7 @@ fun ActivityScreen(
             ) {
                 Icon(Icons.Outlined.DeleteSweep, contentDescription = "Clear All Logs", modifier = Modifier.size(18.dp))
                 Spacer(Modifier.width(8.dp))
-                Text("Clear All")
+                Text(stringResource(R.string.activity_clear_all))
             }
         }
 
@@ -166,9 +168,11 @@ fun ActivityScreen(
 
         Text(
             text = if (showingFilteredResults) {
-                "${filteredEvents.size} ${if (filteredEvents.size == 1) "event" else "events"} found"
+                val eventWord = if (filteredEvents.size == 1) stringResource(R.string.event_singular) else stringResource(R.string.events_plural)
+                stringResource(R.string.events_found_format, filteredEvents.size, eventWord)
             } else {
-                "$totalUnfilteredEventCount ${if (totalUnfilteredEventCount == 1) "event" else "events"} recorded"
+                val eventWord = if (totalUnfilteredEventCount == 1) stringResource(R.string.event_singular) else stringResource(R.string.events_plural)
+                stringResource(R.string.events_recorded_format, totalUnfilteredEventCount, eventWord)
             },
             style = MaterialTheme.typography.bodyMedium,
             color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.7f),
@@ -186,13 +190,13 @@ fun ActivityScreen(
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {
                         Text(
-                            text = if (showingFilteredResults) "No Matching Activity" else "No Activity Yet",
+                            text = if (showingFilteredResults) stringResource(R.string.no_matching_activity) else stringResource(R.string.no_activity_yet),
                             style = MaterialTheme.typography.headlineSmall,
                             color = MaterialTheme.colorScheme.onSurface
                         )
                         Spacer(modifier = Modifier.height(8.dp))
                         Text(
-                            text = if (showingFilteredResults) "Try adjusting your filters." else "Activity logs will appear here.",
+                            text = if (showingFilteredResults) stringResource(R.string.adjust_filters_hint) else stringResource(R.string.activity_logs_hint),
                             style = MaterialTheme.typography.bodyMedium,
                             color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f),
                             textAlign = androidx.compose.ui.text.style.TextAlign.Center
@@ -223,7 +227,8 @@ fun EventTypeFilterDropdown(
     modifier: Modifier = Modifier
 ) {
     var expanded by remember { mutableStateOf(false) }
-    val itemsWithAllOption = remember(distinctEventTypes) { listOf("All Types") + distinctEventTypes.sorted() }
+    val context = LocalContext.current
+    val itemsWithAllOption = remember(distinctEventTypes) { listOf(context.getString(R.string.all_types_filter)) + distinctEventTypes.sorted() }
 
     ExposedDropdownMenuBox(
         expanded = expanded,
@@ -231,10 +236,10 @@ fun EventTypeFilterDropdown(
         modifier = modifier
     ) {
         OutlinedTextField(
-            value = selectedEventType ?: "All Types",
+            value = selectedEventType ?: context.getString(R.string.all_types_filter),
             onValueChange = {},
             readOnly = true,
-            label = { Text("Event Type") },
+            label = { Text(stringResource(R.string.activity_filter_event_type)) },
             trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded = expanded) },
             modifier = Modifier.menuAnchor().fillMaxWidth(),
             colors = ExposedDropdownMenuDefaults.outlinedTextFieldColors(),
@@ -245,7 +250,7 @@ fun EventTypeFilterDropdown(
                 DropdownMenuItem(
                     text = { Text(type) },
                     onClick = {
-                        onEventTypeSelected(if (type == "All Types") null else type)
+                        onEventTypeSelected(if (type == context.getString(R.string.all_types_filter)) null else type)
                         expanded = false
                     },
                     contentPadding = ExposedDropdownMenuDefaults.ItemContentPadding
@@ -274,7 +279,7 @@ fun DateFilterDropdown(
             value = selectedOption.displayName,
             onValueChange = {},
             readOnly = true,
-            label = { Text("Date Range") },
+            label = { Text(stringResource(R.string.activity_filter_date_range)) },
             trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded = expanded) },
             modifier = Modifier.menuAnchor().fillMaxWidth(),
             colors = ExposedDropdownMenuDefaults.outlinedTextFieldColors(),
