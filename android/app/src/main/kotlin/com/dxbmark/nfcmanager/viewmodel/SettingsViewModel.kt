@@ -63,6 +63,15 @@ class SettingsViewModel @Inject constructor(
                         context.getString(it.nameResId)
                     } ?: context.getString(R.string.language_system_default)
                 }
+                
+                fun getLogDisplayName(code: String?): String {
+                    return when (code) {
+                        "en" -> app.getString(R.string.language_name_english)
+                        "ar" -> app.getString(R.string.language_name_arabic)
+                        "de" -> app.getString(R.string.language_name_german)
+                        else -> app.getString(R.string.language_name_system_default)
+                    }
+                }
 
                 val currentLanguageDisplayName = getDisplayName(oldLanguageCode)
                 val newLanguageDisplayName = getDisplayName(languageCode)
@@ -77,8 +86,8 @@ class SettingsViewModel @Inject constructor(
                 NfcManagerApplication.updateLanguageCode(app.applicationContext, languageCode) 
 
                 repository.logEvent(
-                    "SETTINGS",
-                    app.getString(R.string.language_changed_log, currentLanguageDisplayName, newLanguageDisplayName),
+                    app.getString(R.string.event_type_settings),
+                    app.getString(R.string.language_changed_log, getLogDisplayName(oldLanguageCode), getLogDisplayName(languageCode)),
                     "Language"
                 )
                 updateSuccess(app.getString(R.string.language_updated_success, newLanguageDisplayName))
@@ -99,7 +108,7 @@ class SettingsViewModel @Inject constructor(
                 // Pass context when resetting language in Application class
                 NfcManagerApplication.updateLanguageCode(app.applicationContext, null) 
                 repository.logEvent(
-                    "SETTINGS",
+                    app.getString(R.string.event_type_settings),
                     app.getString(R.string.settings_reset_log),
                     "Settings",
                     isImportant = true
@@ -152,7 +161,7 @@ class SettingsViewModel @Inject constructor(
                 repository.updateCustomNotificationSoundUri(soundUri)
                 val message = if (soundUri != null) app.getString(R.string.notification_sound_updated) else app.getString(R.string.notification_sound_reset)
                 repository.logEvent(
-                    "SETTINGS",
+                    app.getString(R.string.event_type_settings),
                     message,
                     if (soundUri != null) "SoundOn" else "SoundOff"
                 )
@@ -185,9 +194,9 @@ class SettingsViewModel @Inject constructor(
                             context.startService(intent)
                         }
                         repository.logEvent(
-                        "SETTINGS",
-                        app.getString(R.string.background_monitoring_enabled_log),
-                        "Radar"
+                            app.getString(R.string.event_type_settings),
+                            app.getString(R.string.background_monitoring_enabled_log),
+                            "Radar"
                         )
                         updateSuccess(app.getString(R.string.background_monitoring_enabled_success))
                     } catch (e: Exception) {
@@ -208,11 +217,11 @@ class SettingsViewModel @Inject constructor(
                         action = NfcMonitoringService.ACTION_STOP_MONITORING
                     }
                     context.startService(intent)
-                    repository.logEvent(
-                        "SETTINGS",
-                        "Background NFC Monitoring disabled (via intent)",
-                        "RadarOff"
-                    )
+                        repository.logEvent(
+                            app.getString(R.string.event_type_settings),
+                            app.getString(R.string.background_monitoring_disabled_log),
+                            "RadarOff"
+                        )
                     updateSuccess("Background NFC Monitoring disabled")
                 } catch (e: Exception) {
                     updateError("Failed to disable background monitoring: ${e.message}")
@@ -230,8 +239,8 @@ class SettingsViewModel @Inject constructor(
                 val newSetting = !settings.value.autoReminderEnabled
                 repository.updateAutoReminderEnabled(newSetting)
                 repository.logEvent(
-                    "SETTINGS",
-                    "Auto-reminder ${if (newSetting) "enabled" else "disabled"}",
+                    app.getString(R.string.event_type_settings),
+                    if (newSetting) app.getString(R.string.auto_reminder_enabled) else app.getString(R.string.auto_reminder_disabled),
                     "Bell"
                 )
                 val statusText = if (newSetting) app.getString(R.string.enabled_status) else app.getString(R.string.disabled_status)
@@ -254,8 +263,8 @@ class SettingsViewModel @Inject constructor(
                 updateLoading(true)
                 repository.updateReminderInterval(interval)
                 repository.logEvent(
-                    "SETTINGS",
-                    "Reminder interval set to ${interval}s",
+                    app.getString(R.string.event_type_settings),
+                    app.getString(R.string.reminder_interval_set, interval),
                     "Clock"
                 )
                 updateSuccess("Reminder interval updated to ${interval} seconds")
@@ -287,11 +296,11 @@ class SettingsViewModel @Inject constructor(
                 }
 
                 repository.logEvent(
-                    "SETTINGS",
-                    "Notifications ${if (newSetting) "enabled" else "disabled"}",
+                    app.getString(R.string.event_type_settings),
+                    if (newSetting) app.getString(R.string.notifications_enabled) else app.getString(R.string.notifications_disabled),
                     "Bell"
                 )
-                updateSuccess("Notifications ${if (newSetting) "enabled" else "disabled"}")
+                updateSuccess(if (newSetting) app.getString(R.string.notifications_enabled) else app.getString(R.string.notifications_disabled))
             } catch (e: Exception) {
                 updateError("Failed to toggle notifications: ${e.message}")
             } finally {
@@ -307,11 +316,11 @@ class SettingsViewModel @Inject constructor(
                 val newSetting = !settings.value.vibrationEnabled
                 repository.updateVibrationEnabled(newSetting)
                 repository.logEvent(
-                    "SETTINGS",
-                    "Vibration ${if (newSetting) "enabled" else "disabled"}",
+                    app.getString(R.string.event_type_settings),
+                    if (newSetting) app.getString(R.string.vibration_enabled) else app.getString(R.string.vibration_disabled),
                     "Vibrate"
                 )
-                updateSuccess("Vibration ${if (newSetting) "enabled" else "disabled"}")
+                updateSuccess(if (newSetting) app.getString(R.string.vibration_enabled) else app.getString(R.string.vibration_disabled))
             } catch (e: Exception) {
                 updateError("Failed to toggle vibration: ${e.message}")
             } finally {
@@ -327,11 +336,11 @@ class SettingsViewModel @Inject constructor(
                 val newSetting = !settings.value.soundEnabled
                 repository.updateSettings(settings.value.copy(soundEnabled = newSetting))
                 repository.logEvent(
-                    "SETTINGS",
-                    "Sound (general) ${if (newSetting) "enabled" else "disabled"}",
+                    app.getString(R.string.event_type_settings),
+                    if (newSetting) app.getString(R.string.sound_enabled) else app.getString(R.string.sound_disabled),
                     "Volume2"
                 )
-                updateSuccess("Sound (general) ${if (newSetting) "enabled" else "disabled"}")
+                updateSuccess(if (newSetting) app.getString(R.string.sound_enabled) else app.getString(R.string.sound_disabled))
             } catch (e: Exception) {
                 updateError("Failed to toggle sound: ${e.message}")
             } finally {
@@ -346,8 +355,8 @@ class SettingsViewModel @Inject constructor(
                 updateLoading(true)
                 repository.updateDarkMode(isDark)
                 repository.logEvent(
-                    "SETTINGS",
-                    if (isDark) "Dark mode enabled" else "Light mode enabled",
+                    app.getString(R.string.event_type_settings),
+                    if (isDark) app.getString(R.string.dark_mode_enabled) else app.getString(R.string.light_mode_enabled),
                     "Settings"
                 )
                 updateSuccess(if (isDark) "Dark mode enabled" else "Light mode enabled")
@@ -365,8 +374,8 @@ class SettingsViewModel @Inject constructor(
                 updateLoading(true)
                 repository.updateSettings(settings.value.copy(accentColor = color))
                 repository.logEvent(
-                    "SETTINGS",
-                    "Accent color updated",
+                    app.getString(R.string.event_type_settings),
+                    app.getString(R.string.accent_color_updated),
                     "Settings"
                 )
                 updateSuccess("Accent color updated")
@@ -385,11 +394,11 @@ class SettingsViewModel @Inject constructor(
                 val newSetting = !settings.value.batteryOptimized
                 repository.updateBatteryOptimized(newSetting)
                 repository.logEvent(
-                    "SETTINGS",
-                    "Battery optimization ${if (newSetting) "enabled" else "disabled"}",
+                    app.getString(R.string.event_type_settings),
+                    if (newSetting) app.getString(R.string.battery_optimization_enabled) else app.getString(R.string.battery_optimization_disabled),
                     "Battery"
                 )
-                updateSuccess("Battery optimization ${if (newSetting) "enabled" else "disabled"}")
+                updateSuccess(if (newSetting) app.getString(R.string.battery_optimization_enabled) else app.getString(R.string.battery_optimization_disabled))
             } catch (e: Exception) {
                 updateError("Failed to toggle battery optimization: ${e.message}")
             } finally {
@@ -408,8 +417,8 @@ class SettingsViewModel @Inject constructor(
                 updateLoading(true)
                 repository.updateSettings(settings.value.copy(monitoringInterval = interval))
                 repository.logEvent(
-                    "SETTINGS",
-                    "Monitoring interval set to ${interval}ms",
+                    app.getString(R.string.event_type_settings),
+                    app.getString(R.string.monitoring_interval_set, interval),
                     "Clock"
                 )
                 updateSuccess("Monitoring interval updated")
@@ -428,12 +437,12 @@ class SettingsViewModel @Inject constructor(
                 val newSetting = !settings.value.isPrivacyModeEnabled
                 repository.updateSettings(settings.value.copy(isPrivacyModeEnabled = newSetting))
                 repository.logEvent(
-                    "SECURITY",
-                    "Privacy mode ${if (newSetting) "enabled" else "disabled"}",
+                    app.getString(R.string.event_type_security),
+                    if (newSetting) app.getString(R.string.privacy_mode_enabled) else app.getString(R.string.privacy_mode_disabled),
                     "Shield",
                     isImportant = true
                 )
-                updateSuccess("Privacy mode ${if (newSetting) "enabled" else "disabled"}")
+                updateSuccess(if (newSetting) app.getString(R.string.privacy_mode_enabled) else app.getString(R.string.privacy_mode_disabled))
             } catch (e: Exception) {
                 updateError("Failed to toggle privacy mode: ${e.message}")
             } finally {
@@ -449,12 +458,12 @@ class SettingsViewModel @Inject constructor(
                 val newSetting = !settings.value.blockUnknownTags
                 repository.updateSettings(settings.value.copy(blockUnknownTags = newSetting))
                 repository.logEvent(
-                    "SECURITY",
-                    "Block unknown tags ${if (newSetting) "enabled" else "disabled"}",
+                    app.getString(R.string.event_type_security),
+                    if (newSetting) app.getString(R.string.unknown_tag_blocking_enabled) else app.getString(R.string.unknown_tag_blocking_disabled),
                     "Shield",
                     isImportant = true
                 )
-                updateSuccess("Unknown tag blocking ${if (newSetting) "enabled" else "disabled"}")
+                updateSuccess(if (newSetting) app.getString(R.string.unknown_tag_blocking_enabled) else app.getString(R.string.unknown_tag_blocking_disabled))
             } catch (e: Exception) {
                 updateError("Failed to toggle unknown tag blocking: ${e.message}")
             } finally {
@@ -467,8 +476,8 @@ class SettingsViewModel @Inject constructor(
         viewModelScope.launch {
             try {
                 updateLoading(true)
-                repository.logEvent("SETTINGS", "Settings exported", "Settings")
-                updateSuccess("Settings exported successfully")
+                repository.logEvent(app.getString(R.string.event_type_settings), app.getString(R.string.settings_exported), "Settings")
+                updateSuccess(app.getString(R.string.settings_exported))
             } catch (e: Exception) {
                 updateError("Failed to export settings: ${e.message}")
             } finally {
@@ -484,8 +493,8 @@ class SettingsViewModel @Inject constructor(
                 updateLoading(true)
                 repository.cleanupOldEvents(daysToKeep)
                 repository.logEvent(
-                    "SETTINGS",
-                    "Old data cleanup completed (${daysToKeep} days)",
+                    app.getString(R.string.event_type_settings),
+                    app.getString(R.string.old_data_cleanup_completed, daysToKeep),
                     "Settings"
                 )
                 updateSuccess("Old data cleaned up successfully")

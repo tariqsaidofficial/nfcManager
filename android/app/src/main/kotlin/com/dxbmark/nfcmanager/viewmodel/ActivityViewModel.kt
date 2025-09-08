@@ -2,6 +2,7 @@ package com.dxbmark.nfcmanager.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.dxbmark.nfcmanager.R
 import com.dxbmark.nfcmanager.data.database.entities.NFCEventEntity
 import com.dxbmark.nfcmanager.data.repository.NFCRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -14,11 +15,11 @@ import java.util.Locale
 import javax.inject.Inject
 
 // Enum for Date Filter Options
-enum class DateFilterOption(val displayName: String) {
-    TODAY("Today"),
-    LAST_7_DAYS("Last 7 Days"),
-    LAST_30_DAYS("Last 30 Days"),
-    ALL_TIME("All Time")
+enum class DateFilterOption(val stringResId: Int) {
+    TODAY(R.string.date_filter_today),
+    LAST_7_DAYS(R.string.date_filter_last_7_days),
+    LAST_30_DAYS(R.string.date_filter_last_30_days),
+    ALL_TIME(R.string.date_filter_all_time)
 }
 
 @HiltViewModel
@@ -310,7 +311,7 @@ class ActivityViewModel @Inject constructor(
     fun formatRelativeTime(date: java.util.Date): String {
         val seconds = (System.currentTimeMillis() - date.time) / 1000
         return when {
-            seconds < 60 -> "now"
+            seconds < 60 -> "now" // context.getString(R.string.time_now)
             seconds < 3600 -> "${seconds / 60}m ago"
             seconds < 86400 -> "${seconds / 3600}h ago"
             else -> "${seconds / 86400}d ago"

@@ -7,12 +7,14 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController // Added NavController import
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.*
+import com.dxbmark.nfcmanager.R
 import com.dxbmark.nfcmanager.ui.screens.*
 import com.dxbmark.nfcmanager.ui.theme.NothingTextStyles
 import com.dxbmark.nfcmanager.viewmodel.*
@@ -52,12 +54,12 @@ fun NFCManagerNavigation(
                         icon = {
                             Icon(
                                 imageVector = item.icon,
-                                contentDescription = item.title
+                                contentDescription = stringResource(item.titleRes)
                             )
                         },
                         label = {
                             Text(
-                                text = item.title,
+                                text = stringResource(item.titleRes),
                                 style = NothingTextStyles.HeaderTitle // Updated to use HeaderTitle
                             )
                         },
@@ -116,17 +118,17 @@ fun NFCManagerNavigation(
  */
 private val bottomNavItems = listOf(
     BottomNavItem(
-        title = "NFC MANAGER",
+        titleRes = R.string.nav_nfc_manager,
         icon = androidx.compose.material.icons.Icons.Filled.Nfc, 
         route = AppRoutes.HOME // Use constant
     ),
     BottomNavItem(
-        title = "ACTIVITY",
+        titleRes = R.string.nav_activity,
         icon = androidx.compose.material.icons.Icons.Filled.History, 
         route = AppRoutes.ACTIVITY // Use constant
     ),
     BottomNavItem(
-        title = "SETTINGS",
+        titleRes = R.string.nav_settings,
         icon = androidx.compose.material.icons.Icons.Filled.Settings, 
         route = AppRoutes.SETTINGS // Use constant
     )
@@ -136,7 +138,7 @@ private val bottomNavItems = listOf(
  * Bottom Navigation Item Data Class
  */
 private data class BottomNavItem(
-    val title: String,
+    val titleRes: Int,
     val icon: ImageVector,
     val route: String
 )

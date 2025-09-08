@@ -142,7 +142,7 @@ fun ActivityScreen(
                 },
                 enabled = filteredEvents.isNotEmpty()
             ) {
-                Icon(Icons.Outlined.Share, contentDescription = "Export to CSV", modifier = Modifier.size(18.dp))
+                Icon(Icons.Outlined.Share, contentDescription = stringResource(R.string.export_to_csv_icon), modifier = Modifier.size(18.dp))
                 Spacer(Modifier.width(8.dp))
                 Text(stringResource(R.string.activity_export_csv))
             }
@@ -155,7 +155,7 @@ fun ActivityScreen(
                 ),
                 border = BorderStroke(1.dp, if (totalUnfilteredEventCount > 0) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.onSurface.copy(alpha = 0.12f))
             ) {
-                Icon(Icons.Outlined.DeleteSweep, contentDescription = "Clear All Logs", modifier = Modifier.size(18.dp))
+                Icon(Icons.Outlined.DeleteSweep, contentDescription = stringResource(R.string.clear_all_logs_icon), modifier = Modifier.size(18.dp))
                 Spacer(Modifier.width(8.dp))
                 Text(stringResource(R.string.activity_clear_all))
             }
@@ -276,7 +276,7 @@ fun DateFilterDropdown(
         modifier = modifier
     ) {
         OutlinedTextField(
-            value = selectedOption.displayName,
+            value = stringResource(selectedOption.stringResId),
             onValueChange = {},
             readOnly = true,
             label = { Text(stringResource(R.string.activity_filter_date_range)) },
@@ -288,7 +288,7 @@ fun DateFilterDropdown(
         ExposedDropdownMenu(expanded = expanded, onDismissRequest = { expanded = false }) {
             options.forEach { option ->
                 DropdownMenuItem(
-                    text = { Text(option.displayName) },
+                    text = { Text(stringResource(option.stringResId)) },
                     onClick = {
                         onOptionSelected(option)
                         expanded = false
@@ -342,12 +342,24 @@ private fun EventItem(event: com.dxbmark.nfcmanager.data.database.entities.NFCEv
                 tonalElevation = 1.dp
             ) {
                 Text(
-                    text = event.eventType.uppercase(Locale.getDefault()),
+                    text = getLocalizedEventType(event.eventType),
                     style = NothingTextStyles.Caption.copy(fontSize = MaterialTheme.typography.labelSmall.fontSize, color = badgeTextColor),
                     modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp)
                 )
             }
         }
+    }
+}
+
+@Composable
+private fun getLocalizedEventType(eventType: String): String {
+    return when (eventType) {
+        "SETTINGS" -> stringResource(R.string.event_type_settings)
+        "SYSTEM" -> stringResource(R.string.event_type_system)
+        "PRIVACY" -> stringResource(R.string.event_type_privacy)
+        "NFC_SCAN" -> stringResource(R.string.event_type_nfc_scan)
+        "SECURITY" -> stringResource(R.string.event_type_security)
+        else -> eventType.uppercase(Locale.getDefault())
     }
 }
 

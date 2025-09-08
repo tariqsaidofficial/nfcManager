@@ -246,4 +246,99 @@
     <string name="enabled_status">enabled</string>
     <string name="disabled_status">disabled</string>
 
+    <!-- Date Filter Options -->
+    <string name="date_filter_today">Today</string>
+    <string name="date_filter_last_7_days">Last 7 Days</string>
+    <string name="date_filter_last_30_days">Last 30 Days</string>
+    <string name="date_filter_all_time">All Time</string>
+
+    <!-- System Messages -->
+    <string name="mainviewmodel_initialized">MainViewModel initialized</string>
+    <string name="tag_scanned_format">Tag Scanned: %1$s (Action: %2$s)</string>
+    <string name="event_deleted">Event deleted</string>
+    <string name="all_events_cleared">All events cleared</string>
+    <string name="all_events_cleared_success">All events cleared successfully</string>
+    <string name="failed_to_delete_event">Failed to delete event: %1$s</string>
+    <string name="failed_to_clear_events">Failed to clear all events: %1$s</string>
+
+    <!-- Additional System Messages -->
+    <string name="nfc_not_supported_device">NFC not supported on this device</string>
+    <string name="privacy_alert_shown">Privacy alert shown</string>
+    <string name="privacy_alert_dismissed">Privacy alert dismissed</string>
+    <string name="reminder_interval_set_log">Reminder interval set to %1$ds</string>
+    <string name="notifications_toggled_system_log">Notifications %1$s</string>
+    <string name="vibration_toggled_system_log">Vibration %1$s</string>
+
+    <!-- Content Descriptions -->
+    <string name="export_to_csv_icon">Export to CSV</string>
+    <string name="clear_all_logs_icon">Clear All Logs</string>
+
+    <!-- Bottom Navigation -->
+    <string name="nav_nfc_manager">NFC MANAGER</string>
+    <string name="nav_activity">ACTIVITY</string>
+    <string name="nav_settings">SETTINGS</string>
+
+    <!-- Language Names for Logging -->
+    <string name="language_name_english">English</string>
+    <string name="language_name_arabic">Arabic</string>
+    <string name="language_name_german">German</string>
+    <string name="language_name_system_default">System Default</string>
+
+    <!-- Event Types -->
+    <string name="event_type_settings">SETTINGS</string>
+    <string name="event_type_system">SYSTEM</string>
+    <string name="event_type_privacy">PRIVACY</string>
+    <string name="event_type_nfc_scan">NFC SCAN</string>
+    <string name="event_type_security">SECURITY</string>
+
+    <!-- Settings Messages -->
+    <string name="auto_reminder_enabled">Auto-reminder enabled</string>
+    <string name="auto_reminder_disabled">Auto-reminder disabled</string>
+    <string name="notifications_enabled">Notifications enabled</string>
+    <string name="notifications_disabled">Notifications disabled</string>
+    <string name="vibration_enabled">Vibration enabled</string>
+    <string name="vibration_disabled">Vibration disabled</string>
+    <string name="sound_enabled">Sound (general) enabled</string>
+    <string name="sound_disabled">Sound (general) disabled</string>
+    <string name="battery_optimization_enabled">Battery optimization enabled</string>
+    <string name="battery_optimization_disabled">Battery optimization disabled</string>
+    <string name="privacy_mode_enabled">Privacy mode enabled</string>
+    <string name="privacy_mode_disabled">Privacy mode disabled</string>
+    <string name="unknown_tag_blocking_enabled">Block unknown tags enabled</string>
+    <string name="unknown_tag_blocking_disabled">Block unknown tags disabled</string>
+    <string name="settings_exported">Settings exported</string>
+    <string name="reminder_interval_set">Reminder interval set to %1$ds</string>
+    <string name="nfc_hardware_enabled">NFC hardware now enabled</string>
+    <string name="nfc_hardware_disabled">NFC hardware now disabled</string>
+
+    <!-- Time Format -->
+    <string name="time_now">now</string>
+
+    <!-- Additional Settings Messages -->
+    <string name="dark_mode_enabled">Dark mode enabled</string>
+    <string name="light_mode_enabled">Light mode enabled</string>
+    <string name="accent_color_updated">Accent color updated</string>
+    <string name="monitoring_interval_set">Monitoring interval set to %1$dms</string>
+    <string name="old_data_cleanup_completed">Old data cleanup completed (%1$d days)</string>
+
+    <!-- Additional Success Messages -->
+    <string name="old_data_cleanup_success">Old data cleaned up successfully</string>
+
+    <!-- Error Messages -->
+    <string name="failed_to_disable_monitoring">Failed to disable background monitoring: %1$s</string>
+    <string name="failed_to_toggle_auto_reminder">Failed to toggle auto-reminder: %1$s</string>
+    <string name="failed_to_update_interval">Failed to update interval: %1$s</string>
+    <string name="failed_to_toggle_notifications">Failed to toggle notifications: %1$s</string>
+    <string name="failed_to_toggle_vibration">Failed to toggle vibration: %1$s</string>
+    <string name="failed_to_toggle_sound">Failed to toggle sound: %1$s</string>
+    <string name="failed_to_set_theme">Failed to set theme: %1$s</string>
+    <string name="failed_to_update_color">Failed to update color: %1$s</string>
+    <string name="failed_to_toggle_battery_optimization">Failed to toggle battery optimization: %1$s</string>
+    <string name="monitoring_interval_range_error">Monitoring interval must be between 1000 and 10000 milliseconds</string>
+    <string name="failed_to_update_monitoring_interval">Failed to update monitoring interval: %1$s</string>
+    <string name="failed_to_toggle_privacy_mode">Failed to toggle privacy mode: %1$s</string>
+    <string name="failed_to_toggle_unknown_tag_blocking">Failed to toggle unknown tag blocking: %1$s</string>
+    <string name="failed_to_export_settings">Failed to export settings: %1$s</string>
+    <string name="failed_to_cleanup_data">Failed to cleanup data: %1$s</string>
+
 </resources>

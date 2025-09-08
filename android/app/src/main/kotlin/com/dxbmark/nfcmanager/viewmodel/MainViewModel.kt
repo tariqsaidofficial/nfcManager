@@ -4,6 +4,7 @@ import android.app.Activity
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
+import com.dxbmark.nfcmanager.R
 import com.dxbmark.nfcmanager.data.database.entities.NFCEventEntity
 import com.dxbmark.nfcmanager.data.database.entities.NFCSettingsEntity
 import com.dxbmark.nfcmanager.data.repository.NFCRepository
@@ -72,7 +73,8 @@ class MainViewModel @Inject constructor(
     
     init {
         viewModelScope.launch {
-            logEvent("SYSTEM", "MainViewModel initialized", "Shield", isImportant = false)
+            val app = getApplication<Application>()
+            logEvent(app.getString(R.string.event_type_system), app.getString(R.string.mainviewmodel_initialized), "Shield", isImportant = false)
             val appContext = getApplication<Application>().applicationContext
             // Perform NFC checks on IO dispatcher
             val hasAdapter = withContext(Dispatchers.IO) {
@@ -120,9 +122,10 @@ class MainViewModel @Inject constructor(
     }
 
     fun logRealNfcTagScan(tagIdHex: String, action: String) {
+        val app = getApplication<Application>()
         logEvent(
-            eventType = "NFC_SCAN",
-            message = "Tag Scanned: $tagIdHex (Action: $action)",
+            eventType = app.getString(R.string.event_type_nfc_scan),
+            message = app.getString(R.string.tag_scanned_format, tagIdHex, action),
             icon = "NFCTag",
             tagId = tagIdHex,
             tagType = action,
@@ -134,9 +137,11 @@ class MainViewModel @Inject constructor(
         viewModelScope.launch {
             try {
                 repository.deleteEvent(event)
-                logEvent("SYSTEM", "Event deleted", "Settings")
+                val app = getApplication<Application>()
+                logEvent(app.getString(R.string.event_type_system), app.getString(R.string.event_deleted), "Settings")
             } catch (e: Exception) {
-                updateError("Failed to delete event: ${e.message}")
+                val app = getApplication<Application>()
+                updateError(app.getString(R.string.failed_to_delete_event, e.message ?: "Unknown error"))
             }
         }
     }
@@ -145,10 +150,12 @@ class MainViewModel @Inject constructor(
         viewModelScope.launch {
             try {
                 repository.clearAllEvents()
-                logEvent("SYSTEM", "All events cleared", "Settings", isImportant = true)
-                updateSuccess("All events cleared successfully")
+                val app = getApplication<Application>()
+                logEvent(app.getString(R.string.event_type_system), app.getString(R.string.all_events_cleared), "Settings", isImportant = true)
+                updateSuccess(app.getString(R.string.all_events_cleared_success))
             } catch (e: Exception) {
-                updateError("Failed to clear events: ${e.message}")
+                val app = getApplication<Application>()
+                updateError(app.getString(R.string.failed_to_clear_events, e.message ?: "Unknown error"))
             }
         }
     }
@@ -160,9 +167,10 @@ class MainViewModel @Inject constructor(
             try {
                 val currentState = autoReminderEnabled.value
                 repository.updateAutoReminderEnabled(!currentState)
+                val app = getApplication<Application>()
                 logEvent(
-                    "SETTINGS", 
-                    "Auto-reminder ${if (!currentState) "enabled" else "disabled"}", 
+                    app.getString(R.string.event_type_settings), 
+                    if (!currentState) app.getString(R.string.auto_reminder_enabled) else app.getString(R.string.auto_reminder_disabled), 
                     "Bell"
                 )
             } catch (e: Exception) {
@@ -175,7 +183,8 @@ class MainViewModel @Inject constructor(
         viewModelScope.launch {
             try {
                 repository.updateReminderInterval(interval)
-                logEvent("SETTINGS", "Reminder interval set to ${interval}s", "Clock")
+                val app = getApplication<Application>()
+                logEvent(app.getString(R.string.event_type_settings), app.getString(R.string.reminder_interval_set, interval), "Clock")
             } catch (e: Exception) {
                 updateError("Failed to update interval: ${e.message}")
             }
@@ -187,7 +196,8 @@ class MainViewModel @Inject constructor(
             try {
                 val current = settings.value.showNotifications
                 repository.updateNotificationsEnabled(!current)
-                logEvent("SETTINGS", "Notifications ${if (!current) "enabled" else "disabled"}", "Bell")
+                val app = getApplication<Application>()
+                logEvent(app.getString(R.string.event_type_settings), if (!current) app.getString(R.string.notifications_enabled) else app.getString(R.string.notifications_disabled), "Bell")
             } catch (e: Exception) {
                 updateError("Failed to toggle notifications: ${e.message}")
             }
@@ -199,7 +209,8 @@ class MainViewModel @Inject constructor(
             try {
                 val current = settings.value.vibrationEnabled
                 repository.updateVibrationEnabled(!current)
-                logEvent("SETTINGS", "Vibration ${if (!current) "enabled" else "disabled"}", "Vibrate")
+                val app = getApplication<Application>()
+                logEvent(app.getString(R.string.event_type_settings), if (!current) app.getString(R.string.vibration_enabled) else app.getString(R.string.vibration_disabled), "Vibrate")
             } catch (e: Exception) {
                 updateError("Failed to toggle vibration: ${e.message}")
             }
@@ -233,9 +244,10 @@ class MainViewModel @Inject constructor(
 
     private fun updateNFCStatus(enabled: Boolean) {
         _uiState.value = _uiState.value.copy(isNFCEnabled = enabled)
+        val app = getApplication<Application>()
         logEvent(
-            "NFC_STATE", 
-            "NFC hardware now ${if (enabled) "enabled" else "disabled"}", 
+            app.getString(R.string.event_type_system), 
+            if (enabled) app.getString(R.string.nfc_hardware_enabled) else app.getString(R.string.nfc_hardware_disabled), 
             "Power",
             isImportant = true
         )
@@ -245,7 +257,8 @@ class MainViewModel @Inject constructor(
     private fun updateNFCSupport(supported: Boolean) {
         _uiState.value = _uiState.value.copy(isNFCSupported = supported)
         if (!supported) {
-            logEvent("SYSTEM", "NFC not supported on this device", "Shield", isImportant = true)
+            val app = getApplication<Application>()
+            logEvent(app.getString(R.string.event_type_system), app.getString(R.string.nfc_not_supported_device), "Shield", isImportant = true)
         }
     }
 
@@ -256,14 +269,16 @@ class MainViewModel @Inject constructor(
     fun showPrivacyNotification(show: Boolean) {
         _uiState.value = _uiState.value.copy(showPrivacyNotification = show)
         if (show) {
-            logEvent("PRIVACY", "Privacy alert shown", "Bell", isImportant = true)
+            val app = getApplication<Application>()
+            logEvent(app.getString(R.string.event_type_privacy), app.getString(R.string.privacy_alert_shown), "Bell", isImportant = true)
         }
     }
     
     fun dismissPrivacyNotification() {
         _uiState.value = _uiState.value.copy(showPrivacyNotification = false)
         updateLastActivity()
-        logEvent("PRIVACY", "Privacy alert dismissed", "Shield")
+        val app = getApplication<Application>()
+        logEvent(app.getString(R.string.event_type_privacy), app.getString(R.string.privacy_alert_dismissed), "Shield")
     }
     
     // ==================== UI STATE HELPERS ====================
@@ -310,7 +325,7 @@ class MainViewModel @Inject constructor(
     fun formatRelativeTime(date: Date): String {
         val seconds = (System.currentTimeMillis() - date.time) / 1000
         return when {
-            seconds < 60 -> "now"
+            seconds < 60 -> getApplication<Application>().getString(R.string.time_now)
             seconds < 3600 -> "${seconds / 60}m ago"
             seconds < 86400 -> "${seconds / 3600}h ago"
             else -> "${seconds / 86400}d ago"

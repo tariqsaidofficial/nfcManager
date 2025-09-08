@@ -247,4 +247,79 @@
     <string name="enabled_status">aktiviert</string>
     <string name="disabled_status">deaktiviert</string>
 
+    <!-- Date Filter Options -->
+    <string name="date_filter_today">Heute</string>
+    <string name="date_filter_last_7_days">Letzte 7 Tage</string>
+    <string name="date_filter_last_30_days">Letzte 30 Tage</string>
+    <string name="date_filter_all_time">Alle Zeit</string>
+
+    <!-- System Messages -->
+    <string name="mainviewmodel_initialized">MainViewModel initialisiert</string>
+    <string name="tag_scanned_format">Tag gescannt: %1$s (Aktion: %2$s)</string>
+    <string name="event_deleted">Ereignis gelöscht</string>
+    <string name="all_events_cleared">Alle Ereignisse gelöscht</string>
+    <string name="all_events_cleared_success">Alle Ereignisse erfolgreich gelöscht</string>
+    <string name="failed_to_delete_event">Fehler beim Löschen des Ereignisses: %1$s</string>
+    <string name="failed_to_clear_events">Fehler beim Löschen aller Ereignisse: %1$s</string>
+
+    <!-- Additional System Messages -->
+    <string name="nfc_not_supported_device">NFC wird auf diesem Gerät nicht unterstützt</string>
+    <string name="privacy_alert_shown">Datenschutzwarnung angezeigt</string>
+    <string name="privacy_alert_dismissed">Datenschutzwarnung geschlossen</string>
+    <string name="reminder_interval_set_log">Erinnerungsintervall auf %1$ds eingestellt</string>
+    <string name="notifications_toggled_system_log">Benachrichtigungen %1$s</string>
+    <string name="vibration_toggled_system_log">Vibration %1$s</string>
+
+    <!-- Content Descriptions -->
+    <string name="export_to_csv_icon">Nach CSV exportieren</string>
+    <string name="clear_all_logs_icon">Alle Protokolle löschen</string>
+
+    <!-- Bottom Navigation -->
+    <string name="nav_nfc_manager">NFC MANAGER</string>
+    <string name="nav_activity">AKTIVITÄT</string>
+    <string name="nav_settings">EINSTELLUNGEN</string>
+
+    <!-- Language Names for Logging -->
+    <string name="language_name_english">Englisch</string>
+    <string name="language_name_arabic">Arabisch</string>
+    <string name="language_name_german">Deutsch</string>
+    <string name="language_name_system_default">Systemstandard</string>
+
+    <!-- Event Types -->
+    <string name="event_type_settings">EINSTELLUNGEN</string>
+    <string name="event_type_system">SYSTEM</string>
+    <string name="event_type_privacy">DATENSCHUTZ</string>
+    <string name="event_type_nfc_scan">NFC SCAN</string>
+    <string name="event_type_security">SICHERHEIT</string>
+
+    <!-- Settings Messages -->
+    <string name="auto_reminder_enabled">Auto-Erinnerung aktiviert</string>
+    <string name="auto_reminder_disabled">Auto-Erinnerung deaktiviert</string>
+    <string name="notifications_enabled">Benachrichtigungen aktiviert</string>
+    <string name="notifications_disabled">Benachrichtigungen deaktiviert</string>
+    <string name="vibration_enabled">Vibration aktiviert</string>
+    <string name="vibration_disabled">Vibration deaktiviert</string>
+    <string name="sound_enabled">Ton (allgemein) aktiviert</string>
+    <string name="sound_disabled">Ton (allgemein) deaktiviert</string>
+    <string name="battery_optimization_enabled">Batterieoptimierung aktiviert</string>
+    <string name="battery_optimization_disabled">Batterieoptimierung deaktiviert</string>
+    <string name="privacy_mode_enabled">Datenschutzmodus aktiviert</string>
+    <string name="privacy_mode_disabled">Datenschutzmodus deaktiviert</string>
+    <string name="unknown_tag_blocking_enabled">Unbekannte Tags blockieren aktiviert</string>
+    <string name="unknown_tag_blocking_disabled">Unbekannte Tags blockieren deaktiviert</string>
+    <string name="settings_exported">Einstellungen exportiert</string>
+    <string name="reminder_interval_set">Erinnerungsintervall auf %1$ds gesetzt</string>
+    <string name="nfc_hardware_enabled">NFC-Hardware jetzt aktiviert</string>
+    <string name="nfc_hardware_disabled">NFC-Hardware jetzt deaktiviert</string>
+
+    <!-- Time Format -->
+    <string name="time_now">jetzt</string>
+
+    <!-- Additional Settings Messages -->
+    <string name="dark_mode_enabled">Dunkler Modus aktiviert</string>
+    <string name="light_mode_enabled">Heller Modus aktiviert</string>
+    <string name="accent_color_updated">Akzentfarbe aktualisiert</string>
+    <string name="monitoring_interval_set">Überwachungsintervall auf %1$dms gesetzt</string>
+    <string name="old_data_cleanup_completed">Alte Daten bereinigt (%1$d Tage)</string>
+
 </resources>

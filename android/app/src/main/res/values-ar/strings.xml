@@ -245,4 +245,79 @@
     <string name="enabled_status">مُفعّل</string>
     <string name="disabled_status">مُعطّل</string>
 
+    <!-- Date Filter Options -->
+    <string name="date_filter_today">اليوم</string>
+    <string name="date_filter_last_7_days">آخر 7 أيام</string>
+    <string name="date_filter_last_30_days">آخر 30 يوماً</string>
+    <string name="date_filter_all_time">جميع الأوقات</string>
+
+    <!-- System Messages -->
+    <string name="mainviewmodel_initialized">تم تهيئة MainViewModel</string>
+    <string name="tag_scanned_format">تم مسح العلامة: %1$s (الإجراء: %2$s)</string>
+    <string name="event_deleted">تم حذف الحدث</string>
+    <string name="all_events_cleared">تم مسح جميع الأحداث</string>
+    <string name="all_events_cleared_success">تم مسح جميع الأحداث بنجاح</string>
+    <string name="failed_to_delete_event">فشل في حذف الحدث: %1$s</string>
+    <string name="failed_to_clear_events">فشل في مسح جميع الأحداث: %1$s</string>
+
+    <!-- Additional System Messages -->
+    <string name="nfc_not_supported_device">NFC غير مدعوم على هذا الجهاز</string>
+    <string name="privacy_alert_shown">تم عرض تنبيه الخصوصية</string>
+    <string name="privacy_alert_dismissed">تم إغلاق تنبيه الخصوصية</string>
+    <string name="reminder_interval_set_log">تم تعيين فاصل التذكير إلى %1$d ث</string>
+    <string name="notifications_toggled_system_log">الإشعارات %1$s</string>
+    <string name="vibration_toggled_system_log">الاهتزاز %1$s</string>
+
+    <!-- Content Descriptions -->
+    <string name="export_to_csv_icon">تصدير إلى CSV</string>
+    <string name="clear_all_logs_icon">مسح جميع السجلات</string>
+
+    <!-- Bottom Navigation -->
+    <string name="nav_nfc_manager">مدير NFC</string>
+    <string name="nav_activity">النشاط</string>
+    <string name="nav_settings">الإعدادات</string>
+
+    <!-- Language Names for Logging -->
+    <string name="language_name_english">الإنجليزية</string>
+    <string name="language_name_arabic">العربية</string>
+    <string name="language_name_german">الألمانية</string>
+    <string name="language_name_system_default">افتراضي النظام</string>
+
+    <!-- Event Types -->
+    <string name="event_type_settings">الإعدادات</string>
+    <string name="event_type_system">النظام</string>
+    <string name="event_type_privacy">الخصوصية</string>
+    <string name="event_type_nfc_scan">مسح NFC</string>
+    <string name="event_type_security">الأمان</string>
+
+    <!-- Settings Messages -->
+    <string name="auto_reminder_enabled">تم تفعيل التذكير التلقائي</string>
+    <string name="auto_reminder_disabled">تم إلغاء التذكير التلقائي</string>
+    <string name="notifications_enabled">تم تفعيل الإشعارات</string>
+    <string name="notifications_disabled">تم إلغاء الإشعارات</string>
+    <string name="vibration_enabled">تم تفعيل الاهتزاز</string>
+    <string name="vibration_disabled">تم إلغاء الاهتزاز</string>
+    <string name="sound_enabled">تم تفعيل الصوت (عام)</string>
+    <string name="sound_disabled">تم إلغاء الصوت (عام)</string>
+    <string name="battery_optimization_enabled">تم تفعيل تحسين البطارية</string>
+    <string name="battery_optimization_disabled">تم إلغاء تحسين البطارية</string>
+    <string name="privacy_mode_enabled">تم تفعيل وضع الخصوصية</string>
+    <string name="privacy_mode_disabled">تم إلغاء وضع الخصوصية</string>
+    <string name="unknown_tag_blocking_enabled">تم تفعيل حظر العلامات المجهولة</string>
+    <string name="unknown_tag_blocking_disabled">تم إلغاء حظر العلامات المجهولة</string>
+    <string name="settings_exported">تم تصدير الإعدادات</string>
+    <string name="reminder_interval_set">تم تعيين فاصل التذكير إلى %1$d ثانية</string>
+    <string name="nfc_hardware_enabled">تم تفعيل جهاز NFC الآن</string>
+    <string name="nfc_hardware_disabled">تم إلغاء جهاز NFC الآن</string>
+
+    <!-- Time Format -->
+    <string name="time_now">الآن</string>
+
+    <!-- Additional Settings Messages -->
+    <string name="dark_mode_enabled">تم تفعيل الوضع المظلم</string>
+    <string name="light_mode_enabled">تم تفعيل الوضع المضيء</string>
+    <string name="accent_color_updated">تم تحديث لون التمييز</string>
+    <string name="monitoring_interval_set">تم تعيين فاصل المراقبة إلى %1$d مللي ثانية</string>
+    <string name="old_data_cleanup_completed">تم تنظيف البيانات القديمة (%1$d أيام)</string>
+
 </resources>
