@@ -44,9 +44,6 @@ import kotlinx.coroutines.launch
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
-    // @Inject
-    // lateinit var repository: NFCRepository // No longer injecting repository directly
-
     private val mainViewModel: MainViewModel by viewModels()
     private val settingsViewModel: SettingsViewModel by viewModels()
 
@@ -58,25 +55,16 @@ class MainActivity : ComponentActivity() {
         private const val TAG = "MainActivityFull"
     }
 
-    // Removed updateContextWithLocale function, LocaleUtils handles this
-
     override fun attachBaseContext(newBase: Context) {
-        // Get language code from NfcManagerApplication (set during its onCreate)
-        val languageCode = NfcManagerApplication.currentLanguageCode
-        Log.d(TAG, "attachBaseContext: Applying language code from NfcManagerApplication: $languageCode")
-        val contextWithLocale = LocaleUtils.wrapContext(newBase, languageCode)
-        super.attachBaseContext(contextWithLocale)
+        // Use LocaleUtils.onAttach to get the localized context
+        // This already fetches currentLanguageCode from NfcManagerApplication internally
+        Log.d(TAG, "attachBaseContext: Wrapping context with LocaleUtils.onAttach")
+        super.attachBaseContext(LocaleUtils.onAttach(newBase))
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Log.d(TAG, "onCreate: MainActivity (FULL HILT) starting...")
-
-        // Apply application wide locale on initial creation if needed, though attachBaseContext handles activity
-        // If NfcManagerApplication.currentLanguageCode was null initially,
-        // and then set, a recreate would fix it.
-        // LocaleUtils.setApplicationLocale(applicationContext, NfcManagerApplication.currentLanguageCode)
-
 
         enableEdgeToEdge()
         setupNFC()
@@ -100,7 +88,7 @@ class MainActivity : ComponentActivity() {
 
         val intent = Intent(this, javaClass).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
         val pendingIntentFlag = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-            PendingIntent.FLAG_MUTABLE // Or FLAG_IMMUTABLE if the intent itself never changes
+            PendingIntent.FLAG_MUTABLE 
         } else {
             PendingIntent.FLAG_UPDATE_CURRENT
         }
@@ -108,7 +96,7 @@ class MainActivity : ComponentActivity() {
 
         val ndefIntentFilter = IntentFilter(NfcAdapter.ACTION_NDEF_DISCOVERED).apply {
             try {
-                // addDataType("*/*") // Example: filter for specific NDEF records
+                // addDataType("*/*") 
             } catch (e: IntentFilter.MalformedMimeTypeException) {
                 Log.e(TAG, "Failed to add MIME type for NDEF_DISCOVERED filter", e)
                 throw RuntimeException("Failed to add MIME type.", e)
@@ -174,6 +162,8 @@ class MainActivity : ComponentActivity() {
         val settings by settingsViewModelInstance.settings.collectAsState()
         val isCurrentlyDarkTheme = settings.isDarkMode
 
+        // The Locale is now applied at the Activity and Application level.
+        // Jetpack Compose will pick up the correct Locale from the Context implicitly.
         NothingOSTheme(darkTheme = isCurrentlyDarkTheme) {
             ApplySystemBarColors(isDarkTheme = isCurrentlyDarkTheme)
             Surface(

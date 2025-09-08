@@ -1,11 +1,13 @@
 package com.dxbmark.nfcmanager
 
 import android.app.Application
+import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.util.Log
 import com.dxbmark.nfcmanager.data.repository.NFCRepository
 import com.dxbmark.nfcmanager.services.NfcMonitoringService
+import com.dxbmark.nfcmanager.utils.LocaleUtils // <<< IMPORT LocaleUtils
 import dagger.hilt.android.HiltAndroidApp
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -20,21 +22,22 @@ class NfcManagerApplication : Application() {
     @Inject
     lateinit var repository: NFCRepository
 
-    // Changed to IO dispatcher for direct repository access during init
     private val applicationScope = CoroutineScope(SupervisorJob() + Dispatchers.IO)
 
     companion object {
         private const val TAG = "NfcManagerApplication"
         var currentLanguageCode: String? = null
-            private set // Make setter private to control updates from within this class
+            private set
 
         /**
-         * Updates the current language code for the application.
+         * Updates the current language code for the application and applies it to the context.
          * This should be called when the user changes the language in settings.
          */
-        fun updateLanguageCode(newLanguageCode: String?) {
-            Log.d(TAG, "updateLanguageCode: Updating currentLanguageCode to $newLanguageCode")
+        fun updateLanguageCode(context: Context, newLanguageCode: String?) {
+            Log.d(TAG, "updateLanguageCode: Updating currentLanguageCode to $newLanguageCode and applying to context")
             currentLanguageCode = newLanguageCode
+            // Update the application's own context/resources immediately
+            LocaleUtils.updateApplicationContext(context.applicationContext, newLanguageCode)
         }
     }
 
@@ -42,19 +45,21 @@ class NfcManagerApplication : Application() {
         super.onCreate()
         Log.d(TAG, "onCreate: Application starting")
 
-        applicationScope.launch { // Coroutine now runs on IO dispatcher
-            Log.d(TAG, "onCreate: Coroutine for settings init, locale Caching, and service start.")
+        applicationScope.launch { 
+            Log.d(TAG, "onCreate: Coroutine for settings init, locale Caching, service start, and applying locale.")
             try {
-                // Initialize settings if needed
                 repository.initializeSettingsIfNeeded()
                 Log.d(TAG, "onCreate: initializeSettingsIfNeeded completed.")
 
-                // Check current settings and cache the language code
-                val settings = repository.getSettings().first() // Synchronous for this single value in IO scope
+                val settings = repository.getSettings().first() 
                 currentLanguageCode = settings.selectedLanguageCode
-                Log.d(TAG, "onCreate: Cached language code: $currentLanguageCode")
+                Log.d(TAG, "onCreate: Cached language code from repository: $currentLanguageCode")
 
-                // Background service starting logic (remains the same)
+                // Apply the loaded language to the Application's context
+                // This ensures the application resources are up-to-date with the persisted language setting on startup
+                LocaleUtils.updateApplicationContext(this@NfcManagerApplication, currentLanguageCode)
+                Log.d(TAG, "onCreate: Applied cached language to application context.")
+
                 if (settings.backgroundServiceMonitoringEnabled) {
                     Log.d(TAG, "onCreate: Background service monitoring is enabled, attempting to start service...")
                     val intent = Intent(applicationContext, NfcMonitoringService::class.java).apply {
@@ -72,7 +77,6 @@ class NfcManagerApplication : Application() {
                 }
                 Log.d(TAG, "onCreate: Coroutine finished successfully.")
             } catch (e: Exception) {
-                // Log critical exceptions during application startup
                 Log.e(TAG, "onCreate: CRITICAL EXCEPTION IN APPLICATION COROUTINE", e)
             }
         }

@@ -256,7 +256,7 @@ nfcManager/
 - ✅ **Android SDK Tools**: ADB, device management
 
 ### **Core Libraries (Official)**
-- ✅ **Jetpack Compose BOM 2023.10.01**: Latest UI toolkit with Material 3
+- ✅ **Jetpack Compose BOM 2024.02.02**: Latest UI toolkit with Material 3
 - ✅ **Room Database 2.6.0**: Official SQLite abstraction for local data
 - ✅ **ViewModel & LiveData 2.7.0**: MVVM architecture components (ViewModel with StateFlow used)
 - ✅ **Navigation Component 2.7.5**: Type-safe navigation between screens

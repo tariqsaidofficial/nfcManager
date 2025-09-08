@@ -22,7 +22,7 @@ import kotlinx.coroutines.launch
 
 @HiltViewModel
 class SettingsViewModel @Inject constructor(
-    private val app: Application,
+    private val app: Application, // 'app' is the Application context
     private val repository: NFCRepository
 ) : AndroidViewModel(app) {
 
@@ -38,7 +38,6 @@ class SettingsViewModel @Inject constructor(
     private val _requestStoragePermissionChannel = MutableSharedFlow<Unit>(replay = 0)
     val requestStoragePermissionFlow = _requestStoragePermissionChannel.asSharedFlow()
 
-    // <<< SHARED FLOW FOR ACTIVITY RECREATION >>>
     private val _recreateActivityChannel = MutableSharedFlow<Unit>(replay = 0)
     val recreateActivityFlow = _recreateActivityChannel.asSharedFlow()
 
@@ -48,6 +47,74 @@ class SettingsViewModel @Inject constructor(
             started = SharingStarted.WhileSubscribed(5000),
             initialValue = NFCSettingsEntity()
         )
+
+    // ... (other functions remain the same) ...
+
+    fun updateSelectedLanguage(languageCode: String?) {
+        viewModelScope.launch {
+            try {
+                updateLoading(true)
+                val oldLanguageCode = settings.value.selectedLanguageCode
+                // Use 'app' (Application context) directly passed to the ViewModel's constructor
+                val context: Context = app.applicationContext 
+
+                fun getDisplayName(code: String?): String {
+                    return availableLanguages.firstOrNull { it.code == code }?.let {
+                        context.getString(it.nameResId)
+                    } ?: context.getString(R.string.language_system_default)
+                }
+
+                val currentLanguageDisplayName = getDisplayName(oldLanguageCode)
+                val newLanguageDisplayName = getDisplayName(languageCode)
+
+                if (oldLanguageCode == languageCode) {
+                    updateSuccess("Language is already set to $currentLanguageDisplayName.")
+                    return@launch
+                }
+
+                repository.updateSelectedLanguageCode(languageCode)
+                // Pass the application context to the updated static method
+                NfcManagerApplication.updateLanguageCode(app.applicationContext, languageCode) 
+
+                repository.logEvent(
+                    "SETTINGS",
+                    "Language changed from $currentLanguageDisplayName to $newLanguageDisplayName",
+                    "Language"
+                )
+                updateSuccess("Language updated to $newLanguageDisplayName. Restarting for changes to take effect.")
+                _recreateActivityChannel.emit(Unit) 
+            } catch (e: Exception) {
+                updateError("Failed to update language: ${e.message}")
+            } finally {
+                updateLoading(false)
+            }
+        }
+    }
+
+    fun resetAllSettings() {
+        viewModelScope.launch {
+            try {
+                updateLoading(true)
+                repository.resetAllSettings()
+                // Pass context when resetting language in Application class
+                NfcManagerApplication.updateLanguageCode(app.applicationContext, null) 
+                repository.logEvent(
+                    "SETTINGS",
+                    "All settings reset to defaults",
+                    "Settings",
+                    isImportant = true
+                )
+                updateSuccess("All settings reset to defaults")
+                _recreateActivityChannel.emit(Unit) // Also recreate on reset
+            } catch (e: Exception) {
+                updateError("Failed to reset settings: ${e.message}")
+            } finally {
+                updateLoading(false)
+            }
+        }
+    }
+
+    // ... (rest of the ViewModel code) ...
 
     private fun checkNfcPermissions(): Boolean {
         return ContextCompat.checkSelfPermission(
@@ -92,47 +159,6 @@ class SettingsViewModel @Inject constructor(
                 updateSuccess(message)
             } catch (e: Exception) {
                 updateError("Failed to update notification sound: ${e.message}")
-            } finally {
-                updateLoading(false)
-            }
-        }
-    }
-
-    fun updateSelectedLanguage(languageCode: String?) {
-        viewModelScope.launch {
-            try {
-                updateLoading(true)
-                val oldLanguageCode = settings.value.selectedLanguageCode
-                val context: Context = getApplication<Application>().applicationContext
-
-                // Function to get display name based on code
-                fun getDisplayName(code: String?): String {
-                    return availableLanguages.firstOrNull { it.code == code }?.let {
-                        context.getString(it.nameResId)
-                    } ?: context.getString(R.string.language_system_default)
-                }
-
-                val currentLanguageDisplayName = getDisplayName(oldLanguageCode)
-                val newLanguageDisplayName = getDisplayName(languageCode)
-
-                if (oldLanguageCode == languageCode) {
-                    updateSuccess("Language is already set to $currentLanguageDisplayName.")
-                    return@launch
-                }
-
-                repository.updateSelectedLanguageCode(languageCode)
-                NfcManagerApplication.updateLanguageCode(languageCode) // <<< UPDATE IN APPLICATION CLASS
-
-                repository.logEvent(
-                    "SETTINGS",
-                    "Language changed from $currentLanguageDisplayName to $newLanguageDisplayName",
-                    "Language"
-                )
-                // Use the display name for the toast message
-                updateSuccess("Language updated to $newLanguageDisplayName. Restarting for changes to take effect.")
-                _recreateActivityChannel.emit(Unit) // <<< EMIT EVENT TO RECREATE ACTIVITY >>>
-            } catch (e: Exception) {
-                updateError("Failed to update language: ${e.message}")
             } finally {
                 updateLoading(false)
             }
@@ -450,27 +476,6 @@ class SettingsViewModel @Inject constructor(
         }
     }
 
-    fun resetAllSettings() {
-        viewModelScope.launch {
-            try {
-                updateLoading(true)
-                repository.resetAllSettings()
-                NfcManagerApplication.updateLanguageCode(null) // Reset in Application class as well
-                repository.logEvent(
-                    "SETTINGS",
-                    "All settings reset to defaults",
-                    "Settings",
-                    isImportant = true
-                )
-                updateSuccess("All settings reset to defaults")
-                _recreateActivityChannel.emit(Unit) // Also recreate on reset
-            } catch (e: Exception) {
-                updateError("Failed to reset settings: ${e.message}")
-            } finally {
-                updateLoading(false)
-            }
-        }
-    }
 
     fun cleanupOldData(daysToKeep: Int = 30) {
         viewModelScope.launch {

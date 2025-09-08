@@ -11,8 +11,8 @@ We provide security updates for the following versions:
 | Version | Supported          | End of Support |
 | ------- | ------------------ | -------------- |
 | 1.0.x   | ✅ Yes            | TBD            |
-| 0.9.x   | ❌ No             | 2025-01-01     |
-| < 0.9   | ❌ No             | 2024-12-01     |
+| 0.9.x   | ❌ No             | 2025-09-01     |
+| < 0.9   | ❌ No             | 2025-08-01     |
 
 ## 🛡️ Security Features
 
@@ -193,12 +193,6 @@ The following are considered out of scope for security reports:
 - Permission-based access control
 - ProGuard obfuscation enabled
 - Certificate pinning implemented
-
-### Planned Security Enhancements
-- **v1.1.0**: Enhanced encryption for settings
-- **v1.2.0**: Biometric authentication option
-- **v1.3.0**: Advanced threat detection
-- **v2.0.0**: Zero-knowledge architecture
 
 ## 🔒 Compliance and Standards
 

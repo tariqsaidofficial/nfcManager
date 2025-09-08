@@ -170,7 +170,7 @@ The first alpha release of NFC Manager, a privacy-focused NFC management applica
 - **Settings**: 20+ configurable options
 - **Database Tables**: 2 optimized tables
 
-## [0.9.0] - 2024-12-15
+## [0.9.0] - 2025-08-15
 
 ### 🧪 Beta Release
 
@@ -192,7 +192,7 @@ Pre-release version for testing and feedback collection.
 - Memory leaks in background service
 - UI responsiveness problems
 
-## [0.8.0] - 2024-11-30
+## [0.8.0] - 2025-08-01
 
 ### 🔬 Alpha Release
 
@@ -212,25 +212,25 @@ Early development version for internal testing.
 
 ## Development Timeline
 
-### Phase 1: Foundation (September - October 2024)
+### Phase 1: Foundation (September 2025)
 - ✅ Project setup and architecture design
 - ✅ Core NFC functionality implementation
 - ✅ Basic UI with Nothing OS theming
 - ✅ Database schema and data layer
 
-### Phase 2: Features (October - November 2024)
+### Phase 2: Features (October - November 2025)
 - ✅ Background monitoring service
 - ✅ Advanced settings and customization
 - ✅ Multi-language support implementation
 - ✅ Activity logging and filtering
 
-### Phase 3: Polish (November - December 2024)
+### Phase 3: Polish (November - December 2025)
 - ✅ UI refinements and animations
 - ✅ Performance optimizations
 - ✅ Comprehensive testing
 - ✅ Documentation completion
 
-### Phase 4: Release (December 2024 - January 2025)
+### Phase 4: Release (December 2025 - January 2026)
 - ✅ Beta testing and feedback integration
 - ✅ Final bug fixes and optimizations
 - ✅ Release preparation and deployment
