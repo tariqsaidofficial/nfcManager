@@ -133,7 +133,7 @@ nfcManager/
 ├── android/                     # Android project root
 │   ├── app/
 │   │   ├── src/main/
-│   │   │   ├── kotlin/com/nothingos/nfcmanager/
+│   │   │   ├── kotlin/com/dxbmark/nfcmanager/
 │   │   │   │   ├── data/        # Data layer
 │   │   │   │   │   ├── database/
 │   │   │   │   │   │   ├── entities/

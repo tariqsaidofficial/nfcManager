@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- App Identity -->
+    <string name="app_name">مدير NFC</string>
+
+    <!-- Main Interface -->
+    <string name="home_title">مدير NFC</string>
+    <string name="nfc_monitoring">مراقبة NFC</string>
+    <string name="privacy_protection">حماية الخصوصية</string>
+
+    <!-- Settings -->
+    <string name="settings_title">الإعدادات</string>
+    <string name="reminder_interval">الفاصل الزمني للتذكير</string> <!-- settings_item_reminder_interval_title -->
+    <string name="privacy_mode">وضع الخصوصية</string> <!-- settings_item_privacy_mode_title -->
+    <string name="notifications">الإشعارات</string>
+
+    <!-- Alert Intervals -->
+    <string name="interval_5_seconds">5 ثوانٍ</string>
+    <string name="interval_10_seconds">10 ثوانٍ</string>
+    <string name="interval_15_seconds">15 ثانية</string>
+    <string name="interval_20_seconds">20 ثانية</string>
+    <string name="interval_30_seconds">30 ثانية</string>
+    <string name="interval_40_seconds">40 ثانية</string>
+    <string name="interval_50_seconds">50 ثانية</string>
+    <string name="interval_60_seconds">60 ثانية</string> <!-- أو "دقيقة واحدة" إذا كان مفضلاً -->
+    <string name="custom_interval">فاصل زمني مخصص</string>
+
+    <!-- Security Messages -->
+    <string name="nfc_enabled_too_long">تقنية NFC مُفعلة لفترة طويلة. يُرجى النظر في تعطيلها لحماية خصوصيتك.</string>
+    <string name="nfc_privacy_warning">يمكن استخدام تقنية NFC للمدفوعات غير المصرح بها أو الوصول إلى البيانات.</string>
+
+    <!-- Activity -->
+    <string name="activity_title">سجل الأنشطة</string>
+    <string name="nfc_events">أحداث NFC</string>
+
+    <!-- General -->
+    <string name="enabled">مُفعّل</string>
+    <string name="disabled">مُعطّل</string>
+    <string name="ok">موافق</string>
+    <string name="cancel">إلغاء</string>
+    <string name="save">حفظ</string>
+
+    <!-- Language Settings -->
+    <string name="settings_language_title">اللغة</string>
+    <string name="language_system_default">افتراضي النظام</string>
+    <string name="language_english">الإنجليزية</string>
+    <string name="language_arabic">العربية</string>
+    <string name="language_spanish">الإسبانية (Español)</string>
+    <string name="language_french">الفرنسية (Français)</string>
+    <string name="language_german">الألمانية (Deutsch)</string>
+    <string name="language_russian_soon">الروسية (قريباً)</string>
+    <string name="language_chinese_mandarin_soon">الصينية المبسطة (قريباً)</string>
+    <string name="language_hindi_soon">الهندية (قريباً)</string>
+    <string name="language_filipino_soon">الفلبينية (قريباً)</string>
+
+    <!-- Dialog title for language selection -->
+    <string name="dialog_select_language_title">اختر اللغة</string>
+
+    <!-- Settings Screen (New additions from grep & manual additions) -->
+    <string name="interval_seconds_format">%1$d ث</string> <!-- For dynamic interval display e.g., "10ث" -->
+    <string name="settings_custom_interval_label">فاصل زمني مخصص (5-300 ثانية)</string>
+    <string name="settings_error_interval_range">يجب أن يكون الفاصل الزمني رقمًا بين 5-300.</string>
+    
+    <!-- Toast Messages -->
+    <string name="settings_toast_notification_perm_granted">تم منح إذن الإشعارات</string>
+    <string name="settings_toast_notification_perm_denied">تم رفض إذن الإشعارات</string>
+    <string name="settings_toast_nfc_perm_granted">تم منح إذن NFC. يرجى تبديل المراقبة مرة أخرى إذا لزم الأمر.</string>
+    <string name="settings_toast_nfc_perm_denied">تم رفض إذن NFC. لا يمكن تمكين المراقبة في الخلفية.</string>
+
+    <!-- Screen and Section Titles -->
+    <string name="settings_screen_header_title">الإعدادات</string>
+    <string name="settings_section_display_title">العرض</string>
+    <string name="settings_section_language_region_title">اللغة والمنطقة</string> <!-- New Section Title -->
+    <string name="settings_section_notifications_alerts_title">الإشعارات والتنبيهات</string>
+    <string name="settings_section_privacy_security_title">الخصوصية والأمان</string>
+    <string name="settings_section_performance_title">الأداء</string>
+
+    <!-- Theme Options -->
+    <string name="settings_item_theme_title">المظهر</string>
+    <string name="settings_item_dark_mode_title">الوضع الداكن</string>
+    <string name="settings_item_dark_mode_subtitle">مريح للعينين</string>
+    <string name="settings_item_light_mode_title">الوضع الفاتح</string>
+    <string name="settings_item_light_mode_subtitle">المظهر الكلاسيكي</string>
+
+    <!-- General Settings Items (Titles and Subtitles) -->
+    <string name="settings_item_auto_reminder_title">تذكير تلقائي</string>
+    <string name="settings_item_auto_reminder_subtitle">تنبيهات خصوصية عند بقاء NFC مفعّلاً</string>
+
+    <string name="settings_item_reminder_interval_subtitle">عدد مرات التذكير بشأن خصوصية NFC</string>
+    <string name="settings_item_reminder_interval_current_label">الحالي: %1$d ث</string>
+
+    <string name="settings_item_show_notifications_title">عرض الإشعارات</string>
+    <string name="settings_item_show_notifications_subtitle">عرض جميع إشعارات الخصوصية والحالة</string>
+
+    <string name="settings_item_vibration_alerts_title">اهتزاز للتنبيهات</string>
+    <string name="settings_item_vibration_alerts_subtitle">ردود فعل لمسية لتنبيهات الخصوصية</string>
+
+    <string name="settings_item_enable_sounds_title">تمكين الأصوات</string>
+    <string name="settings_item_enable_sounds_subtitle">تشغيل أصوات للتنبيهات والإشعارات</string>
+
+    <string name="settings_item_notification_sound_subtitle">تخصيص الصوت المحدد للإشعارات</string>
+
+    <string name="settings_item_privacy_mode_subtitle">حماية خصوصية معززة</string>
+
+    <string name="settings_item_block_unknown_tags_title">حظر العلامات غير المعروفة</string>
+    <string name="settings_item_block_unknown_tags_subtitle">حظر علامات NFC غير المعروفة تلقائيًا</string>
+
+    <string name="settings_item_background_monitoring_title">مراقبة NFC في الخلفية</string>
+    <string name="settings_item_background_monitoring_subtitle">تراقب حالة NFC باستمرار. يتطلب إذن NFC.</string>
+
+    <string name="settings_item_battery_optimization_title">تحسين البطارية</string>
+    <string name="settings_item_battery_optimization_subtitle">تحسين لأداء بطارية أفضل</string>
+
+    <!-- Buttons -->
+    <string name="settings_button_export_settings">تصدير الإعدادات</string>
+    <string name="settings_button_reset_defaults">إعادة التعيين إلى الافتراضيات</string>
+
+    <!-- Design Info Card -->
+    <string name="settings_card_design_info_title">تصميم مستوحى من Nothing OS</string>
+    <string name="settings_card_design_info_subtitle">مبني بأدوات أندرويد الرسمية: Kotlin، Jetpack Compose، قاعدة بيانات Room، وهيكلية MVVM.</string>
+    
+    <!-- Content Descriptions -->
+    <string name="settings_cd_navigate">انتقال</string>
+
+    <!-- Notification Sound Settings Screen (Existing from grep) -->
+    <string name="notification_sound_title">صوت الإشعار</string> <!-- settings_item_notification_sound_title -->
+    <string name="notification_sound_use_system_default">استخدام صوت النظام الافتراضي</string>
+    <string name="notification_sound_choose_custom">اختيار صوت مخصص</string>
+
+    <!-- Activity Screen (Existing from grep) -->
+    <string name="activity_clear_all">مسح الكل</string>
+    <string name="activity_filter_event_type">نوع الحدث</string>
+    <string name="activity_export_csv">تصدير CSV</string>
+    <string name="activity_filter_date_range">النطاق الزمني</string>
+
+</resources>

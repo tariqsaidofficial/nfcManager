@@ -163,7 +163,7 @@ nfcManager/
 ├── android/                                    # 🏗️ Android Project
 │   ├── app/
 │   │   ├── src/main/
-│   │   │   ├── kotlin/com/nothingos/nfcmanager/
+│   │   │   ├── kotlin/com/dxbmark/nfcmanager/
 │   │   │   │   ├── data/                       # 📊 Data Layer
 │   │   │   │   │   ├── database/               # Room Database
 │   │   │   │   │   │   ├── entities/           # Database Entities

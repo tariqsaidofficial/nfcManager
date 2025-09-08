@@ -31,7 +31,7 @@ android {
     ndkVersion rootProject.ext.ndkVersion
     compileSdkVersion rootProject.ext.compileSdkVersion
 
-    namespace 'com.nothingos.nfcmanager'
+    namespace 'com.dxbmark.nfcmanager'
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_17
@@ -52,7 +52,7 @@ android {
     }
 
     defaultConfig {
-        applicationId 'com.nothingos.nfcmanager'
+        applicationId 'com.dxbmark.nfcmanager'
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1

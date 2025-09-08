@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- App Identity -->
+    <string name="app_name">NFC Manager</string>
+
+    <!-- Main Interface -->
+    <string name="home_title">NFC Manager</string>
+    <string name="nfc_monitoring">NFC Monitoring</string>
+    <string name="privacy_protection">Privacy Protection</string>
+
+    <!-- Settings -->
+    <string name="settings_title">Settings</string>
+    <string name="reminder_interval">Reminder Interval</string>
+    <string name="privacy_mode">Privacy Mode</string>
+    <string name="notifications">Notifications</string>
+
+    <!-- Alert Intervals -->
+    <string name="interval_5_seconds">5 seconds</string>
+    <string name="interval_10_seconds">10 seconds</string>
+    <string name="interval_15_seconds">15 seconds</string>
+    <string name="interval_20_seconds">20 seconds</string>
+    <string name="interval_30_seconds">30 seconds</string>
+    <string name="interval_40_seconds">40 seconds</string>
+    <string name="interval_50_seconds">50 seconds</string>
+    <string name="interval_60_seconds">60 seconds</string> <!-- Or "1 minute" if preferred -->
+    <string name="custom_interval">Custom interval</string>
+
+    <!-- Security Messages -->
+    <string name="nfc_enabled_too_long">NFC has been enabled for too long. Consider disabling it to protect your privacy.</string>
+    <string name="nfc_privacy_warning">NFC can be used for unauthorized payments or data access.</string>
+
+    <!-- Activity -->
+    <string name="activity_title">Activity Log</string>
+    <string name="nfc_events">NFC Events</string>
+
+    <!-- General -->
+    <string name="enabled">Enabled</string>
+    <string name="disabled">Disabled</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
+    <string name="save">Save</string>
+
+    <!-- Language Settings -->
+    <string name="settings_language_title">Language</string>
+    <string name="language_system_default">System Default</string>
+    <string name="language_english">English</string>
+    <string name="language_arabic">العربية</string>
+    <string name="language_spanish">Español (Spanish)</string>
+    <string name="language_french">Français (French)</string>
+    <string name="language_russian">Русский (Russian)</string>
+    <string name="language_chinese_mandarin">中文 (简体)</string> <!-- Mandarin Chinese (Simplified) -->
+    <string name="language_hindi">हिन्दी (Hindi)</string>
+    <string name="language_filipino">Filipino</string>
+
+    <!-- Dialog title for language selection -->
+    <string name="dialog_select_language_title">Select Language</string>
+
+    <!-- Settings Screen (New additions from grep) -->
+    <string name="interval_seconds_format">%1$ds</string> <!-- For dynamic interval display e.g., "10s" -->
+    <string name="settings_custom_interval_label">Custom Interval (5-300 seconds)</string>
+    <string name="settings_error_interval_range">Interval must be a number between 5-300.</string>
+
+    <!-- Notification Sound Settings Screen (New additions from grep) -->
+    <string name="notification_sound_title">Notification Sound</string>
+    <string name="notification_sound_use_system_default">Use System Default Sound</string>
+    <string name="notification_sound_choose_custom">Choose Custom Sound</string>
+
+    <!-- Activity Screen (New additions from grep) -->
+    <string name="activity_clear_all">Clear All</string>
+    <string name="activity_filter_event_type">Event Type</string>
+    <string name="activity_export_csv">Export CSV</string>
+    <string name="activity_filter_date_range">Date Range</string>
+
+</resources>

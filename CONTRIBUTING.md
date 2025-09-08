@@ -75,7 +75,7 @@ Understanding the project structure will help you contribute effectively:
 ```
 android/
 ├── app/
-│   ├── src/main/kotlin/com/nothingos/nfcmanager/
+│   ├── src/main/kotlin/com/dxbmark/nfcmanager/
 │   │   ├── data/                    # Data layer (Room, Repository)
 │   │   ├── services/                # Background services
 │   │   ├── ui/                      # UI layer (Compose screens)

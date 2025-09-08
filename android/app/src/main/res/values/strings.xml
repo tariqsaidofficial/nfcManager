@@ -2,36 +2,136 @@
 <resources>
     <!-- App Identity -->
     <string name="app_name">NFC Manager</string>
-    
+
     <!-- Main Interface -->
     <string name="home_title">NFC Manager</string>
     <string name="nfc_monitoring">NFC Monitoring</string>
     <string name="privacy_protection">Privacy Protection</string>
-    
+
     <!-- Settings -->
     <string name="settings_title">Settings</string>
     <string name="reminder_interval">Reminder Interval</string>
     <string name="privacy_mode">Privacy Mode</string>
     <string name="notifications">Notifications</string>
-    
+
     <!-- Alert Intervals -->
+    <string name="interval_5_seconds">5 seconds</string>
     <string name="interval_10_seconds">10 seconds</string>
+    <string name="interval_15_seconds">15 seconds</string>
+    <string name="interval_20_seconds">20 seconds</string>
     <string name="interval_30_seconds">30 seconds</string>
+    <string name="interval_40_seconds">40 seconds</string>
     <string name="interval_50_seconds">50 seconds</string>
+    <string name="interval_60_seconds">60 seconds</string> <!-- Or "1 minute" if preferred -->
     <string name="custom_interval">Custom interval</string>
-    
+
     <!-- Security Messages -->
     <string name="nfc_enabled_too_long">NFC has been enabled for too long. Consider disabling it to protect your privacy.</string>
     <string name="nfc_privacy_warning">NFC can be used for unauthorized payments or data access.</string>
-    
+
     <!-- Activity -->
     <string name="activity_title">Activity Log</string>
     <string name="nfc_events">NFC Events</string>
-    
+
     <!-- General -->
     <string name="enabled">Enabled</string>
     <string name="disabled">Disabled</string>
     <string name="ok">OK</string>
     <string name="cancel">Cancel</string>
     <string name="save">Save</string>
+
+    <!-- Language Settings -->
+    <string name="settings_language_title">Language</string>
+    <string name="language_system_default">System Default</string>
+    <string name="language_english">English</string>
+    <string name="language_arabic">العربية</string>
+    <string name="language_spanish">Español (Spanish)</string>
+    <string name="language_french">Français (French)</string>
+    <string name="language_german">Deutsch (German)</string>
+    <string name="language_russian_soon">Русский (Coming Soon)</string>
+    <string name="language_chinese_mandarin_soon">中文 (简体 - Coming Soon)</string>
+    <string name="language_hindi_soon">हिन्दी (Coming Soon)</string>
+    <string name="language_filipino_soon">Filipino (Coming Soon)</string>
+
+
+    <!-- Dialog title for language selection -->
+    <string name="dialog_select_language_title">Select Language</string>
+
+    <!-- Initially identified from grep - keeping them grouped for now -->
+    <string name="interval_seconds_format">%1$ds</string> <!-- For dynamic interval display e.g., "10s" -->
+    <string name="settings_custom_interval_label">Custom Interval (5-300 seconds)</string>
+    <string name="settings_error_interval_range">Interval must be a number between 5-300.</string>
+    <string name="notification_sound_title">Notification Sound</string>
+    <string name="notification_sound_use_system_default">Use System Default Sound</string>
+    <string name="notification_sound_choose_custom">Choose Custom Sound</string>
+    <string name="activity_clear_all">Clear All</string>
+    <string name="activity_filter_event_type">Event Type</string>
+    <string name="activity_export_csv">Export CSV</string>
+    <string name="activity_filter_date_range">Date Range</string>
+
+    <!-- SettingsScreen.kt -->
+    <!-- Toast Messages -->
+    <string name="settings_toast_notification_perm_granted">Notification permission granted</string>
+    <string name="settings_toast_notification_perm_denied">Notification permission denied</string>
+    <string name="settings_toast_nfc_perm_granted">NFC permission granted. Please toggle monitoring again if needed.</string>
+    <string name="settings_toast_nfc_perm_denied">NFC permission denied. Background monitoring cannot be enabled.</string>
+
+    <!-- Screen and Section Titles -->
+    <string name="settings_screen_header_title">SETTINGS</string>
+    <string name="settings_section_display_title">DISPLAY</string>
+    <string name="settings_section_language_region_title">LANGUAGE &amp; REGION</string> <!-- New Section Title -->
+    <string name="settings_section_notifications_alerts_title">NOTIFICATIONS &amp; ALERTS</string>
+    <string name="settings_section_privacy_security_title">PRIVACY &amp; SECURITY</string>
+    <string name="settings_section_performance_title">PERFORMANCE</string>
+
+    <!-- Theme Options -->
+    <string name="settings_item_theme_title">Theme</string>
+    <string name="settings_item_dark_mode_title">Dark Mode</string>
+    <string name="settings_item_dark_mode_subtitle">Easy on the eyes</string>
+    <string name="settings_item_light_mode_title">Light Mode</string>
+    <string name="settings_item_light_mode_subtitle">Classic look</string>
+
+    <!-- General Settings Items (Titles and Subtitles) -->
+    <string name="settings_item_auto_reminder_title">Auto Reminder</string>
+    <string name="settings_item_auto_reminder_subtitle">Privacy alerts when NFC stays enabled</string>
+
+    <string name="settings_item_reminder_interval_title">Reminder Interval</string> <!-- Used in AdvancedIntervalSelector -->
+    <string name="settings_item_reminder_interval_subtitle">How often to remind about NFC privacy</string> <!-- Used in AdvancedIntervalSelector -->
+    <string name="settings_item_reminder_interval_current_label">Current: %1$ds</string> <!-- Used in AdvancedIntervalSelector, %1$d is for the number -->
+
+    <string name="settings_item_show_notifications_title">Show Notifications</string>
+    <string name="settings_item_show_notifications_subtitle">Display all privacy and status notifications</string>
+
+    <string name="settings_item_vibration_alerts_title">Vibration for Alerts</string>
+    <string name="settings_item_vibration_alerts_subtitle">Haptic feedback for privacy alerts</string>
+
+    <string name="settings_item_enable_sounds_title">Enable Sounds</string>
+    <string name="settings_item_enable_sounds_subtitle">Play sounds for alerts and notifications</string>
+
+    <string name="settings_item_notification_sound_title">Notification Sound</string>
+    <string name="settings_item_notification_sound_subtitle">Customize the specific sound for notifications</string>
+
+    <string name="settings_item_privacy_mode_title">Privacy Mode</string>
+    <string name="settings_item_privacy_mode_subtitle">Enhanced privacy protection</string>
+
+    <string name="settings_item_block_unknown_tags_title">Block Unknown Tags</string>
+    <string name="settings_item_block_unknown_tags_subtitle">Automatically block unrecognized NFC tags</string>
+
+    <string name="settings_item_background_monitoring_title">Background NFC Monitoring</string>
+    <string name="settings_item_background_monitoring_subtitle">Continuously monitors NFC status. Requires NFC permission.</string>
+
+    <string name="settings_item_battery_optimization_title">Battery Optimization</string>
+    <string name="settings_item_battery_optimization_subtitle">Optimize for better battery life</string>
+
+    <!-- Buttons -->
+    <string name="settings_button_export_settings">EXPORT SETTINGS</string>
+    <string name="settings_button_reset_defaults">RESET TO DEFAULTS</string>
+
+    <!-- Design Info Card -->
+    <string name="settings_card_design_info_title">Nothing OS Inspired Design</string>
+    <string name="settings_card_design_info_subtitle">Built with official Android tools: Kotlin, Jetpack Compose, Room Database, and MVVM architecture.</string>
+
+    <!-- Content Descriptions -->
+    <string name="settings_cd_navigate">Navigate</string> <!-- For KeyboardArrowRight icon -->
+
 </resources>
