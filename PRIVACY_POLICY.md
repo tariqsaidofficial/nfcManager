@@ -1,11 +1,11 @@
-# Privacy Policy for NFC Manager
+# Privacy Policy
 
-**Effective Date:** September 7, 2025  
-**Last Updated:** September 7, 2025
+**Effective Date**: September 6, 2025  
+**Last Updated**: September 6, 2025
 
-## Overview
+## 🛡️ Our Commitment to Privacy
 
-NFC Manager ("we," "our," or "us") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, and protect information when you use our NFC Manager mobile application (the "App").
+At NFC Manager, your privacy is our top priority. This Privacy Policy explains how we collect, use, and protect your information when you use our application. We believe in complete transparency and user control over personal data.
 
 ## Information We Collect
 
@@ -97,9 +97,9 @@ Since we don't collect or store personal data:
 
 If you have questions about this Privacy Policy or our privacy practices, contact us:
 
-- **Email**: your.email@example.com
-- **GitHub Issues**: [https://github.com/yourusername/nfc-manager/issues](https://github.com/yourusername/nfc-manager/issues)
-- **Project Repository**: [https://github.com/yourusername/nfc-manager](https://github.com/yourusername/nfc-manager)
+- **Email**: support@dxbmark.com
+- **Response Time**: 24-48 hours for privacy inquiries
+- **Languages**: English, Arabic
 
 ## Legal Basis for Processing (GDPR)
 
@@ -126,4 +126,13 @@ Given the minimal data processing, we have not appointed a Data Protection Offic
 
 ---
 
-*This privacy policy is effective as of the date listed above and applies to all users of the NFC Manager application.*
+---
+
+**Built with ❤️ by Tariq Said - Nothing OS Inspired Design**
+
+*Technical Support & Contact: support@dxbmark.com*
+
+---
+
+*Licensed under the Apache License, Version 2.0*  
+*Copyright 2025 Tariq Said. All rights reserved.*

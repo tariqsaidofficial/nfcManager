@@ -21,7 +21,7 @@
 
 1. **Open Google Play Store** on your Android device
 2. **Search** for "NFC Manager" by [Developer Name]
-3. **Verify** the developer and package name: `com.nothingos.nfcmanager`
+3. **Verify** the developer and package name: `com.dxbmark.nfcmanager`
 4. **Tap Install** and wait for download to complete
 5. **Open** the app and follow setup instructions
 
@@ -186,7 +186,7 @@ cd nfc-manager/android
    - Or long-press app icon > Uninstall
 
 4. **Clean Residual Data** (if needed):
-   - Use file manager to check `/Android/data/com.nothingos.nfcmanager/`
+   - Use file manager to check `/Android/data/com.dxbmark.nfcmanager/`
    - Delete folder if it exists
 
 ## Updates

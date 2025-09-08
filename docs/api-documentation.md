@@ -538,12 +538,12 @@ companion object {
     /**
      * Action to start NFC monitoring
      */
-    const val ACTION_START_MONITORING = "com.nothingos.nfcmanager.services.ACTION_START_MONITORING"
+    const val ACTION_START_MONITORING = "com.dxbmark.nfcmanager.services.ACTION_START_MONITORING"
     
     /**
      * Action to stop NFC monitoring
      */
-    const val ACTION_STOP_MONITORING = "com.nothingos.nfcmanager.services.ACTION_STOP_MONITORING"
+    const val ACTION_STOP_MONITORING = "com.dxbmark.nfcmanager.services.ACTION_STOP_MONITORING"
 }
 ```
 

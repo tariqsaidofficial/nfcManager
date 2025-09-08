@@ -505,20 +505,6 @@ We recognize contributors in several ways:
 - Enhanced accessibility
 - Additional language support
 
-### Future Plans (v1.1+)
-
-- NFC tag writing capabilities
-- Advanced automation features
-- Enhanced analytics dashboard
-- Material You theming support
-
-### Long-term Vision (v2.0+)
-
-- Cross-platform support
-- Advanced security features
-- Community plugin system
-- Enterprise features
-
 ## 📋 Quick Reference
 
 ### Useful Commands
