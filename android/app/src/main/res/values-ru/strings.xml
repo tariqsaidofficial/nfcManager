@@ -66,9 +66,146 @@
     <string name="notification_sound_choose_custom">Choose Custom Sound</string>
 
     <!-- Activity Screen (New additions from grep) -->
-    <string name="activity_clear_all">Clear All</string>
-    <string name="activity_filter_event_type">Event Type</string>
-    <string name="activity_export_csv">Export CSV</string>
-    <string name="activity_filter_date_range">Date Range</string>
+    <string name="activity_filter_event_type">Тип События</string>
+    <string name="activity_export_csv">Экспорт CSV</string>
+    <string name="activity_filter_date_range">Диапазон Дат</string>
+
+    <!-- Недостающие строки - завершение русского перевода -->
+    <string name="events_logged_format">%1$d событий записано</string>
+    <string name="activity_log_title">ЖУРНАЛ АКТИВНОСТИ</string>
+    <string name="activity_clear_all">Очистить Все</string>
+    <string name="activity_search_hint">Поиск событий...</string>
+    <string name="activity_filter_type">Фильтр по типу</string>
+    <string name="activity_filter_date">Фильтр по дате</string>
+    <string name="activity_important_only">Только важные</string>
+    <string name="activity_no_events">События не найдены</string>
+    <string name="events_found_format">Найдено %1$d %2$s</string>
+    <string name="event_singular">событие</string>
+    <string name="events_plural">событий</string>
+
+    <!-- Экран Настроек Звука Уведомлений -->
+    <string name="notification_sound_screen_title">Звук Уведомлений</string>
+    <string name="notification_sound_current">Текущий звук</string>
+    <string name="notification_sound_pick">Выбрать звук</string>
+    <string name="notification_sound_reset">Сбросить по умолчанию</string>
+    <string name="sound_access_warning">Не удалось сохранить доступ к звуку, он может не работать позже.</string>
+    <string name="system_default_sound">Системный По Умолчанию</string>
+    <string name="pick_sound_icon">Выбрать звук</string>
+
+    <!-- Сообщения ViewModel -->
+    <string name="language_already_set">Язык уже установлен на %1$s.</string>
+    <string name="language_updated_success">Язык обновлен на %1$s</string>
+    <string name="language_update_failed">Ошибка обновления языка: %1$s</string>
+    <string name="language_changed_log">Язык изменен с %1$s на %2$s</string>
+    <string name="settings_reset_log">Настройки сброшены</string>
+    <string name="notification_sound_updated">Звук уведомлений обновлен</string>
+    <string name="notification_sound_updated_log">Звук уведомлений обновлен на %1$s</string>
+    <string name="notification_sound_update_failed">Ошибка обновления звука уведомлений: %1$s</string>
+    <string name="background_monitoring_enabled_log">Фоновый мониторинг NFC включен</string>
+    <string name="background_monitoring_disabled_log">Фоновый мониторинг NFC отключен</string>
+    <string name="background_monitoring_enabled_success">Фоновый мониторинг NFC включен</string>
+    <string name="background_monitoring_disabled_success">Фоновый мониторинг NFC отключен</string>
+    <string name="background_monitoring_enable_failed">Ошибка включения фонового мониторинга: %1$s</string>
+    <string name="auto_reminder_toggled_success">Автоматическое напоминание %1$s</string>
+    <string name="auto_reminder_toggled_log">Автоматическое напоминание %1$s</string>
+    <string name="enabled_status">включено</string>
+    <string name="disabled_status">отключено</string>
+
+    <!-- Заголовки Разделов Настроек -->
+    <string name="settings_section_language_region_title">ЯЗЫК И РЕГИОН</string>
+
+    <!-- Параметры Фильтра Дат -->
+    <string name="date_filter_today">Сегодня</string>
+    <string name="date_filter_last_7_days">Последние 7 дней</string>
+    <string name="date_filter_last_30_days">Последние 30 дней</string>
+    <string name="date_filter_all_time">Все время</string>
+
+    <!-- Системные Сообщения -->
+    <string name="mainviewmodel_initialized">MainViewModel инициализирован</string>
+    <string name="nfc_not_supported_device">NFC не поддерживается на этом устройстве</string>
+    <string name="event_deleted">Событие удалено</string>
+    <string name="all_events_cleared">Все события очищены</string>
+    <string name="all_events_cleared_success">Все события успешно очищены</string>
+    <string name="failed_to_delete_event">Ошибка удаления события: %1$s</string>
+    <string name="failed_to_clear_events">Ошибка очистки событий: %1$s</string>
+    <string name="tag_scanned_format">Тег отсканирован: %1$s, действие: %2$s</string>
+    <string name="privacy_alert_shown">Предупреждение о конфиденциальности показано</string>
+    <string name="privacy_alert_dismissed">Предупреждение о конфиденциальности закрыто</string>
+    <string name="reminder_interval_set_log">Интервал напоминания установлен на %1$dс</string>
+    <string name="notifications_toggled_system_log">Уведомления %1$s</string>
+    <string name="vibration_toggled_system_log">Вибрация %1$s</string>
+
+    <!-- Описания Содержимого -->
+    <string name="export_to_csv_icon">Экспорт в CSV</string>
+    <string name="clear_all_logs_icon">Очистить все журналы</string>
+
+    <!-- Нижняя Навигация -->
+    <string name="nav_nfc_manager">NFC MANAGER</string>
+    <string name="nav_activity">АКТИВНОСТЬ</string>
+    <string name="nav_settings">НАСТРОЙКИ</string>
+
+    <!-- Названия Языков для Журналирования -->
+    <string name="language_name_english">Английский</string>
+    <string name="language_name_arabic">Арабский</string>
+    <string name="language_name_german">Немецкий</string>
+    <string name="language_name_system_default">Системный По Умолчанию</string>
+
+    <!-- Типы События -->
+    <string name="event_type_settings">НАСТРОЙКИ</string>
+    <string name="event_type_system">СИСТЕМА</string>
+    <string name="event_type_privacy">КОНФИДЕНЦИАЛЬНОСТЬ</string>
+    <string name="event_type_nfc_scan">NFC СКАНИРОВАНИЕ</string>
+    <string name="event_type_security">БЕЗОПАСНОСТЬ</string>
+
+    <!-- Сообщения Настроек -->
+    <string name="auto_reminder_enabled">Автоматическое напоминание включено</string>
+    <string name="auto_reminder_disabled">Автоматическое напоминание отключено</string>
+    <string name="notifications_enabled">Уведомления включены</string>
+    <string name="notifications_disabled">Уведомления отключены</string>
+    <string name="vibration_enabled">Вибрация включена</string>
+    <string name="vibration_disabled">Вибрация отключена</string>
+    <string name="sound_enabled">Звук (общий) включен</string>
+    <string name="sound_disabled">Звук (общий) отключен</string>
+    <string name="battery_optimization_enabled">Оптимизация батареи включена</string>
+    <string name="battery_optimization_disabled">Оптимизация батареи отключена</string>
+    <string name="privacy_mode_enabled">Режим конфиденциальности включен</string>
+    <string name="privacy_mode_disabled">Режим конфиденциальности отключен</string>
+    <string name="unknown_tag_blocking_enabled">Блокировка неизвестных тегов включена</string>
+    <string name="unknown_tag_blocking_disabled">Блокировка неизвестных тегов отключена</string>
+    <string name="settings_exported">Настройки экспортированы</string>
+    <string name="reminder_interval_set">Интервал напоминания установлен на %1$dс</string>
+    <string name="nfc_hardware_enabled">Оборудование NFC теперь включено</string>
+    <string name="nfc_hardware_disabled">Оборудование NFC теперь отключено</string>
+
+    <!-- Формат Времени -->
+    <string name="time_now">сейчас</string>
+
+    <!-- Дополнительные Сообщения Настроек -->
+    <string name="dark_mode_enabled">Темный режим включен</string>
+    <string name="light_mode_enabled">Светлый режим включен</string>
+    <string name="accent_color_updated">Акцентный цвет обновлен</string>
+    <string name="monitoring_interval_set">Интервал мониторинга установлен на %1$dмс</string>
+    <string name="old_data_cleanup_completed">Очистка старых данных завершена (%1$d дней)</string>
+
+    <!-- Дополнительные Сообщения об Успехе -->
+    <string name="monitoring_interval_updated_success">Интервал мониторинга обновлен</string>
+    <string name="old_data_cleanup_success">Старые данные успешно очищены</string>
+
+    <!-- Сообщения об Ошибках -->
+    <string name="failed_to_disable_monitoring">Ошибка отключения фонового мониторинга: %1$s</string>
+    <string name="failed_to_toggle_auto_reminder">Ошибка переключения автоматического напоминания: %1$s</string>
+    <string name="failed_to_update_interval">Ошибка обновления интервала: %1$s</string>
+    <string name="failed_to_toggle_notifications">Ошибка переключения уведомлений: %1$s</string>
+    <string name="failed_to_toggle_vibration">Ошибка переключения вибрации: %1$s</string>
+    <string name="failed_to_toggle_sound">Ошибка переключения звука: %1$s</string>
+    <string name="failed_to_set_theme">Ошибка установки темы: %1$s</string>
+    <string name="failed_to_update_color">Ошибка обновления цвета: %1$s</string>
+    <string name="failed_to_toggle_battery_optimization">Ошибка переключения оптимизации батареи: %1$s</string>
+    <string name="monitoring_interval_range_error">Интервал мониторинга должен быть между 1000 и 10000 миллисекунд</string>
+    <string name="failed_to_update_monitoring_interval">Ошибка обновления интервала мониторинга: %1$s</string>
+    <string name="failed_to_toggle_privacy_mode">Ошибка переключения режима конфиденциальности: %1$s</string>
+    <string name="failed_to_toggle_unknown_tag_blocking">Ошибка переключения блокировки неизвестных тегов: %1$s</string>
+    <string name="failed_to_export_settings">Ошибка экспорта настроек: %1$s</string>
+    <string name="failed_to_cleanup_data">Ошибка очистки данных: %1$s</string>
 
 </resources>

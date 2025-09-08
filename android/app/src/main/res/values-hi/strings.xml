@@ -66,9 +66,146 @@
     <string name="notification_sound_choose_custom">Choose Custom Sound</string>
 
     <!-- Activity Screen (New additions from grep) -->
-    <string name="activity_clear_all">Clear All</string>
-    <string name="activity_filter_event_type">Event Type</string>
-    <string name="activity_export_csv">Export CSV</string>
-    <string name="activity_filter_date_range">Date Range</string>
+    <string name="activity_filter_event_type">इवेंट प्रकार</string>
+    <string name="activity_export_csv">CSV निर्यात करें</string>
+    <string name="activity_filter_date_range">दिनांक सीमा</string>
+
+    <!-- लुप्त स्ट्रिंग्स - हिंदी अनुवाद पूरा करना -->
+    <string name="events_logged_format">%1$d इवेंट लॉग किए गए</string>
+    <string name="activity_log_title">गतिविधि लॉग</string>
+    <string name="activity_clear_all">सभी साफ़ करें</string>
+    <string name="activity_search_hint">इवेंट खोजें...</string>
+    <string name="activity_filter_type">प्रकार के अनुसार फ़िल्टर करें</string>
+    <string name="activity_filter_date">दिनांक के अनुसार फ़िल्टर करें</string>
+    <string name="activity_important_only">केवल महत्वपूर्ण</string>
+    <string name="activity_no_events">कोई इवेंट नहीं मिला</string>
+    <string name="events_found_format">%1$d %2$s मिले</string>
+    <string name="event_singular">इवेंट</string>
+    <string name="events_plural">इवेंट्स</string>
+
+    <!-- सूचना ध्वनि सेटिंग्स स्क्रीन -->
+    <string name="notification_sound_screen_title">सूचना ध्वनि</string>
+    <string name="notification_sound_current">वर्तमान ध्वनि</string>
+    <string name="notification_sound_pick">ध्वनि चुनें</string>
+    <string name="notification_sound_reset">डिफ़ॉल्ट पर रीसेट करें</string>
+    <string name="sound_access_warning">ध्वनि पहुंच बनाए नहीं रख सके, बाद में काम नहीं कर सकती।</string>
+    <string name="system_default_sound">सिस्टम डिफ़ॉल्ट</string>
+    <string name="pick_sound_icon">ध्वनि चुनें</string>
+
+    <!-- ViewModel संदेश -->
+    <string name="language_already_set">भाषा पहले से %1$s पर सेट है।</string>
+    <string name="language_updated_success">भाषा %1$s में अपडेट की गई</string>
+    <string name="language_update_failed">भाषा अपडेट असफल: %1$s</string>
+    <string name="language_changed_log">भाषा %1$s से %2$s में बदली गई</string>
+    <string name="settings_reset_log">सेटिंग्स रीसेट की गईं</string>
+    <string name="notification_sound_updated">सूचना ध्वनि अपडेट की गई</string>
+    <string name="notification_sound_updated_log">सूचना ध्वनि %1$s में अपडेट की गई</string>
+    <string name="notification_sound_update_failed">सूचना ध्वनि अपडेट असफल: %1$s</string>
+    <string name="background_monitoring_enabled_log">NFC बैकग्राउंड मॉनिटरिंग सक्षम की गई</string>
+    <string name="background_monitoring_disabled_log">NFC बैकग्राउंड मॉनिटरिंग अक्षम की गई</string>
+    <string name="background_monitoring_enabled_success">NFC बैकग्राउंड मॉनिटरिंग सक्षम की गई</string>
+    <string name="background_monitoring_disabled_success">NFC बैकग्राउंड मॉनिटरिंग अक्षम की गई</string>
+    <string name="background_monitoring_enable_failed">बैकग्राउंड मॉनिटरिंग सक्षम करना असफल: %1$s</string>
+    <string name="auto_reminder_toggled_success">स्वचालित रिमाइंडर %1$s</string>
+    <string name="auto_reminder_toggled_log">स्वचालित रिमाइंडर %1$s</string>
+    <string name="enabled_status">सक्षम</string>
+    <string name="disabled_status">अक्षम</string>
+
+    <!-- सेटिंग्स अनुभाग शीर्षक -->
+    <string name="settings_section_language_region_title">भाषा और क्षेत्र</string>
+
+    <!-- दिनांक फ़िल्टर विकल्प -->
+    <string name="date_filter_today">आज</string>
+    <string name="date_filter_last_7_days">पिछले 7 दिन</string>
+    <string name="date_filter_last_30_days">पिछले 30 दिन</string>
+    <string name="date_filter_all_time">सभी समय</string>
+
+    <!-- सिस्टम संदेश -->
+    <string name="mainviewmodel_initialized">MainViewModel प्रारंभ किया गया</string>
+    <string name="nfc_not_supported_device">इस डिवाइस पर NFC समर्थित नहीं है</string>
+    <string name="event_deleted">इवेंट हटाया गया</string>
+    <string name="all_events_cleared">सभी इवेंट्स साफ़ किए गए</string>
+    <string name="all_events_cleared_success">सभी इवेंट्स सफलतापूर्वक साफ़ किए गए</string>
+    <string name="failed_to_delete_event">इवेंट हटाना असफल: %1$s</string>
+    <string name="failed_to_clear_events">इवेंट्स साफ़ करना असफल: %1$s</string>
+    <string name="tag_scanned_format">टैग स्कैन किया गया: %1$s, कार्य: %2$s</string>
+    <string name="privacy_alert_shown">गोपनीयता चेतावनी दिखाई गई</string>
+    <string name="privacy_alert_dismissed">गोपनीयता चेतावनी बंद की गई</string>
+    <string name="reminder_interval_set_log">रिमाइंडर अंतराल %1$d सेकंड पर सेट किया गया</string>
+    <string name="notifications_toggled_system_log">सूचनाएं %1$s</string>
+    <string name="vibration_toggled_system_log">कंपन %1$s</string>
+
+    <!-- सामग्री विवरण -->
+    <string name="export_to_csv_icon">CSV में निर्यात करें</string>
+    <string name="clear_all_logs_icon">सभी लॉग साफ़ करें</string>
+
+    <!-- नीचे नेवीगेशन -->
+    <string name="nav_nfc_manager">NFC प्रबंधक</string>
+    <string name="nav_activity">गतिविधि</string>
+    <string name="nav_settings">सेटिंग्स</string>
+
+    <!-- लॉगिंग के लिए भाषा नाम -->
+    <string name="language_name_english">अंग्रेजी</string>
+    <string name="language_name_arabic">अरबी</string>
+    <string name="language_name_german">जर्मन</string>
+    <string name="language_name_system_default">सिस्टम डिफ़ॉल्ट</string>
+
+    <!-- इवेंट प्रकार -->
+    <string name="event_type_settings">सेटिंग्स</string>
+    <string name="event_type_system">सिस्टम</string>
+    <string name="event_type_privacy">गोपनीयता</string>
+    <string name="event_type_nfc_scan">NFC स्कैन</string>
+    <string name="event_type_security">सुरक्षा</string>
+
+    <!-- सेटिंग्स संदेश -->
+    <string name="auto_reminder_enabled">स्वचालित रिमाइंडर सक्षम किया गया</string>
+    <string name="auto_reminder_disabled">स्वचालित रिमाइंडर अक्षम किया गया</string>
+    <string name="notifications_enabled">सूचनाएं सक्षम की गईं</string>
+    <string name="notifications_disabled">सूचनाएं अक्षम की गईं</string>
+    <string name="vibration_enabled">कंपन सक्षम किया गया</string>
+    <string name="vibration_disabled">कंपन अक्षम किया गया</string>
+    <string name="sound_enabled">ध्वनि (सामान्य) सक्षम की गई</string>
+    <string name="sound_disabled">ध्वनि (सामान्य) अक्षम की गई</string>
+    <string name="battery_optimization_enabled">बैटरी अनुकूलन सक्षम किया गया</string>
+    <string name="battery_optimization_disabled">बैटरी अनुकूलन अक्षम किया गया</string>
+    <string name="privacy_mode_enabled">गोपनीयता मोड सक्षम किया गया</string>
+    <string name="privacy_mode_disabled">गोपनीयता मोड अक्षम किया गया</string>
+    <string name="unknown_tag_blocking_enabled">अज्ञात टैग अवरोधन सक्षम किया गया</string>
+    <string name="unknown_tag_blocking_disabled">अज्ञात टैग अवरोधन अक्षम किया गया</string>
+    <string name="settings_exported">सेटिंग्स निर्यात की गईं</string>
+    <string name="reminder_interval_set">रिमाइंडर अंतराल %1$d सेकंड पर सेट किया गया</string>
+    <string name="nfc_hardware_enabled">NFC हार्डवेयर अब सक्षम किया गया</string>
+    <string name="nfc_hardware_disabled">NFC हार्डवेयर अब अक्षम किया गया</string>
+
+    <!-- समय प्रारूप -->
+    <string name="time_now">अभी</string>
+
+    <!-- अतिरिक्त सेटिंग्स संदेश -->
+    <string name="dark_mode_enabled">डार्क मोड सक्षम किया गया</string>
+    <string name="light_mode_enabled">लाइट मोड सक्षम किया गया</string>
+    <string name="accent_color_updated">एक्सेंट रंग अपडेट किया गया</string>
+    <string name="monitoring_interval_set">मॉनिटरिंग अंतराल %1$d मिलीसेकंड पर सेट किया गया</string>
+    <string name="old_data_cleanup_completed">पुराना डेटा सफाई पूर्ण (%1$d दिन)</string>
+
+    <!-- अतिरिक्त सफलता संदेश -->
+    <string name="monitoring_interval_updated_success">मॉनिटरिंग अंतराल अपडेट किया गया</string>
+    <string name="old_data_cleanup_success">पुराना डेटा सफलतापूर्वक साफ़ किया गया</string>
+
+    <!-- त्रुटि संदेश -->
+    <string name="failed_to_disable_monitoring">बैकग्राउंड मॉनिटरिंग अक्षम करना असफल: %1$s</string>
+    <string name="failed_to_toggle_auto_reminder">स्वचालित रिमाइंडर टॉगल करना असफल: %1$s</string>
+    <string name="failed_to_update_interval">अंतराल अपडेट करना असफल: %1$s</string>
+    <string name="failed_to_toggle_notifications">सूचनाएं टॉगल करना असफल: %1$s</string>
+    <string name="failed_to_toggle_vibration">कंपन टॉगल करना असफल: %1$s</string>
+    <string name="failed_to_toggle_sound">ध्वनि टॉगल करना असफल: %1$s</string>
+    <string name="failed_to_set_theme">थीम सेट करना असफल: %1$s</string>
+    <string name="failed_to_update_color">रंग अपडेट करना असफल: %1$s</string>
+    <string name="failed_to_toggle_battery_optimization">बैटरी अनुकूलन टॉगल करना असफल: %1$s</string>
+    <string name="monitoring_interval_range_error">मॉनिटरिंग अंतराल 1000 से 10000 मिलीसेकंड के बीच होना चाहिए</string>
+    <string name="failed_to_update_monitoring_interval">मॉनिटरिंग अंतराल अपडेट करना असफल: %1$s</string>
+    <string name="failed_to_toggle_privacy_mode">गोपनीयता मोड टॉगल करना असफल: %1$s</string>
+    <string name="failed_to_toggle_unknown_tag_blocking">अज्ञात टैग अवरोधन टॉगल करना असफल: %1$s</string>
+    <string name="failed_to_export_settings">सेटिंग्स निर्यात करना असफल: %1$s</string>
+    <string name="failed_to_cleanup_data">डेटा साफ़ करना असफल: %1$s</string>
 
 </resources>

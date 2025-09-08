@@ -66,9 +66,146 @@
     <string name="notification_sound_choose_custom">Choose Custom Sound</string>
 
     <!-- Activity Screen (New additions from grep) -->
-    <string name="activity_clear_all">Clear All</string>
-    <string name="activity_filter_event_type">Event Type</string>
-    <string name="activity_export_csv">Export CSV</string>
-    <string name="activity_filter_date_range">Date Range</string>
+    <string name="activity_filter_event_type">事件类型</string>
+    <string name="activity_export_csv">导出CSV</string>
+    <string name="activity_filter_date_range">日期范围</string>
+
+    <!-- 缺失的字符串 - 完成中文翻译 -->
+    <string name="events_logged_format">已记录%1$d个事件</string>
+    <string name="activity_log_title">活动日志</string>
+    <string name="activity_clear_all">清除全部</string>
+    <string name="activity_search_hint">搜索事件...</string>
+    <string name="activity_filter_type">按类型筛选</string>
+    <string name="activity_filter_date">按日期筛选</string>
+    <string name="activity_important_only">仅重要事件</string>
+    <string name="activity_no_events">未找到事件</string>
+    <string name="events_found_format">找到%1$d个%2$s</string>
+    <string name="event_singular">事件</string>
+    <string name="events_plural">事件</string>
+
+    <!-- 通知声音设置屏幕 -->
+    <string name="notification_sound_screen_title">通知声音</string>
+    <string name="notification_sound_current">当前声音</string>
+    <string name="notification_sound_pick">选择声音</string>
+    <string name="notification_sound_reset">重置为默认</string>
+    <string name="sound_access_warning">无法保持声音访问权限，稍后可能无法正常工作。</string>
+    <string name="system_default_sound">系统默认</string>
+    <string name="pick_sound_icon">选择声音</string>
+
+    <!-- ViewModel消息 -->
+    <string name="language_already_set">语言已设置为%1$s。</string>
+    <string name="language_updated_success">语言已更新为%1$s</string>
+    <string name="language_update_failed">语言更新失败：%1$s</string>
+    <string name="language_changed_log">语言从%1$s更改为%2$s</string>
+    <string name="settings_reset_log">设置已重置</string>
+    <string name="notification_sound_updated">通知声音已更新</string>
+    <string name="notification_sound_updated_log">通知声音已更新为%1$s</string>
+    <string name="notification_sound_update_failed">通知声音更新失败：%1$s</string>
+    <string name="background_monitoring_enabled_log">NFC后台监控已启用</string>
+    <string name="background_monitoring_disabled_log">NFC后台监控已禁用</string>
+    <string name="background_monitoring_enabled_success">NFC后台监控已启用</string>
+    <string name="background_monitoring_disabled_success">NFC后台监控已禁用</string>
+    <string name="background_monitoring_enable_failed">启用后台监控失败：%1$s</string>
+    <string name="auto_reminder_toggled_success">自动提醒%1$s</string>
+    <string name="auto_reminder_toggled_log">自动提醒%1$s</string>
+    <string name="enabled_status">已启用</string>
+    <string name="disabled_status">已禁用</string>
+
+    <!-- 设置部分标题 -->
+    <string name="settings_section_language_region_title">语言与地区</string>
+
+    <!-- 日期筛选选项 -->
+    <string name="date_filter_today">今天</string>
+    <string name="date_filter_last_7_days">最近7天</string>
+    <string name="date_filter_last_30_days">最近30天</string>
+    <string name="date_filter_all_time">全部时间</string>
+
+    <!-- 系统消息 -->
+    <string name="mainviewmodel_initialized">MainViewModel已初始化</string>
+    <string name="nfc_not_supported_device">此设备不支持NFC</string>
+    <string name="event_deleted">事件已删除</string>
+    <string name="all_events_cleared">所有事件已清除</string>
+    <string name="all_events_cleared_success">所有事件已成功清除</string>
+    <string name="failed_to_delete_event">删除事件失败：%1$s</string>
+    <string name="failed_to_clear_events">清除事件失败：%1$s</string>
+    <string name="tag_scanned_format">标签已扫描：%1$s，操作：%2$s</string>
+    <string name="privacy_alert_shown">隐私警报已显示</string>
+    <string name="privacy_alert_dismissed">隐私警报已关闭</string>
+    <string name="reminder_interval_set_log">提醒间隔已设置为%1$d秒</string>
+    <string name="notifications_toggled_system_log">通知%1$s</string>
+    <string name="vibration_toggled_system_log">振动%1$s</string>
+
+    <!-- 内容描述 -->
+    <string name="export_to_csv_icon">导出到CSV</string>
+    <string name="clear_all_logs_icon">清除所有日志</string>
+
+    <!-- 底部导航 -->
+    <string name="nav_nfc_manager">NFC管理器</string>
+    <string name="nav_activity">活动</string>
+    <string name="nav_settings">设置</string>
+
+    <!-- 日志记录的语言名称 -->
+    <string name="language_name_english">英语</string>
+    <string name="language_name_arabic">阿拉伯语</string>
+    <string name="language_name_german">德语</string>
+    <string name="language_name_system_default">系统默认</string>
+
+    <!-- 事件类型 -->
+    <string name="event_type_settings">设置</string>
+    <string name="event_type_system">系统</string>
+    <string name="event_type_privacy">隐私</string>
+    <string name="event_type_nfc_scan">NFC扫描</string>
+    <string name="event_type_security">安全</string>
+
+    <!-- 设置消息 -->
+    <string name="auto_reminder_enabled">自动提醒已启用</string>
+    <string name="auto_reminder_disabled">自动提醒已禁用</string>
+    <string name="notifications_enabled">通知已启用</string>
+    <string name="notifications_disabled">通知已禁用</string>
+    <string name="vibration_enabled">振动已启用</string>
+    <string name="vibration_disabled">振动已禁用</string>
+    <string name="sound_enabled">声音（常规）已启用</string>
+    <string name="sound_disabled">声音（常规）已禁用</string>
+    <string name="battery_optimization_enabled">电池优化已启用</string>
+    <string name="battery_optimization_disabled">电池优化已禁用</string>
+    <string name="privacy_mode_enabled">隐私模式已启用</string>
+    <string name="privacy_mode_disabled">隐私模式已禁用</string>
+    <string name="unknown_tag_blocking_enabled">未知标签阻止已启用</string>
+    <string name="unknown_tag_blocking_disabled">未知标签阻止已禁用</string>
+    <string name="settings_exported">设置已导出</string>
+    <string name="reminder_interval_set">提醒间隔已设置为%1$d秒</string>
+    <string name="nfc_hardware_enabled">NFC硬件现已启用</string>
+    <string name="nfc_hardware_disabled">NFC硬件现已禁用</string>
+
+    <!-- 时间格式 -->
+    <string name="time_now">现在</string>
+
+    <!-- 附加设置消息 -->
+    <string name="dark_mode_enabled">深色模式已启用</string>
+    <string name="light_mode_enabled">浅色模式已启用</string>
+    <string name="accent_color_updated">强调色已更新</string>
+    <string name="monitoring_interval_set">监控间隔已设置为%1$d毫秒</string>
+    <string name="old_data_cleanup_completed">旧数据清理已完成（%1$d天）</string>
+
+    <!-- 附加成功消息 -->
+    <string name="monitoring_interval_updated_success">监控间隔已更新</string>
+    <string name="old_data_cleanup_success">旧数据清理成功</string>
+
+    <!-- 错误消息 -->
+    <string name="failed_to_disable_monitoring">禁用后台监控失败：%1$s</string>
+    <string name="failed_to_toggle_auto_reminder">切换自动提醒失败：%1$s</string>
+    <string name="failed_to_update_interval">更新间隔失败：%1$s</string>
+    <string name="failed_to_toggle_notifications">切换通知失败：%1$s</string>
+    <string name="failed_to_toggle_vibration">切换振动失败：%1$s</string>
+    <string name="failed_to_toggle_sound">切换声音失败：%1$s</string>
+    <string name="failed_to_set_theme">设置主题失败：%1$s</string>
+    <string name="failed_to_update_color">更新颜色失败：%1$s</string>
+    <string name="failed_to_toggle_battery_optimization">切换电池优化失败：%1$s</string>
+    <string name="monitoring_interval_range_error">监控间隔必须在1000到10000毫秒之间</string>
+    <string name="failed_to_update_monitoring_interval">更新监控间隔失败：%1$s</string>
+    <string name="failed_to_toggle_privacy_mode">切换隐私模式失败：%1$s</string>
+    <string name="failed_to_toggle_unknown_tag_blocking">切换未知标签阻止失败：%1$s</string>
+    <string name="failed_to_export_settings">导出设置失败：%1$s</string>
+    <string name="failed_to_cleanup_data">清理数据失败：%1$s</string>
 
 </resources>

@@ -66,9 +66,147 @@
     <string name="notification_sound_choose_custom">Choose Custom Sound</string>
 
     <!-- Activity Screen (New additions from grep) -->
-    <string name="activity_clear_all">Clear All</string>
-    <string name="activity_filter_event_type">Event Type</string>
-    <string name="activity_export_csv">Export CSV</string>
-    <string name="activity_filter_date_range">Date Range</string>
+    <string name="activity_filter_event_type">Type d\'Événement</string>
+    <string name="activity_export_csv">Exporter CSV</string>
+    <string name="activity_filter_date_range">Plage de Dates</string>
+
+    <!-- Traductions manquantes - complétant la traduction française -->
+    <string name="events_logged_format">%1$d événements enregistrés</string>
+    <string name="activity_log_title">JOURNAL D\'ACTIVITÉ</string>
+    <string name="activity_clear_all">Effacer Tout</string>
+    <string name="activity_search_hint">Rechercher des événements...</string>
+    <string name="activity_filter_type">Filtrer par type</string>
+    <string name="activity_filter_date">Filtrer par date</string>
+    <string name="activity_important_only">Importants seulement</string>
+    <string name="activity_no_events">Aucun événement trouvé</string>
+    <string name="events_found_format">%1$d %2$s trouvés</string>
+    <string name="event_singular">événement</string>
+    <string name="events_plural">événements</string>
+
+    <!-- Écran des Paramètres de Son de Notification -->
+    <string name="notification_sound_screen_title">Son de Notification</string>
+    <string name="notification_sound_current">Son actuel</string>
+    <string name="notification_sound_pick">Choisir un son</string>
+    <string name="notification_sound_reset_button">Rétablir par défaut</string>
+    <string name="sound_access_warning">Impossible de maintenir l\'accès au son, il pourrait ne pas fonctionner plus tard.</string>
+    <string name="system_default_sound">Défaut du Système</string>
+    <string name="pick_sound_icon">Choisir un son</string>
+
+    <!-- Messages ViewModel -->
+    <string name="language_already_set">La langue est déjà définie sur %1$s.</string>
+    <string name="language_updated_success">Langue mise à jour vers %1$s</string>
+    <string name="language_update_failed">Échec de la mise à jour de la langue : %1$s</string>
+    <string name="language_changed_log">Langue changée de %1$s vers %2$s</string>
+    <string name="settings_reset_log">Paramètres réinitialisés</string>
+    <string name="notification_sound_updated">Son de notification mis à jour</string>
+    <string name="notification_sound_reset">Son de notification réinitialisé par défaut</string>
+    <string name="notification_sound_updated_log">Son de notification mis à jour vers %1$s</string>
+    <string name="notification_sound_update_failed">Échec de la mise à jour du son de notification : %1$s</string>
+    <string name="background_monitoring_enabled_log">Surveillance NFC en arrière-plan activée</string>
+    <string name="background_monitoring_disabled_log">Surveillance NFC en arrière-plan désactivée</string>
+    <string name="background_monitoring_enabled_success">Surveillance NFC en arrière-plan activée</string>
+    <string name="background_monitoring_disabled_success">Surveillance NFC en arrière-plan désactivée</string>
+    <string name="background_monitoring_enable_failed">Échec de l\'activation de la surveillance en arrière-plan : %1$s</string>
+    <string name="auto_reminder_toggled_success">Rappel automatique %1$s</string>
+    <string name="auto_reminder_toggled_log">Rappel automatique %1$s</string>
+    <string name="enabled_status">activé</string>
+    <string name="disabled_status">désactivé</string>
+
+    <!-- Titres des Sections de Paramètres -->
+    <string name="settings_section_language_region_title">LANGUE ET RÉGION</string>
+
+    <!-- Options de Filtre de Date -->
+    <string name="date_filter_today">Aujourd\'hui</string>
+    <string name="date_filter_last_7_days">7 derniers jours</string>
+    <string name="date_filter_last_30_days">30 derniers jours</string>
+    <string name="date_filter_all_time">Tout le temps</string>
+
+    <!-- Messages Système -->
+    <string name="mainviewmodel_initialized">MainViewModel initialisé</string>
+    <string name="nfc_not_supported_device">NFC non pris en charge sur cet appareil</string>
+    <string name="event_deleted">Événement supprimé</string>
+    <string name="all_events_cleared">Tous les événements effacés</string>
+    <string name="all_events_cleared_success">Tous les événements effacés avec succès</string>
+    <string name="failed_to_delete_event">Échec de la suppression de l\'événement : %1$s</string>
+    <string name="failed_to_clear_events">Échec de l\'effacement des événements : %1$s</string>
+    <string name="tag_scanned_format">Tag scanné : %1$s, action : %2$s</string>
+    <string name="privacy_alert_shown">Alerte de confidentialité affichée</string>
+    <string name="privacy_alert_dismissed">Alerte de confidentialité fermée</string>
+    <string name="reminder_interval_set_log">Intervalle de rappel défini à %1$ds</string>
+    <string name="notifications_toggled_system_log">Notifications %1$s</string>
+    <string name="vibration_toggled_system_log">Vibration %1$s</string>
+
+    <!-- Descriptions de Contenu -->
+    <string name="export_to_csv_icon">Exporter vers CSV</string>
+    <string name="clear_all_logs_icon">Effacer tous les journaux</string>
+
+    <!-- Navigation Inférieure -->
+    <string name="nav_nfc_manager">NFC MANAGER</string>
+    <string name="nav_activity">ACTIVITÉ</string>
+    <string name="nav_settings">PARAMÈTRES</string>
+
+    <!-- Noms de Langues pour Journalisation -->
+    <string name="language_name_english">Anglais</string>
+    <string name="language_name_arabic">Arabe</string>
+    <string name="language_name_german">Allemand</string>
+    <string name="language_name_system_default">Défaut du Système</string>
+
+    <!-- Types d\'Événements -->
+    <string name="event_type_settings">PARAMÈTRES</string>
+    <string name="event_type_system">SYSTÈME</string>
+    <string name="event_type_privacy">CONFIDENTIALITÉ</string>
+    <string name="event_type_nfc_scan">SCAN NFC</string>
+    <string name="event_type_security">SÉCURITÉ</string>
+
+    <!-- Messages de Paramètres -->
+    <string name="auto_reminder_enabled">Rappel automatique activé</string>
+    <string name="auto_reminder_disabled">Rappel automatique désactivé</string>
+    <string name="notifications_enabled">Notifications activées</string>
+    <string name="notifications_disabled">Notifications désactivées</string>
+    <string name="vibration_enabled">Vibration activée</string>
+    <string name="vibration_disabled">Vibration désactivée</string>
+    <string name="sound_enabled">Son (général) activé</string>
+    <string name="sound_disabled">Son (général) désactivé</string>
+    <string name="battery_optimization_enabled">Optimisation de la batterie activée</string>
+    <string name="battery_optimization_disabled">Optimisation de la batterie désactivée</string>
+    <string name="privacy_mode_enabled">Mode confidentialité activé</string>
+    <string name="privacy_mode_disabled">Mode confidentialité désactivé</string>
+    <string name="unknown_tag_blocking_enabled">Blocage des tags inconnus activé</string>
+    <string name="unknown_tag_blocking_disabled">Blocage des tags inconnus désactivé</string>
+    <string name="settings_exported">Paramètres exportés</string>
+    <string name="reminder_interval_set">Intervalle de rappel défini à %1$ds</string>
+    <string name="nfc_hardware_enabled">Matériel NFC maintenant activé</string>
+    <string name="nfc_hardware_disabled">Matériel NFC maintenant désactivé</string>
+
+    <!-- Format de Temps -->
+    <string name="time_now">maintenant</string>
+
+    <!-- Messages de Paramètres Supplémentaires -->
+    <string name="dark_mode_enabled">Mode sombre activé</string>
+    <string name="light_mode_enabled">Mode clair activé</string>
+    <string name="accent_color_updated">Couleur d\'accent mise à jour</string>
+    <string name="monitoring_interval_set">Intervalle de surveillance défini à %1$dms</string>
+    <string name="old_data_cleanup_completed">Nettoyage des anciennes données terminé (%1$d jours)</string>
+
+    <!-- Messages de Succès Supplémentaires -->
+    <string name="monitoring_interval_updated_success">Intervalle de surveillance mis à jour</string>
+    <string name="old_data_cleanup_success">Anciennes données nettoyées avec succès</string>
+
+    <!-- Messages d\'Erreur -->
+    <string name="failed_to_disable_monitoring">Échec de la désactivation de la surveillance en arrière-plan : %1$s</string>
+    <string name="failed_to_toggle_auto_reminder">Échec du basculement du rappel automatique : %1$s</string>
+    <string name="failed_to_update_interval">Échec de la mise à jour de l\'intervalle : %1$s</string>
+    <string name="failed_to_toggle_notifications">Échec du basculement des notifications : %1$s</string>
+    <string name="failed_to_toggle_vibration">Échec du basculement de la vibration : %1$s</string>
+    <string name="failed_to_toggle_sound">Échec du basculement du son : %1$s</string>
+    <string name="failed_to_set_theme">Échec de la définition du thème : %1$s</string>
+    <string name="failed_to_update_color">Échec de la mise à jour de la couleur : %1$s</string>
+    <string name="failed_to_toggle_battery_optimization">Échec du basculement de l\'optimisation de la batterie : %1$s</string>
+    <string name="monitoring_interval_range_error">L\'intervalle de surveillance doit être entre 1000 et 10000 millisecondes</string>
+    <string name="failed_to_update_monitoring_interval">Échec de la mise à jour de l\'intervalle de surveillance : %1$s</string>
+    <string name="failed_to_toggle_privacy_mode">Échec du basculement du mode confidentialité : %1$s</string>
+    <string name="failed_to_toggle_unknown_tag_blocking">Échec du basculement du blocage des tags inconnus : %1$s</string>
+    <string name="failed_to_export_settings">Échec de l\'exportation des paramètres : %1$s</string>
+    <string name="failed_to_cleanup_data">Échec du nettoyage des données : %1$s</string>
 
 </resources>

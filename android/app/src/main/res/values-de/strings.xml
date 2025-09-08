@@ -193,6 +193,7 @@
     <string name="settings_reset_failed">Fehler beim Zurücksetzen der Einstellungen: %1$s</string>
     <string name="notification_sound_updated">Benachrichtigungston aktualisiert</string>
     <string name="notification_sound_reset">Benachrichtigungston auf Standard zurückgesetzt</string>
+    <string name="notification_sound_reset_button">Auf Standard zurücksetzen</string>
     <string name="notification_sound_update_failed">Fehler beim Aktualisieren des Benachrichtigungstons: %1$s</string>
     <string name="background_monitoring_enabled_log">NFC-Hintergrundüberwachung aktiviert (über Intent)</string>
     <string name="background_monitoring_enabled_success">NFC-Hintergrundüberwachung aktiviert</string>

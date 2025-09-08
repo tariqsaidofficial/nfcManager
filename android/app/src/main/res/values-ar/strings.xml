@@ -191,6 +191,7 @@
     <string name="settings_reset_failed">فشل في إعادة تعيين الإعدادات: %1$s</string>
     <string name="notification_sound_updated">تم تحديث صوت الإشعار</string>
     <string name="notification_sound_reset">تم إعادة تعيين صوت الإشعار إلى الافتراضي</string>
+    <string name="notification_sound_reset_button">إعادة تعيين إلى الافتراضي</string>
     <string name="notification_sound_update_failed">فشل في تحديث صوت الإشعار: %1$s</string>
     <string name="background_monitoring_enabled_log">تم تفعيل مراقبة NFC في الخلفية (عبر النية)</string>
     <string name="background_monitoring_enabled_success">تم تفعيل مراقبة NFC في الخلفية</string>

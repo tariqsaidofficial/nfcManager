@@ -192,6 +192,7 @@
     <string name="settings_reset_failed">Failed to reset settings: %1$s</string>
     <string name="notification_sound_updated">Notification sound updated</string>
     <string name="notification_sound_reset">Notification sound reset to default</string>
+    <string name="notification_sound_reset_button">Reset to default</string>
     <string name="notification_sound_update_failed">Failed to update notification sound: %1$s</string>
     <string name="background_monitoring_enabled_log">Background NFC Monitoring enabled (via intent)</string>
     <string name="background_monitoring_enabled_success">Background NFC Monitoring enabled</string>
