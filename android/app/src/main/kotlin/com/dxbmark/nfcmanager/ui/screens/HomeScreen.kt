@@ -152,7 +152,7 @@ fun HomeScreen(
                 modifier = Modifier.padding(20.dp)
             ) {
                 Text(
-                    text = stringResource(R.string.todays_activity_title),
+                    text = stringResource(R.string.home_todays_activity_title),
                     style = NothingTextStyles.SmallCaps,
                     color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f)
                 )

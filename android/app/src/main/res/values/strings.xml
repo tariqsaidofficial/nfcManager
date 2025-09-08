@@ -48,6 +48,10 @@
     <string name="language_spanish">Español (Spanish)</string>
     <string name="language_french">Français (French)</string>
     <string name="language_german">Deutsch (German)</string>
+    <string name="language_chinese_mandarin">中文 (简体)</string>
+    <string name="language_russian">Русский</string>
+    <string name="language_hindi">हिन्दी</string>
+    <string name="language_filipino">Filipino</string>
     <string name="language_russian_soon">Русский (Coming Soon)</string>
     <string name="language_chinese_mandarin_soon">中文 (简体 - Coming Soon)</string>
     <string name="language_hindi_soon">हिन्दी (Coming Soon)</string>
@@ -143,7 +147,7 @@
     <string name="privacy_monitoring_active">Privacy monitoring active</string>
     <string name="nfc_status_disabled">DISABLED</string>
     <string name="tap_to_enable_nfc">Tap here to enable NFC in system settings.</string>
-    <string name="todays_activity_title">TODAY\'S ACTIVITY</string>
+    <string name="home_todays_activity_title">TODAYS ACTIVITY</string>
     <string name="events_logged_format">%1$d events logged</string>
     <string name="enable_nfc_button">ENABLE NFC IN SETTINGS</string>
 

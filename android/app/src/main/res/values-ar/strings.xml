@@ -142,7 +142,7 @@
     <string name="privacy_monitoring_active">مراقبة الخصوصية نشطة</string>
     <string name="nfc_status_disabled">مُعطّل</string>
     <string name="tap_to_enable_nfc">اضغط هنا لتفعيل NFC في إعدادات النظام.</string>
-    <string name="todays_activity_title">نشاط اليوم</string>
+    <string name="home_todays_activity_title">نشاط اليوم</string>
     <string name="events_logged_format">تم تسجيل %1$d أحداث</string>
     <string name="enable_nfc_button">تفعيل NFC في الإعدادات</string>
 

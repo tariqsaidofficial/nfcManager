@@ -144,7 +144,7 @@
     <string name="privacy_monitoring_active">Datenschutzüberwachung aktiv</string>
     <string name="nfc_status_disabled">DEAKTIVIERT</string>
     <string name="tap_to_enable_nfc">Hier tippen, um NFC in den Systemeinstellungen zu aktivieren.</string>
-    <string name="todays_activity_title">HEUTIGE AKTIVITÄT</string>
+    <string name="home_todays_activity_title">HEUTIGE AKTIVITAET</string>
     <string name="events_logged_format">%1$d Ereignisse protokolliert</string>
     <string name="enable_nfc_button">NFC IN EINSTELLUNGEN AKTIVIEREN</string>
 
