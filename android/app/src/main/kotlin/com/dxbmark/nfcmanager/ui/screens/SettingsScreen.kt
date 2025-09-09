@@ -747,7 +747,7 @@ fun LanguageSelectionDialog(
 
     AlertDialog(
         onDismissRequest = { showDialog(false) },
-        title = { Text(stringResource(R.string.dialog_select_language_title)) },
+        title = { Text(stringResource(R.string.dialog_select_language_title), style = MaterialTheme.typography.headlineSmall) },
         text = {
             Column(modifier = Modifier.verticalScroll(scrollState)) { // Make the language list scrollable
                 availableLanguages.forEach { langOption ->

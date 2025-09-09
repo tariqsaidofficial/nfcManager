@@ -28,7 +28,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.dxbmark.nfcmanager.R
-import com.dxbmark.nfcmanager.ui.theme.NothingTextStyles
 import com.dxbmark.nfcmanager.viewmodel.SettingsViewModel
 import kotlinx.coroutines.flow.collectLatest
 
@@ -96,7 +95,7 @@ fun NotificationSoundSettingsScreen(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text(stringResource(R.string.notification_sound_screen_title), style = NothingTextStyles.HeaderTitle) },
+                title = { Text(stringResource(R.string.notification_sound_screen_title), style = MaterialTheme.typography.headlineSmall) },
                 navigationIcon = {
                     IconButton(onClick = {
                         currentRingtone?.stop()

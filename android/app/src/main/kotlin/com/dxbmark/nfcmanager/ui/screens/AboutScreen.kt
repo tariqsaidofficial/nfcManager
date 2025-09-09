@@ -43,7 +43,7 @@ fun AboutScreen(
                 title = { 
                     Text(
                         text = stringResource(R.string.about_app_title),
-                        style = NothingTextStyles.HeaderTitle
+                        style = MaterialTheme.typography.headlineSmall
                     ) 
                 },
                 navigationIcon = {
