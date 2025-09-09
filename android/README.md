@@ -28,7 +28,7 @@ A smart NFC management application for privacy protection and security monitorin
 
 ### Colors
 - **Primary**: `#ef4444` (Nothing Red)
-- **Background**: `#000000` (Pure Black)
+- **Background**: `#1A1A1A` (Eerie Black)
 - **Surface**: `#1f2937` (Dark Gray)
 - **Text**: `#ffffff` (White)
 

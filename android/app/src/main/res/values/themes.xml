@@ -1,23 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Base application theme. -->
+    <!-- Base application theme -->
     <style name="AppTheme" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your theme here. For example: -->
-        <!-- <item name="colorPrimary">@color/your_primary_color</item> -->
+        <!-- Customize your theme here -->
     </style>
 
-    <!-- Splash Screen Theme -->
-    <!-- Enhanced splash screen with Nothing OS design and dynamic theming -->
+    <!-- Light Mode Splash Screen Theme -->
     <style name="Theme.App.SplashScreen" parent="Theme.SplashScreen">
-        <!-- Light mode background color -->
-        <item name="windowSplashScreenBackground">#FAFAFA</item>
-        <!-- Use NFC animated icon for splash -->
+        <item name="windowSplashScreenBackground">@color/splash_bg_light</item>
         <item name="windowSplashScreenAnimatedIcon">@drawable/ic_launcher_foreground</item>
-        <!-- Icon background for better visibility -->
         <item name="windowSplashScreenIconBackgroundColor">@android:color/transparent</item>
-        <!-- Post splash theme -->
         <item name="postSplashScreenTheme">@style/AppTheme</item>
-        <!-- Animation duration - 3 seconds -->
-        <item name="windowSplashScreenAnimationDuration">3000</item>
+        <item name="windowSplashScreenAnimationDuration">2000</item>
     </style>
 </resources>

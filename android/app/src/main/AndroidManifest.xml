@@ -37,13 +37,13 @@
         android:requestLegacyExternalStorage="false"
         android:hardwareAccelerated="true"
         android:supportsRtl="true">
-
-        <!-- Main Activity -->
+        
+        <!-- Main Activity - NOW THE LAUNCHER AGAIN -->
         <activity
             android:name=".MainActivity"
-            android:exported="true"
+            android:theme="@style/Theme.App.SplashScreen" 
+            android:exported="true" 
             android:launchMode="singleTask"
-            android:theme="@style/Theme.App.SplashScreen"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize|uiMode|locale|layoutDirection"
             android:windowSoftInputMode="adjustResize">
 

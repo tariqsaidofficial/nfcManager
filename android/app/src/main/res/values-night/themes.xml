@@ -1,16 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Dark theme version of splash screen -->
+    <!-- Dark Mode Splash Screen Theme -->
     <style name="Theme.App.SplashScreen" parent="Theme.SplashScreen">
-        <!-- Dark background for night mode -->
-        <item name="windowSplashScreenBackground">#1A1A1A</item>
-        <!-- Use NFC animated icon for splash -->
+        <item name="windowSplashScreenBackground">@color/splash_bg_dark</item>
         <item name="windowSplashScreenAnimatedIcon">@drawable/ic_launcher_foreground</item>
-        <!-- Icon background for better visibility -->
         <item name="windowSplashScreenIconBackgroundColor">@android:color/transparent</item>
-        <!-- Post splash theme -->
         <item name="postSplashScreenTheme">@style/AppTheme</item>
-        <!-- Animation duration - 3 seconds -->
-        <item name="windowSplashScreenAnimationDuration">3000</item>
+        <item name="windowSplashScreenAnimationDuration">2000</item>
     </style>
 </resources>
