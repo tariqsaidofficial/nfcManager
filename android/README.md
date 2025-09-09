@@ -1,52 +1,4 @@
-# NFC Manager
-
-A smart NFC management application for privacy protection and security monitoring, inspired by Nothing OS design aesthetics, built with **official Android development tools** and modern architecture patterns.
-
-## 🎨 Features
-
-- ✅ **Privacy Protection**: Smart alerts when NFC stays enabled to prevent unauthorized access
-- ✅ **Security Monitoring**: Real-time NFC status tracking with customizable intervals
-- ✅ **Background NFC Monitoring**: Continuous NFC status tracking via a foreground service with notification, permission handling, and robust lifecycle management.
-- ✅ **Nothing OS Design**: Authentic Nothing OS visual language with clean lines and thoughtful animations
-- ✅ **Auto Reminders**: Privacy-focused notifications to protect against NFC vulnerabilities
-- ✅ **Enhanced Activity Logging**: Comprehensive security activity tracking with timestamps. Features robust filtering by event type and date range (Today, Last 7 Days, Last 30 Days, All Time), and allows exporting the filtered log to a CSV file for external analysis or record-keeping. Includes NFC tag scan events (privacy-focused).
-- ✅ **Accessibility**: Full accessibility support with screen reader compatibility
-- ✅ **Privacy Compliant**: Google Play compliant with transparent privacy practices and no data collection
-
-## 🏗️ Architecture (Official Android Stack)
-
-- ✅ **Android Studio**: Official IDE with full debugging and profiling tools
-- ✅ **Kotlin**: Google's preferred language for Android development
-- ✅ **Jetpack Compose**: Modern declarative UI toolkit
-- ✅ **Room Database**: Official SQLite abstraction for local data storage
-- ✅ **MVVM Architecture**: Industry-standard pattern with ViewModel and Repository
-- ✅ **Navigation Component**: Official navigation framework
-- ✅ **Material Design 3**: Latest design system with Nothing OS theming
-- ✅ **Foreground Service**: For persistent background tasks like NFC monitoring.
-
-## 🎯 Design System
-
-### Colors
-- **Primary**: `#ef4444` (Nothing Red)
-- **Background**: `#1A1A1A` (Eerie Black)
-- **Surface**: `#1f2937` (Dark Gray)
-- **Text**: `#ffffff` (White)
-
-### Typography
-- **Font Family**: System default with monospace fallbacks
-- **Weights**: Regular (400), Medium (500), Bold (700)
-- **Spacing**: Consistent 8px grid system
-
-### Animations
-- **Duration**: 300ms for interactions, 1500ms for complex animations
-- **Easing**: Custom bezier curves for Nothing OS feel
-- **Micro-interactions**: Haptic feedback and visual responses
-
-## 📱 Screens
-
-1. ✅ **NFC Manager** - Main interface with real-time NFC monitoring and privacy alerts
-2. ✅ **Settings** - Security configuration, theme selection, and background service management
-3. ✅ **Activity** - Detailed security activity log with advanced filtering (by type & date) and CSV export capabilities. Tracks privacy monitoring history.
+ed security activity log with advanced filtering (by type & date) and CSV export capabilities. Tracks privacy monitoring history.
 
 ## 🔒 Privacy & Security
 
@@ -404,7 +356,7 @@ Contributions welcome! Please read our contributing guidelines and code of condu
     - Implemented options for more granular monitoring intervals.
     - **Enhanced Notification Sound Customization**: Users can now pick custom notification sounds from their device storage. The settings screen for notification sounds allows for playing/stopping the currently selected sound for preview. The "Use System Default Sound" button dynamically changes its appearance based on whether a custom sound is active. Sound playback automatically stops when navigating away from the screen, and error handling for sound playback has been improved.
 - 🚧 **UI Testing**: Manual UI testing in progress by the developer. Automated Jetpack Compose tests to be developed later.
-- ✅ **Localization**: Added support for German. App now supports English, Arabic, Spanish, French, and German. (Further languages like Chinese, Russian, Hindi, Filipino are planned for community contributions).
+- ✅ **Localization**: Added support for German. App now supports English, Arabic, Spanish, French, and German. Chinese, Russian, Hindi and Filipino are planned for community contributions.
 
 ### Phase 3: Performance, Release Preparation & Future Enhancements (Planned)
 - 🟡 **Performance Optimization**: Initial review and planning for profiling CPU, memory, and battery usage (especially the background service) and implementing optimizations.

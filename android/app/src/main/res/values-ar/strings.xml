@@ -48,6 +48,10 @@
     <string name="language_spanish">الإسبانية (Español)</string>
     <string name="language_french">الفرنسية (Français)</string>
     <string name="language_german">الألمانية (Deutsch)</string>
+    <string name="language_chinese_mandarin">الصينية (الماندرين)</string>
+    <string name="language_russian">الروسية (Русский)</string>
+    <string name="language_hindi">الهندية (हिन्दी)</string>
+    <string name="language_filipino">الفلبينية</string>
 
     <!-- Dialog title for language selection -->
     <string name="dialog_select_language_title">اختر اللغة</string>
@@ -60,8 +64,8 @@
     <!-- Toast Messages -->
     <string name="settings_toast_notification_perm_granted">تم منح إذن الإشعارات</string>
     <string name="settings_toast_notification_perm_denied">تم رفض إذن الإشعارات</string>
-    <string name="settings_toast_nfc_perm_granted">تم منح إذن NFC. يرجى تبديل المراقبة مرة أخرى إذا لزم الأمر.</string>
-    <string name="settings_toast_nfc_perm_denied">تم رفض إذن NFC. لا يمكن تمكين المراقبة في الخلفية.</string>
+    <string name="settings_toast_nfc_perm_granted">تم منح إذن NFC. يرجى تفعيل المراقبة مرة أخرى إذا لزم الأمر.</string>
+    <string name="settings_toast_nfc_perm_denied">تم رفض إذن NFC. لا يمكن تفعيل المراقبة في الخلفية.</string>
 
     <!-- Screen and Section Titles -->
     <string name="settings_screen_header_title">الإعدادات</string>
@@ -82,6 +86,7 @@
     <string name="settings_item_auto_reminder_title">تذكير تلقائي</string>
     <string name="settings_item_auto_reminder_subtitle">تنبيهات خصوصية عند بقاء NFC مفعّلاً</string>
 
+    <string name="settings_item_reminder_interval_title">الفاصل الزمني للتذكير</string>
     <string name="settings_item_reminder_interval_subtitle">عدد مرات التذكير بشأن خصوصية NFC</string>
     <string name="settings_item_reminder_interval_current_label">الحالي: %1$d ث</string>
 
@@ -94,8 +99,10 @@
     <string name="settings_item_enable_sounds_title">تمكين الأصوات</string>
     <string name="settings_item_enable_sounds_subtitle">تشغيل أصوات للتنبيهات والإشعارات</string>
 
+    <string name="settings_item_notification_sound_title">صوت الإشعار</string>
     <string name="settings_item_notification_sound_subtitle">تخصيص الصوت المحدد للإشعارات</string>
 
+    <string name="settings_item_privacy_mode_title">وضع الخصوصية</string>
     <string name="settings_item_privacy_mode_subtitle">حماية خصوصية معززة</string>
 
     <string name="settings_item_block_unknown_tags_title">حظر العلامات غير المعروفة</string>
@@ -119,7 +126,7 @@
     <string name="settings_cd_navigate">انتقال</string>
 
     <!-- Notification Sound Settings Screen (Existing from grep) -->
-    <string name="notification_sound_title">صوت الإشعار</string> <!-- settings_item_notification_sound_title -->
+    <string name="notification_sound_title">صوت الإشعار</string> 
     <string name="notification_sound_use_system_default">استخدام صوت النظام الافتراضي</string>
     <string name="notification_sound_choose_custom">اختيار صوت مخصص</string>
 
@@ -199,8 +206,8 @@
     <string name="auto_reminder_toggled_log">التذكير التلقائي %1$s</string>
     <string name="auto_reminder_toggled_success">التذكير التلقائي %1$s</string>
     <string name="auto_reminder_toggle_failed">فشل في تبديل التذكير التلقائي: %1$s</string>
-    <string name="interval_out_of_range">يجب أن يكون الفاصل الزمني بين 5 و300 ثانية</string>
-    <string name="reminder_interval_updated_log">تم تعيين الفاصل الزمني للتذكير إلى %1$d ث</string>
+    <string name="interval_out_of_range">يجب أن يكون الفاصل الزمني بين 5 و 300 ثانية</string>
+    <string name="reminder_interval_updated_log">تم ضبط الفاصل الزمني للتذكير على %1$d ثانية</string>
     <string name="reminder_interval_updated_success">تم تحديث الفاصل الزمني للتذكير إلى %1$d ثانية</string>
     <string name="reminder_interval_update_failed">فشل في تحديث الفاصل الزمني: %1$s</string>
     <string name="notifications_toggled_log">الإشعارات %1$s</string>
@@ -212,21 +219,21 @@
     <string name="sound_toggled_log">الصوت (عام) %1$s</string>
     <string name="sound_toggled_success">الصوت (عام) %1$s</string>
     <string name="sound_toggle_failed">فشل في تبديل الصوت: %1$s</string>
-    <string name="theme_changed_log">تم تفعيل %1$s</string>
-    <string name="theme_changed_success">تم تفعيل %1$s</string>
+    <string name="theme_changed_log">%1$s مُفعّل</string>
+    <string name="theme_changed_success">%1$s مُفعّل</string>
     <string name="theme_change_failed">فشل في تعيين المظهر: %1$s</string>
     <string name="dark_mode_text">الوضع الداكن</string>
     <string name="light_mode_text">الوضع الفاتح</string>
-    <string name="accent_color_updated_log">تم تحديث اللون المميز</string>
-    <string name="accent_color_updated_success">تم تحديث اللون المميز</string>
+    <string name="accent_color_updated_log">تم تحديث لون التمييز</string>
+    <string name="accent_color_updated_success">تم تحديث لون التمييز</string>
     <string name="accent_color_update_failed">فشل في تحديث اللون: %1$s</string>
     <string name="battery_optimization_toggled_log">تحسين البطارية %1$s</string>
     <string name="battery_optimization_toggled_success">تحسين البطارية %1$s</string>
     <string name="battery_optimization_toggle_failed">فشل في تبديل تحسين البطارية: %1$s</string>
-    <string name="monitoring_interval_out_of_range">يجب أن يكون فاصل المراقبة بين 1000 و10000 ميلي ثانية</string>
-    <string name="monitoring_interval_updated_log">تم تعيين فاصل المراقبة إلى %1$d مللي ثانية</string>
-    <string name="monitoring_interval_updated_success">تم تحديث فاصل المراقبة</string>
-    <string name="monitoring_interval_update_failed">فشل في تحديث فاصل المراقبة: %1$s</string>
+    <string name="monitoring_interval_out_of_range">يجب أن يكون الفاصل الزمني للمراقبة بين 1000 و 10000 مللي ثانية</string>
+    <string name="monitoring_interval_updated_log">تم ضبط الفاصل الزمني للمراقبة على %1$d مللي ثانية</string>
+    <string name="monitoring_interval_updated_success">تم تحديث الفاصل الزمني للمراقبة</string>
+    <string name="monitoring_interval_update_failed">فشل في تحديث الفاصل الزمني للمراقبة: %1$s</string>
     <string name="privacy_mode_toggled_log">وضع الخصوصية %1$s</string>
     <string name="privacy_mode_toggled_success">وضع الخصوصية %1$s</string>
     <string name="privacy_mode_toggle_failed">فشل في تبديل وضع الخصوصية: %1$s</string>
@@ -236,7 +243,7 @@
     <string name="settings_exported_log">تم تصدير الإعدادات</string>
     <string name="settings_exported_success">تم تصدير الإعدادات بنجاح</string>
     <string name="settings_export_failed">فشل في تصدير الإعدادات: %1$s</string>
-    <string name="data_cleanup_log">تم إكمال تنظيف البيانات القديمة (%1$d أيام)</string>
+    <string name="data_cleanup_log">اكتمل تنظيف البيانات القديمة (%1$d أيام)</string>
     <string name="data_cleanup_success">تم تنظيف البيانات القديمة بنجاح</string>
     <string name="data_cleanup_failed">فشل في تنظيف البيانات: %1$s</string>
     <string name="enabled_status">مُفعّل</string>
@@ -245,8 +252,8 @@
     <!-- Date Filter Options -->
     <string name="date_filter_today">اليوم</string>
     <string name="date_filter_last_7_days">آخر 7 أيام</string>
-    <string name="date_filter_last_30_days">آخر 30 يوماً</string>
-    <string name="date_filter_all_time">جميع الأوقات</string>
+    <string name="date_filter_last_30_days">آخر 30 يومًا</string>
+    <string name="date_filter_all_time">كل الأوقات</string>
 
     <!-- System Messages -->
     <string name="mainviewmodel_initialized">تم تهيئة MainViewModel</string>
@@ -256,12 +263,10 @@
     <string name="all_events_cleared_success">تم مسح جميع الأحداث بنجاح</string>
     <string name="failed_to_delete_event">فشل في حذف الحدث: %1$s</string>
     <string name="failed_to_clear_events">فشل في مسح جميع الأحداث: %1$s</string>
-
-    <!-- Additional System Messages -->
     <string name="nfc_not_supported_device">NFC غير مدعوم على هذا الجهاز</string>
     <string name="privacy_alert_shown">تم عرض تنبيه الخصوصية</string>
-    <string name="privacy_alert_dismissed">تم إغلاق تنبيه الخصوصية</string>
-    <string name="reminder_interval_set_log">تم تعيين فاصل التذكير إلى %1$d ث</string>
+    <string name="privacy_alert_dismissed">تم تجاهل تنبيه الخصوصية</string>
+    <string name="reminder_interval_set_log">تم ضبط الفاصل الزمني للتذكير على %1$d ثانية</string>
     <string name="notifications_toggled_system_log">الإشعارات %1$s</string>
     <string name="vibration_toggled_system_log">الاهتزاز %1$s</string>
 
@@ -288,33 +293,102 @@
     <string name="event_type_security">الأمان</string>
 
     <!-- Settings Messages -->
-    <string name="auto_reminder_enabled">تم تفعيل التذكير التلقائي</string>
-    <string name="auto_reminder_disabled">تم إلغاء التذكير التلقائي</string>
-    <string name="notifications_enabled">تم تفعيل الإشعارات</string>
-    <string name="notifications_disabled">تم إلغاء الإشعارات</string>
-    <string name="vibration_enabled">تم تفعيل الاهتزاز</string>
-    <string name="vibration_disabled">تم إلغاء الاهتزاز</string>
-    <string name="sound_enabled">تم تفعيل الصوت (عام)</string>
-    <string name="sound_disabled">تم إلغاء الصوت (عام)</string>
-    <string name="battery_optimization_enabled">تم تفعيل تحسين البطارية</string>
-    <string name="battery_optimization_disabled">تم إلغاء تحسين البطارية</string>
-    <string name="privacy_mode_enabled">تم تفعيل وضع الخصوصية</string>
-    <string name="privacy_mode_disabled">تم إلغاء وضع الخصوصية</string>
-    <string name="unknown_tag_blocking_enabled">تم تفعيل حظر العلامات المجهولة</string>
-    <string name="unknown_tag_blocking_disabled">تم إلغاء حظر العلامات المجهولة</string>
+    <string name="auto_reminder_enabled">التذكير التلقائي مُفعّل</string>
+    <string name="auto_reminder_disabled">التذكير التلقائي مُعطّل</string>
+    <string name="notifications_enabled">الإشعارات مُفعّلة</string>
+    <string name="notifications_disabled">الإشعارات مُعطّلة</string>
+    <string name="vibration_enabled">الاهتزاز مُفعّل</string>
+    <string name="vibration_disabled">الاهتزاز مُعطّل</string>
+    <string name="sound_enabled">الصوت (عام) مُفعّل</string>
+    <string name="sound_disabled">الصوت (عام) مُعطّل</string>
+    <string name="battery_optimization_enabled">تحسين البطارية مُفعّل</string>
+    <string name="battery_optimization_disabled">تحسين البطارية مُعطّل</string>
+    <string name="privacy_mode_enabled">وضع الخصوصية مُفعّل</string>
+    <string name="privacy_mode_disabled">وضع الخصوصية مُعطّل</string>
+    <string name="unknown_tag_blocking_enabled">حظر العلامات غير المعروفة مُفعّل</string>
+    <string name="unknown_tag_blocking_disabled">حظر العلامات غير المعروفة مُعطّل</string>
     <string name="settings_exported">تم تصدير الإعدادات</string>
-    <string name="reminder_interval_set">تم تعيين فاصل التذكير إلى %1$d ثانية</string>
-    <string name="nfc_hardware_enabled">تم تفعيل جهاز NFC الآن</string>
-    <string name="nfc_hardware_disabled">تم إلغاء جهاز NFC الآن</string>
+    <string name="reminder_interval_set">تم ضبط الفاصل الزمني للتذكير على %1$d ثانية</string>
+    <string name="nfc_hardware_enabled">جهاز NFC مُفعّل الآن</string>
+    <string name="nfc_hardware_disabled">جهاز NFC مُعطّل الآن</string>
 
     <!-- Time Format -->
     <string name="time_now">الآن</string>
 
     <!-- Additional Settings Messages -->
-    <string name="dark_mode_enabled">تم تفعيل الوضع المظلم</string>
-    <string name="light_mode_enabled">تم تفعيل الوضع المضيء</string>
+    <string name="dark_mode_enabled">الوضع الداكن مُفعّل</string>
+    <string name="light_mode_enabled">الوضع الفاتح مُفعّل</string>
     <string name="accent_color_updated">تم تحديث لون التمييز</string>
-    <string name="monitoring_interval_set">تم تعيين فاصل المراقبة إلى %1$d مللي ثانية</string>
-    <string name="old_data_cleanup_completed">تم تنظيف البيانات القديمة (%1$d أيام)</string>
+    <string name="monitoring_interval_set">تم ضبط الفاصل الزمني للمراقبة على %1$d مللي ثانية</string>
+    <string name="old_data_cleanup_completed">اكتمل تنظيف البيانات القديمة (%1$d أيام)</string>
+
+    <!-- Additional Success Messages -->
+    <string name="old_data_cleanup_success">تم تنظيف البيانات القديمة بنجاح</string>
+
+    <!-- Error Messages -->
+    <string name="failed_to_disable_monitoring">فشل في تعطيل المراقبة في الخلفية: %1$s</string>
+    <string name="failed_to_toggle_auto_reminder">فشل في تبديل التذكير التلقائي: %1$s</string>
+    <string name="failed_to_update_interval">فشل في تحديث الفاصل الزمني: %1$s</string>
+    <string name="failed_to_toggle_notifications">فشل في تبديل الإشعارات: %1$s</string>
+    <string name="failed_to_toggle_vibration">فشل في تبديل الاهتزاز: %1$s</string>
+    <string name="failed_to_toggle_sound">فشل في تبديل الصوت: %1$s</string>
+    <string name="failed_to_set_theme">فشل في تعيين المظهر: %1$s</string>
+    <string name="failed_to_update_color">فشل في تحديث اللون: %1$s</string>
+    <string name="failed_to_toggle_battery_optimization">فشل في تبديل تحسين البطارية: %1$s</string>
+    <string name="monitoring_interval_range_error">يجب أن يكون الفاصل الزمني للمراقبة بين 1000 و 10000 مللي ثانية</string>
+    <string name="failed_to_update_monitoring_interval">فشل في تحديث الفاصل الزمني للمراقبة: %1$s</string>
+    <string name="failed_to_toggle_privacy_mode">فشل في تبديل وضع الخصوصية: %1$s</string>
+    <string name="failed_to_toggle_unknown_tag_blocking">فشل في تبديل حظر العلامات غير المعروفة: %1$s</string>
+    <string name="failed_to_export_settings">فشل في تصدير الإعدادات: %1$s</string>
+    <string name="failed_to_cleanup_data">فشل في تنظيف البيانات: %1$s</string>
+
+    <!-- About Screen -->
+    <string name="about_title">حول</string>
+    <string name="about_app_title">حول مدير NFC</string>
+    <string name="about_app_description">مدير NFC هو تطبيق أندرويد يركز على الخصوصية ومصمم لمساعدة المستخدمين على مراقبة وإدارة إعدادات NFC (الاتصال قريب المدى) الخاصة بهم مع وعي أمني معزز. ينبه التطبيق المستخدمين عندما يظل NFC مفعلًا لفترات طويلة، مما يساعد على منع الوصول غير المصرح به والحماية من ثغرات الخصوصية المحتملة.</string>
+    <string name="about_copyright">تم إنشاؤه بـ ❤️ بواسطة طارق سعيد - تصميم مستوحى من Nothing OS</string>
+    <string name="about_contact_support_title">الاتصال والدعم</string>
+    <string name="about_email">البريد الإلكتروني: support@dxbmark.com</string>
+    <string name="about_response_time">وقت الاستجابة: 24-48 ساعة</string>
+    <string name="about_languages">اللغات: الإنجليزية، العربية</string>
+    <string name="about_timezone">المنطقة الزمنية: GMT+4 (الإمارات العربية المتحدة)</string>
+    <string name="about_license_title">الرخصة</string>
+    <string name="about_license_text">مرخص بموجب رخصة أباتشي، الإصدار 2.0</string>
+    <string name="about_copyright_text">حقوق النشر © 2025 طارق سعيد. جميع الحقوق محفوظة.</string>
+    <string name="about_license_link">عرض الرخصة</string>
+    <string name="about_important_links_title">روابط هامة</string>
+    <string name="about_terms_service">شروط الخدمة</string>
+    <string name="about_privacy_policy">سياسة الخصوصية</string>
+    <string name="about_full_changelog">سجل التغييرات الكامل</string>
+    <string name="about_project_repository">مستودع المشروع</string>
+    <string name="about_development_design_title">التطوير والتصميم</string>
+    <string name="about_development_credit">تصميم وتطوير طارق سعيد</string>
+    <string name="about_powered_by_dxbmark">بدعم من DXBMark</string>
+    <string name="about_tariq_linkedin">طارق سعيد على LinkedIn</string>
+    <string name="about_tariq_github">طارق سعيد على GitHub</string>
+    <string name="about_official_contributor_title">مساهم رسمي</string>
+    <string name="about_mwheba_agency">وكالة موهبة للدعاية والإعلان</string>
+    <string name="about_security_highlights_title">أبرز ميزات الأمان (الإصدار %1$s)</string>
+    <string name="about_initial_security">- التنفيذ الأولي للأمان</string>
+    <string name="about_local_storage">- تخزين البيانات محليًا فقط</string>
+    <string name="about_permission_access">- التحكم في الوصول المستند إلى الأذونات</string>
+    <string name="about_proguard_obfuscation">- تمكين ProGuard obfuscation</string>
+    <string name="about_certificate_pinning">- تنفيذ تثبيت الشهادة</string>
+    <string name="navigate_back">العودة</string>
+    <string name="settings_section_about_title">حول</string>
+    <string name="settings_item_about_title">حول مدير NFC</string>
+    <string name="settings_item_about_subtitle">معلومات التطبيق، سياسة الخصوصية، والدعم</string>
+
+    <!-- Activity Screen (Additional - from empty values) -->
+    <string name="activity_search_hint">بحث في الأنشطة...</string>
+    <string name="activity_filter_type">تصفية حسب النوع</string>
+    <string name="activity_filter_date">تصفية حسب التاريخ</string>
+    <string name="activity_important_only">المهم فقط</string>
+    <string name="activity_no_events">لا توجد أحداث</string>
+
+    <!-- Notification Sound Settings Screen (Additional - from empty values) -->
+    <string name="notification_sound_current">الصوت الحالي</string>
+    <string name="notification_sound_pick">اختيار الصوت</string>
+    <string name="notification_sound_updated_log">تم تحديث صوت الإشعار إلى %1$s</string>
 
 </resources>
