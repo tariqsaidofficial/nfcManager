@@ -6,336 +6,373 @@
     <!-- Main Interface -->
     <string name="home_title">NFC Manager</string>
     <string name="nfc_monitoring">NFC Monitoring</string>
-    <string name="privacy_protection">Privacy Protection</string>
+    <string name="privacy_protection">Proteksyon ng Privacy</string>
 
     <!-- Settings -->
-    <string name="settings_title">Settings</string>
-    <string name="reminder_interval">Reminder Interval</string>
+    <string name="settings_title">Mga Setting</string>
+    <string name="reminder_interval">Agwat ng Paalala</string>
     <string name="privacy_mode">Privacy Mode</string>
-    <string name="notifications">Notifications</string>
+    <string name="notifications">Mga Notification</string>
 
     <!-- Alert Intervals -->
-    <string name="interval_5_seconds">5 seconds</string>
-    <string name="interval_10_seconds">10 seconds</string>
-    <string name="interval_15_seconds">15 seconds</string>
-    <string name="interval_20_seconds">20 seconds</string>
-    <string name="interval_30_seconds">30 seconds</string>
-    <string name="interval_40_seconds">40 seconds</string>
-    <string name="interval_50_seconds">50 seconds</string>
-    <string name="interval_60_seconds">60 seconds</string> <!-- Or "1 minute" if preferred -->
-    <string name="custom_interval">Custom interval</string>
+    <string name="interval_5_seconds">5 segundo</string>
+    <string name="interval_10_seconds">10 segundo</string>
+    <string name="interval_15_seconds">15 segundo</string>
+    <string name="interval_20_seconds">20 segundo</string>
+    <string name="interval_30_seconds">30 segundo</string>
+    <string name="interval_40_seconds">40 segundo</string>
+    <string name="interval_50_seconds">50 segundo</string>
+    <string name="interval_60_seconds">60 segundo</string>
+    <string name="custom_interval">Custom na agwat</string>
 
     <!-- Security Messages -->
-    <string name="nfc_enabled_too_long">NFC has been enabled for too long. Consider disabling it to protect your privacy.</string>
-    <string name="nfc_privacy_warning">NFC can be used for unauthorized payments or data access.</string>
+    <string name="nfc_enabled_too_long">Matagal nang nakabukas ang NFC. Isaalang-alang na i-disable ito para sa inyong privacy.</string>
+    <string name="nfc_privacy_warning">Maaaring gamitin ang NFC para sa hindi awtorisadong bayad o pag-access sa data.</string>
 
     <!-- Activity -->
     <string name="activity_title">Activity Log</string>
-    <string name="nfc_events">NFC Events</string>
+    <string name="nfc_events">Mga NFC Event</string>
 
     <!-- General -->
-    <string name="enabled">Enabled</string>
-    <string name="disabled">Disabled</string>
+    <string name="enabled">Nakabukas</string>
+    <string name="disabled">Nakapatay</string>
     <string name="ok">OK</string>
-    <string name="cancel">Cancel</string>
-    <string name="save">Save</string>
+    <string name="cancel">Kanselahin</string>
+    <string name="save">I-save</string>
 
     <!-- Language Settings -->
-    <string name="settings_language_title">Language</string>
+    <string name="settings_language_title">Wika</string>
     <string name="language_system_default">System Default</string>
-    <string name="language_english">English</string>
-    <string name="language_arabic">العربية</string>
-    <string name="language_spanish">Español (Spanish)</string>
-    <string name="language_french">Français (French)</string>
-    <string name="language_german">Deutsch (German)</string>
-
+    <string name="language_english">Ingles</string>
+    <string name="language_arabic">Arabo</string>
+    <string name="language_spanish">Español (Espanyol)</string>
+    <string name="language_french">Français (Pranses)</string>
+    <string name="language_german">Deutsch (Aleman)</string>
 
     <!-- Dialog title for language selection -->
-    <string name="dialog_select_language_title">Select Language</string>
+    <string name="dialog_select_language_title">Pumili ng Wika</string>
 
-    <!-- Initially identified from grep - keeping them grouped for now -->
-    <string name="interval_seconds_format">%1$ds</string> <!-- For dynamic interval display e.g., "10s" -->
-    <string name="settings_custom_interval_label">Custom Interval (5-300 seconds)</string>
-    <string name="settings_error_interval_range">Interval must be a number between 5-300.</string>
-    <string name="notification_sound_title">Notification Sound</string>
-    <string name="notification_sound_use_system_default">Use System Default Sound</string>
-    <string name="notification_sound_choose_custom">Choose Custom Sound</string>
-    <string name="activity_clear_all">Clear All</string>
-    <string name="activity_filter_event_type">Event Type</string>
-    <string name="activity_export_csv">Export CSV</string>
-    <string name="activity_filter_date_range">Date Range</string>
+    <string name="interval_seconds_format">%1$ds</string>
+    <string name="settings_custom_interval_label">Custom na Agwat (5-300 segundo)</string>
+    <string name="settings_error_interval_range">Dapat numero ang agwat na nasa pagitan ng 5-300.</string>
+    <string name="notification_sound_title">Tunog ng Notification</string>
+    <string name="notification_sound_use_system_default">Gamitin ang System Default na Tunog</string>
+    <string name="notification_sound_choose_custom">Pumili ng Custom na Tunog</string>
+    <string name="activity_clear_all">I-clear Lahat</string>
+    <string name="activity_filter_event_type">Uri ng Event</string>
+    <string name="activity_export_csv">I-export ang CSV</string>
+    <string name="activity_filter_date_range">Hanay ng Petsa</string>
 
-    <!-- SettingsScreen.kt -->
     <!-- Toast Messages -->
-    <string name="settings_toast_notification_perm_granted">Notification permission granted</string>
-    <string name="settings_toast_notification_perm_denied">Notification permission denied</string>
-    <string name="settings_toast_nfc_perm_granted">NFC permission granted. Please toggle monitoring again if needed.</string>
-    <string name="settings_toast_nfc_perm_denied">NFC permission denied. Background monitoring cannot be enabled.</string>
+    <string name="settings_toast_notification_perm_granted">Nabigay ang pahintulot sa notification</string>
+    <string name="settings_toast_notification_perm_denied">Hindi nabigay ang pahintulot sa notification</string>
+    <string name="settings_toast_nfc_perm_granted">Nabigay ang NFC permission. Paki-toggle ulit ang monitoring kung kailangan.</string>
+    <string name="settings_toast_nfc_perm_denied">Hindi nabigay ang NFC permission. Hindi ma-enable ang background monitoring.</string>
 
     <!-- Screen and Section Titles -->
-    <string name="settings_screen_header_title">SETTINGS</string>
+    <string name="settings_screen_header_title">MGA SETTING</string>
     <string name="settings_section_display_title">DISPLAY</string>
-    <string name="settings_section_language_region_title">LANGUAGE &amp; REGION</string> <!-- New Section Title -->
-    <string name="settings_section_notifications_alerts_title">NOTIFICATIONS &amp; ALERTS</string>
-    <string name="settings_section_privacy_security_title">PRIVACY &amp; SECURITY</string>
+    <string name="settings_section_language_region_title">WIKA AT REHIYON</string>
+    <string name="settings_section_notifications_alerts_title">MGA NOTIFICATION AT ALERTO</string>
+    <string name="settings_section_privacy_security_title">PRIVACY AT SECURITY</string>
     <string name="settings_section_performance_title">PERFORMANCE</string>
 
     <!-- Theme Options -->
     <string name="settings_item_theme_title">Theme</string>
     <string name="settings_item_dark_mode_title">Dark Mode</string>
-    <string name="settings_item_dark_mode_subtitle">Easy on the eyes</string>
+    <string name="settings_item_dark_mode_subtitle">Madaling sa mata</string>
     <string name="settings_item_light_mode_title">Light Mode</string>
-    <string name="settings_item_light_mode_subtitle">Classic look</string>
+    <string name="settings_item_light_mode_subtitle">Klasikong hitsura</string>
 
-    <!-- General Settings Items (Titles and Subtitles) -->
+    <!-- General Settings Items -->
     <string name="settings_item_auto_reminder_title">Auto Reminder</string>
-    <string name="settings_item_auto_reminder_subtitle">Privacy alerts when NFC stays enabled</string>
-
-    <string name="settings_item_reminder_interval_title">Reminder Interval</string> <!-- Used in AdvancedIntervalSelector -->
-    <string name="settings_item_reminder_interval_subtitle">How often to remind about NFC privacy</string> <!-- Used in AdvancedIntervalSelector -->
-    <string name="settings_item_reminder_interval_current_label">Current: %1$ds</string> <!-- Used in AdvancedIntervalSelector, %1$d is for the number -->
-
-    <string name="settings_item_show_notifications_title">Show Notifications</string>
-    <string name="settings_item_show_notifications_subtitle">Display all privacy and status notifications</string>
-
-    <string name="settings_item_vibration_alerts_title">Vibration for Alerts</string>
-    <string name="settings_item_vibration_alerts_subtitle">Haptic feedback for privacy alerts</string>
-
-    <string name="settings_item_enable_sounds_title">Enable Sounds</string>
-    <string name="settings_item_enable_sounds_subtitle">Play sounds for alerts and notifications</string>
-
-    <string name="settings_item_notification_sound_title">Notification Sound</string>
-    <string name="settings_item_notification_sound_subtitle">Customize the specific sound for notifications</string>
-
+    <string name="settings_item_auto_reminder_subtitle">Privacy alerts kapag nanatiling nakabukas ang NFC</string>
+    <string name="settings_item_reminder_interval_title">Agwat ng Paalala</string>
+    <string name="settings_item_reminder_interval_subtitle">Gaano kadalas magpaalala tungkol sa NFC privacy</string>
+    <string name="settings_item_reminder_interval_current_label">Kasalukuyan: %1$ds</string>
+    <string name="settings_item_show_notifications_title">Ipakita ang Mga Notification</string>
+    <string name="settings_item_show_notifications_subtitle">Ipakita lahat ng privacy at status notifications</string>
+    <string name="settings_item_vibration_alerts_title">Vibration para sa Mga Alerto</string>
+    <string name="settings_item_vibration_alerts_subtitle">Haptic feedback para sa privacy alerts</string>
+    <string name="settings_item_enable_sounds_title">I-enable ang Mga Tunog</string>
+    <string name="settings_item_enable_sounds_subtitle">Tumugtog ng mga tunog para sa alerts at notifications</string>
+    <string name="settings_item_notification_sound_title">Tunog ng Notification</string>
+    <string name="settings_item_notification_sound_subtitle">I-customize ang specific na tunog para sa notifications</string>
     <string name="settings_item_privacy_mode_title">Privacy Mode</string>
-    <string name="settings_item_privacy_mode_subtitle">Enhanced privacy protection</string>
-
-    <string name="settings_item_block_unknown_tags_title">Block Unknown Tags</string>
-    <string name="settings_item_block_unknown_tags_subtitle">Automatically block unrecognized NFC tags</string>
-
+    <string name="settings_item_privacy_mode_subtitle">Enhanced na proteksyon ng privacy</string>
+    <string name="settings_item_block_unknown_tags_title">I-block ang Hindi Kilalang Tags</string>
+    <string name="settings_item_block_unknown_tags_subtitle">Awtomatikong i-block ang hindi nakilalang NFC tags</string>
     <string name="settings_item_background_monitoring_title">Background NFC Monitoring</string>
-    <string name="settings_item_background_monitoring_subtitle">Continuously monitors NFC status. Requires NFC permission.</string>
-
-    <string name="settings_item_battery_optimization_title">Battery Optimization</string>
-    <string name="settings_item_battery_optimization_subtitle">Optimize for better battery life</string>
+    <string name="settings_item_background_monitoring_subtitle">Patuloy na sinusubaybayan ang NFC status. Kailangan ng NFC permission.</string>
+    <string name="settings_item_battery_optimization_title">Pag-optimize ng Baterya</string>
+    <string name="settings_item_battery_optimization_subtitle">I-optimize para sa mas magandang battery life</string>
 
     <!-- Buttons -->
-    <string name="settings_button_export_settings">EXPORT SETTINGS</string>
-    <string name="settings_button_reset_defaults">RESET TO DEFAULTS</string>
+    <string name="settings_button_export_settings">I-EXPORT ANG MGA SETTING</string>
+    <string name="settings_button_reset_defaults">I-RESET SA MGA DEFAULT</string>
 
     <!-- Design Info Card -->
     <string name="settings_card_design_info_title">Nothing OS Inspired Design</string>
-    <string name="settings_card_design_info_subtitle">Built with official Android tools: Kotlin, Jetpack Compose, Room Database, and MVVM architecture.</string>
+    <string name="settings_card_design_info_subtitle">Ginawa gamit ang opisyal na Android tools: Kotlin, Jetpack Compose, Room Database, at MVVM architecture.</string>
 
     <!-- Content Descriptions -->
-    <string name="settings_cd_navigate">Navigate</string> <!-- For KeyboardArrowRight icon -->
+    <string name="settings_cd_navigate">Mag-navigate</string>
 
     <!-- Home Screen Strings -->
     <string name="home_screen_title">NFC MANAGER</string>
     <string name="nfc_status_title">NFC STATUS</string>
-    <string name="nfc_not_supported">NOT SUPPORTED</string>
-    <string name="nfc_hardware_not_found">NFC hardware not found on this device.</string>
-    <string name="nfc_status_enabled">ENABLED</string>
-    <string name="privacy_monitoring_active">Privacy monitoring active</string>
-    <string name="nfc_status_disabled">DISABLED</string>
-    <string name="tap_to_enable_nfc">Tap here to enable NFC in system settings.</string>
-    <string name="home_todays_activity_title">TODAYS ACTIVITY</string>
-    <string name="events_logged_format">%1$d events logged</string>
-    <string name="enable_nfc_button">ENABLE NFC IN SETTINGS</string>
+    <string name="nfc_not_supported">HINDI SUPPORTED</string>
+    <string name="nfc_hardware_not_found">Hindi natagpuan ang NFC hardware sa device na ito.</string>
+    <string name="nfc_status_enabled">NAKABUKAS</string>
+    <string name="privacy_monitoring_active">Aktibo ang privacy monitoring</string>
+    <string name="nfc_status_disabled">NAKAPATAY</string>
+    <string name="tap_to_enable_nfc">I-tap dito para i-enable ang NFC sa system settings.</string>
+    <string name="home_todays_activity_title">AKTIBIDAD NGAYON</string>
+    <string name="events_logged_format">%1$d events na naitala</string>
+    <string name="enable_nfc_button">I-ENABLE ANG NFC SA SETTINGS</string>
 
     <!-- Activity Screen Strings -->
     <string name="activity_log_title">ACTIVITY LOG</string>
-    <string name="export_success">Events exported successfully</string>
-    <string name="export_error">Error exporting events: %1$s</string>
-    <string name="no_events_to_export">No events to export for the current filter</string>
-    <string name="no_events_to_export_simple">No events to export</string>
+    <string name="export_success">Matagumpay na na-export ang mga events</string>
+    <string name="export_error">Error sa pag-export ng events: %1$s</string>
+    <string name="no_events_to_export">Walang events na ie-export para sa kasalukuyang filter</string>
+    <string name="no_events_to_export_simple">Walang events na ie-export</string>
     <string name="event_singular">event</string>
-    <string name="events_plural">events</string>
-    <string name="no_matching_activity">No Matching Activity</string>
-    <string name="no_activity_yet">No Activity Yet</string>
-    <string name="adjust_filters_hint">Try adjusting your filters.</string>
-    <string name="activity_logs_hint">Activity logs will appear here.</string>
-    <string name="all_types_filter">All Types</string>
-    <string name="events_found_format">%1$d %2$s found</string>
-    <string name="events_recorded_format">%1$d %2$s recorded</string>
+    <string name="events_plural">mga event</string>
+    <string name="no_matching_activity">Walang Tumugmang Aktibidad</string>
+    <string name="no_activity_yet">Walang Aktibidad Pa</string>
+    <string name="adjust_filters_hint">Subukan i-adjust ang inyong mga filter.</string>
+    <string name="activity_logs_hint">Lalabas dito ang mga activity logs.</string>
+    <string name="all_types_filter">Lahat ng Uri</string>
+    <string name="events_found_format">Natagpuan ang %1$d %2$s</string>
+    <string name="events_recorded_format">Naitala ang %1$d %2$s</string>
 
     <!-- Notification Sound Settings Screen Strings -->
-    <string name="sound_access_warning">Could not persist sound access, it might not work later.</string>
-    <string name="storage_permission_required">Storage permission is required to choose a custom sound.</string>
-    <string name="notification_sound_screen_title">Notification Sound</string>
-    <string name="notification_sound_description">Customize the sound played for NFC Manager notifications. Choose a custom sound from your device or use the system default.</string>
-    <string name="current_sound_label">Current Sound</string>
-    <string name="sound_play_error_null">Cannot play sound: Default URI is null.</string>
-    <string name="sound_play_error_corrupted">Cannot play sound: Ringtone not found or corrupted.</string>
-    <string name="sound_play_error_general">Error playing sound: %1$s</string>
-    <string name="choose_custom_sound">Choose Custom Sound</string>
-    <string name="use_system_default_sound">Use System Default Sound</string>
-    <string name="sound_playing_indicator">Playing</string>
+    <string name="sound_access_warning">Hindi ma-persist ang sound access, maaaring hindi gumana mamaya.</string>
+    <string name="storage_permission_required">Kailangan ang storage permission para pumili ng custom na tunog.</string>
+    <string name="notification_sound_screen_title">Tunog ng Notification</string>
+    <string name="notification_sound_description">I-customize ang tunog na tutugtog para sa NFC Manager notifications. Pumili ng custom na tunog mula sa inyong device o gamitin ang system default.</string>
+    <string name="current_sound_label">Kasalukuyang Tunog</string>
+    <string name="sound_play_error_null">Hindi ma-play ang tunog: Null ang default URI.</string>
+    <string name="sound_play_error_corrupted">Hindi ma-play ang tunog: Hindi natagpuan o sira ang ringtone.</string>
+    <string name="sound_play_error_general">Error sa pag-play ng tunog: %1$s</string>
+    <string name="choose_custom_sound">Pumili ng Custom na Tunog</string>
+    <string name="use_system_default_sound">Gamitin ang System Default na Tunog</string>
+    <string name="sound_playing_indicator">Tumutugtog</string>
     <string name="system_default_sound">System Default</string>
-    <string name="custom_sound_label">Custom Sound</string>
-    <string name="custom_sound_error">Custom Sound (Error)</string>
-    <string name="back_button">Back</string>
-    <string name="pick_sound_icon">Pick Sound</string>
-    <string name="default_sound_icon">Default Sound</string>
+    <string name="custom_sound_label">Custom na Tunog</string>
+    <string name="custom_sound_error">Custom na Tunog (Error)</string>
+    <string name="back_button">Bumalik</string>
+    <string name="pick_sound_icon">Pumili ng Tunog</string>
+    <string name="default_sound_icon">Default na Tunog</string>
 
     <!-- ViewModel Messages -->
-    <string name="language_already_set">Language is already set to %1$s.</string>
-    <string name="language_changed_log">Language changed from %1$s to %2$s</string>
-    <string name="language_updated_success">Language updated to %1$s. Restarting for changes to take effect.</string>
-    <string name="language_update_failed">Failed to update language: %1$s</string>
-    <string name="settings_reset_log">All settings reset to defaults</string>
-    <string name="settings_reset_success">All settings reset to defaults</string>
-    <string name="settings_reset_failed">Failed to reset settings: %1$s</string>
-    <string name="notification_sound_updated">Notification sound updated</string>
-    <string name="notification_sound_reset">Notification sound reset to default</string>
-    <string name="notification_sound_reset_button">Reset to default</string>
-    <string name="notification_sound_update_failed">Failed to update notification sound: %1$s</string>
-    <string name="background_monitoring_enabled_log">Background NFC Monitoring enabled (via intent)</string>
-    <string name="background_monitoring_enabled_success">Background NFC Monitoring enabled</string>
-    <string name="background_monitoring_enable_failed">Failed to enable background monitoring: %1$s</string>
-    <string name="nfc_permission_required">NFC Permission required to enable background monitoring.</string>
-    <string name="background_monitoring_disabled_log">Background NFC Monitoring disabled (via intent)</string>
-    <string name="background_monitoring_disabled_success">Background NFC Monitoring disabled</string>
-    <string name="background_monitoring_disable_failed">Failed to disable background monitoring: %1$s</string>
+    <string name="language_already_set">Naka-set na ang wika sa %1$s.</string>
+    <string name="language_changed_log">Nabago ang wika mula sa %1$s patungo sa %2$s</string>
+    <string name="language_updated_success">Na-update ang wika sa %1$s. Nagre-restart para sa mga pagbabago.</string>
+    <string name="language_update_failed">Nabigo ang pag-update ng wika: %1$s</string>
+    <string name="settings_reset_log">Lahat ng settings na-reset sa defaults</string>
+    <string name="settings_reset_success">Lahat ng settings na-reset sa defaults</string>
+    <string name="settings_reset_failed">Nabigo ang pag-reset ng settings: %1$s</string>
+    <string name="notification_sound_updated">Na-update ang tunog ng notification</string>
+    <string name="notification_sound_reset">Na-reset ang tunog ng notification sa default</string>
+    <string name="notification_sound_reset_button">I-reset sa default</string>
+    <string name="notification_sound_update_failed">Nabigo ang pag-update ng notification sound: %1$s</string>
+    <string name="background_monitoring_enabled_log">Na-enable ang Background NFC Monitoring (via intent)</string>
+    <string name="background_monitoring_enabled_success">Na-enable ang Background NFC Monitoring</string>
+    <string name="background_monitoring_enable_failed">Nabigo ang pag-enable ng background monitoring: %1$s</string>
+    <string name="nfc_permission_required">Kailangan ang NFC Permission para i-enable ang background monitoring.</string>
+    <string name="background_monitoring_disabled_log">Na-disable ang Background NFC Monitoring (via intent)</string>
+    <string name="background_monitoring_disabled_success">Na-disable ang Background NFC Monitoring</string>
+    <string name="background_monitoring_disable_failed">Nabigo ang pag-disable ng background monitoring: %1$s</string>
     <string name="auto_reminder_toggled_log">Auto-reminder %1$s</string>
     <string name="auto_reminder_toggled_success">Auto-reminder %1$s</string>
-    <string name="auto_reminder_toggle_failed">Failed to toggle auto-reminder: %1$s</string>
-    <string name="interval_out_of_range">Interval must be between 5 and 300 seconds</string>
-    <string name="reminder_interval_updated_log">Reminder interval set to %1$ds</string>
-    <string name="reminder_interval_updated_success">Reminder interval updated to %1$d seconds</string>
-    <string name="reminder_interval_update_failed">Failed to update interval: %1$s</string>
-    <string name="notifications_toggled_log">Notifications %1$s</string>
-    <string name="notifications_toggled_success">Notifications %1$s</string>
-    <string name="notifications_toggle_failed">Failed to toggle notifications: %1$s</string>
+    <string name="auto_reminder_toggle_failed">Nabigo ang pag-toggle ng auto-reminder: %1$s</string>
+    <string name="interval_out_of_range">Dapat nasa pagitan ng 5 at 300 segundo ang agwat</string>
+    <string name="reminder_interval_updated_log">Naka-set ang reminder interval sa %1$ds</string>
+    <string name="reminder_interval_updated_success">Na-update ang reminder interval sa %1$d segundo</string>
+    <string name="reminder_interval_update_failed">Nabigo ang pag-update ng interval: %1$s</string>
+    <string name="notifications_toggled_log">Mga notification %1$s</string>
+    <string name="notifications_toggled_success">Mga notification %1$s</string>
+    <string name="notifications_toggle_failed">Nabigo ang pag-toggle ng notifications: %1$s</string>
     <string name="vibration_toggled_log">Vibration %1$s</string>
     <string name="vibration_toggled_success">Vibration %1$s</string>
-    <string name="vibration_toggle_failed">Failed to toggle vibration: %1$s</string>
-    <string name="sound_toggled_log">Sound (general) %1$s</string>
-    <string name="sound_toggled_success">Sound (general) %1$s</string>
-    <string name="sound_toggle_failed">Failed to toggle sound: %1$s</string>
-    <string name="theme_changed_log">%1$s enabled</string>
-    <string name="theme_changed_success">%1$s enabled</string>
-    <string name="theme_change_failed">Failed to set theme: %1$s</string>
+    <string name="vibration_toggle_failed">Nabigo ang pag-toggle ng vibration: %1$s</string>
+    <string name="sound_toggled_log">Tunog (general) %1$s</string>
+    <string name="sound_toggled_success">Tunog (general) %1$s</string>
+    <string name="sound_toggle_failed">Nabigo ang pag-toggle ng tunog: %1$s</string>
+    <string name="theme_changed_log">%1$s na-enable</string>
+    <string name="theme_changed_success">%1$s na-enable</string>
+    <string name="theme_change_failed">Nabigo ang pag-set ng theme: %1$s</string>
     <string name="dark_mode_text">Dark mode</string>
     <string name="light_mode_text">Light mode</string>
-    <string name="accent_color_updated_log">Accent color updated</string>
-    <string name="accent_color_updated_success">Accent color updated</string>
-    <string name="accent_color_update_failed">Failed to update color: %1$s</string>
+    <string name="accent_color_updated_log">Na-update ang accent color</string>
+    <string name="accent_color_updated_success">Na-update ang accent color</string>
+    <string name="accent_color_update_failed">Nabigo ang pag-update ng kulay: %1$s</string>
     <string name="battery_optimization_toggled_log">Battery optimization %1$s</string>
     <string name="battery_optimization_toggled_success">Battery optimization %1$s</string>
-    <string name="battery_optimization_toggle_failed">Failed to toggle battery optimization: %1$s</string>
-    <string name="monitoring_interval_out_of_range">Monitoring interval must be between 1000 and 10000 milliseconds</string>
-    <string name="monitoring_interval_updated_log">Monitoring interval set to %1$dms</string>
-    <string name="monitoring_interval_updated_success">Monitoring interval updated</string>
-    <string name="monitoring_interval_update_failed">Failed to update monitoring interval: %1$s</string>
+    <string name="battery_optimization_toggle_failed">Nabigo ang pag-toggle ng battery optimization: %1$s</string>
+    <string name="monitoring_interval_out_of_range">Dapat nasa pagitan ng 1000 at 10000 milliseconds ang monitoring interval</string>
+    <string name="monitoring_interval_updated_log">Naka-set ang monitoring interval sa %1$dms</string>
+    <string name="monitoring_interval_updated_success">Na-update ang monitoring interval</string>
+    <string name="monitoring_interval_update_failed">Nabigo ang pag-update ng monitoring interval: %1$s</string>
     <string name="privacy_mode_toggled_log">Privacy mode %1$s</string>
     <string name="privacy_mode_toggled_success">Privacy mode %1$s</string>
-    <string name="privacy_mode_toggle_failed">Failed to toggle privacy mode: %1$s</string>
-    <string name="block_unknown_tags_toggled_log">Block unknown tags %1$s</string>
-    <string name="block_unknown_tags_toggled_success">Unknown tag blocking %1$s</string>
-    <string name="block_unknown_tags_toggle_failed">Failed to toggle unknown tag blocking: %1$s</string>
-    <string name="settings_exported_log">Settings exported</string>
-    <string name="settings_exported_success">Settings exported successfully</string>
-    <string name="settings_export_failed">Failed to export settings: %1$s</string>
-    <string name="data_cleanup_log">Old data cleanup completed (%1$d days)</string>
-    <string name="data_cleanup_success">Old data cleaned up successfully</string>
-    <string name="data_cleanup_failed">Failed to cleanup data: %1$s</string>
-    <string name="enabled_status">enabled</string>
-    <string name="disabled_status">disabled</string>
+    <string name="privacy_mode_toggle_failed">Nabigo ang pag-toggle ng privacy mode: %1$s</string>
+    <string name="block_unknown_tags_toggled_log">I-block ang hindi kilalang tags %1$s</string>
+    <string name="block_unknown_tags_toggled_success">Pag-block sa hindi kilalang tag %1$s</string>
+    <string name="block_unknown_tags_toggle_failed">Nabigo ang pag-toggle ng unknown tag blocking: %1$s</string>
+    <string name="settings_exported_log">Na-export ang mga settings</string>
+    <string name="settings_exported_success">Matagumpay na na-export ang mga settings</string>
+    <string name="settings_export_failed">Nabigo ang pag-export ng settings: %1$s</string>
+    <string name="data_cleanup_log">Tapos na ang paglinis ng lumang data (%1$d araw)</string>
+    <string name="data_cleanup_success">Matagumpay na nalinis ang lumang data</string>
+    <string name="data_cleanup_failed">Nabigo ang paglinis ng data: %1$s</string>
+    <string name="enabled_status">naka-enable</string>
+    <string name="disabled_status">naka-disable</string>
 
     <!-- Date Filter Options -->
-    <string name="date_filter_today">Today</string>
-    <string name="date_filter_last_7_days">Last 7 Days</string>
-    <string name="date_filter_last_30_days">Last 30 Days</string>
-    <string name="date_filter_all_time">All Time</string>
+    <string name="date_filter_today">Ngayon</string>
+    <string name="date_filter_last_7_days">Nakaraang 7 Araw</string>
+    <string name="date_filter_last_30_days">Nakaraang 30 Araw</string>
+    <string name="date_filter_all_time">Buong Panahon</string>
 
     <!-- System Messages -->
-    <string name="mainviewmodel_initialized">MainViewModel initialized</string>
-    <string name="tag_scanned_format">Tag Scanned: %1$s (Action: %2$s)</string>
-    <string name="event_deleted">Event deleted</string>
-    <string name="all_events_cleared">All events cleared</string>
-    <string name="all_events_cleared_success">All events cleared successfully</string>
-    <string name="failed_to_delete_event">Failed to delete event: %1$s</string>
-    <string name="failed_to_clear_events">Failed to clear all events: %1$s</string>
+    <string name="mainviewmodel_initialized">Na-initialize ang MainViewModel</string>
+    <string name="tag_scanned_format">Na-scan ang Tag: %1$s (Action: %2$s)</string>
+    <string name="event_deleted">Na-delete ang event</string>
+    <string name="all_events_cleared">Na-clear na lahat ng events</string>
+    <string name="all_events_cleared_success">Matagumpay na na-clear lahat ng events</string>
+    <string name="failed_to_delete_event">Nabigo ang pag-delete ng event: %1$s</string>
+    <string name="failed_to_clear_events">Nabigo ang pag-clear ng lahat ng events: %1$s</string>
 
     <!-- Additional System Messages -->
-    <string name="nfc_not_supported_device">NFC not supported on this device</string>
-    <string name="privacy_alert_shown">Privacy alert shown</string>
-    <string name="privacy_alert_dismissed">Privacy alert dismissed</string>
-    <string name="reminder_interval_set_log">Reminder interval set to %1$ds</string>
-    <string name="notifications_toggled_system_log">Notifications %1$s</string>
+    <string name="nfc_not_supported_device">Hindi supported ang NFC sa device na ito</string>
+    <string name="privacy_alert_shown">Ipinakita ang privacy alert</string>
+    <string name="privacy_alert_dismissed">Na-dismiss ang privacy alert</string>
+    <string name="reminder_interval_set_log">Naka-set ang reminder interval sa %1$ds</string>
+    <string name="notifications_toggled_system_log">Mga notification %1$s</string>
     <string name="vibration_toggled_system_log">Vibration %1$s</string>
 
     <!-- Content Descriptions -->
-    <string name="export_to_csv_icon">Export to CSV</string>
-    <string name="clear_all_logs_icon">Clear All Logs</string>
+    <string name="export_to_csv_icon">I-export sa CSV</string>
+    <string name="clear_all_logs_icon">I-clear Lahat ng Logs</string>
 
     <!-- Bottom Navigation -->
     <string name="nav_nfc_manager">NFC MANAGER</string>
-    <string name="nav_activity">ACTIVITY</string>
-    <string name="nav_settings">SETTINGS</string>
+    <string name="nav_activity">AKTIBIDAD</string>
+    <string name="nav_settings">MGA SETTING</string>
 
     <!-- Language Names for Logging -->
-    <string name="language_name_english">English</string>
-    <string name="language_name_arabic">Arabic</string>
-    <string name="language_name_german">German</string>
+    <string name="language_name_english">Ingles</string>
+    <string name="language_name_arabic">Arabo</string>
+    <string name="language_name_german">Aleman</string>
     <string name="language_name_system_default">System Default</string>
 
     <!-- Event Types -->
-    <string name="event_type_settings">SETTINGS</string>
-    <string name="event_type_system">SYSTEM</string>
+    <string name="event_type_settings">MGA SETTING</string>
+    <string name="event_type_system">SISTEMA</string>
     <string name="event_type_privacy">PRIVACY</string>
     <string name="event_type_nfc_scan">NFC SCAN</string>
     <string name="event_type_security">SECURITY</string>
 
     <!-- Settings Messages -->
-    <string name="auto_reminder_enabled">Auto-reminder enabled</string>
-    <string name="auto_reminder_disabled">Auto-reminder disabled</string>
-    <string name="notifications_enabled">Notifications enabled</string>
-    <string name="notifications_disabled">Notifications disabled</string>
-    <string name="vibration_enabled">Vibration enabled</string>
-    <string name="vibration_disabled">Vibration disabled</string>
-    <string name="sound_enabled">Sound (general) enabled</string>
-    <string name="sound_disabled">Sound (general) disabled</string>
-    <string name="battery_optimization_enabled">Battery optimization enabled</string>
-    <string name="battery_optimization_disabled">Battery optimization disabled</string>
-    <string name="privacy_mode_enabled">Privacy mode enabled</string>
-    <string name="privacy_mode_disabled">Privacy mode disabled</string>
-    <string name="unknown_tag_blocking_enabled">Block unknown tags enabled</string>
-    <string name="unknown_tag_blocking_disabled">Block unknown tags disabled</string>
-    <string name="settings_exported">Settings exported</string>
-    <string name="reminder_interval_set">Reminder interval set to %1$ds</string>
-    <string name="nfc_hardware_enabled">NFC hardware now enabled</string>
-    <string name="nfc_hardware_disabled">NFC hardware now disabled</string>
+    <string name="auto_reminder_enabled">Na-enable ang auto-reminder</string>
+    <string name="auto_reminder_disabled">Na-disable ang auto-reminder</string>
+    <string name="notifications_enabled">Na-enable ang mga notification</string>
+    <string name="notifications_disabled">Na-disable ang mga notification</string>
+    <string name="vibration_enabled">Na-enable ang vibration</string>
+    <string name="vibration_disabled">Na-disable ang vibration</string>
+    <string name="sound_enabled">Na-enable ang tunog (general)</string>
+    <string name="sound_disabled">Na-disable ang tunog (general)</string>
+    <string name="battery_optimization_enabled">Na-enable ang battery optimization</string>
+    <string name="battery_optimization_disabled">Na-disable ang battery optimization</string>
+    <string name="privacy_mode_enabled">Na-enable ang privacy mode</string>
+    <string name="privacy_mode_disabled">Na-disable ang privacy mode</string>
+    <string name="unknown_tag_blocking_enabled">Na-enable ang pag-block sa hindi kilalang tags</string>
+    <string name="unknown_tag_blocking_disabled">Na-disable ang pag-block sa hindi kilalang tags</string>
+    <string name="settings_exported">Na-export ang mga settings</string>
+    <string name="reminder_interval_set">Naka-set ang reminder interval sa %1$ds</string>
+    <string name="nfc_hardware_enabled">Nakabukas na ngayon ang NFC hardware</string>
+    <string name="nfc_hardware_disabled">Nakapatay na ngayon ang NFC hardware</string>
 
     <!-- Time Format -->
-    <string name="time_now">now</string>
+    <string name="time_now">ngayon</string>
 
     <!-- Additional Settings Messages -->
-    <string name="dark_mode_enabled">Dark mode enabled</string>
-    <string name="light_mode_enabled">Light mode enabled</string>
-    <string name="accent_color_updated">Accent color updated</string>
-    <string name="monitoring_interval_set">Monitoring interval set to %1$dms</string>
-    <string name="old_data_cleanup_completed">Old data cleanup completed (%1$d days)</string>
+    <string name="dark_mode_enabled">Na-enable ang dark mode</string>
+    <string name="light_mode_enabled">Na-enable ang light mode</string>
+    <string name="accent_color_updated">Na-update ang accent color</string>
+    <string name="monitoring_interval_set">Naka-set ang monitoring interval sa %1$dms</string>
+    <string name="old_data_cleanup_completed">Tapos na ang paglinis ng lumang data (%1$d araw)</string>
 
     <!-- Additional Success Messages -->
-    <string name="old_data_cleanup_success">Old data cleaned up successfully</string>
+    <string name="old_data_cleanup_success">Matagumpay na nalinis ang lumang data</string>
 
     <!-- Error Messages -->
-    <string name="failed_to_disable_monitoring">Failed to disable background monitoring: %1$s</string>
-    <string name="failed_to_toggle_auto_reminder">Failed to toggle auto-reminder: %1$s</string>
-    <string name="failed_to_update_interval">Failed to update interval: %1$s</string>
-    <string name="failed_to_toggle_notifications">Failed to toggle notifications: %1$s</string>
-    <string name="failed_to_toggle_vibration">Failed to toggle vibration: %1$s</string>
-    <string name="failed_to_toggle_sound">Failed to toggle sound: %1$s</string>
-    <string name="failed_to_set_theme">Failed to set theme: %1$s</string>
-    <string name="failed_to_update_color">Failed to update color: %1$s</string>
-    <string name="failed_to_toggle_battery_optimization">Failed to toggle battery optimization: %1$s</string>
-    <string name="monitoring_interval_range_error">Monitoring interval must be between 1000 and 10000 milliseconds</string>
-    <string name="failed_to_update_monitoring_interval">Failed to update monitoring interval: %1$s</string>
-    <string name="failed_to_toggle_privacy_mode">Failed to toggle privacy mode: %1$s</string>
-    <string name="failed_to_toggle_unknown_tag_blocking">Failed to toggle unknown tag blocking: %1$s</string>
-    <string name="failed_to_export_settings">Failed to export settings: %1$s</string>
-    <string name="failed_to_cleanup_data">Failed to cleanup data: %1$s</string>
+    <string name="failed_to_disable_monitoring">Nabigo ang pag-disable ng background monitoring: %1$s</string>
+    <string name="failed_to_toggle_auto_reminder">Nabigo ang pag-toggle ng auto-reminder: %1$s</string>
+    <string name="failed_to_update_interval">Nabigo ang pag-update ng interval: %1$s</string>
+    <string name="failed_to_toggle_notifications">Nabigo ang pag-toggle ng notifications: %1$s</string>
+    <string name="failed_to_toggle_vibration">Nabigo ang pag-toggle ng vibration: %1$s</string>
+    <string name="failed_to_toggle_sound">Nabigo ang pag-toggle ng tunog: %1$s</string>
+    <string name="failed_to_set_theme">Nabigo ang pag-set ng theme: %1$s</string>
+    <string name="failed_to_update_color">Nabigo ang pag-update ng kulay: %1$s</string>
+    <string name="failed_to_toggle_battery_optimization">Nabigo ang pag-toggle ng battery optimization: %1$s</string>
+    <string name="monitoring_interval_range_error">Dapat nasa pagitan ng 1000 at 10000 milliseconds ang monitoring interval</string>
+    <string name="failed_to_update_monitoring_interval">Nabigo ang pag-update ng monitoring interval: %1$s</string>
+    <string name="failed_to_toggle_privacy_mode">Nabigo ang pag-toggle ng privacy mode: %1$s</string>
+    <string name="failed_to_toggle_unknown_tag_blocking">Nabigo ang pag-toggle ng unknown tag blocking: %1$s</string>
+    <string name="failed_to_export_settings">Nabigo ang pag-export ng settings: %1$s</string>
+    <string name="failed_to_cleanup_data">Nabigo ang paglinis ng data: %1$s</string>
+
+    <!-- About Screen -->
+    <string name="about_title">Tungkol</string>
+    <string name="about_app_title">Tungkol sa NFC Manager</string>
+    <string name="about_app_description">Ang NFC Manager ay isang privacy-focused na Android application na nakatuon sa pagtulong sa mga user na subaybayan at pamahalaan ang kanilang NFC (Near Field Communication) settings na may enhanced security awareness. Nag-aalerto ang app sa mga user kapag nanatiling naka-enable ang NFC sa mahabang panahon, nakakatulong na maiwasan ang hindi awtorisadong access at nagpoprotekta laban sa mga potensyal na vulnerability sa privacy.</string>
+    <string name="about_copyright">Ginawa nang may ❤️ ni Tariq Said - Nothing OS Inspired Design</string>
+    <string name="about_contact_support_title">Contact at Support</string>
+    <string name="about_email">Email: support@dxbmark.com</string>
+    <string name="about_response_time">Response Time: 24-48 oras</string>
+    <string name="about_languages">Mga Wika: Ingles, Arabo</string>
+    <string name="about_timezone">Timezone: GMT+4 (UAE)</string>
+    <string name="about_license_title">License</string>
+    <string name="about_license_text">Licensed sa ilalim ng Apache License, Version 2.0</string>
+    <string name="about_copyright_text">Copyright 2025 Tariq Said. Lahat ng karapatan ay nakalaan.</string>
+    <string name="about_license_link">Tingnan ang License</string>
+    <string name="about_important_links_title">Mahahalagang Links</string>
+    <string name="about_terms_service">Terms of Service</string>
+    <string name="about_privacy_policy">Privacy Policy</string>
+    <string name="about_full_changelog">Buong Changelog</string>
+    <string name="about_project_repository">Project Repository</string>
+    <string name="about_development_design_title">Development at Design</string>
+    <string name="about_development_credit">Dinisenyo at Ginawa ni Tariq Said</string>
+    <string name="about_powered_by_dxbmark">Powered by DXBMark</string>
+    <string name="about_tariq_linkedin">Tariq Said sa LinkedIn</string>
+    <string name="about_tariq_github">Tariq Said sa GitHub</string>
+    <string name="about_official_contributor_title">Opisyal na contributor</string>
+    <string name="about_mwheba_agency">MWHEBA Advertising Agency</string>
+    <string name="about_security_highlights_title">Security Highlights (v%1$s)</string>
+    <string name="about_initial_security">- Initial na security implementation</string>
+    <string name="about_local_storage">- Local-only na data storage</string>
+    <string name="about_permission_access">- Permission-based na access control</string>
+    <string name="about_proguard_obfuscation">- Na-enable ang ProGuard obfuscation</string>
+    <string name="about_certificate_pinning">- Na-implement ang Certificate pinning</string>
+    <string name="navigate_back">Bumalik</string>
+    <string name="settings_section_about_title">TUNGKOL</string>
+    <string name="settings_item_about_title">Tungkol sa NFC Manager</string>
+    <string name="settings_item_about_subtitle">Info ng app, privacy policy, at support</string>
+
+    <!-- Activity Screen (Additional) -->
+    <string name="activity_search_hint">Maghanap sa activity logs...</string>
+    <string name="activity_filter_type">I-filter ayon sa uri</string>
+    <string name="activity_filter_date">I-filter ayon sa petsa</string>
+    <string name="activity_important_only">Mahahalaga lang</string>
+    <string name="activity_no_events">Walang natagpuang events</string>
+
+    <!-- Notification Sound Settings Screen (Additional) -->
+    <string name="notification_sound_current">Kasalukuyang tunog ng notification</string>
+    <string name="notification_sound_pick">Pumili ng tunog ng notification</string>
+    <string name="notification_sound_updated_log">Na-update ang tunog ng notification</string>
 
 </resources>
