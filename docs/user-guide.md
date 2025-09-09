@@ -310,12 +310,6 @@ Comprehensive configuration options:
 - **FAQ**: Common questions and answers
 - **Community**: User forums and discussions
 
-### Contact Support
-
-- **GitHub Issues**: Bug reports and feature requests
-- **Email**: [SUPPORT_EMAIL] for direct support
-- **Community**: [FORUM_LINK] for user discussions
-
 ### Feedback
 
 We value your feedback! Please:
