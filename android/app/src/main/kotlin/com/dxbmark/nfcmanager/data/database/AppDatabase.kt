@@ -85,9 +85,9 @@ abstract class AppDatabase : RoomDatabase() {
          * Migration examples for future versions
          */
         private val MIGRATION_1_2 = object : Migration(1, 2) {
-            override fun migrate(database: SupportSQLiteDatabase) {
+            override fun migrate(db: SupportSQLiteDatabase) {
                 // Example migration
-                // database.execSQL("ALTER TABLE nfc_events ADD COLUMN newColumn TEXT")
+                // db.execSQL("ALTER TABLE nfc_events ADD COLUMN newColumn TEXT")
             }
         }
         
