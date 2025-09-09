@@ -1,341 +1,359 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- App Identity -->
-    <string name="app_name">NFC Manager</string>
+    <string name="app_name">एनएफसी मैनेजर</string>
 
-    <!-- Main Interface -->
-    <string name="home_title">NFC Manager</string>
-    <string name="nfc_monitoring">NFC Monitoring</string>
-    <string name="privacy_protection">Privacy Protection</string>
+    <string name="home_title">एनएफसी मैनेजर</string>
+    <string name="nfc_monitoring">एनएफसी मॉनिटरिंग</string>
+    <string name="privacy_protection">गोपनीयता सुरक्षा</string>
 
-    <!-- Settings -->
-    <string name="settings_title">Settings</string>
-    <string name="reminder_interval">Reminder Interval</string>
-    <string name="privacy_mode">Privacy Mode</string>
-    <string name="notifications">Notifications</string>
+    <string name="settings_title">सेटिंग्स</string>
+    <string name="reminder_interval">अनुस्मारक अंतराल</string>
+    <string name="privacy_mode">गोपनीयता मोड</string>
+    <string name="notifications">सूचनाएं</string>
 
-    <!-- Alert Intervals -->
-    <string name="interval_5_seconds">5 seconds</string>
-    <string name="interval_10_seconds">10 seconds</string>
-    <string name="interval_15_seconds">15 seconds</string>
-    <string name="interval_20_seconds">20 seconds</string>
-    <string name="interval_30_seconds">30 seconds</string>
-    <string name="interval_40_seconds">40 seconds</string>
-    <string name="interval_50_seconds">50 seconds</string>
-    <string name="interval_60_seconds">60 seconds</string> <!-- Or "1 minute" if preferred -->
-    <string name="custom_interval">Custom interval</string>
+    <string name="interval_5_seconds">5 सेकंड</string>
+    <string name="interval_10_seconds">10 सेकंड</string>
+    <string name="interval_15_seconds">15 सेकंड</string>
+    <string name="interval_20_seconds">20 सेकंड</string>
+    <string name="interval_30_seconds">30 सेकंड</string>
+    <string name="interval_40_seconds">40 सेकंड</string>
+    <string name="interval_50_seconds">50 सेकंड</string>
+    <string name="interval_60_seconds">60 सेकंड</string>
+    <string name="custom_interval">कस्टम अंतराल</string>
 
-    <!-- Security Messages -->
-    <string name="nfc_enabled_too_long">NFC has been enabled for too long. Consider disabling it to protect your privacy.</string>
-    <string name="nfc_privacy_warning">NFC can be used for unauthorized payments or data access.</string>
+    <string name="nfc_enabled_too_long">एनएफसी बहुत देर से चालू है। अपनी गोपनीयता की सुरक्षा के लिए इसे बंद करने पर विचार करें।</string>
+    <string name="nfc_privacy_warning">एनएफसी का उपयोग अनधिकृत भुगतानों या डेटा पहुंच के लिए किया जा सकता है।</string>
 
-    <!-- Activity -->
-    <string name="activity_title">Activity Log</string>
-    <string name="nfc_events">NFC Events</string>
+    <string name="activity_title">गतिविधि लॉग</string>
+    <string name="nfc_events">एनएफसी घटनाक्रम</string>
+    <string name="activity_filter_date">दिनांक फ़िल्टर करें</string>
+    <string name="activity_filter_type">प्रकार फ़िल्टर करें</string>
+    <string name="activity_important_only">केवल महत्वपूर्ण</string>
+    <string name="activity_no_events">कोई घटनाक्रम नहीं</string>
+    <string name="activity_search_hint">खोजें...</string>
 
-    <!-- General -->
-    <string name="enabled">Enabled</string>
-    <string name="disabled">Disabled</string>
-    <string name="ok">OK</string>
-    <string name="cancel">Cancel</string>
-    <string name="save">Save</string>
+    <string name="enabled">सक्षम किया गया</string>
+    <string name="disabled">अक्षम किया गया</string>
+    <string name="ok">ठीक है</string>
+    <string name="cancel">रद्द करें</string>
+    <string name="save">सहेजें</string>
 
-    <!-- Language Settings -->
-    <string name="settings_language_title">Language</string>
-    <string name="language_system_default">System Default</string>
+    <string name="settings_language_title">भाषा</string>
+    <string name="language_system_default">सिस्टम डिफ़ॉल्ट</string>
     <string name="language_english">English</string>
     <string name="language_arabic">العربية</string>
     <string name="language_spanish">Español (Spanish)</string>
     <string name="language_french">Français (French)</string>
     <string name="language_german">Deutsch (German)</string>
+    <string name="language_chinese_mandarin">中文 (简体)</string>
+    <string name="language_russian">Русский</string>
+    <string name="language_hindi">हिन्दी</string>
+    <string name="language_filipino">Filipino</string>
 
+    <string name="dialog_select_language_title">भाषा चुनें</string>
 
-    <!-- Dialog title for language selection -->
-    <string name="dialog_select_language_title">Select Language</string>
+    <string name="interval_seconds_format">%1$dसे</string>
+    <string name="settings_custom_interval_label">कस्टम अंतराल (5-300 सेकंड)</string>
+    <string name="settings_error_interval_range">अंतराल 5-300 के बीच एक संख्या होनी चाहिए।</string>
+    <string name="notification_sound_title">सूचना ध्वनि</string>
+    <string name="notification_sound_use_system_default">सिस्टम डिफ़ॉल्ट ध्वनि का उपयोग करें</string>
+    <string name="notification_sound_choose_custom">कस्टम ध्वनि चुनें</string>
+    <string name="notification_sound_current">वर्तमान ध्वनि</string>
+    <string name="notification_sound_pick">ध्वनि चुनें</string>
+    <string name="notification_sound_updated_log">सूचना ध्वनि अपडेट की गई</string>
+    <string name="activity_clear_all">सभी साफ़ करें</string>
+    <string name="activity_filter_event_type">घटना का प्रकार</string>
+    <string name="activity_export_csv">CSV निर्यात करें</string>
+    <string name="activity_filter_date_range">दिनांक सीमा</string>
 
-    <!-- Initially identified from grep - keeping them grouped for now -->
-    <string name="interval_seconds_format">%1$ds</string> <!-- For dynamic interval display e.g., "10s" -->
-    <string name="settings_custom_interval_label">Custom Interval (5-300 seconds)</string>
-    <string name="settings_error_interval_range">Interval must be a number between 5-300.</string>
-    <string name="notification_sound_title">Notification Sound</string>
-    <string name="notification_sound_use_system_default">Use System Default Sound</string>
-    <string name="notification_sound_choose_custom">Choose Custom Sound</string>
-    <string name="activity_clear_all">Clear All</string>
-    <string name="activity_filter_event_type">Event Type</string>
-    <string name="activity_export_csv">Export CSV</string>
-    <string name="activity_filter_date_range">Date Range</string>
+    <string name="settings_toast_notification_perm_granted">सूचना अनुमति दी गई</string>
+    <string name="settings_toast_notification_perm_denied">सूचना अनुमति अस्वीकृत</string>
+    <string name="settings_toast_nfc_perm_granted">एनएफसी अनुमति दी गई। यदि आवश्यक हो तो कृपया मॉनिटरिंग को फिर से चालू करें।</string>
+    <string name="settings_toast_nfc_perm_denied">एनएफसी अनुमति अस्वीकृत। पृष्ठभूमि मॉनिटरिंग सक्षम नहीं की जा सकती।</string>
 
-    <!-- SettingsScreen.kt -->
-    <!-- Toast Messages -->
-    <string name="settings_toast_notification_perm_granted">Notification permission granted</string>
-    <string name="settings_toast_notification_perm_denied">Notification permission denied</string>
-    <string name="settings_toast_nfc_perm_granted">NFC permission granted. Please toggle monitoring again if needed.</string>
-    <string name="settings_toast_nfc_perm_denied">NFC permission denied. Background monitoring cannot be enabled.</string>
+    <string name="settings_screen_header_title">सेटिंग्स</string>
+    <string name="settings_section_display_title">प्रदर्शन</string>
+    <string name="settings_section_language_region_title">भाषा और क्षेत्र</string>
+    <string name="settings_section_notifications_alerts_title">सूचनाएं और अलर्ट</string>
+    <string name="settings_section_privacy_security_title">गोपनीयता और सुरक्षा</string>
+    <string name="settings_section_performance_title">प्रदर्शन</string>
 
-    <!-- Screen and Section Titles -->
-    <string name="settings_screen_header_title">SETTINGS</string>
-    <string name="settings_section_display_title">DISPLAY</string>
-    <string name="settings_section_language_region_title">LANGUAGE &amp; REGION</string> <!-- New Section Title -->
-    <string name="settings_section_notifications_alerts_title">NOTIFICATIONS &amp; ALERTS</string>
-    <string name="settings_section_privacy_security_title">PRIVACY &amp; SECURITY</string>
-    <string name="settings_section_performance_title">PERFORMANCE</string>
+    <string name="settings_item_theme_title">थीम</string>
+    <string name="settings_item_dark_mode_title">डार्क मोड</string>
+    <string name="settings_item_dark_mode_subtitle">आंखों पर आसान</string>
+    <string name="settings_item_light_mode_title">लाइट मोड</string>
+    <string name="settings_item_light_mode_subtitle">क्लासिक लुक</string>
+    <string name="settings_item_accent_color_title">उच्चारण रंग</string>
+    <string name="settings_item_accent_color_subtitle">ऐप का मुख्य रंग बदलें</string>
 
-    <!-- Theme Options -->
-    <string name="settings_item_theme_title">Theme</string>
-    <string name="settings_item_dark_mode_title">Dark Mode</string>
-    <string name="settings_item_dark_mode_subtitle">Easy on the eyes</string>
-    <string name="settings_item_light_mode_title">Light Mode</string>
-    <string name="settings_item_light_mode_subtitle">Classic look</string>
+    <string name="settings_item_auto_reminder_title">ऑटो अनुस्मारक</string>
+    <string name="settings_item_auto_reminder_subtitle">जब एनएफसी चालू रहता है तो गोपनीयता अलर्ट</string>
 
-    <!-- General Settings Items (Titles and Subtitles) -->
-    <string name="settings_item_auto_reminder_title">Auto Reminder</string>
-    <string name="settings_item_auto_reminder_subtitle">Privacy alerts when NFC stays enabled</string>
+    <string name="settings_item_reminder_interval_title">अनुस्मारक अंतराल</string>
+    <string name="settings_item_reminder_interval_subtitle">एनएफसी गोपनीयता के बारे में कितनी बार याद दिलाना है</string>
+    <string name="settings_item_reminder_interval_current_label">वर्तमान: %1$dसे</string>
 
-    <string name="settings_item_reminder_interval_title">Reminder Interval</string> <!-- Used in AdvancedIntervalSelector -->
-    <string name="settings_item_reminder_interval_subtitle">How often to remind about NFC privacy</string> <!-- Used in AdvancedIntervalSelector -->
-    <string name="settings_item_reminder_interval_current_label">Current: %1$ds</string> <!-- Used in AdvancedIntervalSelector, %1$d is for the number -->
+    <string name="settings_item_show_notifications_title">सूचनाएं दिखाएं</string>
+    <string name="settings_item_show_notifications_subtitle">सभी गोपनीयता और स्थिति सूचनाएं प्रदर्शित करें</string>
 
-    <string name="settings_item_show_notifications_title">Show Notifications</string>
-    <string name="settings_item_show_notifications_subtitle">Display all privacy and status notifications</string>
+    <string name="settings_item_vibration_alerts_title">अलर्ट के लिए कंपन</string>
+    <string name="settings_item_vibration_alerts_subtitle">गोपनीयता अलर्ट के लिए हैप्टिक फीडबैक</string>
 
-    <string name="settings_item_vibration_alerts_title">Vibration for Alerts</string>
-    <string name="settings_item_vibration_alerts_subtitle">Haptic feedback for privacy alerts</string>
+    <string name="settings_item_enable_sounds_title">ध्वनि सक्षम करें</string>
+    <string name="settings_item_enable_sounds_subtitle">अलर्ट और सूचनाओं के लिए ध्वनि बजाएं</string>
 
-    <string name="settings_item_enable_sounds_title">Enable Sounds</string>
-    <string name="settings_item_enable_sounds_subtitle">Play sounds for alerts and notifications</string>
+    <string name="settings_item_notification_sound_title">सूचना ध्वनि</string>
+    <string name="settings_item_notification_sound_subtitle">सूचनाओं के लिए विशिष्ट ध्वनि को अनुकूलित करें</string>
 
-    <string name="settings_item_notification_sound_title">Notification Sound</string>
-    <string name="settings_item_notification_sound_subtitle">Customize the specific sound for notifications</string>
+    <string name="settings_item_privacy_mode_title">गोपनीयता मोड</string>
+    <string name="settings_item_privacy_mode_subtitle">बढ़ी हुई गोपनीयता सुरक्षा</string>
 
-    <string name="settings_item_privacy_mode_title">Privacy Mode</string>
-    <string name="settings_item_privacy_mode_subtitle">Enhanced privacy protection</string>
+    <string name="settings_item_block_unknown_tags_title">अज्ञात टैग को ब्लॉक करें</string>
+    <string name="settings_item_block_unknown_tags_subtitle">अज्ञात एनएफसी टैग को स्वचालित रूप से ब्लॉक करें</string>
 
-    <string name="settings_item_block_unknown_tags_title">Block Unknown Tags</string>
-    <string name="settings_item_block_unknown_tags_subtitle">Automatically block unrecognized NFC tags</string>
+    <string name="settings_item_background_monitoring_title">पृष्ठभूमि एनएफसी मॉनिटरिंग</string>
+    <string name="settings_item_background_monitoring_subtitle">एनएफसी स्थिति की लगातार निगरानी करता है। एनएफसी अनुमति की आवश्यकता है।</string>
 
-    <string name="settings_item_background_monitoring_title">Background NFC Monitoring</string>
-    <string name="settings_item_background_monitoring_subtitle">Continuously monitors NFC status. Requires NFC permission.</string>
+    <string name="settings_item_battery_optimization_title">बैटरी ऑप्टिमाइजेशन</string>
+    <string name="settings_item_battery_optimization_subtitle">बेहतर बैटरी लाइफ के लिए ऑप्टिमाइज करें</string>
+    <string name="settings_item_performance_title">प्रदर्शन</string>
+    <string name="settings_item_performance_subtitle">स्मूथनेस और बैटरी लाइफ के बीच संतुलन</string>
+    <string name="settings_item_monitoring_interval_title">मॉनिटरिंग अंतराल</string>
+    <string name="settings_item_monitoring_interval_subtitle">एनएफसी स्थिति जांचने की गति</string>
 
-    <string name="settings_item_battery_optimization_title">Battery Optimization</string>
-    <string name="settings_item_battery_optimization_subtitle">Optimize for better battery life</string>
+    <string name="settings_button_export_settings">सेटिंग्स निर्यात करें</string>
+    <string name="settings_button_reset_defaults">डिफ़ॉल्ट पर रीसेट करें</string>
 
-    <!-- Buttons -->
-    <string name="settings_button_export_settings">EXPORT SETTINGS</string>
-    <string name="settings_button_reset_defaults">RESET TO DEFAULTS</string>
+    <string name="settings_card_design_info_title">नथिंग ओएस से प्रेरित डिज़ाइन</string>
+    <string name="settings_card_design_info_subtitle">आधिकारिक एंड्रॉइड टूल के साथ बनाया गया: कोटलिन, जेटपैक कंपोज, रूम डेटाबेस, और एमवीवीएम आर्किटेक्चर।</string>
 
-    <!-- Design Info Card -->
-    <string name="settings_card_design_info_title">Nothing OS Inspired Design</string>
-    <string name="settings_card_design_info_subtitle">Built with official Android tools: Kotlin, Jetpack Compose, Room Database, and MVVM architecture.</string>
+    <string name="settings_cd_navigate">नेविगेट करें</string>
 
-    <!-- Content Descriptions -->
-    <string name="settings_cd_navigate">Navigate</string> <!-- For KeyboardArrowRight icon -->
+    <string name="home_screen_title">एनएफसी मैनेजर</string>
+    <string name="nfc_status_title">एनएफसी स्थिति</string>
+    <string name="nfc_not_supported">समर्थित नहीं है</string>
+    <string name="nfc_hardware_not_found">इस डिवाइस पर एनएफसी हार्डवेयर नहीं मिला।</string>
+    <string name="nfc_status_enabled">सक्षम</string>
+    <string name="privacy_monitoring_active">गोपनीयता मॉनिटरिंग सक्रिय</string>
+    <string name="nfc_status_disabled">अक्षम</string>
+    <string name="tap_to_enable_nfc">सिस्टम सेटिंग्स में एनएफसी सक्षम करने के लिए यहां टैप करें।</string>
+    <string name="home_todays_activity_title">आज की गतिविधि</string>
+    <string name="events_logged_format">%1$d घटनाक्रम लॉग किए गए</string>
+    <string name="enable_nfc_button">सेटिंग्स में एनएफसी सक्षम करें</string>
 
-    <!-- Home Screen Strings -->
-    <string name="home_screen_title">NFC MANAGER</string>
-    <string name="nfc_status_title">NFC STATUS</string>
-    <string name="nfc_not_supported">NOT SUPPORTED</string>
-    <string name="nfc_hardware_not_found">NFC hardware not found on this device.</string>
-    <string name="nfc_status_enabled">ENABLED</string>
-    <string name="privacy_monitoring_active">Privacy monitoring active</string>
-    <string name="nfc_status_disabled">DISABLED</string>
-    <string name="tap_to_enable_nfc">Tap here to enable NFC in system settings.</string>
-    <string name="home_todays_activity_title">TODAYS ACTIVITY</string>
-    <string name="events_logged_format">%1$d events logged</string>
-    <string name="enable_nfc_button">ENABLE NFC IN SETTINGS</string>
+    <string name="activity_log_title">गतिविधि लॉग</string>
+    <string name="export_success">घटनाक्रम सफलतापूर्वक निर्यात किए गए</string>
+    <string name="export_error">घटनाक्रम निर्यात करने में त्रुटि: %1$s</string>
+    <string name="no_events_to_export">वर्तमान फ़िल्टर के लिए निर्यात करने हेतु कोई घटनाक्रम नहीं</string>
+    <string name="no_events_to_export_simple">निर्यात करने के लिए कोई घटनाक्रम नहीं</string>
+    <string name="event_singular">घटना</string>
+    <string name="events_plural">घटनाक्रम</string>
+    <string name="no_matching_activity">कोई मिलान करने वाली गतिविधि नहीं</string>
+    <string name="no_activity_yet">अभी तक कोई गतिविधि नहीं</string>
+    <string name="adjust_filters_hint">अपने फ़िल्टर समायोजित करने का प्रयास करें।</string>
+    <string name="activity_logs_hint">गतिविधि लॉग यहां दिखाई देंगे।</string>
+    <string name="all_types_filter">सभी प्रकार</string>
+    <string name="events_found_format">%1$d %2$s मिले</string>
+    <string name="events_recorded_format">%1$d %2$s रिकॉर्ड किए गए</string>
 
-    <!-- Activity Screen Strings -->
-    <string name="activity_log_title">ACTIVITY LOG</string>
-    <string name="export_success">Events exported successfully</string>
-    <string name="export_error">Error exporting events: %1$s</string>
-    <string name="no_events_to_export">No events to export for the current filter</string>
-    <string name="no_events_to_export_simple">No events to export</string>
-    <string name="event_singular">event</string>
-    <string name="events_plural">events</string>
-    <string name="no_matching_activity">No Matching Activity</string>
-    <string name="no_activity_yet">No Activity Yet</string>
-    <string name="adjust_filters_hint">Try adjusting your filters.</string>
-    <string name="activity_logs_hint">Activity logs will appear here.</string>
-    <string name="all_types_filter">All Types</string>
-    <string name="events_found_format">%1$d %2$s found</string>
-    <string name="events_recorded_format">%1$d %2$s recorded</string>
+    <string name="sound_access_warning">ध्वनि पहुंच को स्थायी नहीं किया जा सका, यह बाद में काम नहीं कर सकता है।</string>
+    <string name="storage_permission_required">कस्टम ध्वनि चुनने के लिए स्टोरेज अनुमति आवश्यक है।</string>
+    <string name="notification_sound_screen_title">सूचना ध्वनि</string>
+    <string name="notification_sound_description">एनएफसी मैनेजर सूचनाओं के लिए बजाई जाने वाली ध्वनि को अनुकूलित करें। अपने डिवाइस से एक कस्टम ध्वनि चुनें या सिस्टम डिफ़ॉल्ट का उपयोग करें।</string>
+    <string name="current_sound_label">वर्तमान ध्वनि</string>
+    <string name="sound_play_error_null">ध्वनि नहीं बजाई जा सकती: डिफ़ॉल्ट यूआरआई शून्य है।</string>
+    <string name="sound_play_error_corrupted">ध्वनि नहीं बजाई जा सकती: रिंगटोन नहीं मिली या दूषित है।</string>
+    <string name="sound_play_error_general">ध्वनि बजाने में त्रुटि: %1$s</string>
+    <string name="choose_custom_sound">कस्टम ध्वनि चुनें</string>
+    <string name="use_system_default_sound">सिस्टम डिफ़ॉल्ट ध्वनि का उपयोग करें</string>
+    <string name="sound_playing_indicator">बज रहा है</string>
+    <string name="system_default_sound">सिस्टम डिफ़ॉल्ट</string>
+    <string name="custom_sound_label">कस्टम ध्वनि</string>
+    <string name="custom_sound_error">कस्टम ध्वनि (त्रुटि)</string>
+    <string name="back_button">वापस</string>
+    <string name="pick_sound_icon">ध्वनि चुनें</string>
+    <string name="default_sound_icon">डिफ़ॉल्ट ध्वनि</string>
 
-    <!-- Notification Sound Settings Screen Strings -->
-    <string name="sound_access_warning">Could not persist sound access, it might not work later.</string>
-    <string name="storage_permission_required">Storage permission is required to choose a custom sound.</string>
-    <string name="notification_sound_screen_title">Notification Sound</string>
-    <string name="notification_sound_description">Customize the sound played for NFC Manager notifications. Choose a custom sound from your device or use the system default.</string>
-    <string name="current_sound_label">Current Sound</string>
-    <string name="sound_play_error_null">Cannot play sound: Default URI is null.</string>
-    <string name="sound_play_error_corrupted">Cannot play sound: Ringtone not found or corrupted.</string>
-    <string name="sound_play_error_general">Error playing sound: %1$s</string>
-    <string name="choose_custom_sound">Choose Custom Sound</string>
-    <string name="use_system_default_sound">Use System Default Sound</string>
-    <string name="sound_playing_indicator">Playing</string>
-    <string name="system_default_sound">System Default</string>
-    <string name="custom_sound_label">Custom Sound</string>
-    <string name="custom_sound_error">Custom Sound (Error)</string>
-    <string name="back_button">Back</string>
-    <string name="pick_sound_icon">Pick Sound</string>
-    <string name="default_sound_icon">Default Sound</string>
+    <string name="language_already_set">भाषा पहले ही %1$s पर सेट है।</string>
+    <string name="language_changed_log">भाषा %1$s से %2$s में बदली गई</string>
+    <string name="language_updated_success">भाषा %1$s में अपडेट हो गई। परिवर्तनों के प्रभावी होने के लिए पुनरारंभ हो रहा है।</string>
+    <string name="language_update_failed">भाषा अपडेट करने में विफल: %1$s</string>
+    <string name="settings_reset_log">सभी सेटिंग्स डिफ़ॉल्ट पर रीसेट की गईं</string>
+    <string name="settings_reset_success">सभी सेटिंग्स डिफ़ॉल्ट पर रीसेट की गईं</string>
+    <string name="settings_reset_failed">सेटिंग्स रीसेट करने में विफल: %1$s</string>
+    <string name="notification_sound_updated">सूचना ध्वनि अपडेट की गई</string>
+    <string name="notification_sound_reset">सूचना ध्वनि डिफ़ॉल्ट पर रीसेट की गई</string>
+    <string name="notification_sound_reset_button">डिफ़ॉल्ट पर रीसेट करें</string>
+    <string name="notification_sound_update_failed">सूचना ध्वनि अपडेट करने में विफल: %1$s</string>
+    <string name="background_monitoring_enabled_log">पृष्ठभूमि एनएफसी मॉनिटरिंग सक्षम की गई (इंटेंट के माध्यम से)</string>
+    <string name="background_monitoring_enabled_success">पृष्ठभूमि एनएफसी मॉनिटरिंग सक्षम की गई</string>
+    <string name="background_monitoring_enable_failed">पृष्ठभूमि मॉनिटरिंग सक्षम करने में विफल: %1$s</string>
+    <string name="nfc_permission_required">पृष्ठभूमि मॉनिटरिंग सक्षम करने के लिए एनएफसी अनुमति आवश्यक है।</string>
+    <string name="background_monitoring_disabled_log">पृष्ठभूमि एनएफसी मॉनिटरिंग अक्षम की गई (इंटेंट के माध्यम से)</string>
+    <string name="background_monitoring_disabled_success">पृष्ठभूमि एनएफसी मॉनिटरिंग अक्षम की गई</string>
+    <string name="background_monitoring_disable_failed">पृष्ठभूमि मॉनिटरिंग अक्षम करने में विफल: %1$s</string>
+    <string name="auto_reminder_toggled_log">ऑटो-अनुस्मारक %1$s</string>
+    <string name="auto_reminder_toggled_success">ऑटो-अनुस्मारक %1$s</string>
+    <string name="auto_reminder_toggle_failed">ऑटो-अनुस्मारक को चालू/बंद करने में विफल: %1$s</string>
+    <string name="interval_out_of_range">अंतराल 5 और 300 सेकंड के बीच होना चाहिए</string>
+    <string name="reminder_interval_updated_log">अनुस्मारक अंतराल %1$dसे पर सेट किया गया</string>
+    <string name="reminder_interval_updated_success">अनुस्मारक अंतराल %1$d सेकंड में अपडेट किया गया</string>
+    <string name="reminder_interval_update_failed">अंतराल अपडेट करने में विफल: %1$s</string>
+    <string name="notifications_toggled_log">सूचनाएं %1$s</string>
+    <string name="notifications_toggled_success">सूचनाएं %1$s</string>
+    <string name="notifications_toggle_failed">सूचनाएं चालू/बंद करने में विफल: %1$s</string>
+    <string name="vibration_toggled_log">कंपन %1$s</string>
+    <string name="vibration_toggled_success">कंपन %1$s</string>
+    <string name="vibration_toggle_failed">कंपन चालू/बंद करने में विफल: %1$s</string>
+    <string name="sound_toggled_log">ध्वनि (सामान्य) %1$s</string>
+    <string name="sound_toggled_success">ध्वनि (सामान्य) %1$s</string>
+    <string name="sound_toggle_failed">ध्वनि चालू/बंद करने में विफल: %1$s</string>
+    <string name="theme_changed_log">%1$s सक्षम किया गया</string>
+    <string name="theme_changed_success">%1$s सक्षम किया गया</string>
+    <string name="theme_change_failed">थीम सेट करने में विफल: %1$s</string>
+    <string name="dark_mode_text">डार्क मोड</string>
+    <string name="light_mode_text">लाइट मोड</string>
+    <string name="accent_color_updated_log">उच्चारण रंग अपडेट किया गया</string>
+    <string name="accent_color_updated_success">उच्चारण रंग अपडेट किया गया</string>
+    <string name="accent_color_update_failed">रंग अपडेट करने में विफल: %1$s</string>
+    <string name="battery_optimization_toggled_log">बैटरी ऑप्टिमाइजेशन %1$s</string>
+    <string name="battery_optimization_toggled_success">बैटरी ऑप्टिमाइजेशन %1$s</string>
+    <string name="battery_optimization_toggle_failed">बैटरी ऑप्टिमाइजेशन को चालू/बंद करने में विफल: %1$s</string>
+    <string name="monitoring_interval_out_of_range">मॉनिटरिंग अंतराल 1000 और 10000 मिलीसेकंड के बीच होना चाहिए</string>
+    <string name="monitoring_interval_updated_log">मॉनिटरिंग अंतराल %1$d मिसे पर सेट किया गया</string>
+    <string name="monitoring_interval_updated_success">मॉनिटरिंग अंतराल अपडेट किया गया</string>
+    <string name="monitoring_interval_update_failed">मॉनिटरिंग अंतराल अपडेट करने में विफल: %1$s</string>
+    <string name="privacy_mode_toggled_log">गोपनीयता मोड %1$s</string>
+    <string name="privacy_mode_toggled_success">गोपनीयता मोड %1$s</string>
+    <string name="privacy_mode_toggle_failed">गोपनीयता मोड चालू/बंद करने में विफल: %1$s</string>
+    <string name="block_unknown_tags_toggled_log">अज्ञात टैग को ब्लॉक करें %1$s</string>
+    <string name="block_unknown_tags_toggled_success">अज्ञात टैग ब्लॉकिंग %1$s</string>
+    <string name="block_unknown_tags_toggle_failed">अज्ञात टैग ब्लॉकिंग चालू/बंद करने में विफल: %1$s</string>
+    <string name="settings_exported_log">सेटिंग्स निर्यात की गईं</string>
+    <string name="settings_exported_success">सेटिंग्स सफलतापूर्वक निर्यात की गईं</string>
+    <string name="settings_export_failed">सेटिंग्स निर्यात करने में विफल: %1$s</string>
+    <string name="data_cleanup_log">पुराने डेटा की सफाई पूरी हुई (%1$d दिन)</string>
+    <string name="data_cleanup_success">पुराना डेटा सफलतापूर्वक साफ किया गया</string>
+    <string name="data_cleanup_failed">डेटा साफ करने में विफल: %1$s</string>
+    <string name="enabled_status">सक्षम</string>
+    <string name="disabled_status">अक्षम</string>
 
-    <!-- ViewModel Messages -->
-    <string name="language_already_set">Language is already set to %1$s.</string>
-    <string name="language_changed_log">Language changed from %1$s to %2$s</string>
-    <string name="language_updated_success">Language updated to %1$s. Restarting for changes to take effect.</string>
-    <string name="language_update_failed">Failed to update language: %1$s</string>
-    <string name="settings_reset_log">All settings reset to defaults</string>
-    <string name="settings_reset_success">All settings reset to defaults</string>
-    <string name="settings_reset_failed">Failed to reset settings: %1$s</string>
-    <string name="notification_sound_updated">Notification sound updated</string>
-    <string name="notification_sound_reset">Notification sound reset to default</string>
-    <string name="notification_sound_reset_button">Reset to default</string>
-    <string name="notification_sound_update_failed">Failed to update notification sound: %1$s</string>
-    <string name="background_monitoring_enabled_log">Background NFC Monitoring enabled (via intent)</string>
-    <string name="background_monitoring_enabled_success">Background NFC Monitoring enabled</string>
-    <string name="background_monitoring_enable_failed">Failed to enable background monitoring: %1$s</string>
-    <string name="nfc_permission_required">NFC Permission required to enable background monitoring.</string>
-    <string name="background_monitoring_disabled_log">Background NFC Monitoring disabled (via intent)</string>
-    <string name="background_monitoring_disabled_success">Background NFC Monitoring disabled</string>
-    <string name="background_monitoring_disable_failed">Failed to disable background monitoring: %1$s</string>
-    <string name="auto_reminder_toggled_log">Auto-reminder %1$s</string>
-    <string name="auto_reminder_toggled_success">Auto-reminder %1$s</string>
-    <string name="auto_reminder_toggle_failed">Failed to toggle auto-reminder: %1$s</string>
-    <string name="interval_out_of_range">Interval must be between 5 and 300 seconds</string>
-    <string name="reminder_interval_updated_log">Reminder interval set to %1$ds</string>
-    <string name="reminder_interval_updated_success">Reminder interval updated to %1$d seconds</string>
-    <string name="reminder_interval_update_failed">Failed to update interval: %1$s</string>
-    <string name="notifications_toggled_log">Notifications %1$s</string>
-    <string name="notifications_toggled_success">Notifications %1$s</string>
-    <string name="notifications_toggle_failed">Failed to toggle notifications: %1$s</string>
-    <string name="vibration_toggled_log">Vibration %1$s</string>
-    <string name="vibration_toggled_success">Vibration %1$s</string>
-    <string name="vibration_toggle_failed">Failed to toggle vibration: %1$s</string>
-    <string name="sound_toggled_log">Sound (general) %1$s</string>
-    <string name="sound_toggled_success">Sound (general) %1$s</string>
-    <string name="sound_toggle_failed">Failed to toggle sound: %1$s</string>
-    <string name="theme_changed_log">%1$s enabled</string>
-    <string name="theme_changed_success">%1$s enabled</string>
-    <string name="theme_change_failed">Failed to set theme: %1$s</string>
-    <string name="dark_mode_text">Dark mode</string>
-    <string name="light_mode_text">Light mode</string>
-    <string name="accent_color_updated_log">Accent color updated</string>
-    <string name="accent_color_updated_success">Accent color updated</string>
-    <string name="accent_color_update_failed">Failed to update color: %1$s</string>
-    <string name="battery_optimization_toggled_log">Battery optimization %1$s</string>
-    <string name="battery_optimization_toggled_success">Battery optimization %1$s</string>
-    <string name="battery_optimization_toggle_failed">Failed to toggle battery optimization: %1$s</string>
-    <string name="monitoring_interval_out_of_range">Monitoring interval must be between 1000 and 10000 milliseconds</string>
-    <string name="monitoring_interval_updated_log">Monitoring interval set to %1$dms</string>
-    <string name="monitoring_interval_updated_success">Monitoring interval updated</string>
-    <string name="monitoring_interval_update_failed">Failed to update monitoring interval: %1$s</string>
-    <string name="privacy_mode_toggled_log">Privacy mode %1$s</string>
-    <string name="privacy_mode_toggled_success">Privacy mode %1$s</string>
-    <string name="privacy_mode_toggle_failed">Failed to toggle privacy mode: %1$s</string>
-    <string name="block_unknown_tags_toggled_log">Block unknown tags %1$s</string>
-    <string name="block_unknown_tags_toggled_success">Unknown tag blocking %1$s</string>
-    <string name="block_unknown_tags_toggle_failed">Failed to toggle unknown tag blocking: %1$s</string>
-    <string name="settings_exported_log">Settings exported</string>
-    <string name="settings_exported_success">Settings exported successfully</string>
-    <string name="settings_export_failed">Failed to export settings: %1$s</string>
-    <string name="data_cleanup_log">Old data cleanup completed (%1$d days)</string>
-    <string name="data_cleanup_success">Old data cleaned up successfully</string>
-    <string name="data_cleanup_failed">Failed to cleanup data: %1$s</string>
-    <string name="enabled_status">enabled</string>
-    <string name="disabled_status">disabled</string>
+    <string name="date_filter_today">आज</string>
+    <string name="date_filter_last_7_days">पिछले 7 दिन</string>
+    <string name="date_filter_last_30_days">पिछले 30 दिन</string>
+    <string name="date_filter_all_time">हर समय</string>
 
-    <!-- Date Filter Options -->
-    <string name="date_filter_today">Today</string>
-    <string name="date_filter_last_7_days">Last 7 Days</string>
-    <string name="date_filter_last_30_days">Last 30 Days</string>
-    <string name="date_filter_all_time">All Time</string>
+    <string name="mainviewmodel_initialized">MainViewModel आरंभ किया गया</string>
+    <string name="tag_scanned_format">टैग स्कैन किया गया: %1$s (कार्य: %2$s)</string>
+    <string name="event_deleted">घटना हटाई गई</string>
+    <string name="all_events_cleared">सभी घटनाक्रम साफ़ किए गए</string>
+    <string name="all_events_cleared_success">सभी घटनाक्रम सफलतापूर्वक साफ़ किए गए</string>
+    <string name="failed_to_delete_event">घटना हटाने में विफल: %1$s</string>
+    <string name="failed_to_clear_events">सभी घटनाक्रम साफ़ करने में विफल: %1$s</string>
 
-    <!-- System Messages -->
-    <string name="mainviewmodel_initialized">MainViewModel initialized</string>
-    <string name="tag_scanned_format">Tag Scanned: %1$s (Action: %2$s)</string>
-    <string name="event_deleted">Event deleted</string>
-    <string name="all_events_cleared">All events cleared</string>
-    <string name="all_events_cleared_success">All events cleared successfully</string>
-    <string name="failed_to_delete_event">Failed to delete event: %1$s</string>
-    <string name="failed_to_clear_events">Failed to clear all events: %1$s</string>
+    <string name="nfc_not_supported_device">इस डिवाइस पर एनएफसी समर्थित नहीं है</string>
+    <string name="privacy_alert_shown">गोपनीयता अलर्ट दिखाया गया</string>
+    <string name="privacy_alert_dismissed">गोपनीयता अलर्ट खारिज किया गया</string>
+    <string name="reminder_interval_set_log">अनुस्मारक अंतराल %1$dसे पर सेट किया गया</string>
+    <string name="notifications_toggled_system_log">सूचनाएं %1$s</string>
+    <string name="vibration_toggled_system_log">कंपन %1$s</string>
 
-    <!-- Additional System Messages -->
-    <string name="nfc_not_supported_device">NFC not supported on this device</string>
-    <string name="privacy_alert_shown">Privacy alert shown</string>
-    <string name="privacy_alert_dismissed">Privacy alert dismissed</string>
-    <string name="reminder_interval_set_log">Reminder interval set to %1$ds</string>
-    <string name="notifications_toggled_system_log">Notifications %1$s</string>
-    <string name="vibration_toggled_system_log">Vibration %1$s</string>
+    <string name="export_to_csv_icon">CSV में निर्यात करें</string>
+    <string name="clear_all_logs_icon">सभी लॉग साफ़ करें</string>
 
-    <!-- Content Descriptions -->
-    <string name="export_to_csv_icon">Export to CSV</string>
-    <string name="clear_all_logs_icon">Clear All Logs</string>
+    <string name="nav_nfc_manager">एनएफसी मैनेजर</string>
+    <string name="nav_activity">गतिविधि</string>
+    <string name="nav_settings">सेटिंग्स</string>
 
-    <!-- Bottom Navigation -->
-    <string name="nav_nfc_manager">NFC MANAGER</string>
-    <string name="nav_activity">ACTIVITY</string>
-    <string name="nav_settings">SETTINGS</string>
-
-    <!-- Language Names for Logging -->
     <string name="language_name_english">English</string>
     <string name="language_name_arabic">Arabic</string>
     <string name="language_name_german">German</string>
-    <string name="language_name_system_default">System Default</string>
+    <string name="language_name_system_default">सिस्टम डिफ़ॉल्ट</string>
 
-    <!-- Event Types -->
-    <string name="event_type_settings">SETTINGS</string>
-    <string name="event_type_system">SYSTEM</string>
-    <string name="event_type_privacy">PRIVACY</string>
-    <string name="event_type_nfc_scan">NFC SCAN</string>
-    <string name="event_type_security">SECURITY</string>
+    <string name="event_type_settings">सेटिंग्स</string>
+    <string name="event_type_system">सिस्टम</string>
+    <string name="event_type_privacy">गोपनीयता</string>
+    <string name="event_type_nfc_scan">एनएफसी स्कैन</string>
+    <string name="event_type_security">सुरक्षा</string>
 
-    <!-- Settings Messages -->
-    <string name="auto_reminder_enabled">Auto-reminder enabled</string>
-    <string name="auto_reminder_disabled">Auto-reminder disabled</string>
-    <string name="notifications_enabled">Notifications enabled</string>
-    <string name="notifications_disabled">Notifications disabled</string>
-    <string name="vibration_enabled">Vibration enabled</string>
-    <string name="vibration_disabled">Vibration disabled</string>
-    <string name="sound_enabled">Sound (general) enabled</string>
-    <string name="sound_disabled">Sound (general) disabled</string>
-    <string name="battery_optimization_enabled">Battery optimization enabled</string>
-    <string name="battery_optimization_disabled">Battery optimization disabled</string>
-    <string name="privacy_mode_enabled">Privacy mode enabled</string>
-    <string name="privacy_mode_disabled">Privacy mode disabled</string>
-    <string name="unknown_tag_blocking_enabled">Block unknown tags enabled</string>
-    <string name="unknown_tag_blocking_disabled">Block unknown tags disabled</string>
-    <string name="settings_exported">Settings exported</string>
-    <string name="reminder_interval_set">Reminder interval set to %1$ds</string>
-    <string name="nfc_hardware_enabled">NFC hardware now enabled</string>
-    <string name="nfc_hardware_disabled">NFC hardware now disabled</string>
+    <string name="auto_reminder_enabled">ऑटो-अनुस्मारक सक्षम</string>
+    <string name="auto_reminder_disabled">ऑटो-अनुस्मारक अक्षम</string>
+    <string name="notifications_enabled">सूचनाएं सक्षम</string>
+    <string name="notifications_disabled">सूचनाएं अक्षम</string>
+    <string name="vibration_enabled">कंपन सक्षम</string>
+    <string name="vibration_disabled">कंपन अक्षम</string>
+    <string name="sound_enabled">ध्वनि (सामान्य) सक्षम</string>
+    <string name="sound_disabled">ध्वनि (सामान्य) अक्षम</string>
+    <string name="battery_optimization_enabled">बैटरी ऑप्टिमाइजेशन सक्षम</string>
+    <string name="battery_optimization_disabled">बैटरी ऑप्टिमाइजेशन अक्षम</string>
+    <string name="privacy_mode_enabled">गोपनीयता मोड सक्षम</string>
+    <string name="privacy_mode_disabled">गोपनीयता मोड अक्षम</string>
+    <string name="unknown_tag_blocking_enabled">अज्ञात टैग ब्लॉकिंग सक्षम</string>
+    <string name="unknown_tag_blocking_disabled">अज्ञात टैग ब्लॉकिंग अक्षम</string>
+    <string name="settings_exported">सेटिंग्स निर्यात की गईं</string>
+    <string name="reminder_interval_set">अनुस्मारक अंतराल %1$dसे पर सेट किया गया</string>
+    <string name="nfc_hardware_enabled">एनएफसी हार्डवेयर अब सक्षम</string>
+    <string name="nfc_hardware_disabled">एनएफसी हार्डवेयर अब अक्षम</string>
 
-    <!-- Time Format -->
-    <string name="time_now">now</string>
+    <string name="time_now">अब</string>
 
-    <!-- Additional Settings Messages -->
-    <string name="dark_mode_enabled">Dark mode enabled</string>
-    <string name="light_mode_enabled">Light mode enabled</string>
-    <string name="accent_color_updated">Accent color updated</string>
-    <string name="monitoring_interval_set">Monitoring interval set to %1$dms</string>
-    <string name="old_data_cleanup_completed">Old data cleanup completed (%1$d days)</string>
+    <string name="dark_mode_enabled">डार्क मोड सक्षम</string>
+    <string name="light_mode_enabled">लाइट मोड सक्षम</string>
+    <string name="accent_color_updated">उच्चारण रंग अपडेट किया गया</string>
+    <string name="monitoring_interval_set">मॉनिटरिंग अंतराल %1$d मिसे पर सेट किया गया</string>
+    <string name="old_data_cleanup_completed">पुराने डेटा की सफाई पूरी हुई (%1$d दिन)</string>
 
-    <!-- Additional Success Messages -->
-    <string name="old_data_cleanup_success">Old data cleaned up successfully</string>
+    <string name="old_data_cleanup_success">पुराना डेटा सफलतापूर्वक साफ किया गया</string>
 
-    <!-- Error Messages -->
-    <string name="failed_to_disable_monitoring">Failed to disable background monitoring: %1$s</string>
-    <string name="failed_to_toggle_auto_reminder">Failed to toggle auto-reminder: %1$s</string>
-    <string name="failed_to_update_interval">Failed to update interval: %1$s</string>
-    <string name="failed_to_toggle_notifications">Failed to toggle notifications: %1$s</string>
-    <string name="failed_to_toggle_vibration">Failed to toggle vibration: %1$s</string>
-    <string name="failed_to_toggle_sound">Failed to toggle sound: %1$s</string>
-    <string name="failed_to_set_theme">Failed to set theme: %1$s</string>
-    <string name="failed_to_update_color">Failed to update color: %1$s</string>
-    <string name="failed_to_toggle_battery_optimization">Failed to toggle battery optimization: %1$s</string>
-    <string name="monitoring_interval_range_error">Monitoring interval must be between 1000 and 10000 milliseconds</string>
-    <string name="failed_to_update_monitoring_interval">Failed to update monitoring interval: %1$s</string>
-    <string name="failed_to_toggle_privacy_mode">Failed to toggle privacy mode: %1$s</string>
-    <string name="failed_to_toggle_unknown_tag_blocking">Failed to toggle unknown tag blocking: %1$s</string>
-    <string name="failed_to_export_settings">Failed to export settings: %1$s</string>
-    <string name="failed_to_cleanup_data">Failed to cleanup data: %1$s</string>
+    <string name="failed_to_disable_monitoring">पृष्ठभूमि मॉनिटरिंग अक्षम करने में विफल: %1$s</string>
+    <string name="failed_to_toggle_auto_reminder">ऑटो-अनुस्मारक को चालू/बंद करने में विफल: %1$s</string>
+    <string name="failed_to_update_interval">अंतराल अपडेट करने में विफल: %1$s</string>
+    <string name="failed_to_toggle_notifications">सूचनाएं चालू/बंद करने में विफल: %1$s</string>
+    <string name="failed_to_toggle_vibration">कंपन चालू/बंद करने में विफल: %1$s</string>
+    <string name="failed_to_toggle_sound">ध्वनि चालू/बंद करने में विफल: %1$s</string>
+    <string name="failed_to_set_theme">थीम सेट करने में विफल: %1$s</string>
+    <string name="failed_to_update_color">रंग अपडेट करने में विफल: %1$s</string>
+    <string name="failed_to_toggle_battery_optimization">बैटरी ऑप्टिमाइजेशन को चालू/बंद करने में विफल: %1$s</string>
+    <string name="monitoring_interval_range_error">मॉनिटरिंग अंतराल 1000 और 10000 मिलीसेकंड के बीच होना चाहिए</string>
+    <string name="failed_to_update_monitoring_interval">मॉनिटरिंग अंतराल अपडेट करने में विफल: %1$s</string>
+    <string name="failed_to_toggle_privacy_mode">गोपनीयता मोड चालू/बंद करने में विफल: %1$s</string>
+    <string name="failed_to_toggle_unknown_tag_blocking">अज्ञात टैग ब्लॉकिंग चालू/बंद करने में विफल: %1$s</string>
+    <!-- The duplicate settings_export_failed string that was here has been removed -->
+    <string name="failed_to_cleanup_data">डेटा साफ करने में विफल: %1$s</string>
 
+    <string name="about_title">के बारे में</string>
+    <string name="about_app_title">एनएफसी मैनेजर के बारे में</string>
+    <string name="about_app_description">एनएफसी मैनेजर एक गोपनीयता-केंद्रित एंड्रॉइड एप्लिकेशन है जिसे उपयोगकर्ताओं को बढ़ी हुई सुरक्षा जागरूकता के साथ अपने एनएफसी (निकट क्षेत्र संचार) सेटिंग्स की निगरानी और प्रबंधन में मदद करने के लिए डिज़ाइन किया गया है। यह ऐप उपयोगकर्ताओं को तब सचेत करता है जब एनएफसी विस्तारित अवधियों के लिए सक्षम रहता है, जिससे अनधिकृत पहुंच को रोकने और संभावित गोपनीयता कमजोरियों से बचाने में मदद मिलती है।</string>
+    <string name="about_copyright">तारिक सईद द्वारा ❤️ के साथ बनाया गया - नथिंग ओएस से प्रेरित डिज़ाइन</string>
+    <string name="about_contact_support_title">संपर्क और समर्थन</string>
+    <string name="about_email">ईमेल: support@dxbmark.com</string>
+    <string name="about_response_time">प्रतिक्रिया समय: 24-48 घंटे</string>
+    <string name="about_languages">भाषाएं: English, Arabic</string>
+    <string name="about_timezone">समय क्षेत्र: जीएमटी+4 (यूएई)</string>
+    <string name="about_license_title">लाइसेंस</string>
+    <string name="about_license_text">लाइसेंस: अपाचे लाइसेंस, संस्करण 2.0 के तहत</string>
+    <string name="about_copyright_text">कॉपीराइट 2025 तारिक सईद। सभी अधिकार सुरक्षित हैं।</string>
+    <string name="about_license_link">लाइसेंस देखें</string>
+    <string name="about_important_links_title">महत्वपूर्ण लिंक</string>
+    <string name="about_terms_service">सेवा की शर्तें</string>
+    <string name="about_privacy_policy">गोपनीयता नीति</string>
+    <string name="about_full_changelog">पूर्ण चेंजलॉग</string>
+    <string name="about_project_repository">प्रोजेक्ट रिपॉजिटरी</string>
+    <string name="about_development_design_title">विकास और डिज़ाइन</string>
+    <string name="about_development_credit">तारिक सईद द्वारा डिज़ाइन और विकसित किया गया</string>
+    <string name="about_powered_by_dxbmark">DXBMark द्वारा संचालित</string>
+    <string name="about_tariq_linkedin">लिंक्डइन पर तारिक सईद</string>
+    <string name="about_tariq_github">गिटहब पर तारिक सईद</string>
+    <string name="about_official_contributor_title">आधिकारिक योगदानकर्ता</string>
+    <string name="about_mwheba_agency">MWHEBA विज्ञापन एजेंसी</string>
+    <string name="about_security_highlights_title">सुरक्षा हाइलाइट्स (v%1$s)</string>
+    <string name="about_initial_security">- प्रारंभिक सुरक्षा कार्यान्वयन</string>
+    <string name="about_local_storage">- केवल स्थानीय डेटा स्टोरेज</string>
+    <string name="about_permission_access">- अनुमति-आधारित पहुंच नियंत्रण</string>
+    <string name="about_proguard_obfuscation">- प्रो-गार्ड ऑब्सफ्यूकेशन सक्षम किया गया</string>
+    <string name="about_certificate_pinning">- प्रमाणपत्र पिनिंग लागू किया गया</string>
+    <string name="navigate_back">वापस नेविगेट करें</string>
+    <string name="settings_section_about_title">के बारे में</string>
+    <string name="settings_item_about_title">एनएफसी मैनेजर के बारे में</string>
+    <string name="settings_item_about_subtitle">ऐप जानकारी, गोपनीयता नीति, और समर्थन</string>
 </resources>

@@ -83,6 +83,8 @@
     <string name="settings_item_dark_mode_subtitle">Madaling sa mata</string>
     <string name="settings_item_light_mode_title">Light Mode</string>
     <string name="settings_item_light_mode_subtitle">Klasikong hitsura</string>
+    <string name="settings_item_accent_color_title">settings_item_accent_color_title</string>
+    <string name="settings_item_accent_color_subtitle">settings_item_accent_color_subtitle</string>
 
     <!-- General Settings Items -->
     <string name="settings_item_auto_reminder_title">Auto Reminder</string>
@@ -106,6 +108,9 @@
     <string name="settings_item_background_monitoring_subtitle">Patuloy na sinusubaybayan ang NFC status. Kailangan ng NFC permission.</string>
     <string name="settings_item_battery_optimization_title">Pag-optimize ng Baterya</string>
     <string name="settings_item_battery_optimization_subtitle">I-optimize para sa mas magandang battery life</string>
+    <string name="settings_item_performance_title">settings_item_performance_title</string>
+    <string name="settings_item_performance_subtitle">settings_item_performance_subtitle</string>
+    <string name="settings_item_monitoring_interval_title">settings_item_monitoring_interval_title</string>
 
     <!-- Buttons -->
     <string name="settings_button_export_settings">I-EXPORT ANG MGA SETTING</string>

@@ -16,7 +16,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.LocalContext
+// import androidx.compose.ui.platform.LocalContext // This import will be unused after the change
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -33,7 +33,7 @@ import com.dxbmark.nfcmanager.ui.theme.NothingTextStyles
 fun AboutScreen(
     onNavigateBack: () -> Unit
 ) {
-    val context = LocalContext.current
+    // val context = LocalContext.current // Removed this line
     val uriHandler = LocalUriHandler.current
     val appVersion = "1.0.0" // Hard-coded for now, can be replaced with BuildConfig.VERSION_NAME when available
 

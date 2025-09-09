@@ -163,8 +163,8 @@ fun ActivityScreen(
 
         val showingFilteredResults = selectedEventType != null ||
                                      selectedDateFilter != DateFilterOption.ALL_TIME ||
-                                     viewModel.searchQuery.value.isNotBlank() || // Assuming searchQuery is public in VM
-                                     viewModel.showImportantOnly.value // Assuming showImportantOnly is public in VM
+                                     viewModel.searchQuery.collectAsState().value.isNotBlank() || // Assuming searchQuery is public in VM
+                                     viewModel.showImportantOnly.collectAsState().value // Assuming showImportantOnly is public in VM
 
         Text(
             text = if (showingFilteredResults) {

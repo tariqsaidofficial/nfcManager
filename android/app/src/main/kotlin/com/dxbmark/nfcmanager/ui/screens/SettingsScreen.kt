@@ -202,7 +202,7 @@ fun SettingsScreen(
                         onCheckedChange = { viewModel.toggleAutoReminder() },
                         modifier = Modifier.padding(top = 8.dp) // Add padding if first item in card
                     )
-                    Divider(modifier = Modifier.padding(vertical = 4.dp, horizontal = 4.dp))
+                    HorizontalDivider(modifier = Modifier.padding(vertical = 4.dp, horizontal = 4.dp))
 
                     if (settings.autoReminderEnabled) {
                         AdvancedIntervalSelector(
@@ -211,7 +211,7 @@ fun SettingsScreen(
                             validateIntervalString = { viewModel.validateReminderInterval(it) },
                             modifier = Modifier.padding(horizontal = 0.dp) // Remove AdvancedIntervalSelector's own horizontal padding
                         )
-                        Divider(modifier = Modifier.padding(vertical = 4.dp, horizontal = 4.dp))
+                        HorizontalDivider(modifier = Modifier.padding(vertical = 4.dp, horizontal = 4.dp))
                     }
 
                     SettingsItem(
@@ -220,7 +220,7 @@ fun SettingsScreen(
                         checked = settings.showNotifications,
                         onCheckedChange = { viewModel.toggleNotifications() }
                     )
-                    Divider(modifier = Modifier.padding(vertical = 4.dp, horizontal = 4.dp))
+                    HorizontalDivider(modifier = Modifier.padding(vertical = 4.dp, horizontal = 4.dp))
 
                     SettingsItem(
                         title = stringResource(R.string.settings_item_vibration_alerts_title),
@@ -228,7 +228,7 @@ fun SettingsScreen(
                         checked = settings.vibrationEnabled,
                         onCheckedChange = { viewModel.toggleVibration() }
                     )
-                    Divider(modifier = Modifier.padding(vertical = 4.dp, horizontal = 4.dp))
+                    HorizontalDivider(modifier = Modifier.padding(vertical = 4.dp, horizontal = 4.dp))
 
                     SettingsItem(
                         title = stringResource(R.string.settings_item_enable_sounds_title),
@@ -236,7 +236,7 @@ fun SettingsScreen(
                         checked = settings.soundEnabled,
                         onCheckedChange = { viewModel.toggleSound() }
                     )
-                    Divider(modifier = Modifier.padding(vertical = 4.dp, horizontal = 4.dp))
+                    HorizontalDivider(modifier = Modifier.padding(vertical = 4.dp, horizontal = 4.dp))
 
                     SettingsItemClickable(
                         title = stringResource(R.string.settings_item_notification_sound_title),
@@ -270,7 +270,7 @@ fun SettingsScreen(
                         onCheckedChange = { viewModel.togglePrivacyMode() },
                         modifier = Modifier.padding(top = 8.dp)
                     )
-                    Divider(modifier = Modifier.padding(vertical = 4.dp, horizontal = 4.dp))
+                    HorizontalDivider(modifier = Modifier.padding(vertical = 4.dp, horizontal = 4.dp))
 
                     SettingsItem(
                         title = stringResource(R.string.settings_item_block_unknown_tags_title),
@@ -278,7 +278,7 @@ fun SettingsScreen(
                         checked = settings.blockUnknownTags,
                         onCheckedChange = { viewModel.toggleBlockUnknownTags() }
                     )
-                    Divider(modifier = Modifier.padding(vertical = 4.dp, horizontal = 4.dp))
+                    HorizontalDivider(modifier = Modifier.padding(vertical = 4.dp, horizontal = 4.dp))
 
                     SettingsItem(
                         title = stringResource(R.string.settings_item_background_monitoring_title),

@@ -32,6 +32,11 @@
     <!-- Activity -->
     <string name="activity_title">Activity Log</string>
     <string name="nfc_events">NFC Events</string>
+    <string name="activity_filter_date">activity_filter_date</string>
+    <string name="activity_filter_type">activity_filter_type</string>
+    <string name="activity_important_only">activity_important_only</string>
+    <string name="activity_no_events">activity_no_events</string>
+    <string name="activity_search_hint">activity_search_hint</string>
 
     <!-- General -->
     <string name="enabled">Enabled</string>
@@ -64,6 +69,9 @@
     <string name="notification_sound_title">Notification Sound</string>
     <string name="notification_sound_use_system_default">Use System Default Sound</string>
     <string name="notification_sound_choose_custom">Choose Custom Sound</string>
+    <string name="notification_sound_current">notification_sound_current</string>
+    <string name="notification_sound_pick">notification_sound_pick</string>
+    <string name="notification_sound_updated_log">notification_sound_updated_log</string>
     <string name="activity_clear_all">Clear All</string>
     <string name="activity_filter_event_type">Event Type</string>
     <string name="activity_export_csv">Export CSV</string>
@@ -90,6 +98,8 @@
     <string name="settings_item_dark_mode_subtitle">Easy on the eyes</string>
     <string name="settings_item_light_mode_title">Light Mode</string>
     <string name="settings_item_light_mode_subtitle">Classic look</string>
+    <string name="settings_item_accent_color_title">settings_item_accent_color_title</string>
+    <string name="settings_item_accent_color_subtitle">settings_item_accent_color_subtitle</string>
 
     <!-- General Settings Items (Titles and Subtitles) -->
     <string name="settings_item_auto_reminder_title">Auto Reminder</string>
@@ -122,6 +132,10 @@
 
     <string name="settings_item_battery_optimization_title">Battery Optimization</string>
     <string name="settings_item_battery_optimization_subtitle">Optimize for better battery life</string>
+    <string name="settings_item_performance_title">settings_item_performance_title</string>
+    <string name="settings_item_performance_subtitle">settings_item_performance_subtitle</string>
+    <string name="settings_item_monitoring_interval_title">settings_item_monitoring_interval_title</string>
+    <string name="settings_item_monitoring_interval_subtitle">settings_item_monitoring_interval_subtitle</string>
 
     <!-- Buttons -->
     <string name="settings_button_export_settings">EXPORT SETTINGS</string>
