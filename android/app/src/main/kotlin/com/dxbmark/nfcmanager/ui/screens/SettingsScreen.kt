@@ -46,10 +46,10 @@ val availableLanguages = listOf(
     LanguageOption("es", R.string.language_spanish),
     LanguageOption("fr", R.string.language_french),
     LanguageOption("de", R.string.language_german, isEnabled = true), // German added and enabled
-    LanguageOption("ru", R.string.language_russian_soon, isEnabled = false),
-    LanguageOption("zh", R.string.language_chinese_mandarin_soon, isEnabled = false),
-    LanguageOption("hi", R.string.language_hindi_soon, isEnabled = false),
-    LanguageOption("fil", R.string.language_filipino_soon, isEnabled = false)
+    LanguageOption("ru", R.string.language_russian, isEnabled = true),
+    LanguageOption("zh", R.string.language_chinese_mandarin, isEnabled = true),
+    LanguageOption("hi", R.string.language_hindi, isEnabled = true),
+    LanguageOption("fil", R.string.language_filipino, isEnabled = true)
 )
 
 @OptIn(ExperimentalMaterial3Api::class)

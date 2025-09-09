@@ -48,10 +48,6 @@
     <string name="language_spanish">الإسبانية (Español)</string>
     <string name="language_french">الفرنسية (Français)</string>
     <string name="language_german">الألمانية (Deutsch)</string>
-    <string name="language_russian_soon">الروسية (قريباً)</string>
-    <string name="language_chinese_mandarin_soon">الصينية المبسطة (قريباً)</string>
-    <string name="language_hindi_soon">الهندية (قريباً)</string>
-    <string name="language_filipino_soon">الفلبينية (قريباً)</string>
 
     <!-- Dialog title for language selection -->
     <string name="dialog_select_language_title">اختر اللغة</string>

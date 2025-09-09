@@ -52,10 +52,6 @@
     <string name="language_russian">Русский</string>
     <string name="language_hindi">हिन्दी</string>
     <string name="language_filipino">Filipino</string>
-    <string name="language_russian_soon">Русский (Coming Soon)</string>
-    <string name="language_chinese_mandarin_soon">中文 (简体 - Coming Soon)</string>
-    <string name="language_hindi_soon">हिन्दी (Coming Soon)</string>
-    <string name="language_filipino_soon">Filipino (Coming Soon)</string>
 
 
     <!-- Dialog title for language selection -->

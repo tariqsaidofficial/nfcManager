@@ -48,10 +48,6 @@
     <string name="language_spanish">Español (Spanish)</string>
     <string name="language_french">Français (French)</string>
     <string name="language_german">Deutsch (German)</string>
-    <string name="language_russian_soon">Русский (Coming Soon)</string>
-    <string name="language_chinese_mandarin_soon">中文 (简体 - Coming Soon)</string>
-    <string name="language_hindi_soon">हिन्दी (Coming Soon)</string>
-    <string name="language_filipino_soon">Filipino (Coming Soon)</string>
 
 
     <!-- Dialog title for language selection -->
