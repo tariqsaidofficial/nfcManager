@@ -1,341 +1,359 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- App Identity -->
     <string name="app_name">NFC Manager</string>
 
-    <!-- Main Interface -->
     <string name="home_title">NFC Manager</string>
-    <string name="nfc_monitoring">NFC Monitoring</string>
-    <string name="privacy_protection">Privacy Protection</string>
+    <string name="nfc_monitoring">Мониторинг NFC</string>
+    <string name="privacy_protection">Защита конфиденциальности</string>
 
-    <!-- Settings -->
-    <string name="settings_title">Settings</string>
-    <string name="reminder_interval">Reminder Interval</string>
-    <string name="privacy_mode">Privacy Mode</string>
-    <string name="notifications">Notifications</string>
+    <string name="settings_title">Настройки</string>
+    <string name="reminder_interval">Интервал напоминания</string>
+    <string name="privacy_mode">Режим конфиденциальности</string>
+    <string name="notifications">Уведомления</string>
 
-    <!-- Alert Intervals -->
-    <string name="interval_5_seconds">5 seconds</string>
-    <string name="interval_10_seconds">10 seconds</string>
-    <string name="interval_15_seconds">15 seconds</string>
-    <string name="interval_20_seconds">20 seconds</string>
-    <string name="interval_30_seconds">30 seconds</string>
-    <string name="interval_40_seconds">40 seconds</string>
-    <string name="interval_50_seconds">50 seconds</string>
-    <string name="interval_60_seconds">60 seconds</string> <!-- Or "1 minute" if preferred -->
-    <string name="custom_interval">Custom interval</string>
+    <string name="interval_5_seconds">5 секунд</string>
+    <string name="interval_10_seconds">10 секунд</string>
+    <string name="interval_15_seconds">15 секунд</string>
+    <string name="interval_20_seconds">20 секунд</string>
+    <string name="interval_30_seconds">30 секунд</string>
+    <string name="interval_40_seconds">40 секунд</string>
+    <string name="interval_50_seconds">50 секунд</string>
+    <string name="interval_60_seconds">60 секунд</string>
+    <string name="custom_interval">Пользовательский интервал</string>
 
-    <!-- Security Messages -->
-    <string name="nfc_enabled_too_long">NFC has been enabled for too long. Consider disabling it to protect your privacy.</string>
-    <string name="nfc_privacy_warning">NFC can be used for unauthorized payments or data access.</string>
+    <string name="nfc_enabled_too_long">NFC был включен слишком долго. Рекомендуется отключить его для защиты вашей конфиденциальности.</string>
+    <string name="nfc_privacy_warning">NFC может использоваться для несанкционированных платежей или доступа к данным.</string>
 
-    <!-- Activity -->
-    <string name="activity_title">Activity Log</string>
-    <string name="nfc_events">NFC Events</string>
+    <string name="activity_title">Журнал активности</string>
+    <string name="nfc_events">События NFC</string>
+    <string name="activity_filter_date">Фильтровать по дате</string>
+    <string name="activity_filter_type">Фильтровать по типу</string>
+    <string name="activity_important_only">Только важные</string>
+    <string name="activity_no_events">Нет событий</string>
+    <string name="activity_search_hint">Поиск...</string>
 
-    <!-- General -->
-    <string name="enabled">Enabled</string>
-    <string name="disabled">Disabled</string>
-    <string name="ok">OK</string>
-    <string name="cancel">Cancel</string>
-    <string name="save">Save</string>
+    <string name="enabled">Включено</string>
+    <string name="disabled">Отключено</string>
+    <string name="ok">ОК</string>
+    <string name="cancel">Отмена</string>
+    <string name="save">Сохранить</string>
 
-    <!-- Language Settings -->
-    <string name="settings_language_title">Language</string>
-    <string name="language_system_default">System Default</string>
+    <string name="settings_language_title">Язык</string>
+    <string name="language_system_default">Системный по умолчанию</string>
     <string name="language_english">English</string>
     <string name="language_arabic">العربية</string>
     <string name="language_spanish">Español (Spanish)</string>
     <string name="language_french">Français (French)</string>
     <string name="language_german">Deutsch (German)</string>
+    <string name="language_chinese_mandarin">中文 (简体)</string>
+    <string name="language_russian">Русский</string>
+    <string name="language_hindi">हिन्दी</string>
+    <string name="language_filipino">Filipino</string>
 
+    <string name="dialog_select_language_title">Выберите язык</string>
 
-    <!-- Dialog title for language selection -->
-    <string name="dialog_select_language_title">Select Language</string>
+    <string name="interval_seconds_format">%1$dс</string>
+    <string name="settings_custom_interval_label">Пользовательский интервал (5-300 секунд)</string>
+    <string name="settings_error_interval_range">Интервал должен быть числом от 5 до 300.</string>
+    <string name="notification_sound_title">Звук уведомления</string>
+    <string name="notification_sound_use_system_default">Использовать системный звук по умолчанию</string>
+    <string name="notification_sound_choose_custom">Выбрать пользовательский звук</string>
+    <string name="notification_sound_current">Текущий звук</string>
+    <string name="notification_sound_pick">Выбрать звук</string>
+    <string name="notification_sound_updated_log">Звук уведомления обновлен</string>
+    <string name="activity_clear_all">Очистить все</string>
+    <string name="activity_filter_event_type">Тип события</string>
+    <string name="activity_export_csv">Экспорт в CSV</string>
+    <string name="activity_filter_date_range">Диапазон дат</string>
 
-    <!-- Initially identified from grep - keeping them grouped for now -->
-    <string name="interval_seconds_format">%1$ds</string> <!-- For dynamic interval display e.g., "10s" -->
-    <string name="settings_custom_interval_label">Custom Interval (5-300 seconds)</string>
-    <string name="settings_error_interval_range">Interval must be a number between 5-300.</string>
-    <string name="notification_sound_title">Notification Sound</string>
-    <string name="notification_sound_use_system_default">Use System Default Sound</string>
-    <string name="notification_sound_choose_custom">Choose Custom Sound</string>
-    <string name="activity_clear_all">Clear All</string>
-    <string name="activity_filter_event_type">Event Type</string>
-    <string name="activity_export_csv">Export CSV</string>
-    <string name="activity_filter_date_range">Date Range</string>
+    <string name="settings_toast_notification_perm_granted">Разрешение на уведомления предоставлено</string>
+    <string name="settings_toast_notification_perm_denied">Разрешение на уведомления отклонено</string>
+    <string name="settings_toast_nfc_perm_granted">Разрешение на NFC предоставлено. Пожалуйста, снова включите мониторинг, если необходимо.</string>
+    <string name="settings_toast_nfc_perm_denied">Разрешение на NFC отклонено. Фоновый мониторинг не может быть включен.</string>
 
-    <!-- SettingsScreen.kt -->
-    <!-- Toast Messages -->
-    <string name="settings_toast_notification_perm_granted">Notification permission granted</string>
-    <string name="settings_toast_notification_perm_denied">Notification permission denied</string>
-    <string name="settings_toast_nfc_perm_granted">NFC permission granted. Please toggle monitoring again if needed.</string>
-    <string name="settings_toast_nfc_perm_denied">NFC permission denied. Background monitoring cannot be enabled.</string>
+    <string name="settings_screen_header_title">НАСТРОЙКИ</string>
+    <string name="settings_section_display_title">ДИСПЛЕЙ</string>
+    <string name="settings_section_language_region_title">ЯЗЫК И РЕГИОН</string>
+    <string name="settings_section_notifications_alerts_title">УВЕДОМЛЕНИЯ И ОПОВЕЩЕНИЯ</string>
+    <string name="settings_section_privacy_security_title">КОНФИДЕНЦИАЛЬНОСТЬ И БЕЗОПАСНОСТЬ</string>
+    <string name="settings_section_performance_title">ПРОИЗВОДИТЕЛЬНОСТЬ</string>
 
-    <!-- Screen and Section Titles -->
-    <string name="settings_screen_header_title">SETTINGS</string>
-    <string name="settings_section_display_title">DISPLAY</string>
-    <string name="settings_section_language_region_title">LANGUAGE &amp; REGION</string> <!-- New Section Title -->
-    <string name="settings_section_notifications_alerts_title">NOTIFICATIONS &amp; ALERTS</string>
-    <string name="settings_section_privacy_security_title">PRIVACY &amp; SECURITY</string>
-    <string name="settings_section_performance_title">PERFORMANCE</string>
+    <string name="settings_item_theme_title">Тема</string>
+    <string name="settings_item_dark_mode_title">Темный режим</string>
+    <string name="settings_item_dark_mode_subtitle">Приятный для глаз</string>
+    <string name="settings_item_light_mode_title">Светлый режим</string>
+    <string name="settings_item_light_mode_subtitle">Классический вид</string>
+    <string name="settings_item_accent_color_title">Основной цвет</string>
+    <string name="settings_item_accent_color_subtitle">Изменить основной цвет приложения</string>
 
-    <!-- Theme Options -->
-    <string name="settings_item_theme_title">Theme</string>
-    <string name="settings_item_dark_mode_title">Dark Mode</string>
-    <string name="settings_item_dark_mode_subtitle">Easy on the eyes</string>
-    <string name="settings_item_light_mode_title">Light Mode</string>
-    <string name="settings_item_light_mode_subtitle">Classic look</string>
+    <string name="settings_item_auto_reminder_title">Автоматическое напоминание</string>
+    <string name="settings_item_auto_reminder_subtitle">Оповещения о конфиденциальности, когда NFC остается включенным</string>
 
-    <!-- General Settings Items (Titles and Subtitles) -->
-    <string name="settings_item_auto_reminder_title">Auto Reminder</string>
-    <string name="settings_item_auto_reminder_subtitle">Privacy alerts when NFC stays enabled</string>
+    <string name="settings_item_reminder_interval_title">Интервал напоминания</string>
+    <string name="settings_item_reminder_interval_subtitle">Как часто напоминать о конфиденциальности NFC</string>
+    <string name="settings_item_reminder_interval_current_label">Текущий: %1$dс</string>
 
-    <string name="settings_item_reminder_interval_title">Reminder Interval</string> <!-- Used in AdvancedIntervalSelector -->
-    <string name="settings_item_reminder_interval_subtitle">How often to remind about NFC privacy</string> <!-- Used in AdvancedIntervalSelector -->
-    <string name="settings_item_reminder_interval_current_label">Current: %1$ds</string> <!-- Used in AdvancedIntervalSelector, %1$d is for the number -->
+    <string name="settings_item_show_notifications_title">Показывать уведомления</string>
+    <string name="settings_item_show_notifications_subtitle">Отображать все уведомления о конфиденциальности и статусе</string>
 
-    <string name="settings_item_show_notifications_title">Show Notifications</string>
-    <string name="settings_item_show_notifications_subtitle">Display all privacy and status notifications</string>
+    <string name="settings_item_vibration_alerts_title">Вибрация для оповещений</string>
+    <string name="settings_item_vibration_alerts_subtitle">Тактильная обратная связь для оповещений о конфиденциальности</string>
 
-    <string name="settings_item_vibration_alerts_title">Vibration for Alerts</string>
-    <string name="settings_item_vibration_alerts_subtitle">Haptic feedback for privacy alerts</string>
+    <string name="settings_item_enable_sounds_title">Включить звуки</string>
+    <string name="settings_item_enable_sounds_subtitle">Воспроизводить звуки для оповещений и уведомлений</string>
 
-    <string name="settings_item_enable_sounds_title">Enable Sounds</string>
-    <string name="settings_item_enable_sounds_subtitle">Play sounds for alerts and notifications</string>
+    <string name="settings_item_notification_sound_title">Звук уведомления</string>
+    <string name="settings_item_notification_sound_subtitle">Настроить определенный звук для уведомлений</string>
 
-    <string name="settings_item_notification_sound_title">Notification Sound</string>
-    <string name="settings_item_notification_sound_subtitle">Customize the specific sound for notifications</string>
+    <string name="settings_item_privacy_mode_title">Режим конфиденциальности</string>
+    <string name="settings_item_privacy_mode_subtitle">Улучшенная защита конфиденциальности</string>
 
-    <string name="settings_item_privacy_mode_title">Privacy Mode</string>
-    <string name="settings_item_privacy_mode_subtitle">Enhanced privacy protection</string>
+    <string name="settings_item_block_unknown_tags_title">Блокировать неизвестные теги</string>
+    <string name="settings_item_block_unknown_tags_subtitle">Автоматически блокировать нераспознанные NFC-теги</string>
 
-    <string name="settings_item_block_unknown_tags_title">Block Unknown Tags</string>
-    <string name="settings_item_block_unknown_tags_subtitle">Automatically block unrecognized NFC tags</string>
+    <string name="settings_item_background_monitoring_title">Фоновый мониторинг NFC</string>
+    <string name="settings_item_background_monitoring_subtitle">Непрерывно отслеживает статус NFC. Требуется разрешение на NFC.</string>
 
-    <string name="settings_item_background_monitoring_title">Background NFC Monitoring</string>
-    <string name="settings_item_background_monitoring_subtitle">Continuously monitors NFC status. Requires NFC permission.</string>
+    <string name="settings_item_battery_optimization_title">Оптимизация батареи</string>
+    <string name="settings_item_battery_optimization_subtitle">Оптимизировать для лучшего времени автономной работы</string>
+    <string name="settings_item_performance_title">Производительность</string>
+    <string name="settings_item_performance_subtitle">Баланс между плавностью и временем автономной работы</string>
+    <string name="settings_item_monitoring_interval_title">Интервал мониторинга</string>
+    <string name="settings_item_monitoring_interval_subtitle">Скорость проверки статуса NFC</string>
 
-    <string name="settings_item_battery_optimization_title">Battery Optimization</string>
-    <string name="settings_item_battery_optimization_subtitle">Optimize for better battery life</string>
+    <string name="settings_button_export_settings">ЭКСПОРТИРОВАТЬ НАСТРОЙКИ</string>
+    <string name="settings_button_reset_defaults">СБРОСИТЬ ДО НАСТРОЕК ПО УМОЛЧАНИЮ</string>
 
-    <!-- Buttons -->
-    <string name="settings_button_export_settings">EXPORT SETTINGS</string>
-    <string name="settings_button_reset_defaults">RESET TO DEFAULTS</string>
+    <string name="settings_card_design_info_title">Дизайн, вдохновленный Nothing OS</string>
+    <string name="settings_card_design_info_subtitle">Создано с использованием официальных инструментов Android: Kotlin, Jetpack Compose, Room Database и архитектуры MVVM.</string>
 
-    <!-- Design Info Card -->
-    <string name="settings_card_design_info_title">Nothing OS Inspired Design</string>
-    <string name="settings_card_design_info_subtitle">Built with official Android tools: Kotlin, Jetpack Compose, Room Database, and MVVM architecture.</string>
+    <string name="settings_cd_navigate">Навигация</string>
 
-    <!-- Content Descriptions -->
-    <string name="settings_cd_navigate">Navigate</string> <!-- For KeyboardArrowRight icon -->
-
-    <!-- Home Screen Strings -->
     <string name="home_screen_title">NFC MANAGER</string>
-    <string name="nfc_status_title">NFC STATUS</string>
-    <string name="nfc_not_supported">NOT SUPPORTED</string>
-    <string name="nfc_hardware_not_found">NFC hardware not found on this device.</string>
-    <string name="nfc_status_enabled">ENABLED</string>
-    <string name="privacy_monitoring_active">Privacy monitoring active</string>
-    <string name="nfc_status_disabled">DISABLED</string>
-    <string name="tap_to_enable_nfc">Tap here to enable NFC in system settings.</string>
-    <string name="home_todays_activity_title">TODAYS ACTIVITY</string>
-    <string name="events_logged_format">%1$d events logged</string>
-    <string name="enable_nfc_button">ENABLE NFC IN SETTINGS</string>
+    <string name="nfc_status_title">СТАТУС NFC</string>
+    <string name="nfc_not_supported">НЕ ПОДДЕРЖИВАЕТСЯ</string>
+    <string name="nfc_hardware_not_found">NFC-оборудование не найдено на этом устройстве.</string>
+    <string name="nfc_status_enabled">ВКЛЮЧЕНО</string>
+    <string name="privacy_monitoring_active">Мониторинг конфиденциальности активен</string>
+    <string name="nfc_status_disabled">ОТКЛЮЧЕНО</string>
+    <string name="tap_to_enable_nfc">Нажмите здесь, чтобы включить NFC в системных настройках.</string>
+    <string name="home_todays_activity_title">СЕГОДНЯШНЯЯ АКТИВНОСТЬ</string>
+    <string name="events_logged_format">Зарегистрировано %1$d событий</string>
+    <string name="enable_nfc_button">ВКЛЮЧИТЬ NFC В НАСТРОЙКАХ</string>
 
-    <!-- Activity Screen Strings -->
-    <string name="activity_log_title">ACTIVITY LOG</string>
-    <string name="export_success">Events exported successfully</string>
-    <string name="export_error">Error exporting events: %1$s</string>
-    <string name="no_events_to_export">No events to export for the current filter</string>
-    <string name="no_events_to_export_simple">No events to export</string>
-    <string name="event_singular">event</string>
-    <string name="events_plural">events</string>
-    <string name="no_matching_activity">No Matching Activity</string>
-    <string name="no_activity_yet">No Activity Yet</string>
-    <string name="adjust_filters_hint">Try adjusting your filters.</string>
-    <string name="activity_logs_hint">Activity logs will appear here.</string>
-    <string name="all_types_filter">All Types</string>
-    <string name="events_found_format">%1$d %2$s found</string>
-    <string name="events_recorded_format">%1$d %2$s recorded</string>
+    <string name="activity_log_title">ЖУРНАЛ АКТИВНОСТИ</string>
+    <string name="export_success">События успешно экспортированы</string>
+    <string name="export_error">Ошибка экспорта событий: %1$s</string>
+    <string name="no_events_to_export">Нет событий для экспорта для текущего фильтра</string>
+    <string name="no_events_to_export_simple">Нет событий для экспорта</string>
+    <string name="event_singular">событие</string>
+    <string name="events_plural">события</string>
+    <string name="no_matching_activity">Нет совпадений</string>
+    <string name="no_activity_yet">Пока нет активности</string>
+    <string name="adjust_filters_hint">Попробуйте настроить фильтры.</string>
+    <string name="activity_logs_hint">Здесь появятся журналы активности.</string>
+    <string name="all_types_filter">Все типы</string>
+    <string name="events_found_format">Найдено %1$d %2$s</string>
+    <string name="events_recorded_format">Зарегистрировано %1$d %2$s</string>
 
-    <!-- Notification Sound Settings Screen Strings -->
-    <string name="sound_access_warning">Could not persist sound access, it might not work later.</string>
-    <string name="storage_permission_required">Storage permission is required to choose a custom sound.</string>
-    <string name="notification_sound_screen_title">Notification Sound</string>
-    <string name="notification_sound_description">Customize the sound played for NFC Manager notifications. Choose a custom sound from your device or use the system default.</string>
-    <string name="current_sound_label">Current Sound</string>
-    <string name="sound_play_error_null">Cannot play sound: Default URI is null.</string>
-    <string name="sound_play_error_corrupted">Cannot play sound: Ringtone not found or corrupted.</string>
-    <string name="sound_play_error_general">Error playing sound: %1$s</string>
-    <string name="choose_custom_sound">Choose Custom Sound</string>
-    <string name="use_system_default_sound">Use System Default Sound</string>
-    <string name="sound_playing_indicator">Playing</string>
-    <string name="system_default_sound">System Default</string>
-    <string name="custom_sound_label">Custom Sound</string>
-    <string name="custom_sound_error">Custom Sound (Error)</string>
-    <string name="back_button">Back</string>
-    <string name="pick_sound_icon">Pick Sound</string>
-    <string name="default_sound_icon">Default Sound</string>
+    <string name="sound_access_warning">Не удалось сохранить доступ к звуку, возможно, он не будет работать позже.</string>
+    <string name="storage_permission_required">Для выбора пользовательского звука требуется разрешение на хранение.</string>
+    <string name="notification_sound_screen_title">Звук уведомления</string>
+    <string name="notification_sound_description">Настройте звук, воспроизводимый для уведомлений NFC Manager. Выберите пользовательский звук с вашего устройства или используйте системный по умолчанию.</string>
+    <string name="current_sound_label">Текущий звук</string>
+    <string name="sound_play_error_null">Невозможно воспроизвести звук: URI по умолчанию равен нулю.</string>
+    <string name="sound_play_error_corrupted">Невозможно воспроизвести звук: Мелодия не найдена или повреждена.</string>
+    <string name="sound_play_error_general">Ошибка воспроизведения звука: %1$s</string>
+    <string name="choose_custom_sound">Выбрать пользовательский звук</string>
+    <string name="use_system_default_sound">Использовать системный звук по умолчанию</string>
+    <string name="sound_playing_indicator">Воспроизведение</string>
+    <string name="system_default_sound">Системный по умолчанию</string>
+    <string name="custom_sound_label">Пользовательский звук</string>
+    <string name="custom_sound_error">Пользовательский звук (Ошибка)</string>
+    <string name="back_button">Назад</string>
+    <string name="pick_sound_icon">Выбрать звук</string>
+    <string name="default_sound_icon">Звук по умолчанию</string>
 
-    <!-- ViewModel Messages -->
-    <string name="language_already_set">Language is already set to %1$s.</string>
-    <string name="language_changed_log">Language changed from %1$s to %2$s</string>
-    <string name="language_updated_success">Language updated to %1$s. Restarting for changes to take effect.</string>
-    <string name="language_update_failed">Failed to update language: %1$s</string>
-    <string name="settings_reset_log">All settings reset to defaults</string>
-    <string name="settings_reset_success">All settings reset to defaults</string>
-    <string name="settings_reset_failed">Failed to reset settings: %1$s</string>
-    <string name="notification_sound_updated">Notification sound updated</string>
-    <string name="notification_sound_reset">Notification sound reset to default</string>
-    <string name="notification_sound_reset_button">Reset to default</string>
-    <string name="notification_sound_update_failed">Failed to update notification sound: %1$s</string>
-    <string name="background_monitoring_enabled_log">Background NFC Monitoring enabled (via intent)</string>
-    <string name="background_monitoring_enabled_success">Background NFC Monitoring enabled</string>
-    <string name="background_monitoring_enable_failed">Failed to enable background monitoring: %1$s</string>
-    <string name="nfc_permission_required">NFC Permission required to enable background monitoring.</string>
-    <string name="background_monitoring_disabled_log">Background NFC Monitoring disabled (via intent)</string>
-    <string name="background_monitoring_disabled_success">Background NFC Monitoring disabled</string>
-    <string name="background_monitoring_disable_failed">Failed to disable background monitoring: %1$s</string>
-    <string name="auto_reminder_toggled_log">Auto-reminder %1$s</string>
-    <string name="auto_reminder_toggled_success">Auto-reminder %1$s</string>
-    <string name="auto_reminder_toggle_failed">Failed to toggle auto-reminder: %1$s</string>
-    <string name="interval_out_of_range">Interval must be between 5 and 300 seconds</string>
-    <string name="reminder_interval_updated_log">Reminder interval set to %1$ds</string>
-    <string name="reminder_interval_updated_success">Reminder interval updated to %1$d seconds</string>
-    <string name="reminder_interval_update_failed">Failed to update interval: %1$s</string>
-    <string name="notifications_toggled_log">Notifications %1$s</string>
-    <string name="notifications_toggled_success">Notifications %1$s</string>
-    <string name="notifications_toggle_failed">Failed to toggle notifications: %1$s</string>
-    <string name="vibration_toggled_log">Vibration %1$s</string>
-    <string name="vibration_toggled_success">Vibration %1$s</string>
-    <string name="vibration_toggle_failed">Failed to toggle vibration: %1$s</string>
-    <string name="sound_toggled_log">Sound (general) %1$s</string>
-    <string name="sound_toggled_success">Sound (general) %1$s</string>
-    <string name="sound_toggle_failed">Failed to toggle sound: %1$s</string>
-    <string name="theme_changed_log">%1$s enabled</string>
-    <string name="theme_changed_success">%1$s enabled</string>
-    <string name="theme_change_failed">Failed to set theme: %1$s</string>
-    <string name="dark_mode_text">Dark mode</string>
-    <string name="light_mode_text">Light mode</string>
-    <string name="accent_color_updated_log">Accent color updated</string>
-    <string name="accent_color_updated_success">Accent color updated</string>
-    <string name="accent_color_update_failed">Failed to update color: %1$s</string>
-    <string name="battery_optimization_toggled_log">Battery optimization %1$s</string>
-    <string name="battery_optimization_toggled_success">Battery optimization %1$s</string>
-    <string name="battery_optimization_toggle_failed">Failed to toggle battery optimization: %1$s</string>
-    <string name="monitoring_interval_out_of_range">Monitoring interval must be between 1000 and 10000 milliseconds</string>
-    <string name="monitoring_interval_updated_log">Monitoring interval set to %1$dms</string>
-    <string name="monitoring_interval_updated_success">Monitoring interval updated</string>
-    <string name="monitoring_interval_update_failed">Failed to update monitoring interval: %1$s</string>
-    <string name="privacy_mode_toggled_log">Privacy mode %1$s</string>
-    <string name="privacy_mode_toggled_success">Privacy mode %1$s</string>
-    <string name="privacy_mode_toggle_failed">Failed to toggle privacy mode: %1$s</string>
-    <string name="block_unknown_tags_toggled_log">Block unknown tags %1$s</string>
-    <string name="block_unknown_tags_toggled_success">Unknown tag blocking %1$s</string>
-    <string name="block_unknown_tags_toggle_failed">Failed to toggle unknown tag blocking: %1$s</string>
-    <string name="settings_exported_log">Settings exported</string>
-    <string name="settings_exported_success">Settings exported successfully</string>
-    <string name="settings_export_failed">Failed to export settings: %1$s</string>
-    <string name="data_cleanup_log">Old data cleanup completed (%1$d days)</string>
-    <string name="data_cleanup_success">Old data cleaned up successfully</string>
-    <string name="data_cleanup_failed">Failed to cleanup data: %1$s</string>
-    <string name="enabled_status">enabled</string>
-    <string name="disabled_status">disabled</string>
+    <string name="language_already_set">Язык уже установлен на %1$s.</string>
+    <string name="language_changed_log">Язык изменен с %1$s на %2$s</string>
+    <string name="language_updated_success">Язык обновлен до %1$s. Перезапуск для вступления изменений в силу.</string>
+    <string name="language_update_failed">Не удалось обновить язык: %1$s</string>
+    <string name="settings_reset_log">Все настройки сброшены до значений по умолчанию</string>
+    <string name="settings_reset_success">Все настройки сброшены до значений по умолчанию</string>
+    <string name="settings_reset_failed">Не удалось сбросить настройки: %1$s</string>
+    <string name="notification_sound_updated">Звук уведомления обновлен</string>
+    <string name="notification_sound_reset">Звук уведомления сброшен до значения по умолчанию</string>
+    <string name="notification_sound_reset_button">Сбросить до значений по умолчанию</string>
+    <string name="notification_sound_update_failed">Не удалось обновить звук уведомления: %1$s</string>
+    <string name="background_monitoring_enabled_log">Фоновый мониторинг NFC включен (через интент)</string>
+    <string name="background_monitoring_enabled_success">Фоновый мониторинг NFC включен</string>
+    <string name="background_monitoring_enable_failed">Не удалось включить фоновый мониторинг: %1$s</string>
+    <string name="nfc_permission_required">Требуется разрешение на NFC для включения фонового мониторинга.</string>
+    <string name="background_monitoring_disabled_log">Фоновый мониторинг NFC отключен (через интент)</string>
+    <string name="background_monitoring_disabled_success">Фоновый мониторинг NFC отключен</string>
+    <string name="background_monitoring_disable_failed">Не удалось отключить фоновый мониторинг: %1$s</string>
+    <string name="auto_reminder_toggled_log">Авто-напоминание %1$s</string>
+    <string name="auto_reminder_toggled_success">Авто-напоминание %1$s</string>
+    <string name="auto_reminder_toggle_failed">Не удалось переключить авто-напоминание: %1$s</string>
+    <string name="interval_out_of_range">Интервал должен быть от 5 до 300 секунд</string>
+    <string name="reminder_interval_updated_log">Интервал напоминания установлен на %1$dс</string>
+    <string name="reminder_interval_updated_success">Интервал напоминания обновлен до %1$d секунд</string>
+    <string name="reminder_interval_update_failed">Не удалось обновить интервал: %1$s</string>
+    <string name="notifications_toggled_log">Уведомления %1$s</string>
+    <string name="notifications_toggled_success">Уведомления %1$s</string>
+    <string name="notifications_toggle_failed">Не удалось переключить уведомления: %1$s</string>
+    <string name="vibration_toggled_log">Вибрация %1$s</string>
+    <string name="vibration_toggled_success">Вибрация %1$s</string>
+    <string name="vibration_toggle_failed">Не удалось переключить вибрацию: %1$s</string>
+    <string name="sound_toggled_log">Звук (общий) %1$s</string>
+    <string name="sound_toggled_success">Звук (общий) %1$s</string>
+    <string name="sound_toggle_failed">Не удалось переключить звук: %1$s</string>
+    <string name="theme_changed_log">%1$s включен</string>
+    <string name="theme_changed_success">%1$s включен</string>
+    <string name="theme_change_failed">Не удалось установить тему: %1$s</string>
+    <string name="dark_mode_text">Темный режим</string>
+    <string name="light_mode_text">Светлый режим</string>
+    <string name="accent_color_updated_log">Основной цвет обновлен</string>
+    <string name="accent_color_updated_success">Основной цвет обновлен</string>
+    <string name="accent_color_update_failed">Не удалось обновить цвет: %1$s</string>
+    <string name="battery_optimization_toggled_log">Оптимизация батареи %1$s</string>
+    <string name="battery_optimization_toggled_success">Оптимизация батареи %1$s</string>
+    <string name="battery_optimization_toggle_failed">Не удалось переключить оптимизацию батареи: %1$s</string>
+    <string name="monitoring_interval_out_of_range">Интервал мониторинга должен быть от 1000 до 10000 миллисекунд</string>
+    <string name="monitoring_interval_updated_log">Интервал мониторинга установлен на %1$dмс</string>
+    <string name="monitoring_interval_updated_success">Интервал мониторинга обновлен</string>
+    <string name="monitoring_interval_update_failed">Не удалось обновить интервал мониторинга: %1$s</string>
+    <string name="privacy_mode_toggled_log">Режим конфиденциальности %1$s</string>
+    <string name="privacy_mode_toggled_success">Режим конфиденциальности %1$s</string>
+    <string name="privacy_mode_toggle_failed">Не удалось переключить режим конфиденциальности: %1$s</string>
+    <string name="block_unknown_tags_toggled_log">Блокировка неизвестных тегов %1$s</string>
+    <string name="block_unknown_tags_toggled_success">Блокировка неизвестных тегов %1$s</string>
+    <string name="block_unknown_tags_toggle_failed">Не удалось переключить блокировку неизвестных тегов: %1$s</string>
+    <string name="settings_exported_log">Настройки экспортированы</string>
+    <string name="settings_exported_success">Настройки успешно экспортированы</string>
+    <string name="settings_export_failed">Не удалось экспортировать настройки: %1$s</string>
+    <string name="data_cleanup_log">Очистка старых данных завершена (%1$d дней)</string>
+    <string name="data_cleanup_success">Старые данные успешно очищены</string>
+    <string name="data_cleanup_failed">Не удалось очистить данные: %1$s</string>
+    <string name="enabled_status">включено</string>
+    <string name="disabled_status">отключено</string>
 
-    <!-- Date Filter Options -->
-    <string name="date_filter_today">Today</string>
-    <string name="date_filter_last_7_days">Last 7 Days</string>
-    <string name="date_filter_last_30_days">Last 30 Days</string>
-    <string name="date_filter_all_time">All Time</string>
+    <string name="date_filter_today">Сегодня</string>
+    <string name="date_filter_last_7_days">Последние 7 дней</string>
+    <string name="date_filter_last_30_days">Последние 30 дней</string>
+    <string name="date_filter_all_time">За все время</string>
 
-    <!-- System Messages -->
-    <string name="mainviewmodel_initialized">MainViewModel initialized</string>
-    <string name="tag_scanned_format">Tag Scanned: %1$s (Action: %2$s)</string>
-    <string name="event_deleted">Event deleted</string>
-    <string name="all_events_cleared">All events cleared</string>
-    <string name="all_events_cleared_success">All events cleared successfully</string>
-    <string name="failed_to_delete_event">Failed to delete event: %1$s</string>
-    <string name="failed_to_clear_events">Failed to clear all events: %1$s</string>
+    <string name="mainviewmodel_initialized">MainViewModel инициализирован</string>
+    <string name="tag_scanned_format">Тег отсканирован: %1$s (Действие: %2$s)</string>
+    <string name="event_deleted">Событие удалено</string>
+    <string name="all_events_cleared">Все события очищены</string>
+    <string name="all_events_cleared_success">Все события успешно очищены</string>
+    <string name="failed_to_delete_event">Не удалось удалить событие: %1$s</string>
+    <string name="failed_to_clear_events">Не удалось очистить все события: %1$s</string>
 
-    <!-- Additional System Messages -->
-    <string name="nfc_not_supported_device">NFC not supported on this device</string>
-    <string name="privacy_alert_shown">Privacy alert shown</string>
-    <string name="privacy_alert_dismissed">Privacy alert dismissed</string>
-    <string name="reminder_interval_set_log">Reminder interval set to %1$ds</string>
-    <string name="notifications_toggled_system_log">Notifications %1$s</string>
-    <string name="vibration_toggled_system_log">Vibration %1$s</string>
+    <string name="nfc_not_supported_device">NFC не поддерживается на этом устройстве</string>
+    <string name="privacy_alert_shown">Оповещение о конфиденциальности показано</string>
+    <string name="privacy_alert_dismissed">Оповещение о конфиденциальности отклонено</string>
+    <string name="reminder_interval_set_log">Интервал напоминания установлен на %1$dс</string>
+    <string name="notifications_toggled_system_log">Уведомления %1$s</string>
+    <string name="vibration_toggled_system_log">Вибрация %1$s</string>
 
-    <!-- Content Descriptions -->
-    <string name="export_to_csv_icon">Export to CSV</string>
-    <string name="clear_all_logs_icon">Clear All Logs</string>
+    <string name="export_to_csv_icon">Экспорт в CSV</string>
+    <string name="clear_all_logs_icon">Очистить все журналы</string>
 
-    <!-- Bottom Navigation -->
     <string name="nav_nfc_manager">NFC MANAGER</string>
-    <string name="nav_activity">ACTIVITY</string>
-    <string name="nav_settings">SETTINGS</string>
+    <string name="nav_activity">АКТИВНОСТЬ</string>
+    <string name="nav_settings">НАСТРОЙКИ</string>
 
-    <!-- Language Names for Logging -->
     <string name="language_name_english">English</string>
     <string name="language_name_arabic">Arabic</string>
     <string name="language_name_german">German</string>
-    <string name="language_name_system_default">System Default</string>
+    <string name="language_name_system_default">Системный по умолчанию</string>
 
-    <!-- Event Types -->
-    <string name="event_type_settings">SETTINGS</string>
-    <string name="event_type_system">SYSTEM</string>
-    <string name="event_type_privacy">PRIVACY</string>
-    <string name="event_type_nfc_scan">NFC SCAN</string>
-    <string name="event_type_security">SECURITY</string>
+    <string name="event_type_settings">НАСТРОЙКИ</string>
+    <string name="event_type_system">СИСТЕМА</string>
+    <string name="event_type_privacy">КОНФИДЕНЦИАЛЬНОСТЬ</string>
+    <string name="event_type_nfc_scan">СКАНИРОВАНИЕ NFC</string>
+    <string name="event_type_security">БЕЗОПАСНОСТЬ</string>
 
-    <!-- Settings Messages -->
-    <string name="auto_reminder_enabled">Auto-reminder enabled</string>
-    <string name="auto_reminder_disabled">Auto-reminder disabled</string>
-    <string name="notifications_enabled">Notifications enabled</string>
-    <string name="notifications_disabled">Notifications disabled</string>
-    <string name="vibration_enabled">Vibration enabled</string>
-    <string name="vibration_disabled">Vibration disabled</string>
-    <string name="sound_enabled">Sound (general) enabled</string>
-    <string name="sound_disabled">Sound (general) disabled</string>
-    <string name="battery_optimization_enabled">Battery optimization enabled</string>
-    <string name="battery_optimization_disabled">Battery optimization disabled</string>
-    <string name="privacy_mode_enabled">Privacy mode enabled</string>
-    <string name="privacy_mode_disabled">Privacy mode disabled</string>
-    <string name="unknown_tag_blocking_enabled">Block unknown tags enabled</string>
-    <string name="unknown_tag_blocking_disabled">Block unknown tags disabled</string>
-    <string name="settings_exported">Settings exported</string>
-    <string name="reminder_interval_set">Reminder interval set to %1$ds</string>
-    <string name="nfc_hardware_enabled">NFC hardware now enabled</string>
-    <string name="nfc_hardware_disabled">NFC hardware now disabled</string>
+    <string name="auto_reminder_enabled">Авто-напоминание включено</string>
+    <string name="auto_reminder_disabled">Авто-напоминание отключено</string>
+    <string name="notifications_enabled">Уведомления включены</string>
+    <string name="notifications_disabled">Уведомления отключены</string>
+    <string name="vibration_enabled">Вибрация включена</string>
+    <string name="vibration_disabled">Вибрация отключена</string>
+    <string name="sound_enabled">Звук (общий) включен</string>
+    <string name="sound_disabled">Звук (общий) отключен</string>
+    <string name="battery_optimization_enabled">Оптимизация батареи включена</string>
+    <string name="battery_optimization_disabled">Оптимизация батареи отключена</string>
+    <string name="privacy_mode_enabled">Режим конфиденциальности включен</string>
+    <string name="privacy_mode_disabled">Режим конфиденциальности отключен</string>
+    <string name="unknown_tag_blocking_enabled">Блокировка неизвестных тегов включена</string>
+    <string name="unknown_tag_blocking_disabled">Блокировка неизвестных тегов отключена</string>
+    <string name="settings_exported">Настройки экспортированы</string>
+    <string name="reminder_interval_set">Интервал напоминания установлен на %1$dс</string>
+    <string name="nfc_hardware_enabled">NFC-оборудование теперь включено</string>
+    <string name="nfc_hardware_disabled">NFC-оборудование теперь отключено</string>
 
-    <!-- Time Format -->
-    <string name="time_now">now</string>
+    <string name="time_now">сейчас</string>
 
-    <!-- Additional Settings Messages -->
-    <string name="dark_mode_enabled">Dark mode enabled</string>
-    <string name="light_mode_enabled">Light mode enabled</string>
-    <string name="accent_color_updated">Accent color updated</string>
-    <string name="monitoring_interval_set">Monitoring interval set to %1$dms</string>
-    <string name="old_data_cleanup_completed">Old data cleanup completed (%1$d days)</string>
+    <string name="dark_mode_enabled">Темный режим включен</string>
+    <string name="light_mode_enabled">Светлый режим включен</string>
+    <string name="accent_color_updated">Основной цвет обновлен</string>
+    <string name="monitoring_interval_set">Интервал мониторинга установлен на %1$dмс</string>
+    <string name="old_data_cleanup_completed">Очистка старых данных завершена (%1$d дней)</string>
 
-    <!-- Additional Success Messages -->
-    <string name="old_data_cleanup_success">Old data cleaned up successfully</string>
+    <string name="old_data_cleanup_success">Старые данные успешно очищены</string>
 
-    <!-- Error Messages -->
-    <string name="failed_to_disable_monitoring">Failed to disable background monitoring: %1$s</string>
-    <string name="failed_to_toggle_auto_reminder">Failed to toggle auto-reminder: %1$s</string>
-    <string name="failed_to_update_interval">Failed to update interval: %1$s</string>
-    <string name="failed_to_toggle_notifications">Failed to toggle notifications: %1$s</string>
-    <string name="failed_to_toggle_vibration">Failed to toggle vibration: %1$s</string>
-    <string name="failed_to_toggle_sound">Failed to toggle sound: %1$s</string>
-    <string name="failed_to_set_theme">Failed to set theme: %1$s</string>
-    <string name="failed_to_update_color">Failed to update color: %1$s</string>
-    <string name="failed_to_toggle_battery_optimization">Failed to toggle battery optimization: %1$s</string>
-    <string name="monitoring_interval_range_error">Monitoring interval must be between 1000 and 10000 milliseconds</string>
-    <string name="failed_to_update_monitoring_interval">Failed to update monitoring interval: %1$s</string>
-    <string name="failed_to_toggle_privacy_mode">Failed to toggle privacy mode: %1$s</string>
-    <string name="failed_to_toggle_unknown_tag_blocking">Failed to toggle unknown tag blocking: %1$s</string>
-    <string name="failed_to_export_settings">Failed to export settings: %1$s</string>
-    <string name="failed_to_cleanup_data">Failed to cleanup data: %1$s</string>
+    <string name="failed_to_disable_monitoring">Не удалось отключить фоновый мониторинг: %1$s</string>
+    <string name="failed_to_toggle_auto_reminder">Не удалось переключить авто-напоминание: %1$s</string>
+    <string name="failed_to_update_interval">Не удалось обновить интервал: %1$s</string>
+    <string name="failed_to_toggle_notifications">Не удалось переключить уведомления: %1$s</string>
+    <string name="failed_to_toggle_vibration">Не удалось переключить вибрацию: %1$s</string>
+    <string name="failed_to_toggle_sound">Не удалось переключить звук: %1$s</string>
+    <string name="failed_to_set_theme">Не удалось установить тему: %1$s</string>
+    <string name="failed_to_update_color">Не удалось обновить цвет: %1$s</string>
+    <string name="failed_to_toggle_battery_optimization">Не удалось переключить оптимизацию батареи: %1$s</string>
+    <string name="monitoring_interval_range_error">Интервал мониторинга должен быть от 1000 до 10000 миллисекунд</string>
+    <string name="failed_to_update_monitoring_interval">Не удалось обновить интервал мониторинга: %1$s</string>
+    <string name="failed_to_toggle_privacy_mode">Не удалось переключить режим конфиденциальности: %1$s</string>
+    <string name="failed_to_toggle_unknown_tag_blocking">Не удалось переключить блокировку неизвестных тегов: %1$s</string>
+    <string name="failed_to_export_settings">Не удалось экспортировать настройки: %1$s</string>
+    <string name="failed_to_cleanup_data">Не удалось очистить данные: %1$s</string>
 
+    <string name="about_title">О приложении</string>
+    <string name="about_app_title">О приложении NFC Manager</string>
+    <string name="about_app_description">NFC Manager - это приложение для Android, ориентированное на конфиденциальность. Оно разработано, чтобы помочь пользователям контролировать и управлять своими настройками NFC (Near Field Communication) с повышенным уровнем безопасности. Приложение предупреждает пользователей, когда NFC остается включенным в течение длительного времени, что помогает предотвратить несанкционированный доступ и защититься от потенциальных уязвимостей конфиденциальности.</string>
+    <string name="about_copyright">Создано с ❤️ Тариком Саидом - Дизайн, вдохновленный Nothing OS</string>
+    <string name="about_contact_support_title">Контакты и поддержка</string>
+    <string name="about_email">Электронная почта: support@dxbmark.com</string>
+    <string name="about_response_time">Время ответа: 24-48 часов</string>
+    <string name="about_languages">Языки: English, Arabic</string>
+    <string name="about_timezone">Часовой пояс: GMT+4 (ОАЭ)</string>
+    <string name="about_license_title">Лицензия</string>
+    <string name="about_license_text">Лицензировано в соответствии с Apache License, Version 2.0</string>
+    <string name="about_copyright_text">Copyright 2025 Tariq Said. Все права защищены.</string>
+    <string name="about_license_link">Посмотреть лицензию</string>
+    <string name="about_important_links_title">Важные ссылки</string>
+    <string name="about_terms_service">Условия обслуживания</string>
+    <string name="about_privacy_policy">Политика конфиденциальности</string>
+    <string name="about_full_changelog">Полный список изменений</string>
+    <string name="about_project_repository">Репозиторий проекта</string>
+    <string name="about_development_design_title">Разработка и дизайн</string>
+    <string name="about_development_credit">Разработано и спроектировано Тариком Саидом</string>
+    <string name="about_powered_by_dxbmark">При поддержке DXBMark</string>
+    <string name="about_tariq_linkedin">Тарик Саид в LinkedIn</string>
+    <string name="about_tariq_github">Тарик Саид на GitHub</string>
+    <string name="about_official_contributor_title">Официальный участник</string>
+    <string name="about_mwheba_agency">Рекламное агентство MWHEBA</string>
+    <string name="about_security_highlights_title">Основные моменты безопасности (v%1$s)</string>
+    <string name="about_initial_security">- Начальная реализация безопасности</string>
+    <string name="about_local_storage">- Хранение данных только на устройстве</string>
+    <string name="about_permission_access">- Контроль доступа на основе разрешений</string>
+    <string name="about_proguard_obfuscation">- Включена обфускация ProGuard</string>
+    <string name="about_certificate_pinning">- Реализовано закрепление сертификата</string>
+    <string name="navigate_back">Вернуться назад</string>
+    <string name="settings_section_about_title">О ПРИЛОЖЕНИИ</string>
+    <string name="settings_item_about_title">О приложении NFC Manager</string>
+    <string name="settings_item_about_subtitle">Информация о приложении, политика конфиденциальности и поддержка</string>
 </resources>
