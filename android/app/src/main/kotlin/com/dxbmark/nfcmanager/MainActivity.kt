@@ -100,11 +100,8 @@ class MainActivity : ComponentActivity() {
                 settingsViewModel.settings.first() // Wait for settings to load
                 mainViewModel.uiState.first() // Wait for UI state to load
                 
-                // Minimum splash duration for better UX and animation
-                kotlinx.coroutines.delay(1200) // 1.2 seconds minimum
-                
-                // Additional delay for smooth animation completion
-                kotlinx.coroutines.delay(300) 
+                // Fixed splash duration - 3 seconds as requested
+                kotlinx.coroutines.delay(3000) // 3 seconds total 
                 
                 isAppReady = true
                 Log.d(TAG, "App fully initialized - splash screen ready to dismiss")
