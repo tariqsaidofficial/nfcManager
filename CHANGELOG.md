@@ -29,11 +29,12 @@ The first alpha release of NFC Manager, a privacy-focused NFC management applica
 - **Accessibility**: Full screen reader compatibility and accessibility features
 
 #### Multi-language Support
-- **8 Languages Supported**:
+- **9 Languages Supported**:
   - English (default)
   - العربية (Arabic) with RTL support
   - Español (Spanish)
   - Français (French)
+  - Deutsch (German)
   - Русский (Russian)
   - 中文 (Chinese Simplified)
   - हिन्दी (Hindi)
