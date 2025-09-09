@@ -25,6 +25,7 @@ object AppRoutes {
     const val ACTIVITY = "activity"
     const val SETTINGS = "settings"
     const val NOTIFICATION_SOUND_SETTINGS = "notification_sound_settings" // <<< NEW ROUTE
+    const val ABOUT = "about"
 }
 
 /**
@@ -106,6 +107,11 @@ fun NFCManagerNavigation(
             composable(AppRoutes.NOTIFICATION_SOUND_SETTINGS) {
                 NotificationSoundSettingsScreen(
                     viewModel = settingsViewModel, // Can reuse or create a dedicated one if needed
+                    onNavigateBack = { navController.popBackStack() }
+                )
+            }
+            composable(AppRoutes.ABOUT) {
+                AboutScreen(
                     onNavigateBack = { navController.popBackStack() }
                 )
             }

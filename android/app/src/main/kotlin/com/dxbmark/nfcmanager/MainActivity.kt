@@ -15,6 +15,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -36,6 +37,7 @@ import com.dxbmark.nfcmanager.viewmodel.MainViewModel
 import com.dxbmark.nfcmanager.viewmodel.SettingsViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 // import kotlinx.coroutines.runBlocking // No longer needed
 // import java.util.Locale // No longer needed directly here
@@ -50,6 +52,9 @@ class MainActivity : ComponentActivity() {
     private var nfcAdapter: NfcAdapter? = null
     private lateinit var pendingIntent: PendingIntent
     private lateinit var nfcIntentFilters: Array<IntentFilter>
+    
+    // Splash Screen control
+    private var isAppReady = false
 
     companion object {
         private const val TAG = "MainActivityFull"
@@ -63,8 +68,15 @@ class MainActivity : ComponentActivity() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        // Install Splash Screen before calling super.onCreate()
+        val splashScreen = installSplashScreen()
         super.onCreate(savedInstanceState)
         Log.d(TAG, "onCreate: MainActivity (FULL HILT) starting...")
+
+        // Configure splash screen behavior
+        splashScreen.setKeepOnScreenCondition {
+            !isAppReady
+        }
 
         enableEdgeToEdge()
         setupNFC()
@@ -80,6 +92,30 @@ class MainActivity : ComponentActivity() {
         setContent {
             NFCManagerApp(mainViewModel, settingsViewModel)
         }
+        
+        // Smart splash screen control - wait for app initialization
+        lifecycleScope.launch {
+            try {
+                // Wait for ViewModels to be ready
+                settingsViewModel.settings.first() // Wait for settings to load
+                mainViewModel.uiState.first() // Wait for UI state to load
+                
+                // Minimum splash duration for better UX and animation
+                kotlinx.coroutines.delay(1200) // 1.2 seconds minimum
+                
+                // Additional delay for smooth animation completion
+                kotlinx.coroutines.delay(300) 
+                
+                isAppReady = true
+                Log.d(TAG, "App fully initialized - splash screen ready to dismiss")
+            } catch (e: Exception) {
+                Log.e(TAG, "Error during app initialization, dismissing splash", e)
+                // Fallback: dismiss splash after max duration
+                kotlinx.coroutines.delay(2000)
+                isAppReady = true
+            }
+        }
+        
         Log.d(TAG, "onCreate: MainActivity (FULL HILT) started successfully!")
     }
 

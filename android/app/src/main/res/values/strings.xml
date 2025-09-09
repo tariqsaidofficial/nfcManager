@@ -342,4 +342,41 @@
     <string name="failed_to_export_settings">Failed to export settings: %1$s</string>
     <string name="failed_to_cleanup_data">Failed to cleanup data: %1$s</string>
 
+    <!-- About Screen -->
+    <string name="about_title">About</string>
+    <string name="about_app_title">About NFC Manager</string>
+    <string name="about_app_description">NFC Manager is a privacy-focused Android application designed to help users monitor and manage their NFC (Near Field Communication) settings with enhanced security awareness. The app alerts users when NFC remains enabled for extended periods, helping prevent unauthorized access and protecting against potential privacy vulnerabilities.</string>
+    <string name="about_copyright">Built with ❤️ by Tariq Said - Nothing OS Inspired Design</string>
+    <string name="about_contact_support_title">Contact &amp; Support</string>
+    <string name="about_email">Email: support@dxbmark.com</string>
+    <string name="about_response_time">Response Time: 24-48 hours</string>
+    <string name="about_languages">Languages: English, Arabic</string>
+    <string name="about_timezone">Timezone: GMT+4 (UAE)</string>
+    <string name="about_license_title">License</string>
+    <string name="about_license_text">Licensed under the Apache License, Version 2.0</string>
+    <string name="about_copyright_text">Copyright 2025 Tariq Said. All rights reserved.</string>
+    <string name="about_license_link">View License</string>
+    <string name="about_important_links_title">Important Links</string>
+    <string name="about_terms_service">Terms of Service</string>
+    <string name="about_privacy_policy">Privacy Policy</string>
+    <string name="about_full_changelog">Full Changelog</string>
+    <string name="about_project_repository">Project Repository</string>
+    <string name="about_development_design_title">Development &amp; Design</string>
+    <string name="about_development_credit">Designed and Developed Tariq Said</string>
+    <string name="about_powered_by_dxbmark">Powered by DXBMark</string>
+    <string name="about_tariq_linkedin">Tariq Said on LinkedIn</string>
+    <string name="about_tariq_github">Tariq Said on GitHub</string>
+    <string name="about_official_contributor_title">Official contributor</string>
+    <string name="about_mwheba_agency">MWHEBA Advertising Agency</string>
+    <string name="about_security_highlights_title">Security Highlights (v%1$s)</string>
+    <string name="about_initial_security">- Initial security implementation</string>
+    <string name="about_local_storage">- Local-only data storage</string>
+    <string name="about_permission_access">- Permission-based access control</string>
+    <string name="about_proguard_obfuscation">- ProGuard obfuscation enabled</string>
+    <string name="about_certificate_pinning">- Certificate pinning implemented</string>
+    <string name="navigate_back">Navigate back</string>
+    <string name="settings_section_about_title">ABOUT</string>
+    <string name="settings_item_about_title">About NFC Manager</string>
+    <string name="settings_item_about_subtitle">App info, privacy policy, and support</string>
+
 </resources>

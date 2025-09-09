@@ -312,6 +312,29 @@ fun SettingsScreen(
             }
         }
 
+        Spacer(modifier = Modifier.height(24.dp))
+
+        // About Section
+        SettingsSection(title = stringResource(R.string.settings_section_about_title)) {
+            Card(
+                modifier = Modifier.fillMaxWidth(),
+                colors = CardDefaults.cardColors(
+                    containerColor = if (isDarkTheme) NothingColors.DarkSurface else NothingUIColors.LightCardBackground
+                )
+            ) {
+                Column(modifier = Modifier.padding(horizontal = 16.dp)) {
+                    SettingsItemClickable(
+                        title = stringResource(R.string.settings_item_about_title),
+                        subtitle = stringResource(R.string.settings_item_about_subtitle),
+                        onClick = {
+                            navController.navigate(AppRoutes.ABOUT)
+                        },
+                        modifier = Modifier.padding(vertical = 8.dp)
+                    )
+                }
+            }
+        }
+
         Spacer(modifier = Modifier.height(32.dp))
 
         Column(
