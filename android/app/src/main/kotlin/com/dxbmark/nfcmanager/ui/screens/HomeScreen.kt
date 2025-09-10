@@ -1,8 +1,10 @@
 package com.dxbmark.nfcmanager.ui.screens
 
 import android.app.Activity
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -15,9 +17,13 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.compose.ui.res.stringResource
+import androidx.navigation.NavController
 import com.dxbmark.nfcmanager.R
+import com.dxbmark.nfcmanager.ui.components.AppRoutes
 import com.dxbmark.nfcmanager.ui.theme.NothingTextStyles
+import com.dxbmark.nfcmanager.utils.SecurityLevel
 import com.dxbmark.nfcmanager.viewmodel.MainViewModel
+import com.dxbmark.nfcmanager.viewmodel.SecurityScoreViewModel
 
 /**
  * Home Screen with NFC status and controls
@@ -61,6 +67,13 @@ fun HomeScreen(
         )
         
         Spacer(modifier = Modifier.height(32.dp))
+
+        // Security Score Card
+        SecurityScoreQuickCard(
+            modifier = Modifier.fillMaxWidth()
+        )
+
+        Spacer(modifier = Modifier.height(24.dp))
 
         // Main NFC Status Card
         Card(
@@ -193,6 +206,75 @@ fun HomeScreen(
         } else {
             // NFC is supported and enabled, button not needed for enabling
             Box(modifier = Modifier.fillMaxWidth().height(48.dp)) // Placeholder or alternative action
+        }
+    }
+}
+
+@Composable
+fun SecurityScoreQuickCard(
+    modifier: Modifier = Modifier
+) {
+    val securityScoreViewModel: SecurityScoreViewModel = viewModel()
+    val securityScore by securityScoreViewModel.securityScore.collectAsState()
+    
+    Card(
+        modifier = modifier
+            .clickable { 
+                // Navigate to security score screen
+                // This would need NavController to be passed from parent
+            },
+        colors = CardDefaults.cardColors(
+            containerColor = securityScore.level.color.copy(alpha = 0.1f)
+        )
+    ) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            // Security Score Circle
+            Box(
+                modifier = Modifier
+                    .size(48.dp)
+                    .background(
+                        color = securityScore.level.color.copy(alpha = 0.2f),
+                        shape = androidx.compose.foundation.shape.CircleShape
+                    ),
+                contentAlignment = Alignment.Center
+            ) {
+                Text(
+                    text = "${securityScore.score}",
+                    style = MaterialTheme.typography.titleLarge,
+                    color = securityScore.level.color,
+                    fontWeight = androidx.compose.ui.text.font.FontWeight.Bold
+                )
+            }
+            
+            Spacer(modifier = Modifier.width(16.dp))
+            
+            // Security Info
+            Column(
+                modifier = Modifier.weight(1f)
+            ) {
+                Text(
+                    text = "Security Score",
+                    style = MaterialTheme.typography.titleMedium,
+                    fontWeight = androidx.compose.ui.text.font.FontWeight.Bold
+                )
+                Text(
+                    text = securityScore.level.displayName,
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = securityScore.level.color
+                )
+            }
+            
+            // Arrow text
+            Text(
+                text = "→",
+                style = MaterialTheme.typography.titleLarge,
+                color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f)
+            )
         }
     }
 }

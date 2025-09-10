@@ -34,6 +34,7 @@ import com.dxbmark.nfcmanager.ui.theme.NothingOSTheme
 import com.dxbmark.nfcmanager.utils.LocaleUtils // <<< IMPORT LOCALE UTILS
 import com.dxbmark.nfcmanager.viewmodel.ActivityViewModel
 import com.dxbmark.nfcmanager.viewmodel.MainViewModel
+import com.dxbmark.nfcmanager.viewmodel.OnboardingViewModel
 import com.dxbmark.nfcmanager.viewmodel.SettingsViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
@@ -192,22 +193,34 @@ class MainActivity : ComponentActivity() {
         settingsViewModelInstance: SettingsViewModel
     ) {
         val activityViewModel: ActivityViewModel = hiltViewModel()
+        val onboardingViewModel: OnboardingViewModel = hiltViewModel()
         val settings by settingsViewModelInstance.settings.collectAsState()
+        val isOnboardingCompleted by onboardingViewModel.isOnboardingCompleted.collectAsState()
         val isCurrentlyDarkTheme = settings.isDarkMode
 
-        // The Locale is now applied at the Activity and Application level.
-        // Jetpack Compose will pick up the correct Locale from the Context implicitly.
-        NothingOSTheme(darkTheme = isCurrentlyDarkTheme) {
-            ApplySystemBarColors(isDarkTheme = isCurrentlyDarkTheme)
-            Surface(
-                modifier = Modifier.fillMaxSize(),
-                color = MaterialTheme.colorScheme.background
-            ) {
-                NFCManagerNavigation(
-                    mainViewModel = mainViewModelInstance,
-                    activityViewModel = activityViewModel,
-                    settingsViewModel = settingsViewModelInstance
-                )
+        if (!isOnboardingCompleted) {
+            // Show onboarding for new users
+            com.dxbmark.nfcmanager.ui.screens.OnboardingScreen(
+                onComplete = {
+                    // Simple completion without try-catch to prevent double calls
+                    onboardingViewModel.completeOnboarding()
+                }
+            )
+        } else {
+            // The Locale is now applied at the Activity and Application level.
+            // Jetpack Compose will pick up the correct Locale from the Context implicitly.
+            NothingOSTheme(darkTheme = isCurrentlyDarkTheme) {
+                ApplySystemBarColors(isDarkTheme = isCurrentlyDarkTheme)
+                Surface(
+                    modifier = Modifier.fillMaxSize(),
+                    color = MaterialTheme.colorScheme.background
+                ) {
+                    NFCManagerNavigation(
+                        mainViewModel = mainViewModelInstance,
+                        activityViewModel = activityViewModel,
+                        settingsViewModel = settingsViewModelInstance
+                    )
+                }
             }
         }
     }

@@ -17,6 +17,9 @@ import com.dxbmark.nfcmanager.MainActivity
 // import com.dxbmark.nfcmanager.R // Keep for your actual app icon
 import com.dxbmark.nfcmanager.data.database.entities.NFCSettingsEntity // Import settings
 import com.dxbmark.nfcmanager.data.repository.NFCRepository // Import repository
+import com.dxbmark.nfcmanager.utils.NotificationManager as AppNotificationManager
+import com.dxbmark.nfcmanager.utils.PrivacyScoreCalculator
+import com.dxbmark.nfcmanager.utils.SecurityLevel
 import dagger.hilt.android.AndroidEntryPoint // Hilt import
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -30,11 +33,16 @@ class NfcMonitoringService : Service() {
     @Inject // <<< INJECT REPOSITORY
     lateinit var nfcRepository: NFCRepository
 
+    @Inject
+    lateinit var appNotificationManager: AppNotificationManager
+
     private val serviceJob = SupervisorJob()
     private val serviceScope = CoroutineScope(Dispatchers.Main + serviceJob) // Use Main for UI-related or use IO for repo access
 
     private var nfcAdapter: NfcAdapter? = null
     private var isMonitoring = false
+    private var nfcEnabledStartTime: Long = 0
+    private val privacyScoreCalculator = PrivacyScoreCalculator()
 
     override fun onCreate() {
         super.onCreate()
@@ -92,12 +100,12 @@ class NfcMonitoringService : Service() {
             }
         } catch (se: SecurityException) {
             Log.e(TAG, "SecurityException in onStartCommand. Missing permissions?", se)
-            updateNotification("Permission error. Cannot monitor NFC.")
+            updateNfcStatusNotification()
             stopSelf() // Stop if critical permission is missing
             return START_NOT_STICKY
         } catch (e: Exception) {
             Log.e(TAG, "Unexpected error in onStartCommand", e)
-            updateNotification("Error starting service.")
+            updateNfcStatusNotification()
             stopSelf()
             return START_NOT_STICKY
         }
@@ -118,31 +126,32 @@ class NfcMonitoringService : Service() {
     private fun startNfcMonitoring() {
         if (isMonitoring) {
             Log.d(TAG, "NFC monitoring is already active.")
-            updateNotification("NFC monitoring is active.") // Update text if needed
+            updateNfcStatusNotification()
             return
         }
 
         if (nfcAdapter == null) {
             Log.w(TAG, "NFC adapter not available. Cannot start monitoring.")
-            updateNotification("NFC not supported on this device.")
+            updateNfcStatusNotification()
             isMonitoring = false
             return
         }
 
         if (!nfcAdapter!!.isEnabled) {
             Log.w(TAG, "NFC is disabled. Cannot start monitoring.")
-            updateNotification("NFC is disabled. Please enable it.")
+            updateNfcStatusNotification()
             isMonitoring = false
             return
         }
 
         try {
             isMonitoring = true
+            nfcEnabledStartTime = System.currentTimeMillis()
             Log.d(TAG, "NFC monitoring started successfully.")
-            updateNotification("NFC monitoring is active.")
+            updateNfcStatusNotification()
         } catch (e: Exception) {
             Log.e(TAG, "Error starting NFC monitoring operations", e)
-            updateNotification("Error enabling NFC monitoring.")
+            updateNfcStatusNotification()
             isMonitoring = false
         }
     }
@@ -156,7 +165,7 @@ class NfcMonitoringService : Service() {
         try {
             isMonitoring = false
             Log.d(TAG, "NFC monitoring stopped.")
-            updateNotification("NFC monitoring stopped.") // Keep notification to show it's stopped
+            updateNfcStatusNotification()
         } catch (e: Exception) {
             Log.e(TAG, "Error stopping NFC monitoring operations", e)
         }
@@ -244,14 +253,36 @@ class NfcMonitoringService : Service() {
             .build()
     }
 
-    private fun updateNotification(contentText: String) {
+    private fun updateNfcStatusNotification() {
         try {
-            val notification = createNotification(contentText)
-            val notificationManager = getSystemService(NotificationManager::class.java)
-            notificationManager?.notify(NOTIFICATION_ID, notification)
-            Log.d(TAG, "Notification updated with text: $contentText")
+            val isEnabled = nfcAdapter?.isEnabled == true
+            val enabledDuration = if (isEnabled && nfcEnabledStartTime > 0) {
+                System.currentTimeMillis() - nfcEnabledStartTime
+            } else 0
+            
+            val securityLevel = calculateCurrentSecurityLevel()
+            
+            val notification = appNotificationManager.createNfcStatusNotification(
+                isEnabled = isEnabled,
+                enabledDuration = enabledDuration,
+                securityLevel = securityLevel
+            )
+            
+            startForeground(NOTIFICATION_ID, notification)
+            Log.d(TAG, "NFC status notification updated - Enabled: $isEnabled, Duration: ${enabledDuration}ms")
         } catch (e: Exception) {
-            Log.e(TAG, "Failed to update notification", e)
+            Log.e(TAG, "Failed to update NFC status notification", e)
+        }
+    }
+    
+    private fun calculateCurrentSecurityLevel(): SecurityLevel {
+        return try {
+            // For now, return a default level. In a real implementation, 
+            // this would need to be calculated asynchronously
+            SecurityLevel.GOOD // Default fallback
+        } catch (e: Exception) {
+            Log.e(TAG, "Failed to calculate security level", e)
+            SecurityLevel.MODERATE // Safe fallback
         }
     }
 

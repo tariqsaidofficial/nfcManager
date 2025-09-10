@@ -87,6 +87,20 @@ interface NFCSettingsDao {
     @Query("UPDATE nfc_settings SET selectedLanguageCode = :languageCode WHERE id = 1") // <<< NEW FUNCTION
     suspend fun updateSelectedLanguageCode(languageCode: String?) // <<< NEW FUNCTION
 
+    // Onboarding
+    @Query("UPDATE nfc_settings SET isOnboardingCompleted = :completed WHERE id = 1")
+    suspend fun updateOnboardingCompleted(completed: Boolean)
+
+    // Security Score
+    @Query("UPDATE nfc_settings SET lastSecurityScore = :score WHERE id = 1")
+    suspend fun updateSecurityScore(score: Int)
+
+    @Query("UPDATE nfc_settings SET securityLevel = :level WHERE id = 1")
+    suspend fun updateSecurityLevel(level: String)
+
+    @Query("UPDATE nfc_settings SET lastSecurityScore = :score, securityLevel = :level WHERE id = 1")
+    suspend fun updateSecurityScoreAndLevel(score: Int, level: String)
+
     // Reset settings
     @Query("DELETE FROM nfc_settings WHERE id = 1")
     suspend fun resetSettings()

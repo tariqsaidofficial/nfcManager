@@ -90,9 +90,18 @@ class NFCRepository @Inject constructor(
     }
 
     suspend fun initializeSettingsIfNeeded() {
-        val existing = nfcSettingsDao.getSettingsSync()
-        if (existing == null) {
-            nfcSettingsDao.insertSettings(getDefaultSettings())
+        try {
+            val existing = nfcSettingsDao.getSettingsSync()
+            if (existing == null) {
+                nfcSettingsDao.insertSettings(getDefaultSettings())
+            }
+        } catch (e: Exception) {
+            // If there's an error, try to insert default settings
+            try {
+                nfcSettingsDao.insertSettings(getDefaultSettings())
+            } catch (insertError: Exception) {
+                insertError.printStackTrace()
+            }
         }
     }
 
@@ -136,6 +145,38 @@ class NFCRepository @Inject constructor(
         nfcSettingsDao.updateSelectedLanguageCode(languageCode)     // <<< NEW FUNCTION
     }                                                              // <<< NEW FUNCTION
 
+    // Onboarding
+    suspend fun updateOnboardingCompleted(completed: Boolean) {
+        try {
+            nfcSettingsDao.updateOnboardingCompleted(completed)
+        } catch (e: Exception) {
+            e.printStackTrace()
+            // If update fails, try to get current settings and update them
+            try {
+                val currentSettings = getSettingsSync()
+                val updatedSettings = currentSettings.copy(isOnboardingCompleted = completed)
+                nfcSettingsDao.updateSettings(updatedSettings)
+            } catch (updateError: Exception) {
+                updateError.printStackTrace()
+                // If all else fails, just log the error and continue
+                // The UI will still work because we set the state immediately
+            }
+        }
+    }
+
+    // Security Score
+    suspend fun updateSecurityScore(score: Int) {
+        nfcSettingsDao.updateSecurityScore(score)
+    }
+
+    suspend fun updateSecurityLevel(level: String) {
+        nfcSettingsDao.updateSecurityLevel(level)
+    }
+
+    suspend fun updateSecurityScore(score: Int, level: String) {
+        nfcSettingsDao.updateSecurityScoreAndLevel(score, level)
+    }
+
     fun isAutoReminderEnabled(): Flow<Boolean> = nfcSettingsDao.isAutoReminderEnabled()
     fun getReminderInterval(): Flow<Int> = nfcSettingsDao.getReminderInterval()
     fun areNotificationsEnabled(): Flow<Boolean> = nfcSettingsDao.areNotificationsEnabled()
@@ -164,12 +205,20 @@ class NFCRepository @Inject constructor(
             accentColor = "#ef4444",
             backgroundServiceMonitoringEnabled = false,
             customNotificationSoundUri = null,
-            selectedLanguageCode = null // <<< Ensure new field is in default
+            selectedLanguageCode = null, // <<< Ensure new field is in default
+            isOnboardingCompleted = false,
+            lastSecurityScore = 100,
+            securityLevel = "EXCELLENT"
         )
     }
 
     suspend fun getEventStatistics(): Map<String, Int> {
         val allEvents = getAllEvents().first()
         return allEvents.groupBy { it.eventType }.mapValues { it.value.size }
+    }
+
+    suspend fun getEventsFromLastDays(days: Int): Flow<List<NFCEventEntity>> {
+        val cutoffDate = Date(System.currentTimeMillis() - (days * 24 * 60 * 60 * 1000L))
+        return nfcEventDao.getEventsFromDate(cutoffDate)
     }
 }

@@ -33,7 +33,7 @@ class Converters {
         NFCEventEntity::class,
         NFCSettingsEntity::class
     ],
-    version = 1,
+    version = 2,
     exportSchema = false,
     autoMigrations = []
 )
@@ -62,6 +62,7 @@ abstract class AppDatabase : RoomDatabase() {
                     DATABASE_NAME
                 )
                     .addCallback(DatabaseCallback())
+                    .addMigrations(MIGRATION_1_2)
                     .fallbackToDestructiveMigration() // For development
                     .build()
                 
@@ -86,8 +87,10 @@ abstract class AppDatabase : RoomDatabase() {
          */
         private val MIGRATION_1_2 = object : Migration(1, 2) {
             override fun migrate(db: SupportSQLiteDatabase) {
-                // Example migration
-                // db.execSQL("ALTER TABLE nfc_events ADD COLUMN newColumn TEXT")
+                // Add new columns to nfc_settings table
+                db.execSQL("ALTER TABLE nfc_settings ADD COLUMN isOnboardingCompleted INTEGER NOT NULL DEFAULT 0")
+                db.execSQL("ALTER TABLE nfc_settings ADD COLUMN lastSecurityScore INTEGER NOT NULL DEFAULT 100")
+                db.execSQL("ALTER TABLE nfc_settings ADD COLUMN securityLevel TEXT NOT NULL DEFAULT 'EXCELLENT'")
             }
         }
         

@@ -78,6 +78,13 @@ class NfcManagerApplication : Application() {
                 Log.d(TAG, "onCreate: Coroutine finished successfully.")
             } catch (e: Exception) {
                 Log.e(TAG, "onCreate: CRITICAL EXCEPTION IN APPLICATION COROUTINE", e)
+                // Set default values to prevent crashes
+                currentLanguageCode = null
+                try {
+                    LocaleUtils.updateApplicationContext(this@NfcManagerApplication, null)
+                } catch (localeError: Exception) {
+                    Log.e(TAG, "Failed to set default locale", localeError)
+                }
             }
         }
         Log.d(TAG, "onCreate: Application onCreate method finished execution.")

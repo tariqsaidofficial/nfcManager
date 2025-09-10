@@ -40,5 +40,12 @@ data class NFCSettingsEntity(
     val accentColor: String = "#ef4444",
 
     // Language Settings
-    val selectedLanguageCode: String? = null // null for system default
+    val selectedLanguageCode: String? = null, // null for system default
+    
+    // Onboarding
+    val isOnboardingCompleted: Boolean = false,
+    
+    // Security Score
+    val lastSecurityScore: Int = 100,
+    val securityLevel: String = "EXCELLENT"
 )

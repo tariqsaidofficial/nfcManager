@@ -25,6 +25,7 @@ object AppRoutes {
     const val ACTIVITY = "activity"
     const val SETTINGS = "settings"
     const val NOTIFICATION_SOUND_SETTINGS = "notification_sound_settings" // <<< NEW ROUTE
+    const val SECURITY_SCORE = "security_score" // <<< NEW ROUTE
     const val ABOUT = "about"
 }
 
@@ -109,6 +110,9 @@ fun NFCManagerNavigation(
                     viewModel = settingsViewModel, // Can reuse or create a dedicated one if needed
                     onNavigateBack = { navController.popBackStack() }
                 )
+            }
+            composable(AppRoutes.SECURITY_SCORE) {
+                SecurityScoreScreen()
             }
             composable(AppRoutes.ABOUT) {
                 AboutScreen(
