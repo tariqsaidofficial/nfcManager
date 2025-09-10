@@ -365,6 +365,7 @@ Contributions welcome! Please read our contributing guidelines and code of condu
 - 🔄 **Beta Testing Program**: Set up a beta testing program to gather feedback before full release.
 - 🔄 **Future Feature: NFC Tag Writing**: Explore and implement functionality to write data to NFC tags.
 - 🔄 **Future Feature: NFC Event Automation**: Allow users to define actions based on specific NFC events (e.g., toggle Wi-Fi, open an app).
+- 🔄 **Future Feature: Home Screen Widget:** Design and implement a home screen widget for quick access to core app functions (e.g., toggle monitoring, view last alert).
 
 ---
 
