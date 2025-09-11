@@ -32,6 +32,7 @@ import androidx.lifecycle.lifecycleScope
 import com.dxbmark.nfcmanager.ui.components.NFCManagerNavigation
 import com.dxbmark.nfcmanager.ui.theme.NothingOSTheme
 import com.dxbmark.nfcmanager.utils.LocaleUtils // <<< IMPORT LOCALE UTILS
+import com.dxbmark.nfcmanager.data.database.entities.NFCSettingsEntity
 import com.dxbmark.nfcmanager.viewmodel.ActivityViewModel
 import com.dxbmark.nfcmanager.viewmodel.MainViewModel
 import com.dxbmark.nfcmanager.viewmodel.OnboardingViewModel
@@ -40,6 +41,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withTimeout
 // import kotlinx.coroutines.runBlocking // No longer needed
 // import java.util.Locale // No longer needed directly here
 // import javax.inject.Inject // Not needed for repository here
@@ -97,20 +99,41 @@ class MainActivity : ComponentActivity() {
         // Smart splash screen control - wait for app initialization
         lifecycleScope.launch {
             try {
-                // Wait for ViewModels to be ready
-                settingsViewModel.settings.first() // Wait for settings to load
-                mainViewModel.uiState.first() // Wait for UI state to load
+                Log.e(TAG, "=== MainActivity Splash Screen Control STARTED ===")
                 
-                // Fixed splash duration - 3 seconds as requested
-                kotlinx.coroutines.delay(3000) // 3 seconds total 
+                // Wait for database initialization to complete first
+                Log.e(TAG, "Waiting for database initialization...")
+                var attempts = 0
+                while (!com.dxbmark.nfcmanager.NfcManagerApplication.isDatabaseInitialized && attempts < 20) {
+                    kotlinx.coroutines.delay(250)
+                    attempts++
+                    Log.e(TAG, "Waiting for database init... attempt $attempts")
+                }
+                
+                // Wait for ViewModels to be ready with timeout
+                Log.e(TAG, "Waiting for ViewModels to be ready...")
+                try {
+                    withTimeout(5000) { // 5 second timeout
+                        settingsViewModel.settings.first() // Wait for settings to load
+                        mainViewModel.uiState.first() // Wait for UI state to load
+                    }
+                    Log.e(TAG, "ViewModels are ready")
+                } catch (timeoutException: kotlinx.coroutines.TimeoutCancellationException) {
+                    Log.e(TAG, "ViewModels timeout - proceeding anyway")
+                }
+                
+                // Fixed splash duration - 2 seconds as requested
+                Log.e(TAG, "Waiting 2 seconds for splash screen...")
+                kotlinx.coroutines.delay(2000) // 2 seconds total 
                 
                 isAppReady = true
-                Log.d(TAG, "App fully initialized - splash screen ready to dismiss")
+                Log.e(TAG, "=== App fully initialized - splash screen ready to dismiss ===")
             } catch (e: Exception) {
-                Log.e(TAG, "Error during app initialization, dismissing splash", e)
+                Log.e(TAG, "CRITICAL ERROR during app initialization: ${e.message}", e)
                 // Fallback: dismiss splash after max duration
-                kotlinx.coroutines.delay(2000)
+                kotlinx.coroutines.delay(1000)
                 isAppReady = true
+                Log.e(TAG, "Fallback: splash screen dismissed due to error")
             }
         }
         
@@ -192,21 +215,55 @@ class MainActivity : ComponentActivity() {
         mainViewModelInstance: MainViewModel,
         settingsViewModelInstance: SettingsViewModel
     ) {
+        Log.e("NfcManagerApp", "=== NFCManagerApp Composable STARTED ===")
+        
+        Log.e("NfcManagerApp", "Creating ViewModels...")
         val activityViewModel: ActivityViewModel = hiltViewModel()
         val onboardingViewModel: OnboardingViewModel = hiltViewModel()
-        val settings by settingsViewModelInstance.settings.collectAsState()
-        val isOnboardingCompleted by onboardingViewModel.isOnboardingCompleted.collectAsState()
+        Log.e("NfcManagerApp", "ViewModels created successfully")
+        
+        // Add null safety and error handling for settings with explicit initial values
+        Log.e("NfcManagerApp", "Collecting settings state...")
+        val settings by settingsViewModelInstance.settings.collectAsState(
+            initial = NFCSettingsEntity(
+                id = 1,
+                isOnboardingCompleted = false,
+                isDarkMode = false,
+                selectedLanguageCode = null,
+                backgroundServiceMonitoringEnabled = false,
+                soundEnabled = true,
+                vibrationEnabled = true,
+                showNotifications = true
+            )
+        )
+        Log.e("NfcManagerApp", "Settings collected: $settings")
+        
+        Log.e("NfcManagerApp", "Collecting onboarding state...")
+        val isOnboardingCompleted by onboardingViewModel.isOnboardingCompleted.collectAsState(initial = false)
+        val isLoading by onboardingViewModel.isLoading.collectAsState(initial = false)
+        Log.e("NfcManagerApp", "Onboarding state - completed: $isOnboardingCompleted, loading: $isLoading")
+    
+        // Safe theme detection with fallback
         val isCurrentlyDarkTheme = settings.isDarkMode
+        Log.e("NfcManagerApp", "Theme detected - isDarkMode: $isCurrentlyDarkTheme")
 
-        if (!isOnboardingCompleted) {
+        // Show loading screen during transitions
+        if (isLoading) {
+            Log.e("NfcManagerApp", "Showing loading screen...")
+            com.dxbmark.nfcmanager.ui.screens.LoadingScreen(
+                message = "Setting up your experience..."
+            )
+        } else if (!isOnboardingCompleted) {
+            Log.e("NfcManagerApp", "Showing onboarding screen...")
             // Show onboarding for new users
             com.dxbmark.nfcmanager.ui.screens.OnboardingScreen(
                 onComplete = {
-                    // Simple completion without try-catch to prevent double calls
+                    Log.e("NfcManagerApp", "Onboarding completed - calling completeOnboarding()")
                     onboardingViewModel.completeOnboarding()
                 }
             )
         } else {
+            Log.e("NfcManagerApp", "Showing main app interface...")
             // The Locale is now applied at the Activity and Application level.
             // Jetpack Compose will pick up the correct Locale from the Context implicitly.
             NothingOSTheme(darkTheme = isCurrentlyDarkTheme) {
@@ -223,6 +280,8 @@ class MainActivity : ComponentActivity() {
                 }
             }
         }
+        
+        Log.e("NfcManagerApp", "=== NFCManagerApp Composable COMPLETED ===")
     }
 
     @Composable

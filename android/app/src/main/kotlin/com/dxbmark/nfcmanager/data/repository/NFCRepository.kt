@@ -1,5 +1,6 @@
 package com.dxbmark.nfcmanager.data.repository
 
+import android.util.Log
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
@@ -91,15 +92,33 @@ class NFCRepository @Inject constructor(
 
     suspend fun initializeSettingsIfNeeded() {
         try {
+            Log.e("NFCRepository", "=== initializeSettingsIfNeeded() STARTED ===")
             val existing = nfcSettingsDao.getSettingsSync()
             if (existing == null) {
+                Log.e("NFCRepository", "No existing settings found, inserting default settings...")
                 nfcSettingsDao.insertSettings(getDefaultSettings())
+                Log.e("NFCRepository", "Default settings inserted successfully")
+            } else {
+                Log.e("NFCRepository", "Settings already exist, skipping initialization")
             }
+            Log.e("NFCRepository", "=== initializeSettingsIfNeeded() COMPLETED ===")
         } catch (e: Exception) {
-            // If there's an error, try to insert default settings
+            Log.e("NFCRepository", "ERROR in initializeSettingsIfNeeded(): ${e.message}", e)
+            // Check if it's a storage space issue
+            if (e.message?.contains("No space left on device") == true || 
+                e.message?.contains("ENOSPC") == true) {
+                Log.e("NFCRepository", "STORAGE SPACE ERROR: Device is out of storage space!")
+                // Don't try to insert again if it's a space issue
+                return
+            }
+            // If there's another error, try to insert default settings
             try {
+                Log.e("NFCRepository", "Retrying to insert default settings...")
                 nfcSettingsDao.insertSettings(getDefaultSettings())
+                Log.e("NFCRepository", "Default settings inserted on retry")
             } catch (insertError: Exception) {
+                Log.e("NFCRepository", "CRITICAL ERROR: Failed to insert settings even on retry: ${insertError.message}", insertError)
+                // If even that fails, log the error but don't crash
                 insertError.printStackTrace()
             }
         }

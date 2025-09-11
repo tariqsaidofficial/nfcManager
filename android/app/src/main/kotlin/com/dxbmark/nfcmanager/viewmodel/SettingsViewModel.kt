@@ -6,6 +6,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
+import android.util.Log
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
@@ -25,6 +26,12 @@ class SettingsViewModel @Inject constructor(
     private val app: Application, // 'app' is the Application context
     private val repository: NFCRepository
 ) : AndroidViewModel(app) {
+
+    init {
+        Log.e("SettingsViewModel", "=== SettingsViewModel.init() STARTED ===")
+        Log.e("SettingsViewModel", "SettingsViewModel initialized successfully")
+        Log.e("SettingsViewModel", "=== SettingsViewModel.init() COMPLETED ===")
+    }
 
     private val _uiState = MutableStateFlow(SettingsUiState())
     val uiState: StateFlow<SettingsUiState> = _uiState.asStateFlow()

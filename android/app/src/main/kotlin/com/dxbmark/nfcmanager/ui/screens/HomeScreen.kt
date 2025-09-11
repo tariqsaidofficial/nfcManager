@@ -17,6 +17,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.compose.ui.res.stringResource
+import androidx.hilt.navigation.compose.hiltViewModel // Added import
 import androidx.navigation.NavController
 import com.dxbmark.nfcmanager.R
 import com.dxbmark.nfcmanager.ui.components.AppRoutes
@@ -214,7 +215,7 @@ fun HomeScreen(
 fun SecurityScoreQuickCard(
     modifier: Modifier = Modifier
 ) {
-    val securityScoreViewModel: SecurityScoreViewModel = viewModel()
+    val securityScoreViewModel: SecurityScoreViewModel = hiltViewModel() // Changed to hiltViewModel()
     val securityScore by securityScoreViewModel.securityScore.collectAsState()
     
     Card(

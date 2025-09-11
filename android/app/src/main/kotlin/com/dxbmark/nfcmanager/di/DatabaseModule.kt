@@ -22,9 +22,9 @@ object DatabaseModule {
         return Room.databaseBuilder(
             appContext,
             AppDatabase::class.java,
-            "nfc_manager_database" // Double-check this is your actual database name in AppDatabase.kt
+            "nfc_manager_database"
         )
-        // .fallbackToDestructiveMigration() // Add for dev if schema changes, define proper migrations for prod
+        .fallbackToDestructiveMigration() // <<< CRITICAL: Prevents database crashes during development
         .build()
     }
 
