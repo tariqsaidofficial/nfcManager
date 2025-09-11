@@ -148,6 +148,7 @@
     <string name="home_todays_activity_title">نشاط اليوم</string>
     <string name="events_logged_format">تم تسجيل %1$d أحداث</string>
     <string name="enable_nfc_button">تفعيل NFC في الإعدادات</string>
+    <string name="security_score_card_title">مقياس الأمان</string>
 
     <!-- Activity Screen Strings -->
     <string name="activity_log_title">سجل الأنشطة</string>
@@ -390,6 +391,21 @@
     <string name="notification_sound_current">الصوت الحالي</string>
     <string name="notification_sound_pick">اختيار الصوت</string>
     <string name="notification_sound_updated_log">تم تحديث صوت الإشعار إلى %1$s</string>
+    
+    <!-- For SecurityScoreDetailScreen -->
+    <string name="security_score_detail_title">تفاصيل درجة الأمان</string>
+    <string name="loading_security_score">جارٍ حساب الدرجة…</string>
+    <string name="refresh_score_button">تحديث الدرجة</string>
+    <string name="violations_title">الانتهاكات:</string>
+    <string name="no_violations_detected">لم يتم الكشف عن أي انتهاكات أمنية في آخر 7 أيام.</string>
+    <string name="recommendations_title">التوصيات:</string>
+    <string name="no_recommendations_yet">لا توجد توصيات محددة في الوقت الحالي. استمر في العمل الجيد!</string>
+    <string name="security_score_violation_prefix">انتهاك: %1$s</string>
+    <string name="security_level_excellent">ممتاز</string>
+    <string name="security_level_good">جيد</string>
+    <string name="security_level_moderate">متوسط</string>
+    <string name="security_level_poor">ضعيف</string>
+    <string name="security_level_critical">حرج</string>
 
     <!-- Onboarding Screen -->
     <string name="onboarding_button_previous">السابق</string>

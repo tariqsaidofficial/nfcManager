@@ -160,6 +160,7 @@
     <string name="home_todays_activity_title">TODAYS ACTIVITY</string>
     <string name="events_logged_format">%1$d events logged</string>
     <string name="enable_nfc_button">ENABLE NFC IN SETTINGS</string>
+    <string name="security_score_card_title">Security Score</string>
 
     <!-- Activity Screen Strings -->
     <string name="activity_log_title">ACTIVITY LOG</string>
@@ -400,6 +401,7 @@
     <string name="no_violations_detected">No security violations detected in the last 7 days.</string>
     <string name="recommendations_title">Recommendations:</string>
     <string name="no_recommendations_yet">No specific recommendations at this time. Keep up the good work!</string>
+    <string name="security_score_violation_prefix">Violation: %1$s</string> <!-- Added this line -->
     <string name="security_level_excellent">Excellent</string>
     <string name="security_level_good">Good</string>
     <string name="security_level_moderate">Moderate</string>

@@ -253,7 +253,7 @@ fun SecurityScoreQuickCard(
                 modifier = Modifier.weight(1f)
             ) {
                 Text(
-                    text = "Security Score", // Consider making this a string resource
+                    text = stringResource(R.string.security_score_card_title),
                     style = MaterialTheme.typography.titleMedium,
                     fontWeight = androidx.compose.ui.text.font.FontWeight.Bold
                 )

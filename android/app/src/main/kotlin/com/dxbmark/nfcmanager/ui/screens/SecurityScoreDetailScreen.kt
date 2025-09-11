@@ -112,7 +112,7 @@ fun SecurityScoreDetailScreen(
             } else {
                 securityScoreState.violations.take(3).forEach { violation -> 
                     Text(
-                        text = "Violation: ${violation.name}", 
+                        text = stringResource(R.string.security_score_violation_prefix, violation.name), 
                         modifier = Modifier.align(Alignment.Start)
                         // Optional: Apply NothingFont to violation items if desired
                         // fontFamily = NothingTextStyles.HeaderTitle.fontFamily
