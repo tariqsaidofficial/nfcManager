@@ -391,4 +391,33 @@
     <string name="notification_sound_pick">اختيار الصوت</string>
     <string name="notification_sound_updated_log">تم تحديث صوت الإشعار إلى %1$s</string>
 
+    <!-- Onboarding Screen -->
+    <string name="onboarding_button_previous">السابق</string>
+    <string name="onboarding_button_next">التالي</string>
+    <string name="onboarding_button_get_started">ابدأ الآن</string>
+
+    <string name="onboarding_page0_title">مرحباً بك في مدير NFC</string>
+    <string name="onboarding_page0_description">احمِ خصوصيتك مع مراقبة NFC الذكية وتنبيهات الأمان</string>
+    <string name="onboarding_page0_feature1">مراقبة NFC في الوقت الفعلي</string>
+    <string name="onboarding_page0_feature2">تصميم يركز على الخصوصية</string>
+    <string name="onboarding_page0_feature3">واجهة مستوحاة من Nothing OS</string>
+
+    <string name="onboarding_page1_title">مراقبة ذكية</string>
+    <string name="onboarding_page1_description">نظام إشعارات متقدم يبقيك على اطلاع بنشاط NFC وحالة الأمان</string>
+    <string name="onboarding_page1_feature1">تتبع مدة التشغيل</string>
+    <string name="onboarding_page1_feature2">تنبيهات مستوى الأمان</string>
+    <string name="onboarding_page1_feature3">إشعارات ذكية</string>
+
+    <string name="onboarding_page2_title">مقياس الأمان</string>
+    <string name="onboarding_page2_description">تتبع مستوى أمانك مع نظامنا الذكي لقياس الأمان واحصل على توصيات مخصصة</string>
+    <string name="onboarding_page2_feature1">تقييم أمان من 5 مستويات</string>
+    <string name="onboarding_page2_feature2">توصيات مخصصة</string>
+    <string name="onboarding_page2_feature3">تقارير أمان أسبوعية</string>
+
+    <string name="onboarding_page3_title">جاهز للبدء</string>
+    <string name="onboarding_page3_description">ابدأ رحلتك نحو أمان وخصوصية NFC أفضل</string>
+    <string name="onboarding_page3_feature1">حماية خصوصية كاملة</string>
+    <string name="onboarding_page3_feature2">تخزين بيانات محلي فقط</string>
+    <string name="onboarding_page3_feature3">لا يوجد نقل بيانات خارجي</string>
+
 </resources>

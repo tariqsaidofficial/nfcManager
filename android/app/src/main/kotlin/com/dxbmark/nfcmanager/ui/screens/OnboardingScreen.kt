@@ -14,9 +14,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import com.dxbmark.nfcmanager.R // Required for R.string access
 import com.dxbmark.nfcmanager.ui.theme.NothingColors
 import com.dxbmark.nfcmanager.ui.theme.NothingTextStyles
 import kotlinx.coroutines.launch
@@ -76,7 +78,8 @@ fun OnboardingScreen(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(16.dp),
-            horizontalArrangement = Arrangement.SpaceBetween
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
         ) {
             if (pagerState.currentPage > 0) {
                 TextButton(
@@ -89,10 +92,11 @@ fun OnboardingScreen(
                         contentColor = NothingColors.NothingRed
                     )
                 ) {
-                    Text("Previous")
+                    Text(stringResource(R.string.onboarding_button_previous))
                 }
             } else {
-                Spacer(modifier = Modifier.width(80.dp))
+                // Spacer to keep the "Next/Get Started" button to the right
+                Spacer(Modifier.width(IntrinsicSize.Min).weight(1f)) // Occupy space of a button
             }
             
             Button(
@@ -110,7 +114,7 @@ fun OnboardingScreen(
                     contentColor = NothingColors.PureWhite
                 )
             ) {
-                Text(if (pagerState.currentPage < 3) "Next" else "Get Started")
+                Text(if (pagerState.currentPage < 3) stringResource(R.string.onboarding_button_next) else stringResource(R.string.onboarding_button_get_started))
             }
         }
     }
@@ -121,53 +125,83 @@ fun OnboardingPage(
     page: Int,
     modifier: Modifier = Modifier
 ) {
-    val (title, description, icon) = when (page) {
-        0 -> Triple(
-            "Welcome to NFC Manager",
-            "Protect your privacy with smart NFC monitoring and security alerts",
-            Icons.Default.Security
-        )
-        1 -> Triple(
-            "Smart Monitoring",
-            "Advanced notification system keeps you informed about NFC activity and security status",
-            Icons.Default.Notifications
-        )
-        2 -> Triple(
-            "Security Score",
-            "Track your security level with our intelligent scoring system and get personalized recommendations",
-            Icons.Default.Star
-        )
-        3 -> Triple(
-            "Ready to Start",
-            "Begin your journey towards better NFC security and privacy protection",
-            Icons.Default.CheckCircle
-        )
-        else -> Triple("", "", Icons.Default.Info)
+    val title: String
+    val description: String
+    val icon: ImageVector
+    val features: List<String>
+
+    when (page) {
+        0 -> {
+            title = stringResource(R.string.onboarding_page0_title)
+            description = stringResource(R.string.onboarding_page0_description)
+            icon = Icons.Default.Security
+            features = listOf(
+                stringResource(R.string.onboarding_page0_feature1),
+                stringResource(R.string.onboarding_page0_feature2),
+                stringResource(R.string.onboarding_page0_feature3)
+            )
+        }
+        1 -> {
+            title = stringResource(R.string.onboarding_page1_title)
+            description = stringResource(R.string.onboarding_page1_description)
+            icon = Icons.Default.Notifications
+            features = listOf(
+                stringResource(R.string.onboarding_page1_feature1),
+                stringResource(R.string.onboarding_page1_feature2),
+                stringResource(R.string.onboarding_page1_feature3)
+            )
+        }
+        2 -> {
+            title = stringResource(R.string.onboarding_page2_title)
+            description = stringResource(R.string.onboarding_page2_description)
+            icon = Icons.Default.Star
+            features = listOf(
+                stringResource(R.string.onboarding_page2_feature1),
+                stringResource(R.string.onboarding_page2_feature2),
+                stringResource(R.string.onboarding_page2_feature3)
+            )
+        }
+        3 -> {
+            title = stringResource(R.string.onboarding_page3_title)
+            description = stringResource(R.string.onboarding_page3_description)
+            icon = Icons.Default.CheckCircle
+            features = listOf(
+                stringResource(R.string.onboarding_page3_feature1),
+                stringResource(R.string.onboarding_page3_feature2),
+                stringResource(R.string.onboarding_page3_feature3)
+            )
+        }
+        else -> { // Fallback, should not happen with pageCount = 4
+            title = ""
+            description = ""
+            icon = Icons.Default.Info
+            features = emptyList()
+        }
     }
     
     Column(
         modifier = modifier
             .fillMaxSize()
-            .padding(32.dp),
+            .padding(horizontal = 32.dp, vertical = 64.dp), // Increased vertical padding
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
         // Icon
         Icon(
             imageVector = icon,
-            contentDescription = null,
-            modifier = Modifier.size(120.dp),
+            contentDescription = null, // Icons are decorative
+            modifier = Modifier.size(100.dp), // Slightly reduced icon size
             tint = NothingColors.NothingRed
         )
         
-        Spacer(modifier = Modifier.height(32.dp))
+        Spacer(modifier = Modifier.height(24.dp))
         
         // Title
         Text(
             text = title,
             style = NothingTextStyles.HeaderTitle,
             textAlign = TextAlign.Center,
-            fontWeight = FontWeight.Bold
+            fontWeight = FontWeight.Bold // Already part of NothingTextStyles.HeaderTitle typically
         )
         
         Spacer(modifier = Modifier.height(16.dp))
@@ -177,59 +211,22 @@ fun OnboardingPage(
             text = description,
             style = MaterialTheme.typography.bodyLarge,
             textAlign = TextAlign.Center,
-            color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7f)
+            color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7f),
+            modifier = Modifier.padding(horizontal = 16.dp) // Add horizontal padding for longer text
         )
         
-        // Additional content for specific pages
-        when (page) {
-            0 -> {
-                Spacer(modifier = Modifier.height(24.dp))
-                OnboardingFeatureList(
-                    features = listOf(
-                        "Real-time NFC monitoring",
-                        "Privacy-focused design",
-                        "Nothing OS inspired UI"
-                    )
-                )
-            }
-            1 -> {
-                Spacer(modifier = Modifier.height(24.dp))
-                OnboardingFeatureList(
-                    features = listOf(
-                        "Duration tracking",
-                        "Security level alerts",
-                        "Smart notifications"
-                    )
-                )
-            }
-            2 -> {
-                Spacer(modifier = Modifier.height(24.dp))
-                OnboardingFeatureList(
-                    features = listOf(
-                        "5-level security rating",
-                        "Personalized recommendations",
-                        "Weekly security reports"
-                    )
-                )
-            }
-            3 -> {
-                Spacer(modifier = Modifier.height(24.dp))
-                OnboardingFeatureList(
-                    features = listOf(
-                        "Complete privacy protection",
-                        "Local data storage only",
-                        "No external data transmission"
-                    )
-                )
-            }
-        }
+        Spacer(modifier = Modifier.height(32.dp)) // Increased space before features
+        
+        // Feature List for all pages
+        OnboardingFeatureList(features = features)
     }
 }
 
 @Composable
 fun OnboardingFeatureList(features: List<String>) {
     Column(
-        horizontalAlignment = Alignment.CenterHorizontally
+        horizontalAlignment = Alignment.Start, // Align feature text to the start
+        verticalArrangement = Arrangement.spacedBy(8.dp) // Add space between feature items
     ) {
         features.forEach { feature ->
             Row(
@@ -237,12 +234,12 @@ fun OnboardingFeatureList(features: List<String>) {
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Icon(
-                    imageVector = Icons.Default.Check,
-                    contentDescription = null,
-                    modifier = Modifier.size(16.dp),
+                    imageVector = Icons.Default.Check, // Using Filled.Check for consistency
+                    contentDescription = null, // Decorative icon
+                    modifier = Modifier.size(20.dp), // Slightly larger check icon
                     tint = NothingColors.NothingRed
                 )
-                Spacer(modifier = Modifier.width(8.dp))
+                Spacer(modifier = Modifier.width(12.dp)) // Increased space after icon
                 Text(
                     text = feature,
                     style = MaterialTheme.typography.bodyMedium,

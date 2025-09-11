@@ -154,7 +154,7 @@ fun AboutScreen(
                         subtitle = "App Design & Development",
                         url = "https://dxbmark.com",
                         uriHandler = uriHandler,
-                        isPrimary = true,
+                        isPrimary = false, // Changed from true
                         isHighlighted = false
                     )
                     
@@ -166,7 +166,7 @@ fun AboutScreen(
                         subtitle = "Advertising Agency",
                         url = "https://mwheba.com",
                         uriHandler = uriHandler,
-                        isPrimary = false,
+                        isPrimary = true, // Changed from false
                         isHighlighted = false
                     )
                 }

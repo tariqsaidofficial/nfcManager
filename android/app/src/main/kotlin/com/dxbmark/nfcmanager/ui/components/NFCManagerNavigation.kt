@@ -24,8 +24,8 @@ object AppRoutes {
     const val HOME = "home"
     const val ACTIVITY = "activity"
     const val SETTINGS = "settings"
-    const val NOTIFICATION_SOUND_SETTINGS = "notification_sound_settings" // <<< NEW ROUTE
-    const val SECURITY_SCORE = "security_score" // <<< NEW ROUTE
+    const val NOTIFICATION_SOUND_SETTINGS = "notification_sound_settings" 
+    const val SECURITY_SCORE_DETAIL = "security_score_detail" // Renamed for clarity and to match new screen
     const val ABOUT = "about"
 }
 
@@ -89,30 +89,32 @@ fun NFCManagerNavigation(
     ) { innerPadding ->
         NavHost(
             navController = navController,
-            startDestination = AppRoutes.HOME, // Use constant
+            startDestination = AppRoutes.HOME, 
             modifier = Modifier.padding(innerPadding)
         ) {
-            composable(AppRoutes.HOME) { // Use constant
-                HomeScreen(viewModel = mainViewModel)
-            }
-            composable(AppRoutes.ACTIVITY) { // Use constant
-                ActivityScreen(viewModel = activityViewModel)
-            }
-            composable(AppRoutes.SETTINGS) { // Use constant
-                SettingsScreen(
-                    viewModel = settingsViewModel,
-                    navController = navController // <<< PASS NAVCONTROLLER
+            composable(AppRoutes.HOME) { 
+                HomeScreen(
+                    viewModel = mainViewModel,
+                    navController = navController // Pass NavController to HomeScreen
                 )
             }
-            // <<< NEW COMPOSABLE DESTINATION
+            composable(AppRoutes.ACTIVITY) { 
+                ActivityScreen(viewModel = activityViewModel)
+            }
+            composable(AppRoutes.SETTINGS) { 
+                SettingsScreen(
+                    viewModel = settingsViewModel,
+                    navController = navController 
+                )
+            }
             composable(AppRoutes.NOTIFICATION_SOUND_SETTINGS) {
                 NotificationSoundSettingsScreen(
-                    viewModel = settingsViewModel, // Can reuse or create a dedicated one if needed
+                    viewModel = settingsViewModel, 
                     onNavigateBack = { navController.popBackStack() }
                 )
             }
-            composable(AppRoutes.SECURITY_SCORE) {
-                SecurityScoreScreen()
+            composable(AppRoutes.SECURITY_SCORE_DETAIL) { // Updated route name
+                SecurityScoreDetailScreen(navController = navController) // Use the new screen and pass NavController
             }
             composable(AppRoutes.ABOUT) {
                 AboutScreen(
@@ -130,17 +132,17 @@ private val bottomNavItems = listOf(
     BottomNavItem(
         titleRes = R.string.nav_nfc_manager,
         icon = androidx.compose.material.icons.Icons.Filled.Nfc, 
-        route = AppRoutes.HOME // Use constant
+        route = AppRoutes.HOME 
     ),
     BottomNavItem(
         titleRes = R.string.nav_activity,
         icon = androidx.compose.material.icons.Icons.Filled.History, 
-        route = AppRoutes.ACTIVITY // Use constant
+        route = AppRoutes.ACTIVITY 
     ),
     BottomNavItem(
         titleRes = R.string.nav_settings,
         icon = androidx.compose.material.icons.Icons.Filled.Settings, 
-        route = AppRoutes.SETTINGS // Use constant
+        route = AppRoutes.SETTINGS 
     )
 )
 

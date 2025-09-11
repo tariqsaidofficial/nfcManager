@@ -15,14 +15,15 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
-import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.lifecycle.viewmodel.compose.viewModel // Default viewModel import
+import androidx.hilt.navigation.compose.hiltViewModel // Import for hiltViewModel
 import androidx.compose.ui.res.stringResource
-import androidx.hilt.navigation.compose.hiltViewModel // Added import
+import androidx.compose.ui.unit.sp // Required for sp unit
 import androidx.navigation.NavController
 import com.dxbmark.nfcmanager.R
-import com.dxbmark.nfcmanager.ui.components.AppRoutes
+import com.dxbmark.nfcmanager.ui.components.AppRoutes // Make sure AppRoutes is imported
 import com.dxbmark.nfcmanager.ui.theme.NothingTextStyles
-import com.dxbmark.nfcmanager.utils.SecurityLevel
+// import com.dxbmark.nfcmanager.utils.SecurityLevel // Not directly used in this file anymore
 import com.dxbmark.nfcmanager.viewmodel.MainViewModel
 import com.dxbmark.nfcmanager.viewmodel.SecurityScoreViewModel
 
@@ -33,15 +34,14 @@ import com.dxbmark.nfcmanager.viewmodel.SecurityScoreViewModel
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(
-    viewModel: MainViewModel = viewModel()
+    viewModel: MainViewModel = hiltViewModel(), // Changed to hiltViewModel for consistency if needed, or keep viewModel()
+    navController: NavController // Added NavController parameter
 ) {
     val uiState by viewModel.uiState.collectAsState()
-    // val settings by viewModel.settings.collectAsState() // Not directly used in this version of UI
     val todayEventCount by viewModel.todayEventCount.collectAsState()
     val context = LocalContext.current
     val lifecycleOwner = LocalLifecycleOwner.current
 
-    // Refresh NFC status when the screen resumes using DisposableEffect for proper cleanup
     DisposableEffect(lifecycleOwner) {
         val observer = LifecycleEventObserver { _, event ->
             if (event == Lifecycle.Event.ON_RESUME) {
@@ -71,7 +71,8 @@ fun HomeScreen(
 
         // Security Score Card
         SecurityScoreQuickCard(
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier.fillMaxWidth(),
+            navController = navController // Pass NavController
         )
 
         Spacer(modifier = Modifier.height(24.dp))
@@ -82,7 +83,6 @@ fun HomeScreen(
                 .fillMaxWidth()
                 .height(200.dp)
                 .clickable(enabled = uiState.isNFCSupported && !uiState.isNFCEnabled) {
-                    // Allow clicking card to open settings only if supported and disabled
                     if (context is Activity) {
                         viewModel.requestOpenNfcSettings(context)
                     }
@@ -181,7 +181,6 @@ fun HomeScreen(
         
         Spacer(modifier = Modifier.weight(1f))
         
-        // NFC Control Button - Show only if NFC is supported but disabled
         if (uiState.isNFCSupported && !uiState.isNFCEnabled) {
             Button(
                 onClick = { 
@@ -191,7 +190,6 @@ fun HomeScreen(
                 },
                 modifier = Modifier.fillMaxWidth(),
                 colors = ButtonDefaults.buttonColors(
-                    // Use a more prominent color to prompt action
                     containerColor = MaterialTheme.colorScheme.primary,
                     contentColor = MaterialTheme.colorScheme.onPrimary 
                 )
@@ -201,28 +199,24 @@ fun HomeScreen(
                     style = NothingTextStyles.ButtonText
                 )
             }
-        } else if (!uiState.isNFCSupported) {
-             // Optionally, show a disabled-looking message or hide the button space entirely
-             Box(modifier = Modifier.fillMaxWidth().height(48.dp)) // Placeholder to maintain layout if button is hidden
         } else {
-            // NFC is supported and enabled, button not needed for enabling
-            Box(modifier = Modifier.fillMaxWidth().height(48.dp)) // Placeholder or alternative action
+             Box(modifier = Modifier.fillMaxWidth().height(48.dp))
         }
     }
 }
 
 @Composable
 fun SecurityScoreQuickCard(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    navController: NavController // Added NavController parameter
 ) {
-    val securityScoreViewModel: SecurityScoreViewModel = hiltViewModel() // Changed to hiltViewModel()
+    val securityScoreViewModel: SecurityScoreViewModel = hiltViewModel()
     val securityScore by securityScoreViewModel.securityScore.collectAsState()
     
     Card(
         modifier = modifier
             .clickable { 
-                // Navigate to security score screen
-                // This would need NavController to be passed from parent
+                navController.navigate(AppRoutes.SECURITY_SCORE_DETAIL) // Navigate on click
             },
         colors = CardDefaults.cardColors(
             containerColor = securityScore.level.color.copy(alpha = 0.1f)
@@ -234,32 +228,32 @@ fun SecurityScoreQuickCard(
                 .padding(16.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            // Security Score Circle
             Box(
                 modifier = Modifier
                     .size(48.dp)
                     .background(
                         color = securityScore.level.color.copy(alpha = 0.2f),
-                        shape = androidx.compose.foundation.shape.CircleShape
+                        shape = CircleShape
                     ),
                 contentAlignment = Alignment.Center
             ) {
                 Text(
                     text = "${securityScore.score}",
-                    style = MaterialTheme.typography.titleLarge,
-                    color = securityScore.level.color,
-                    fontWeight = androidx.compose.ui.text.font.FontWeight.Bold
+                    style = NothingTextStyles.HeaderTitle.copy(
+                        fontSize = 20.sp, // You can adjust this size later if needed
+                        fontWeight = androidx.compose.ui.text.font.FontWeight.Bold
+                    ),
+                    color = securityScore.level.color
                 )
             }
             
             Spacer(modifier = Modifier.width(16.dp))
             
-            // Security Info
             Column(
                 modifier = Modifier.weight(1f)
             ) {
                 Text(
-                    text = "Security Score",
+                    text = "Security Score", // Consider making this a string resource
                     style = MaterialTheme.typography.titleMedium,
                     fontWeight = androidx.compose.ui.text.font.FontWeight.Bold
                 )
@@ -270,7 +264,6 @@ fun SecurityScoreQuickCard(
                 )
             }
             
-            // Arrow text
             Text(
                 text = "→",
                 style = MaterialTheme.typography.titleLarge,
