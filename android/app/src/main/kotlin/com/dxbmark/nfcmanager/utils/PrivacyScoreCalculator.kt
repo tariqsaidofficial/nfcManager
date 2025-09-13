@@ -2,7 +2,8 @@ package com.dxbmark.nfcmanager.utils
 
 import androidx.compose.ui.graphics.Color
 import com.dxbmark.nfcmanager.data.database.entities.NFCEventEntity
-import com.dxbmark.nfcmanager.ui.theme.NothingColors
+// import com.dxbmark.nfcmanager.ui.theme.NothingColors // Original import, check if still needed or replaced by direct Color values.
+import com.dxbmark.nfcmanager.R // Added import for R class
 
 /**
  * Calculator for privacy and security scores
@@ -48,7 +49,7 @@ class PrivacyScoreCalculator {
             score = maxOf(0, score),
             level = determineSecurityLevel(score),
             violations = violations,
-            recommendations = generateRecommendations(violations)
+            recommendations = generateRecommendations(violations) // This will be modified later
         )
     }
     
@@ -56,6 +57,8 @@ class PrivacyScoreCalculator {
      * Determines security level based on score
      */
     private fun determineSecurityLevel(score: Int): SecurityLevel {
+        // Handle the NOT_APPLICABLE case if score is set to a specific value like -1
+        if (score < 0) return SecurityLevel.NOT_APPLICABLE 
         return when (score) {
             in 90..100 -> SecurityLevel.EXCELLENT
             in 75..89 -> SecurityLevel.GOOD
@@ -67,6 +70,7 @@ class PrivacyScoreCalculator {
     
     /**
      * Generates security recommendations based on violations
+     * THIS FUNCTION WILL BE MODIFIED LATER TO USE STRING RESOURCES
      */
     private fun generateRecommendations(violations: List<SecurityViolation>): List<String> {
         val recommendations = mutableListOf<String>()
@@ -74,28 +78,27 @@ class PrivacyScoreCalculator {
         violations.forEach { violation ->
             when (violation) {
                 SecurityViolation.LONG_NFC_USAGE -> {
-                    recommendations.add("Disable NFC when not in use")
-                    recommendations.add("Set shorter reminder intervals")
+                    recommendations.add("Disable NFC when not in use") // Placeholder
+                    recommendations.add("Set shorter reminder intervals") // Placeholder
                 }
                 SecurityViolation.UNKNOWN_TAG -> {
-                    recommendations.add("Be cautious with unknown NFC tags")
-                    recommendations.add("Enable unknown tag blocking")
+                    recommendations.add("Be cautious with unknown NFC tags") // Placeholder
+                    recommendations.add("Enable unknown tag blocking") // Placeholder
                 }
                 SecurityViolation.RAPID_TAG_DETECTION -> {
-                    recommendations.add("Avoid crowded areas when using NFC")
-                    recommendations.add("Check for suspicious devices nearby")
+                    recommendations.add("Avoid crowded areas when using NFC") // Placeholder
+                    recommendations.add("Check for suspicious devices nearby") // Placeholder
                 }
                 SecurityViolation.SUSPICIOUS_ACTIVITY -> {
-                    recommendations.add("Review your NFC usage patterns")
-                    recommendations.add("Enable maximum security mode")
+                    recommendations.add("Review your NFC usage patterns") // Placeholder
+                    recommendations.add("Enable maximum security mode") // Placeholder
                 }
             }
         }
         
-        // Add general recommendations if no specific violations
         if (recommendations.isEmpty()) {
-            recommendations.add("Keep up the good security practices!")
-            recommendations.add("Regularly review your NFC activity log")
+            recommendations.add("Keep up the good security practices!") // Placeholder - This will use R.string.recommendation_keep_up_good_practices
+            recommendations.add("Regularly review your NFC activity log") // Placeholder - This will use R.string.recommendation_review_activity_log
         }
         
         return recommendations.distinct()
@@ -109,18 +112,19 @@ data class SecurityScore(
     val score: Int,
     val level: SecurityLevel,
     val violations: List<SecurityViolation>,
-    val recommendations: List<String>
+    val recommendations: List<String> // This will eventually be List<Int> for resource IDs or be handled differently
 )
 
 /**
- * Enum representing security levels with display names and colors
+ * Enum representing security levels with display name resource IDs and colors
  */
-enum class SecurityLevel(val displayName: String, val color: Color) {
-    EXCELLENT("Excellent", Color(0xFF4CAF50)),
-    GOOD("Good", Color(0xFF8BC34A)),
-    MODERATE("Moderate", Color(0xFFFF9800)),
-    POOR("Poor", Color(0xFFFF5722)),
-    CRITICAL("Critical", Color(0xFFE53E3E))
+enum class SecurityLevel(val displayNameResId: Int, val color: Color) {
+    EXCELLENT(R.string.security_level_excellent, Color(0xFF4CAF50)),
+    GOOD(R.string.security_level_good, Color(0xFF8BC34A)),
+    MODERATE(R.string.security_level_moderate, Color(0xFFFF9800)),
+    POOR(R.string.security_level_poor, Color(0xFFFF5722)),
+    CRITICAL(R.string.security_level_critical, Color(0xFFE53E3E)),
+    NOT_APPLICABLE(R.string.security_level_not_applicable, Color(0xFF9E9E9E)) // Added new level
 }
 
 /**

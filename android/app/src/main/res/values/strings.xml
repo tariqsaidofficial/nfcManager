@@ -284,6 +284,8 @@
     <string name="reminder_interval_set_log">Reminder interval set to %1$ds</string>
     <string name="notifications_toggled_system_log">Notifications %1$s</string>
     <string name="vibration_toggled_system_log">Vibration %1$s</string>
+    <string name="nfc_not_supported_error">NFC is not supported on this device.</string>
+    <string name="nfc_disabled_error_turn_on">NFC is disabled. Please turn on NFC in your device settings to enable monitoring.</string>
 
     <!-- Content Descriptions -->
     <string name="export_to_csv_icon">Export to CSV</string>
@@ -407,7 +409,25 @@
     <string name="security_level_moderate">Moderate</string>
     <string name="security_level_poor">Poor</string>
     <string name="security_level_critical">Critical</string>
+    <string name="security_level_not_applicable">Not Applicable</string> <!-- Added this line -->
     <string name="navigate_back">Navigate Back</string> <!-- Ensure this is also present, it was in your SecurityScoreDetailScreen.kt -->
+
+    <!-- Security Score Recommendations and Violations -->
+    <string name="recommendation_disable_nfc">Disable NFC when not in use</string>
+    <string name="recommendation_shorter_intervals">Set shorter reminder intervals for NFC</string>
+    <string name="recommendation_cautious_unknown_tags">Be cautious with unknown or unexpected NFC tags</string>
+    <string name="recommendation_enable_unknown_tag_blocking">Consider enabling "Block Unknown Tags" in settings</string>
+    <string name="recommendation_avoid_crowded_areas_nfc">Avoid using NFC in very crowded public areas if possible</string>
+    <string name="recommendation_check_suspicious_devices">Be aware of your surroundings and check for suspicious devices</string>
+    <string name="recommendation_review_nfc_usage">Regularly review your NFC usage patterns in the Activity Log</string>
+    <string name="recommendation_enable_max_security_mode">For maximum protection, enable Privacy Mode in settings</string>
+    <string name="recommendation_keep_up_good_practices">Keep up the good security practices!</string>
+    <string name="recommendation_review_activity_log">Regularly review your NFC activity log for any unusual events</string>
+
+    <string name="violation_long_nfc_usage_name">Prolonged NFC Activation</string>
+    <string name="violation_unknown_tag_name">Unknown Tag Detected</string>
+    <string name="violation_rapid_tag_detection_name">Rapid Multiple Tag Detections</string>
+    <string name="violation_suspicious_activity_name">Suspicious NFC Activity Pattern</string>
 
     <!-- Onboarding Screen -->
     <string name="onboarding_button_previous">Previous</string>

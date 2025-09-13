@@ -5,6 +5,7 @@ import android.app.Application
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.nfc.NfcAdapter // Added import
 import android.os.Build
 import android.util.Log
 import androidx.core.content.ContextCompat
@@ -27,12 +28,6 @@ class SettingsViewModel @Inject constructor(
     private val repository: NFCRepository
 ) : AndroidViewModel(app) {
 
-    init {
-        Log.e("SettingsViewModel", "=== SettingsViewModel.init() STARTED ===")
-        Log.e("SettingsViewModel", "SettingsViewModel initialized successfully")
-        Log.e("SettingsViewModel", "=== SettingsViewModel.init() COMPLETED ===")
-    }
-
     private val _uiState = MutableStateFlow(SettingsUiState())
     val uiState: StateFlow<SettingsUiState> = _uiState.asStateFlow()
 
@@ -52,25 +47,49 @@ class SettingsViewModel @Inject constructor(
         .stateIn(
             scope = viewModelScope,
             started = SharingStarted.WhileSubscribed(5000),
-            initialValue = NFCSettingsEntity()
+            initialValue = NFCSettingsEntity() // Initial value, might be out of sync
         )
 
-    // ... (other functions remain the same) ...
+    init {
+        Log.d("SettingsViewModel", "Initializing SettingsViewModel")
+        viewModelScope.launch {
+            // Check actual NFC adapter state and sync with stored setting if necessary
+            val nfcAdapter = NfcAdapter.getDefaultAdapter(app.applicationContext)
+            val isNfcActuallyEnabled = nfcAdapter?.isEnabled == true
+
+            // Collect the latest setting value once
+            val currentStoredSetting = settings.first().backgroundServiceMonitoringEnabled
+
+            Log.d("SettingsViewModel", "Actual NFC Enabled: $isNfcActuallyEnabled, Stored Monitoring Setting: $currentStoredSetting")
+
+            if (!isNfcActuallyEnabled && currentStoredSetting) {
+                Log.d("SettingsViewModel", "NFC is disabled on device, but monitoring is enabled in settings. Updating stored setting.")
+                repository.updateBackgroundServiceMonitoringEnabled(false)
+                // Optionally, also stop the service if it was running based on the incorrect setting
+                val intent = Intent(app.applicationContext, NfcMonitoringService::class.java).apply {
+                    action = NfcMonitoringService.ACTION_STOP_MONITORING
+                }
+                app.applicationContext.startService(intent)
+            } else if (nfcAdapter == null && currentStoredSetting) {
+                 Log.d("SettingsViewModel", "NFC is not supported on device, but monitoring is enabled in settings. Updating stored setting.")
+                repository.updateBackgroundServiceMonitoringEnabled(false)
+            }
+        }
+    }
 
     fun updateSelectedLanguage(languageCode: String?) {
         viewModelScope.launch {
             try {
                 updateLoading(true)
                 val oldLanguageCode = settings.value.selectedLanguageCode
-                // Use 'app' (Application context) directly passed to the ViewModel's constructor
-                val context: Context = app.applicationContext 
+                val context: Context = app.applicationContext
 
                 fun getDisplayName(code: String?): String {
                     return availableLanguages.firstOrNull { it.code == code }?.let {
                         context.getString(it.nameResId)
                     } ?: context.getString(R.string.language_system_default)
                 }
-                
+
                 fun getLogDisplayName(code: String?): String {
                     return when (code) {
                         "en" -> app.getString(R.string.language_name_english)
@@ -89,8 +108,7 @@ class SettingsViewModel @Inject constructor(
                 }
 
                 repository.updateSelectedLanguageCode(languageCode)
-                // Pass the application context to the updated static method
-                NfcManagerApplication.updateLanguageCode(app.applicationContext, languageCode) 
+                NfcManagerApplication.updateLanguageCode(app.applicationContext, languageCode)
 
                 repository.logEvent(
                     app.getString(R.string.event_type_settings),
@@ -98,7 +116,7 @@ class SettingsViewModel @Inject constructor(
                     "Language"
                 )
                 updateSuccess(app.getString(R.string.language_updated_success, newLanguageDisplayName))
-                _recreateActivityChannel.emit(Unit) 
+                _recreateActivityChannel.emit(Unit)
             } catch (e: Exception) {
                 updateError(app.getString(R.string.language_update_failed, e.message ?: "Unknown error"))
             } finally {
@@ -111,9 +129,21 @@ class SettingsViewModel @Inject constructor(
         viewModelScope.launch {
             try {
                 updateLoading(true)
-                repository.resetAllSettings()
-                // Pass context when resetting language in Application class
-                NfcManagerApplication.updateLanguageCode(app.applicationContext, null) 
+                repository.resetAllSettings() 
+                NfcManagerApplication.updateLanguageCode(app.applicationContext, null)
+                // After resetting, re-check NFC state and sync
+                val nfcAdapter = NfcAdapter.getDefaultAdapter(app.applicationContext)
+                val isNfcActuallyEnabled = nfcAdapter?.isEnabled == true
+                if (!isNfcActuallyEnabled) {
+                    repository.updateBackgroundServiceMonitoringEnabled(false)
+                } else {
+                     // If NFC is actually enabled, ensure the default (likely true after reset) is fine,
+                     // or explicitly set it if resetAllSettings defaults it to false.
+                     // Assuming resetAllSettings might set backgroundServiceMonitoringEnabled to a default (e.g. false or true)
+                     // We want to ensure it aligns with actual NFC state if it was reset to true but NFC is off.
+                     // Or, if reset sets it to false, but NFC is on, the user would manually enable it.
+                     // For now, if NFC is actually ON, we assume the default reset value for monitoring is acceptable or user will toggle.
+                }
                 repository.logEvent(
                     app.getString(R.string.event_type_settings),
                     app.getString(R.string.settings_reset_log),
@@ -121,7 +151,7 @@ class SettingsViewModel @Inject constructor(
                     isImportant = true
                 )
                 updateSuccess(app.getString(R.string.settings_reset_success))
-                _recreateActivityChannel.emit(Unit) // Also recreate on reset
+                _recreateActivityChannel.emit(Unit)
             } catch (e: Exception) {
                 updateError(app.getString(R.string.settings_reset_failed, e.message ?: "Unknown error"))
             } finally {
@@ -129,8 +159,6 @@ class SettingsViewModel @Inject constructor(
             }
         }
     }
-
-    // ... (rest of the ViewModel code) ...
 
     private fun checkNfcPermissions(): Boolean {
         return ContextCompat.checkSelfPermission(
@@ -183,55 +211,75 @@ class SettingsViewModel @Inject constructor(
 
     fun toggleBackgroundServiceMonitoring() {
         viewModelScope.launch {
-            val currentSetting = settings.value.backgroundServiceMonitoringEnabled
-            val newSetting = !currentSetting
+            val newSetting = !settings.value.backgroundServiceMonitoringEnabled // Intended new state
             val context = app.applicationContext
+            val nfcAdapter = NfcAdapter.getDefaultAdapter(context)
 
-            if (newSetting) {
-                if (checkNfcPermissions()) {
-                    updateLoading(true)
-                    try {
-                        repository.updateBackgroundServiceMonitoringEnabled(true)
-                        val intent = Intent(context, NfcMonitoringService::class.java).apply {
-                            action = NfcMonitoringService.ACTION_START_MONITORING
-                        }
-                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                            context.startForegroundService(intent)
-                        } else {
-                            context.startService(intent)
-                        }
-                        repository.logEvent(
-                            app.getString(R.string.event_type_settings),
-                            app.getString(R.string.background_monitoring_enabled_log),
-                            "Radar"
-                        )
-                        updateSuccess(app.getString(R.string.background_monitoring_enabled_success))
-                    } catch (e: Exception) {
-                        updateError(app.getString(R.string.background_monitoring_enable_failed, e.message ?: "Unknown error"))
+            if (newSetting) { // Trying to enable monitoring
+                if (nfcAdapter == null) {
+                    updateError(app.getString(R.string.nfc_not_supported_error))
+                    // Ensure the toggle reflects that monitoring cannot be enabled
+                    if (settings.value.backgroundServiceMonitoringEnabled) {
                         repository.updateBackgroundServiceMonitoringEnabled(false)
-                    } finally {
-                        updateLoading(false)
                     }
-                } else {
+                    return@launch
+                }
+                if (!nfcAdapter.isEnabled) {
+                    updateError(app.getString(R.string.nfc_disabled_error_turn_on))
+                     // Ensure the toggle reflects that monitoring cannot be enabled
+                    if (settings.value.backgroundServiceMonitoringEnabled) {
+                        repository.updateBackgroundServiceMonitoringEnabled(false)
+                    }
+                    return@launch
+                }
+                if (!checkNfcPermissions()) {
                     _requestNfcPermissionChannel.emit(Unit)
                     updateError(app.getString(R.string.nfc_permission_required))
+                    // Do not change the stored setting until permission is granted
+                    return@launch
                 }
-            } else {
+
+                // NFC is supported, enabled, and permission is granted
+                updateLoading(true)
+                try {
+                    repository.updateBackgroundServiceMonitoringEnabled(true)
+                    val intent = Intent(context, NfcMonitoringService::class.java).apply {
+                        action = NfcMonitoringService.ACTION_START_MONITORING
+                    }
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                        context.startForegroundService(intent)
+                    } else {
+                        context.startService(intent)
+                    }
+                    repository.logEvent(
+                        app.getString(R.string.event_type_settings),
+                        app.getString(R.string.background_monitoring_enabled_log),
+                        "Radar"
+                    )
+                    updateSuccess(app.getString(R.string.background_monitoring_enabled_success))
+                } catch (e: Exception) {
+                    updateError(app.getString(R.string.background_monitoring_enable_failed, e.message ?: "Unknown error"))
+                    repository.updateBackgroundServiceMonitoringEnabled(false) // Rollback on error
+                } finally {
+                    updateLoading(false)
+                }
+            } else { // Trying to disable monitoring
                 updateLoading(true)
                 try {
                     repository.updateBackgroundServiceMonitoringEnabled(false)
                     val intent = Intent(context, NfcMonitoringService::class.java).apply {
                         action = NfcMonitoringService.ACTION_STOP_MONITORING
                     }
-                    context.startService(intent)
-                        repository.logEvent(
-                            app.getString(R.string.event_type_settings),
-                            app.getString(R.string.background_monitoring_disabled_log),
-                            "RadarOff"
-                        )
-                    updateSuccess("Background NFC Monitoring disabled")
+                    context.startService(intent) // Always try to stop, even if it wasn't running
+                    repository.logEvent(
+                        app.getString(R.string.event_type_settings),
+                        app.getString(R.string.background_monitoring_disabled_log),
+                        "RadarOff"
+                    )
+                    updateSuccess(app.getString(R.string.background_monitoring_disabled_success))
                 } catch (e: Exception) {
-                    updateError("Failed to disable background monitoring: ${e.message}")
+                    updateError(app.getString(R.string.background_monitoring_disable_failed, e.message ?: "Unknown error"))
+                    // Optionally rollback, though usually disabling should be robust
                 } finally {
                     updateLoading(false)
                 }
@@ -520,14 +568,14 @@ class SettingsViewModel @Inject constructor(
     private fun updateError(message: String) {
         _uiState.value = _uiState.value.copy(
             errorMessage = message,
-            isLoading = false
+            isLoading = false // Ensure loading is set to false on error
         )
     }
 
     private fun updateSuccess(message: String) {
         _uiState.value = _uiState.value.copy(
             successMessage = message,
-            isLoading = false
+            isLoading = false // Ensure loading is set to false on success
         )
     }
 

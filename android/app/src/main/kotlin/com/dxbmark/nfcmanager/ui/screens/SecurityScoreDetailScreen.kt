@@ -72,7 +72,7 @@ fun SecurityScoreDetailScreen(
                 modifier = Modifier.padding(top = 20.dp)
             )
             Text(
-                text = securityScoreState.level.displayName,
+                text = stringResource(securityScoreState.level.displayNameResId),
                 style = NothingTextStyles.HeaderTitle.copy( // APPLY NothingFont, keep existing size/weight
                     fontSize = 24.sp,
                     fontWeight = FontWeight.SemiBold
@@ -110,6 +110,7 @@ fun SecurityScoreDetailScreen(
                         .align(Alignment.Start)
                 )
             } else {
+                // TODO: Modify to use stringResource for violation names if they need localization
                 securityScoreState.violations.take(3).forEach { violation -> 
                     Text(
                         text = stringResource(R.string.security_score_violation_prefix, violation.name), 
@@ -139,10 +140,11 @@ fun SecurityScoreDetailScreen(
                         .align(Alignment.Start)
                 )
             } else {
+                // TODO: Modify to use stringResource for recommendations when they are converted to ResIds
                 securityScoreState.recommendations.take(3)
                     .forEach { recommendation -> 
                         Text(
-                            text = recommendation, 
+                            text = recommendation, // This will be stringResource(recommendation) or similar
                             modifier = Modifier.align(Alignment.Start)
                             // Optional: Apply NothingFont to recommendation items if desired
                             // fontFamily = NothingTextStyles.HeaderTitle.fontFamily

@@ -70,6 +70,7 @@ fun SecurityScoreScreen(
             Spacer(modifier = Modifier.height(24.dp))
             
             // Recommendations
+            // TODO: Update to use List<Int> for recommendations (resource IDs) once ViewModel and Calculator are updated
             if (securityScore.recommendations.isNotEmpty()) {
                 SecurityRecommendations(recommendations = securityScore.recommendations)
             }
@@ -108,13 +109,13 @@ fun SecurityScoreCard(securityScore: SecurityScore) {
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     Text(
-                        text = "${securityScore.score}",
+                        text = if (securityScore.level == SecurityLevel.NOT_APPLICABLE) "N/A" else "${securityScore.score}",
                         style = NothingTextStyles.NFCStatusLarge,
                         color = securityScore.level.color,
                         fontWeight = FontWeight.Bold
                     )
                     Text(
-                        text = "Score",
+                        text = if (securityScore.level == SecurityLevel.NOT_APPLICABLE) stringResource(R.string.security_level_not_applicable) else "Score",
                         style = MaterialTheme.typography.bodyMedium,
                         color = securityScore.level.color
                     )
@@ -129,13 +130,13 @@ fun SecurityScoreCard(securityScore: SecurityScore) {
             ) {
                 Icon(
                     imageVector = getSecurityLevelIcon(securityScore.level),
-                    contentDescription = null,
+                    contentDescription = null, // Consider adding a content description for accessibility
                     tint = securityScore.level.color,
                     modifier = Modifier.size(24.dp)
                 )
                 Spacer(modifier = Modifier.width(8.dp))
                 Text(
-                    text = securityScore.level.displayName,
+                    text = stringResource(securityScore.level.displayNameResId),
                     style = MaterialTheme.typography.titleLarge,
                     color = securityScore.level.color,
                     fontWeight = FontWeight.Bold
@@ -163,7 +164,7 @@ fun SecurityLevelIndicator(securityLevel: SecurityLevel) {
             modifier = Modifier.padding(16.dp)
         ) {
             Text(
-                text = "Security Level Breakdown",
+                text = "Security Level Breakdown", // This should be a string resource
                 style = MaterialTheme.typography.titleMedium,
                 fontWeight = FontWeight.Bold
             )
@@ -206,7 +207,7 @@ fun SecurityLevelItem(
         
         // Level name
         Text(
-            text = level.displayName,
+            text = stringResource(level.displayNameResId),
             style = MaterialTheme.typography.bodyMedium,
             fontWeight = if (isCurrent) FontWeight.Bold else FontWeight.Normal,
             color = if (isCurrent) level.color else MaterialTheme.colorScheme.onSurface
@@ -232,7 +233,7 @@ fun SecurityRecommendations(recommendations: List<String>) {
             modifier = Modifier.padding(16.dp)
         ) {
             Text(
-                text = "Security Recommendations",
+                text = "Security Recommendations", // This should be a string resource
                 style = MaterialTheme.typography.titleMedium,
                 fontWeight = FontWeight.Bold
             )
@@ -240,20 +241,21 @@ fun SecurityRecommendations(recommendations: List<String>) {
             Spacer(modifier = Modifier.height(16.dp))
             
             recommendations.forEach { recommendation ->
+                // TODO: When recommendations are List<Int>, use stringResource(recommendation) here
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(vertical = 4.dp)
                 ) {
                     Icon(
-                        imageVector = Icons.Default.Security,
-                        contentDescription = null,
+                        imageVector = Icons.Default.Security, // This could be dynamic based on recommendation type
+                        contentDescription = null, // Consider adding a content description
                         modifier = Modifier.size(20.dp),
                         tint = MaterialTheme.colorScheme.primary
                     )
                     Spacer(modifier = Modifier.width(12.dp))
                     Text(
-                        text = recommendation,
+                        text = recommendation, // This will be stringResource(recommendation) when updated
                         style = MaterialTheme.typography.bodyMedium,
                         modifier = Modifier.weight(1f)
                     )
@@ -272,13 +274,14 @@ fun SecurityTipsCard() {
             modifier = Modifier.padding(16.dp)
         ) {
             Text(
-                text = "Security Tips",
+                text = "Security Tips", // This should be a string resource
                 style = MaterialTheme.typography.titleMedium,
                 fontWeight = FontWeight.Bold
             )
             
             Spacer(modifier = Modifier.height(16.dp))
             
+            // TODO: These tips should be string resources
             val tips = listOf(
                 "Disable NFC when not in use",
                 "Be cautious with unknown NFC tags",
@@ -294,14 +297,14 @@ fun SecurityTipsCard() {
                         .padding(vertical = 4.dp)
                 ) {
                     Icon(
-                        imageVector = Icons.Default.Lightbulb,
-                        contentDescription = null,
+                        imageVector = Icons.Default.Lightbulb, // This could be dynamic
+                        contentDescription = null, // Consider adding a content description
                         modifier = Modifier.size(20.dp),
                         tint = MaterialTheme.colorScheme.secondary
                     )
                     Spacer(modifier = Modifier.width(12.dp))
                     Text(
-                        text = tip,
+                        text = tip, // This will be stringResource(tip) when updated
                         style = MaterialTheme.typography.bodyMedium,
                         modifier = Modifier.weight(1f)
                     )
@@ -319,6 +322,7 @@ private fun getSecurityLevelIcon(level: SecurityLevel): ImageVector {
         SecurityLevel.MODERATE -> Icons.Default.Warning
         SecurityLevel.POOR -> Icons.Default.Error
         SecurityLevel.CRITICAL -> Icons.Default.Dangerous
+        SecurityLevel.NOT_APPLICABLE -> Icons.Default.HelpOutline // Added NOT_APPLICABLE case
     }
 }
 
@@ -329,6 +333,7 @@ private fun getSecurityLevelDescription(level: SecurityLevel): String {
         SecurityLevel.MODERATE -> "Moderate security. Consider following recommendations."
         SecurityLevel.POOR -> "Poor security level. Immediate action required."
         SecurityLevel.CRITICAL -> "Critical security issues. Please review recommendations."
+        SecurityLevel.NOT_APPLICABLE -> "NFC status is not applicable or not supported on this device." // Added NOT_APPLICABLE case
     }
 }
 
@@ -339,5 +344,6 @@ private fun getScoreRange(level: SecurityLevel): String {
         SecurityLevel.MODERATE -> "60-74"
         SecurityLevel.POOR -> "40-59"
         SecurityLevel.CRITICAL -> "0-39"
+        SecurityLevel.NOT_APPLICABLE -> "N/A" // Added NOT_APPLICABLE case
     }
 }

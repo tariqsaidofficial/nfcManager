@@ -258,7 +258,7 @@ fun SecurityScoreQuickCard(
                     fontWeight = androidx.compose.ui.text.font.FontWeight.Bold
                 )
                 Text(
-                    text = securityScore.level.displayName,
+                    text = stringResource(securityScore.level.displayNameResId),
                     style = MaterialTheme.typography.bodyMedium,
                     color = securityScore.level.color
                 )
