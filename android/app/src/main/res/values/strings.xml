@@ -458,4 +458,66 @@
     <string name="onboarding_page3_feature2">Local data storage only</string>
     <string name="onboarding_page3_feature3">No external data transmission</string>
 
+    <!-- === NEW STRINGS START HERE === -->
+    <!-- SecurityScoreScreen.kt -->
+    <string name="security_score_screen_title">Security Score</string>
+    <string name="security_score_value_label">Score</string>
+    <string name="security_level_desc_excellent">Excellent security practices! Keep it up.</string>
+    <string name="security_level_desc_good">Good security level with minor improvements needed.</string>
+    <string name="security_level_desc_moderate">Moderate security. Consider following recommendations.</string>
+    <string name="security_level_desc_poor">Poor security level. Immediate action required.</string>
+    <string name="security_level_desc_critical">Critical security issues. Please review recommendations.</string>
+    <string name="security_level_desc_not_applicable">NFC status is not applicable or not supported on this device.</string>
+    <string name="security_level_breakdown_title">Security Level Breakdown</string>
+    <string name="security_score_range_excellent">90-100</string>
+    <string name="security_score_range_good">75-89</string>
+    <string name="security_score_range_moderate">60-74</string>
+    <string name="security_score_range_poor">40-59</string>
+    <string name="security_score_range_critical">0-39</string>
+    <string name="security_score_range_not_applicable">N/A</string>
+    <string name="security_recommendations_title">Security Recommendations</string>
+    <string name="security_tips_title">Security Tips</string>
+    <string name="security_tip_disable_nfc">Disable NFC when not in use</string>
+    <string name="security_tip_cautious_tags">Be cautious with unknown NFC tags</string>
+    <string name="security_tip_avoid_crowded_nfc">Avoid using NFC in crowded areas</string>
+    <string name="security_tip_review_log">Regularly review your NFC activity log</string>
+    <string name="security_tip_keep_device_updated">Keep your device updated</string>
+
+    <!-- SecurityScoreViewModel.kt -->
+    <string name="recommendation_nfc_disabled_secure">NFC is currently disabled, which enhances security. Enable it only when you need to use NFC features.</string>
+    <string name="error_calculating_score">Error calculating score: %1$s</string>
+    <string name="error_calculating_period_score">Error calculating period score: %1$s</string>
+
+    <!-- NotificationManager.kt -->
+    <string name="channel_nfc_status_name">NFC Status</string>
+    <string name="channel_nfc_status_description">Shows current NFC status and security level</string>
+    <string name="channel_security_alert_name">Security Alerts</string>
+    <string name="channel_security_alert_description">Security alerts and warnings</string>
+    <string name="nfc_enabled_notification_title">NFC Enabled</string>
+    <string name="nfc_disabled_notification_title">NFC Disabled</string>
+    <string name="nfc_enabled_for_label">Enabled for: </string>
+    <string name="nfc_security_level_label">Security Level: </string>
+    <string name="nfc_status_label">Status: </string>
+    <string name="notification_tap_to_open_details">Tap to open NFC Manager for more details.</string>
+    <string name="notification_tap_to_manage_settings">Tap to open NFC Manager to manage your settings.</string>
+    <string name="notification_action_settings">Settings</string>
+    <string name="notification_action_security_score">Security Score</string>
+    <string name="notification_action_review_settings">Review Settings</string>
+    <string name="alert_title_nfc_enabled_long">⚠️ NFC Enabled Too Long</string>
+    <string name="alert_title_unknown_tag">🔍 Unknown Tag Detected</string>
+    <string name="alert_title_multiple_tags_rapid">⚡ Multiple Tags Detected</string>
+    <string name="alert_title_suspicious_activity">🚨 Suspicious Activity</string>
+    <string name="notification_recommendation_label">Recommendation: </string>
+    <string name="security_status_excellent">Excellent security practices</string>
+    <string name="security_status_good">Good security level</string>
+    <string name="security_status_moderate">Moderate security - review recommendations</string>
+    <string name="security_status_poor">Poor security - immediate action needed</string>
+    <string name="security_status_critical">Critical security issues detected</string>
+    <string name="security_status_not_applicable">Security level not applicable</string>
+    <string name="recommendation_alert_nfc_long">Consider disabling NFC when not in use</string>
+    <string name="recommendation_alert_unknown_tag">Be cautious with unknown NFC tags</string>
+    <string name="recommendation_alert_multiple_tags">Avoid crowded areas when using NFC</string>
+    <string name="recommendation_alert_suspicious_activity">Review your NFC usage patterns</string>
+    <!-- === NEW STRINGS END HERE === -->
+
 </resources>

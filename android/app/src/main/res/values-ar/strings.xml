@@ -406,6 +406,7 @@
     <string name="security_level_moderate">متوسط</string>
     <string name="security_level_poor">ضعيف</string>
     <string name="security_level_critical">حرج</string>
+    <string name="security_level_not_applicable">غير قابل للتطبيق</string>
 
     <!-- Onboarding Screen -->
     <string name="onboarding_button_previous">السابق</string>

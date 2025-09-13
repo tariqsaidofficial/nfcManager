@@ -140,6 +140,7 @@
     <string name="home_todays_activity_title">HEUTIGE AKTIVITÄT</string>
     <string name="events_logged_format">%1$d Ereignisse protokolliert</string>
     <string name="enable_nfc_button">NFC IN DEN EINSTELLUNGEN AKTIVIEREN</string>
+    <string name="security_score_card_title">Sicherheitsbewertung</string>
 
     <string name="activity_log_title">AKTIVITÄTSPROTOKOLL</string>
     <string name="export_success">Ereignisse erfolgreich exportiert</string>
@@ -356,4 +357,5 @@
     <string name="settings_section_about_title">ÜBER</string>
     <string name="settings_item_about_title">Über NFC Manager</string>
     <string name="settings_item_about_subtitle">App-Info, Datenschutzerklärung und Support</string>
+    <string name="security_level_not_applicable">Not Applicable</string>
 </resources>

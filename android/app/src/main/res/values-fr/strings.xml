@@ -208,5 +208,5 @@
     <string name="failed_to_toggle_unknown_tag_blocking">Échec du basculement du blocage des tags inconnus : %1$s</string>
     <string name="failed_to_export_settings">Échec de l\'exportation des paramètres : %1$s</string>
     <string name="failed_to_cleanup_data">Échec du nettoyage des données : %1$s</string>
-
+    <string name="security_level_not_applicable">Not Applicable</string>
 </resources>
