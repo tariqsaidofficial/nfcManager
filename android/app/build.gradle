@@ -52,6 +52,7 @@ android {
     buildFeatures {
         compose true
         viewBinding true
+        buildConfig true
     }
 
     composeOptions {
@@ -99,8 +100,9 @@ android {
         }
         release {
             signingConfig signingConfigs.release
-            minifyEnabled enableProguardInReleaseBuilds
-            proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
+            minifyEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
             debuggable false
             zipAlignEnabled true
         }

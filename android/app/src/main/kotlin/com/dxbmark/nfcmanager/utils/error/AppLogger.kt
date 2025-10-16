@@ -1,11 +1,12 @@
 package com.dxbmark.nfcmanager.utils.error
 
 import android.util.Log
+import com.dxbmark.nfcmanager.BuildConfig
 
 /**
  * Centralized logging utility for the application
  * Provides consistent logging with automatic tag generation
- * Logs are disabled in release builds for security
+ * Logs are automatically disabled in release builds for security
  */
 object AppLogger {
     
@@ -24,11 +25,11 @@ object AppLogger {
     }
     
     /**
-     * Check if logging is enabled (always enabled for now)
-     * TODO: Disable in release builds using BuildConfig.DEBUG
+     * Check if logging is enabled (only in debug builds)
+     * Automatically disabled in release builds for security
      */
     private val isLoggingEnabled: Boolean
-        get() = true // Always enabled for debugging
+        get() = BuildConfig.DEBUG
     
     /**
      * Generate tag from class name
