@@ -5,26 +5,31 @@ import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
 import android.app.Service
+import android.content.Context
 import android.content.Intent
-import android.media.AudioAttributes // Needed for custom sound on channel
-import android.net.Uri // Needed for custom sound URI
+import android.media.AudioAttributes
+import android.net.Uri
 import android.nfc.NfcAdapter
 import android.os.Build
 import android.os.IBinder
-import android.util.Log
+import android.os.PowerManager
 import androidx.core.app.NotificationCompat
 import com.dxbmark.nfcmanager.MainActivity
-// import com.dxbmark.nfcmanager.R // Keep for your actual app icon
-import com.dxbmark.nfcmanager.data.database.entities.NFCSettingsEntity // Import settings
-import com.dxbmark.nfcmanager.data.repository.NFCRepository // Import repository
+import com.dxbmark.nfcmanager.data.database.entities.NFCSettingsEntity
+import com.dxbmark.nfcmanager.data.repository.NFCRepository
 import com.dxbmark.nfcmanager.utils.NotificationManager as AppNotificationManager
 import com.dxbmark.nfcmanager.utils.PrivacyScoreCalculator
 import com.dxbmark.nfcmanager.utils.SecurityLevel
-import dagger.hilt.android.AndroidEntryPoint // Hilt import
+import com.dxbmark.nfcmanager.utils.error.AppLogger
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.cancel
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @AndroidEntryPoint // <<< HILT ANNOTATION
@@ -36,47 +41,115 @@ class NfcMonitoringService : Service() {
     @Inject
     lateinit var appNotificationManager: AppNotificationManager
 
+    // Coroutine management
     private val serviceJob = SupervisorJob()
-    private val serviceScope = CoroutineScope(Dispatchers.Main + serviceJob) // Use Main for UI-related or use IO for repo access
+    private val serviceScope = CoroutineScope(Dispatchers.Default + serviceJob)
 
+    // NFC monitoring
     private var nfcAdapter: NfcAdapter? = null
     private var isMonitoring = false
     private var nfcEnabledStartTime: Long = 0
+    
+    // Power management
+    private var wakeLock: PowerManager.WakeLock? = null
+    
+    // Utilities
     private val privacyScoreCalculator = PrivacyScoreCalculator()
+    
+    // Cached settings to reduce DB queries
+    private var cachedSettings: NFCSettingsEntity? = null
+    private var lastSettingsUpdate: Long = 0
+    
+    companion object {
+        private const val TAG = "NfcMonitoringService"
+        private const val NOTIFICATION_ID = 1001
+        private const val CHANNEL_ID = "NFC_MONITORING_CHANNEL_V2"
+        private const val WAKELOCK_TAG = "NfcManager:MonitoringWakeLock"
+        private const val SETTINGS_CACHE_DURATION = 30_000L // 30 seconds
+        private const val MONITORING_CHECK_INTERVAL = 5_000L // 5 seconds
+
+        const val ACTION_START_MONITORING = "com.dxbmark.nfcmanager.services.ACTION_START_MONITORING"
+        const val ACTION_STOP_MONITORING = "com.dxbmark.nfcmanager.services.ACTION_STOP_MONITORING"
+    }
 
     override fun onCreate() {
         super.onCreate()
-        Log.d(TAG, "Service created")
+        AppLogger.service("Service created")
         
-        // Fetch settings and then create/update notification channel
-        serviceScope.launch(Dispatchers.IO) { // Launch on IO dispatcher for repository access
+        initializeWakeLock()
+        initializeNfcAdapter()
+        
+        // Fetch settings and create notification channel
+        serviceScope.launch(Dispatchers.IO) {
             try {
-                val settings = nfcRepository.getSettingsSync() // Fetch settings synchronously within coroutine
-                createNotificationChannel(settings) // Pass settings to channel creation
+                val settings = getCachedOrFetchSettings()
+                withContext(Dispatchers.Main) {
+                    createNotificationChannel(settings)
+                }
             } catch (e: Exception) {
-                Log.e(TAG, "Failed to fetch settings or create notification channel on service create", e)
-                // Fallback to creating channel with default sound settings if fetch fails
-                createNotificationChannel(null)
+                AppLogger.e(TAG, "Failed to fetch settings or create notification channel", e)
+                withContext(Dispatchers.Main) {
+                    createNotificationChannel(null)
+                }
             }
         }
-        initializeNfcAdapter()
+    }
+    
+    /**
+     * Initialize WakeLock for keeping CPU awake during monitoring
+     * Uses PARTIAL_WAKE_LOCK to minimize battery drain
+     */
+    private fun initializeWakeLock() {
+        try {
+            val powerManager = getSystemService(Context.POWER_SERVICE) as PowerManager
+            wakeLock = powerManager.newWakeLock(
+                PowerManager.PARTIAL_WAKE_LOCK,
+                WAKELOCK_TAG
+            ).apply {
+                setReferenceCounted(false)
+            }
+            AppLogger.service("WakeLock initialized")
+        } catch (e: Exception) {
+            AppLogger.e(TAG, "Failed to initialize WakeLock", e)
+        }
+    }
+    
+    /**
+     * Get cached settings or fetch from database
+     * Reduces database queries and improves performance
+     */
+    private suspend fun getCachedOrFetchSettings(): NFCSettingsEntity {
+        val now = System.currentTimeMillis()
+        return if (cachedSettings != null && (now - lastSettingsUpdate) < SETTINGS_CACHE_DURATION) {
+            cachedSettings!!
+        } else {
+            withContext(Dispatchers.IO) {
+                val settings = nfcRepository.getSettingsSync()
+                cachedSettings = settings
+                lastSettingsUpdate = now
+                settings
+            }
+        }
     }
 
+    /**
+     * Initialize NFC adapter
+     */
     private fun initializeNfcAdapter() {
         try {
             nfcAdapter = NfcAdapter.getDefaultAdapter(this)
             if (nfcAdapter == null) {
-                Log.w(TAG, "Device doesn't support NFC")
+                AppLogger.w(TAG, "Device doesn't support NFC")
             } else {
-                Log.d(TAG, "NFC adapter initialized successfully")
+                AppLogger.service("NFC adapter initialized successfully")
             }
         } catch (e: Exception) {
-            Log.e(TAG, "Failed to initialize NFC adapter", e)
+            AppLogger.e(TAG, "Failed to initialize NFC adapter", e)
         }
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
-        Log.d(TAG, "onStartCommand received action: ${intent?.action}")
+        AppLogger.service("onStartCommand received action: ${intent?.action}")
 
         try {
             if (intent?.action != ACTION_STOP_MONITORING) {
@@ -90,21 +163,21 @@ class NfcMonitoringService : Service() {
                 ACTION_STOP_MONITORING -> {
                     stopNfcMonitoring()
                     stopSelf()
-                    Log.d(TAG, "Service explicitly stopped via action.")
+                    AppLogger.service("Service explicitly stopped via action")
                     return START_NOT_STICKY
                 }
                 else -> {
-                    Log.d(TAG, "Service started with no specific action, attempting to start monitoring.")
-                    startNfcMonitoring() // Default action if service is restarted
+                    AppLogger.service("Service started with no specific action, attempting to start monitoring")
+                    startNfcMonitoring()
                 }
             }
         } catch (se: SecurityException) {
-            Log.e(TAG, "SecurityException in onStartCommand. Missing permissions?", se)
+            AppLogger.e(TAG, "SecurityException in onStartCommand. Missing permissions?", se)
             updateNfcStatusNotification()
-            stopSelf() // Stop if critical permission is missing
+            stopSelf()
             return START_NOT_STICKY
         } catch (e: Exception) {
-            Log.e(TAG, "Unexpected error in onStartCommand", e)
+            AppLogger.e(TAG, "Unexpected error in onStartCommand", e)
             updateNfcStatusNotification()
             stopSelf()
             return START_NOT_STICKY
@@ -117,57 +190,127 @@ class NfcMonitoringService : Service() {
         try {
             val notification = createNotification(initialContentText)
             startForeground(NOTIFICATION_ID, notification)
-            Log.d(TAG, "Service started in foreground.")
+            AppLogger.service("Service started in foreground")
         } catch (e: Exception) {
-            Log.e(TAG, "Error starting service in foreground", e)
+            AppLogger.e(TAG, "Error starting service in foreground", e)
         }
     }
 
+    /**
+     * Start NFC monitoring with WakeLock management
+     */
     private fun startNfcMonitoring() {
         if (isMonitoring) {
-            Log.d(TAG, "NFC monitoring is already active.")
+            AppLogger.service("NFC monitoring is already active")
             updateNfcStatusNotification()
             return
         }
 
         if (nfcAdapter == null) {
-            Log.w(TAG, "NFC adapter not available. Cannot start monitoring.")
+            AppLogger.w(TAG, "NFC adapter not available. Cannot start monitoring")
             updateNfcStatusNotification()
             isMonitoring = false
             return
         }
 
         if (!nfcAdapter!!.isEnabled) {
-            Log.w(TAG, "NFC is disabled. Cannot start monitoring.")
+            AppLogger.w(TAG, "NFC is disabled. Cannot start monitoring")
             updateNfcStatusNotification()
             isMonitoring = false
             return
         }
 
         try {
+            // Acquire WakeLock to keep CPU awake
+            acquireWakeLock()
+            
             isMonitoring = true
             nfcEnabledStartTime = System.currentTimeMillis()
-            Log.d(TAG, "NFC monitoring started successfully.")
+            AppLogger.service("NFC monitoring started successfully")
             updateNfcStatusNotification()
+            
+            // Start periodic monitoring
+            startPeriodicMonitoring()
         } catch (e: Exception) {
-            Log.e(TAG, "Error starting NFC monitoring operations", e)
+            AppLogger.e(TAG, "Error starting NFC monitoring operations", e)
             updateNfcStatusNotification()
             isMonitoring = false
+            releaseWakeLock()
+        }
+    }
+    
+    /**
+     * Start periodic monitoring loop
+     */
+    private fun startPeriodicMonitoring() {
+        serviceScope.launch {
+            while (isActive && isMonitoring) {
+                try {
+                    // Check NFC status
+                    val isNfcEnabled = nfcAdapter?.isEnabled == true
+                    if (!isNfcEnabled && isMonitoring) {
+                        AppLogger.w(TAG, "NFC disabled during monitoring")
+                        stopNfcMonitoring()
+                        break
+                    }
+                    
+                    // Update notification periodically
+                    updateNfcStatusNotification()
+                    
+                    // Wait before next check
+                    delay(MONITORING_CHECK_INTERVAL)
+                } catch (e: Exception) {
+                    AppLogger.e(TAG, "Error in monitoring loop", e)
+                    break
+                }
+            }
+        }
+    }
+    
+    /**
+     * Acquire WakeLock to keep CPU awake
+     */
+    private fun acquireWakeLock() {
+        try {
+            if (wakeLock?.isHeld == false) {
+                wakeLock?.acquire(10*60*1000L /*10 minutes*/)
+                AppLogger.service("WakeLock acquired")
+            }
+        } catch (e: Exception) {
+            AppLogger.e(TAG, "Failed to acquire WakeLock", e)
+        }
+    }
+    
+    /**
+     * Release WakeLock to save battery
+     */
+    private fun releaseWakeLock() {
+        try {
+            if (wakeLock?.isHeld == true) {
+                wakeLock?.release()
+                AppLogger.service("WakeLock released")
+            }
+        } catch (e: Exception) {
+            AppLogger.e(TAG, "Failed to release WakeLock", e)
         }
     }
 
+    /**
+     * Stop NFC monitoring and release resources
+     */
     private fun stopNfcMonitoring() {
         if (!isMonitoring) {
-            Log.d(TAG, "NFC monitoring is not active or already stopped.")
+            AppLogger.service("NFC monitoring is not active or already stopped")
             return
         }
 
         try {
             isMonitoring = false
-            Log.d(TAG, "NFC monitoring stopped.")
+            releaseWakeLock()
+            AppLogger.service("NFC monitoring stopped")
             updateNfcStatusNotification()
         } catch (e: Exception) {
-            Log.e(TAG, "Error stopping NFC monitoring operations", e)
+            AppLogger.e(TAG, "Error stopping NFC monitoring operations", e)
         }
     }
 
@@ -196,9 +339,9 @@ class NfcMonitoringService : Service() {
                                     .setUsage(AudioAttributes.USAGE_NOTIFICATION)
                                     .build()
                                 setSound(customSoundUri, audioAttributes)
-                                Log.d(TAG, "Notification channel using custom sound: $customSoundUriString")
+                                AppLogger.service("Notification channel using custom sound: $customSoundUriString")
                             } catch (e: Exception) {
-                                Log.e(TAG, "Failed to parse custom sound URI: $customSoundUriString. Using default sound.", e)
+                                AppLogger.e(TAG, "Failed to parse custom sound URI: $customSoundUriString. Using default sound.", e)
                                 setSound(android.provider.Settings.System.DEFAULT_NOTIFICATION_URI, AudioAttributes.Builder()
                                     .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
                                     .setUsage(AudioAttributes.USAGE_NOTIFICATION)
@@ -209,20 +352,20 @@ class NfcMonitoringService : Service() {
                                 .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
                                 .setUsage(AudioAttributes.USAGE_NOTIFICATION)
                                 .build())
-                            Log.d(TAG, "Notification channel using system default sound.")
+                            AppLogger.service("Notification channel using system default sound")
                         }
                         enableVibration(settings?.vibrationEnabled ?: false) 
                     } else {
                         setSound(null, null)
                         enableVibration(false) 
-                        Log.d(TAG, "Notification channel sound disabled.")
+                        AppLogger.service("Notification channel sound disabled")
                     }
                 }
                 val notificationManager = getSystemService(NotificationManager::class.java)
                 notificationManager?.createNotificationChannel(channel)
-                Log.d(TAG, "Notification channel created/updated.")
+                AppLogger.service("Notification channel created/updated")
             } catch (e: Exception) {
-                Log.e(TAG, "Failed to create notification channel", e)
+                AppLogger.e(TAG, "Failed to create notification channel", e)
             }
         }
     }
@@ -269,9 +412,9 @@ class NfcMonitoringService : Service() {
             )
             
             startForeground(NOTIFICATION_ID, notification)
-            Log.d(TAG, "NFC status notification updated - Enabled: $isEnabled, Duration: ${enabledDuration}ms")
+            AppLogger.service("NFC status notification updated - Enabled: $isEnabled, Duration: ${enabledDuration}ms")
         } catch (e: Exception) {
-            Log.e(TAG, "Failed to update NFC status notification", e)
+            AppLogger.e(TAG, "Failed to update NFC status notification", e)
         }
     }
     
@@ -281,15 +424,16 @@ class NfcMonitoringService : Service() {
             // this would need to be calculated asynchronously
             SecurityLevel.GOOD // Default fallback
         } catch (e: Exception) {
-            Log.e(TAG, "Failed to calculate security level", e)
+            AppLogger.e(TAG, "Failed to calculate security level", e)
             SecurityLevel.MODERATE // Safe fallback
         }
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        Log.d(TAG, "Service being destroyed.")
+        AppLogger.service("Service being destroyed")
         stopNfcMonitoring()
+        releaseWakeLock()
         serviceJob.cancel() 
         try {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
@@ -298,20 +442,11 @@ class NfcMonitoringService : Service() {
                 @Suppress("DEPRECATION")
                 stopForeground(true)
             }
-            Log.d(TAG, "Foreground state removed.")
+            AppLogger.service("Foreground state removed")
         } catch (e: Exception) {
-            Log.e(TAG, "Error ensuring foreground state is removed on destroy", e)
+            AppLogger.e(TAG, "Error ensuring foreground state is removed on destroy", e)
         }
     }
 
     override fun onBind(intent: Intent?): IBinder? = null
-
-    companion object {
-        private const val TAG = "NfcMonitoringService"
-        private const val NOTIFICATION_ID = 1001
-        private const val CHANNEL_ID = "NFC_MONITORING_CHANNEL_V2" 
-
-        const val ACTION_START_MONITORING = "com.dxbmark.nfcmanager.services.ACTION_START_MONITORING"
-        const val ACTION_STOP_MONITORING = "com.dxbmark.nfcmanager.services.ACTION_STOP_MONITORING"
-    }
 }
