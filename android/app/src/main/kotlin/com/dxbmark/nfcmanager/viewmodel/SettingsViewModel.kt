@@ -37,8 +37,7 @@ class SettingsViewModel @Inject constructor(
     private val _requestNfcPermissionChannel = MutableSharedFlow<Unit>(replay = 0)
     val requestNfcPermissionFlow = _requestNfcPermissionChannel.asSharedFlow()
 
-    private val _requestStoragePermissionChannel = MutableSharedFlow<Unit>(replay = 0)
-    val requestStoragePermissionFlow = _requestStoragePermissionChannel.asSharedFlow()
+    // Storage permission removed - GetContent() handles permissions automatically
 
     private val _recreateActivityChannel = MutableSharedFlow<Unit>(replay = 0)
     val recreateActivityFlow = _recreateActivityChannel.asSharedFlow()
@@ -167,27 +166,7 @@ class SettingsViewModel @Inject constructor(
         ) == PackageManager.PERMISSION_GRANTED
     }
 
-    private fun checkStoragePermission(): Boolean {
-        val permission = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            Manifest.permission.READ_MEDIA_AUDIO
-        } else {
-            Manifest.permission.READ_EXTERNAL_STORAGE
-        }
-        return ContextCompat.checkSelfPermission(
-            app.applicationContext,
-            permission
-        ) == PackageManager.PERMISSION_GRANTED
-    }
-
-    fun requestStoragePermissionForSoundPicker(): Boolean {
-        if (checkStoragePermission()) {
-            return true
-        }
-        viewModelScope.launch {
-            _requestStoragePermissionChannel.emit(Unit)
-        }
-        return false
-    }
+    // Storage permission functions removed - no longer needed with GetContent()
 
     fun updateCustomNotificationSound(soundUri: String?) {
         viewModelScope.launch {

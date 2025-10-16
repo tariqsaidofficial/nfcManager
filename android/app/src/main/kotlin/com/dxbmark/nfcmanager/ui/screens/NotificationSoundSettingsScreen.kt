@@ -1,6 +1,5 @@
 package com.dxbmark.nfcmanager.ui.screens
 
-import android.Manifest
 import android.content.Context
 import android.content.Intent
 import android.media.Ringtone
@@ -70,27 +69,7 @@ fun NotificationSoundSettingsScreen(
         }
     )
 
-    val requestStoragePermissionLauncher = rememberLauncherForActivityResult(
-        contract = ActivityResultContracts.RequestPermission(),
-        onResult = { isGranted: Boolean ->
-            if (isGranted) {
-                pickSoundLauncher.launch("audio/*")
-            } else {
-                Toast.makeText(context, context.getString(R.string.storage_permission_required), Toast.LENGTH_LONG).show()
-            }
-        }
-    )
-
-    LaunchedEffect(Unit) {
-        viewModel.requestStoragePermissionFlow.collectLatest {
-            val permission = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-                Manifest.permission.READ_MEDIA_AUDIO
-            } else {
-                Manifest.permission.READ_EXTERNAL_STORAGE
-            }
-            requestStoragePermissionLauncher.launch(permission)
-        }
-    }
+    // No permission needed - GetContent() uses system picker with automatic permissions
 
     Scaffold(
         topBar = {
@@ -168,9 +147,8 @@ fun NotificationSoundSettingsScreen(
                 onClick = {
                     currentRingtone?.stop()
                     isPlayingSound = false
-                    if (viewModel.requestStoragePermissionForSoundPicker()) { // Checks if permission already granted
-                        pickSoundLauncher.launch("audio/*")
-                    }
+                    // No permission needed - GetContent() handles it automatically
+                    pickSoundLauncher.launch("audio/*")
                 },
                 modifier = Modifier.fillMaxWidth()
             ) {

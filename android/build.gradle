@@ -26,7 +26,7 @@ buildscript {
     dependencies {
         // Official Android Gradle Plugin (Stable version)
         // Fixed: 8.13.0 doesn't exist, downgraded to stable 8.2.2
-        classpath 'com.android.tools.build:gradle:8.2.2'
+        classpath 'com.android.tools.build:gradle:8.13.0'
         
         // Kotlin Gradle Plugin
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
