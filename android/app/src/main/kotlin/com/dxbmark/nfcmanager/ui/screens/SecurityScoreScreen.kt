@@ -6,6 +6,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.HelpOutline
 import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -324,7 +325,7 @@ private fun getSecurityLevelIcon(level: SecurityLevel): ImageVector {
         SecurityLevel.MODERATE -> Icons.Default.Warning
         SecurityLevel.POOR -> Icons.Default.Error
         SecurityLevel.CRITICAL -> Icons.Default.Dangerous
-        SecurityLevel.NOT_APPLICABLE -> Icons.Default.HelpOutline
+        SecurityLevel.NOT_APPLICABLE -> Icons.AutoMirrored.Filled.HelpOutline
     }
 }
 

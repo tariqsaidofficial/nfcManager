@@ -1,7 +1,11 @@
 // Top-level build file - Official Google repositories only
+// NFC Manager - Dependency Versions (Last Updated: 2025-10-16)
 buildscript {
+    // Kotlin version - Compatible with Compose Compiler 1.5.10
     ext.kotlin_version = '1.9.22'
-    ext.hilt_version = '2.50' // Added Hilt version
+    
+    // Hilt version - Stable and compatible with Kotlin 1.9.22
+    ext.hilt_version = '2.50'
 
     ext {
         compileSdkVersion = 34
@@ -20,16 +24,23 @@ buildscript {
     }
 
     dependencies {
-        // Official Android Gradle Plugin
-        classpath 'com.android.tools.build:gradle:8.13.0'
+        // Official Android Gradle Plugin (Stable version)
+        // Fixed: 8.13.0 doesn't exist, downgraded to stable 8.2.2
+        classpath 'com.android.tools.build:gradle:8.2.2'
+        
+        // Kotlin Gradle Plugin
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-        classpath "com.google.dagger:hilt-android-gradle-plugin:$hilt_version" // Added Hilt plugin
+        
+        // Hilt Android Gradle Plugin
+        classpath "com.google.dagger:hilt-android-gradle-plugin:$hilt_version"
     }
 }
 
+// Note: allprojects repositories are now defined in settings.gradle
+// This block is kept for backward compatibility but repositories
+// should be managed in settings.gradle (dependencyResolutionManagement)
 allprojects {
     repositories {
-        // Same official repositories
         google()
         mavenCentral()
         maven { url "https://jitpack.io" }
