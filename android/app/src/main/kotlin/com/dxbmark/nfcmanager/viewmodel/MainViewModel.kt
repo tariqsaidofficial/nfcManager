@@ -19,16 +19,41 @@ import kotlinx.coroutines.withContext
 import java.util.Date
 import javax.inject.Inject
 
+/**
+ * Main ViewModel for the NFC Manager application.
+ * 
+ * This ViewModel manages the main screen state and handles:
+ * - NFC status monitoring and updates
+ * - NFC event logging and retrieval
+ * - Settings management
+ * - UI state management for the home screen
+ * 
+ * The ViewModel follows the MVVM architecture pattern and uses StateFlow
+ * for reactive UI updates. It integrates with the repository layer for
+ * data operations and uses Hilt for dependency injection.
+ * 
+ * @param app Application context for accessing system services
+ * @param repository Repository for NFC data operations
+ * 
+ * @author NFC Manager Team
+ * @since 1.0.0
+ */
 @HiltViewModel
 class MainViewModel @Inject constructor(
     private val app: Application, // Changed to private val to use it in methods
     private val repository: NFCRepository
 ) : AndroidViewModel(app) {
 
+    /** Private mutable state for UI updates */
     private val _uiState = MutableStateFlow(MainUiState(isLoading = true))
+    
+    /** Public read-only UI state exposed to the UI layer */
     val uiState: StateFlow<MainUiState> = _uiState.asStateFlow()
 
-    // TODO: These should be properly initialized and collected from the repository
+    /** 
+     * Current app settings from the repository.
+     * Automatically updates when settings change in the database.
+     */
     val settings: StateFlow<NFCSettingsEntity> = repository.getSettings()
         .stateIn(
             scope = viewModelScope,
@@ -36,13 +61,21 @@ class MainViewModel @Inject constructor(
             initialValue = NFCSettingsEntity(isOnboardingCompleted = true)
         )
 
-    val todayEvents: StateFlow<List<NFCEventEntity>> = repository.getTodayEvents() // Corrected function name
+    /** 
+     * Today's NFC events from the repository.
+     * Updates automatically when new events are logged.
+     */
+    val todayEvents: StateFlow<List<NFCEventEntity>> = repository.getTodayEvents()
         .stateIn(
             scope = viewModelScope,
             started = SharingStarted.WhileSubscribed(5000),
             initialValue = emptyList()
         )
 
+    /** 
+     * Count of today's NFC events.
+     * Derived from todayEvents for UI display.
+     */
     val todayEventCount: StateFlow<Int> = todayEvents.map { it.size }
         .stateIn(
             scope = viewModelScope,
@@ -63,6 +96,12 @@ class MainViewModel @Inject constructor(
         }
     }
 
+    /**
+     * Refreshes the NFC status by checking the device's NFC adapter.
+     * 
+     * This function checks if NFC is supported on the device and if it's currently enabled.
+     * Updates the UI state with the current NFC status information.
+     */
     fun refreshNfcStatus() {
         Log.d("MainViewModel", "refreshNfcStatus called")
         viewModelScope.launch {
@@ -82,6 +121,21 @@ class MainViewModel @Inject constructor(
         }
     }
 
+    /**
+     * Logs an NFC event to the repository.
+     * 
+     * This function creates a new NFC event entry with the provided details
+     * and stores it in the database through the repository.
+     * 
+     * @param eventType The type of event (e.g., "NFC_SCAN", "SYSTEM")
+     * @param message The event message or description
+     * @param icon The icon identifier for the event
+     * @param tagId Optional NFC tag ID if applicable
+     * @param tagType Optional NFC tag type if applicable
+     * @param data Optional additional data for the event
+     * @param appPackage Optional app package name if applicable
+     * @param isImportant Whether this event should be marked as important
+     */
     fun logEvent(
         eventType: String,
         message: String,
@@ -98,6 +152,15 @@ class MainViewModel @Inject constructor(
         }
     }
 
+    /**
+     * Logs a real NFC tag scan event.
+     * 
+     * This function is called when an actual NFC tag is scanned by the device.
+     * It creates a specialized log entry for NFC tag interactions.
+     * 
+     * @param tagIdHex The hexadecimal representation of the tag ID
+     * @param action The NFC action that triggered the scan
+     */
     fun logRealNfcTagScan(tagIdHex: String, action: String) {
         logEvent(
             eventType = app.getString(R.string.event_type_nfc_scan),

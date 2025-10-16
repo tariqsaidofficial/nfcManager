@@ -32,6 +32,31 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
+/**
+ * Foreground service for continuous NFC monitoring.
+ * 
+ * This service runs in the background to monitor NFC status and activity.
+ * It provides:
+ * - Continuous NFC status monitoring
+ * - Periodic privacy score calculations
+ * - Persistent notification with current status
+ * - Battery-optimized monitoring with WakeLock management
+ * - Integration with app notification system
+ * 
+ * The service uses Hilt for dependency injection and follows Android's
+ * foreground service guidelines. It maintains a persistent notification
+ * and handles proper lifecycle management.
+ * 
+ * Key features:
+ * - Efficient coroutine-based monitoring
+ * - Configurable monitoring intervals
+ * - Privacy score tracking
+ * - Sound and vibration notifications
+ * - Proper resource cleanup
+ * 
+ * @author NFC Manager Team
+ * @since 1.0.0
+ */
 @AndroidEntryPoint // <<< HILT ANNOTATION
 class NfcMonitoringService : Service() {
 

@@ -22,6 +22,25 @@ import javax.inject.Inject
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
+/**
+ * ViewModel for managing app settings and preferences.
+ * 
+ * This ViewModel handles:
+ * - App settings management (theme, language, notifications)
+ * - Permission requests and status checking
+ * - NFC monitoring service control
+ * - Settings persistence through repository
+ * - Language switching and app recreation
+ * 
+ * The ViewModel integrates with the repository layer for data persistence
+ * and manages UI state for the settings screen.
+ * 
+ * @param app Application context for accessing system services and resources
+ * @param repository Repository for settings data operations
+ * 
+ * @author NFC Manager Team
+ * @since 1.0.0
+ */
 @HiltViewModel
 class SettingsViewModel @Inject constructor(
     private val app: Application, // 'app' is the Application context

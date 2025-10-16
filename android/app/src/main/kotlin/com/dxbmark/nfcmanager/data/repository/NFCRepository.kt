@@ -12,6 +12,27 @@ import java.util.Date
 import javax.inject.Inject
 import javax.inject.Singleton
 
+/**
+ * Repository for managing NFC-related data operations.
+ * 
+ * This repository serves as the single source of truth for NFC data and provides
+ * a clean API for data operations. It abstracts the data layer from the UI layer
+ * and handles:
+ * - NFC event logging and retrieval
+ * - App settings management
+ * - Data caching and flow management
+ * - Database operations coordination
+ * 
+ * The repository follows the Repository pattern and uses Room DAOs for database
+ * operations. It exposes reactive data streams using Kotlin Flow for real-time
+ * UI updates.
+ * 
+ * @param nfcEventDao DAO for NFC event database operations
+ * @param nfcSettingsDao DAO for settings database operations
+ * 
+ * @author NFC Manager Team
+ * @since 1.0.0
+ */
 @Singleton
 class NFCRepository @Inject constructor(
     private val nfcEventDao: NFCEventDao,

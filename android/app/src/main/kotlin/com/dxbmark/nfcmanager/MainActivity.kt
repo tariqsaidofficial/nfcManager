@@ -46,23 +46,57 @@ import kotlinx.coroutines.withTimeout
 // import java.util.Locale // No longer needed directly here
 // import javax.inject.Inject // Not needed for repository here
 
+/**
+ * Main activity for NFC Manager application.
+ * 
+ * This activity serves as the entry point for the application and handles:
+ * - NFC tag detection and processing
+ * - Splash screen management
+ * - Locale configuration and language switching
+ * - Navigation between different screens (onboarding, main app)
+ * - System bar theming based on dark/light mode
+ * 
+ * The activity uses Hilt for dependency injection and follows MVVM architecture
+ * with ViewModels for state management.
+ * 
+ * @author NFC Manager Team
+ * @since 1.0.0
+ */
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
+    /** Main ViewModel for handling NFC operations and app state */
     private val mainViewModel: MainViewModel by viewModels()
+    
+    /** Settings ViewModel for managing app preferences and configuration */
     private val settingsViewModel: SettingsViewModel by viewModels()
 
+    /** NFC adapter for handling NFC operations */
     private var nfcAdapter: NfcAdapter? = null
+    
+    /** Pending intent for NFC foreground dispatch */
     private lateinit var pendingIntent: PendingIntent
+    
+    /** Intent filters for different NFC actions */
     private lateinit var nfcIntentFilters: Array<IntentFilter>
     
-    // Splash Screen control
+    /** Flag to control splash screen visibility */
     private var isAppReady = false
 
     companion object {
+        /** Tag for logging purposes */
         private const val TAG = "MainActivityFull"
     }
 
+    /**
+     * Attaches the base context with proper locale configuration.
+     * 
+     * This method is called before onCreate() and ensures that the activity
+     * uses the correct locale based on user settings. It wraps the base context
+     * with LocaleUtils to apply the selected language.
+     * 
+     * @param newBase The new base context to attach
+     */
     override fun attachBaseContext(newBase: Context) {
         // Use LocaleUtils.onAttach to get the localized context
         // This already fetches currentLanguageCode from NfcManagerApplication internally
@@ -70,6 +104,20 @@ class MainActivity : ComponentActivity() {
         super.attachBaseContext(LocaleUtils.onAttach(newBase))
     }
 
+    /**
+     * Called when the activity is starting.
+     * 
+     * This method handles:
+     * - Splash screen installation and configuration
+     * - Edge-to-edge display setup
+     * - NFC initialization
+     * - ViewModels setup and observation
+     * - UI content setup with Compose
+     * 
+     * @param savedInstanceState If the activity is being re-initialized after previously
+     *                          being shut down then this Bundle contains the data it most
+     *                          recently supplied in onSaveInstanceState(Bundle)
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         // Install Splash Screen before calling super.onCreate()
         val splashScreen = installSplashScreen()
@@ -140,6 +188,16 @@ class MainActivity : ComponentActivity() {
         Log.d(TAG, "onCreate: MainActivity (FULL HILT) started successfully!")
     }
 
+    /**
+     * Sets up NFC adapter and intent filters for NFC tag detection.
+     * 
+     * This method initializes:
+     * - NFC adapter from the system
+     * - Pending intent for foreground dispatch
+     * - Intent filters for NDEF and TAG discovered actions
+     * 
+     * The setup ensures that the app can receive NFC intents when in foreground.
+     */
     private fun setupNFC() {
         nfcAdapter = NfcAdapter.getDefaultAdapter(this)
 
@@ -164,6 +222,12 @@ class MainActivity : ComponentActivity() {
         Log.d(TAG, "NFC setup complete. Adapter: ${nfcAdapter != null}")
     }
 
+    /**
+     * Called when the activity will start interacting with the user.
+     * 
+     * Enables NFC foreground dispatch to ensure this activity receives
+     * NFC intents when it's in the foreground, and refreshes the NFC status.
+     */
     override fun onResume() {
         super.onResume()
         nfcAdapter?.enableForegroundDispatch(this, pendingIntent, nfcIntentFilters, null)
@@ -171,12 +235,26 @@ class MainActivity : ComponentActivity() {
         Log.d(TAG, "onResume: Foreground dispatch enabled. NFC status refreshed.")
     }
 
+    /**
+     * Called when the system is about to start resuming a previous activity.
+     * 
+     * Disables NFC foreground dispatch to prevent this activity from receiving
+     * NFC intents when it's not in the foreground.
+     */
     override fun onPause() {
         super.onPause()
         nfcAdapter?.disableForegroundDispatch(this)
         Log.d(TAG, "onPause: Foreground dispatch disabled.")
     }
 
+    /**
+     * Called when the activity receives a new intent.
+     * 
+     * This method handles NFC tag discovery intents and processes the detected tags.
+     * It supports NDEF_DISCOVERED, TAG_DISCOVERED, and TECH_DISCOVERED actions.
+     * 
+     * @param intent The new intent that was started for the activity
+     */
     override fun onNewIntent(intent: Intent) {
         super.onNewIntent(intent)
         Log.d(TAG, "onNewIntent: Intent received - Action: ${intent.action}")
@@ -200,6 +278,15 @@ class MainActivity : ComponentActivity() {
         }
     }
 
+    /**
+     * Converts a byte array to a hexadecimal string representation.
+     * 
+     * This utility function is used to convert NFC tag IDs (which are byte arrays)
+     * into readable hexadecimal strings for logging and display purposes.
+     * 
+     * @param bytes The byte array to convert
+     * @return A hexadecimal string representation of the byte array
+     */
     private fun bytesToHexString(bytes: ByteArray): String {
         val hexChars = CharArray(bytes.size * 2)
         for (j in bytes.indices) {
