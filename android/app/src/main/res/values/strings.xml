@@ -44,6 +44,7 @@
     <string name="ok">OK</string>
     <string name="cancel">Cancel</string>
     <string name="save">Save</string>
+    <string name="retry_button">Retry</string>
 
     <!-- Language Settings -->
     <string name="settings_language_title">Language</string>
@@ -518,6 +519,48 @@
     <string name="recommendation_alert_unknown_tag">Be cautious with unknown NFC tags</string>
     <string name="recommendation_alert_multiple_tags">Avoid crowded areas when using NFC</string>
     <string name="recommendation_alert_suspicious_activity">Review your NFC usage patterns</string>
+    
+    <!-- Error Messages - Network -->
+    <string name="error_no_internet">No internet connection. Please check your network settings.</string>
+    <string name="error_timeout">Request timed out. Please try again.</string>
+    <string name="error_server">Server error: %1$d. Please try again later.</string>
+    <string name="error_network_unknown">Network error occurred. Please try again.</string>
+    
+    <!-- Error Messages - Database -->
+    <string name="error_database_read">Failed to read data from database.</string>
+    <string name="error_database_write">Failed to save data to database.</string>
+    <string name="error_database_delete">Failed to delete data from database.</string>
+    <string name="error_database_corrupted">Database data is corrupted. Please reinstall the app.</string>
+    <string name="error_database_unknown">Database error occurred.</string>
+    
+    <!-- Error Messages - NFC -->
+    <string name="error_nfc_read">Failed to read NFC tag. Please try again.</string>
+    <string name="error_nfc_write">Failed to write to NFC tag. Please try again.</string>
+    <string name="error_nfc_tag_lost">NFC tag connection lost. Please hold the tag closer.</string>
+    <string name="error_nfc_unknown">NFC error occurred. Please try again.</string>
+    
+    <!-- Error Messages - Permission -->
+    <string name="error_permission_notification">Notification permission is required for alerts.</string>
+    <string name="error_permission_unknown">Permission denied: %1$s</string>
+    
+    <!-- Error Messages - Service -->
+    <string name="error_service_start">Failed to start monitoring service.</string>
+    <string name="error_service_stop">Failed to stop monitoring service.</string>
+    <string name="error_service_not_running">Monitoring service is not running.</string>
+    <string name="error_service_unknown">Service error occurred.</string>
+    
+    <!-- Error Messages - Validation -->
+    <string name="error_validation_invalid">Invalid input for: %1$s</string>
+    <string name="error_validation_range">%1$s must be between %2$d and %3$d</string>
+    <string name="error_validation_required">%1$s is required</string>
+    
+    <!-- Error Messages - File -->
+    <string name="error_file_not_found">File not found: %1$s</string>
+    <string name="error_file_read">Failed to read file.</string>
+    <string name="error_file_write">Failed to write file.</string>
+    <string name="error_file_permission">File permission denied.</string>
+    <string name="error_file_unknown">File error occurred.</string>
+    
     <!-- === NEW STRINGS END HERE === -->
 
 </resources>
