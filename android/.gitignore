@@ -4,3 +4,16 @@ nfcmanager-release.keystore
 KEYSTORE_CREDENTIALS.txt
 gradle.properties
 app/mapping.txt
+
+# Firebase temporary files
+.firebase/
+dataconnect/.dataconnect/
+*.idsig
+
+# APK files (keep only in release folder)
+*.apk
+!release-*/
+
+# Keystore files (security)
+*.keystore
+*.jks

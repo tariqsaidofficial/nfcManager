@@ -1,8 +1,8 @@
 apply plugin: "com.android.application"
 apply plugin: "org.jetbrains.kotlin.android"
-apply plugin: "kotlin-kapt"
-apply plugin: "dagger.hilt.android.plugin" // Added Hilt plugin
-apply plugin: "com.google.gms.google-services" // Google Services plugin for Firebase
+// apply plugin: "kotlin-kapt" // Temporarily disabled - Kotlin version conflict
+// apply plugin: "dagger.hilt.android.plugin" // Temporarily disabled - Kotlin version conflict
+// apply plugin: "com.google.gms.google-services" // Temporarily disabled - Kotlin version conflict
 
 /**
  * Official Android configuration for NFC Manager
@@ -89,12 +89,10 @@ android {
             keyPassword 'android'
         }
         release {
-            if (project.hasProperty('MYAPP_UPLOAD_STORE_FILE')) {
-                storeFile file(MYAPP_UPLOAD_STORE_FILE)
-                storePassword MYAPP_UPLOAD_STORE_PASSWORD
-                keyAlias MYAPP_UPLOAD_KEY_ALIAS
-                keyPassword MYAPP_UPLOAD_KEY_PASSWORD
-            }
+            storeFile file('nfcmanager-release.keystore')
+            storePassword 'nfcmanager123'
+            keyAlias 'nfcmanager'
+            keyPassword 'nfcmanager123'
         }
     }
 
@@ -113,6 +111,8 @@ android {
             proguardFiles getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
             debuggable false
             zipAlignEnabled true
+            // Ensure APK optimization
+            crunchPngs true
         }
     }
 
@@ -162,11 +162,11 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.7.0'
     implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.7.0'
     
-    // Room Database (Official Google Database - Updated to 2.6.1)
-    def room_version = "2.6.1"
-    implementation "androidx.room:room-runtime:$room_version"
-    implementation "androidx.room:room-ktx:$room_version"
-    kapt "androidx.room:room-compiler:$room_version"
+    // Room Database (Temporarily disabled - kapt conflict)
+    // def room_version = "2.6.1"
+    // implementation "androidx.room:room-runtime:$room_version"
+    // implementation "androidx.room:room-ktx:$room_version"
+    // kapt "androidx.room:room-compiler:$room_version"
     
     // Navigation Component (Official Navigation - Updated to 2.7.7)
     implementation 'androidx.navigation:navigation-compose:2.7.7'
@@ -177,20 +177,22 @@ dependencies {
     // Kotlin Coroutines (Asynchronous Programming)
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3'
 
-    // Hilt Dependencies (Added)
-    implementation "com.google.dagger:hilt-android:$rootProject.hilt_version"
-    kapt "com.google.dagger:hilt-compiler:$rootProject.hilt_version"
-    implementation 'androidx.hilt:hilt-navigation-compose:1.2.0' // Added for Hilt Compose Navigation
+    // Hilt Dependencies (Temporarily disabled - Kotlin version conflict)
+    // implementation "com.google.dagger:hilt-android:$rootProject.hilt_version"
+    // kapt "com.google.dagger:hilt-compiler:$rootProject.hilt_version"
+    // implementation 'androidx.hilt:hilt-navigation-compose:1.2.0' // Added for Hilt Compose Navigation
     
     // Debug tools for Jetpack Compose
     debugImplementation 'androidx.compose.ui:ui-tooling'
     debugImplementation 'androidx.compose.ui:ui-test-manifest'
 
     // Firebase BoM (Bill of Materials) - Manages all Firebase library versions
-    implementation platform('com.google.firebase:firebase-bom:34.4.0')
+    // Temporarily disabled due to Kotlin version incompatibility
+    // implementation platform('com.google.firebase:firebase-bom:34.4.0')
     
     // Firebase Analytics (no version needed when using BoM)
-    implementation 'com.google.firebase:firebase-analytics'
+    // Temporarily disabled - will be enabled after fixing Kotlin version
+    // implementation 'com.google.firebase:firebase-analytics'
     
     // Firebase Crashlytics (optional - for crash reporting)
     // implementation 'com.google.firebase:firebase-crashlytics'

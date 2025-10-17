@@ -1,0 +1,68 @@
+mutation CreateSeedData @transaction @auth(level: PUBLIC, insecureReason: "This operation is safe to expose to the public") {
+  user_insertMany(data: [
+    {
+      id: "550e8400-e29b-41d4-a716-446655440000",
+      displayName: "demouser1",
+      createdAt: "2024-04-26T12:00:00Z"
+    },
+    {
+      id: "550e8400-e29b-41d4-a716-446655440001",
+      displayName: "demouser2",
+      createdAt: "2024-04-26T12:00:00Z"
+    }
+  ])
+  nfcTag_insertMany(data: [
+    {
+      id: "650e8400-e29b-41d4-a716-446655440002",
+      userId: "550e8400-e29b-41d4-a716-446655440000",
+      uid: "nfc123",
+      createdAt: "2024-04-26T12:00:00Z"
+    },
+    {
+      id: "750e8400-e29b-41d4-a716-446655440003",
+      userId: "550e8400-e29b-41d4-a716-446655440001",
+      uid: "nfc456",
+      createdAt: "2024-04-26T12:00:00Z"
+    }
+  ])
+  category_insertMany(data: [
+    {
+      id: "850e8400-e29b-41d4-a716-446655440004",
+      userId: "550e8400-e29b-41d4-a716-446655440000",
+      name: "Category 1",
+      createdAt: "2024-04-26T12:00:00Z"
+    },
+    {
+      id: "950e8400-e29b-41d4-a716-446655440005",
+      userId: "550e8400-e29b-41d4-a716-446655440001",
+      name: "Category 2",
+      createdAt: "2024-04-26T12:00:00Z"
+    }
+  ])
+  tagCategory_insertMany(data: [
+    {
+      nfcTagId: "650e8400-e29b-41d4-a716-446655440002",
+      categoryId: "850e8400-e29b-41d4-a716-446655440004",
+      createdAt: "2024-04-26T12:00:00Z"
+    },
+    {
+      nfcTagId: "750e8400-e29b-41d4-a716-446655440003",
+      categoryId: "950e8400-e29b-41d4-a716-446655440005",
+      createdAt: "2024-04-26T12:00:00Z"
+    }
+  ])
+  tagData_insertMany(data: [
+    {
+      nfcTagId: "650e8400-e29b-41d4-a716-446655440002",
+      content: "Example data 1",
+      type: "text",
+      createdAt: "2024-04-26T12:00:00Z"
+    },
+    {
+      nfcTagId: "750e8400-e29b-41d4-a716-446655440003",
+      content: "Example data 2",
+      type: "image",
+      createdAt: "2024-04-26T12:00:00Z"
+    }
+  ])
+}

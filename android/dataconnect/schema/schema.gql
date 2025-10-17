@@ -1,0 +1,38 @@
+type User @table {
+  displayName: String!
+  createdAt: Timestamp!
+  email: String
+  photoUrl: String
+}
+
+type NfcTag @table {
+  uid: String!
+  createdAt: Timestamp!
+  name: String
+  description: String
+  lastWrittenAt: Timestamp
+  lastReadAt: Timestamp
+  user: User
+}
+
+type TagData @table {
+  type: String!
+  content: String!
+  createdAt: Timestamp!
+  isPublic: Boolean
+  mimeType: String
+  nfcTag: NfcTag
+}
+
+type Category @table {
+  name: String!
+  createdAt: Timestamp!
+  description: String
+  user: User
+}
+
+type TagCategory @table(key: ["nfcTag", "category"]) {
+  createdAt: Timestamp!
+  nfcTag: NfcTag!
+  category: Category!
+}

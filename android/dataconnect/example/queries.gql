@@ -1,0 +1,35 @@
+mutation CreateNfcTag($name: String!, $uid: String!, $description: String) @auth(level: USER) {
+  nfcTag_insert(data: {
+    name: $name,
+    uid: $uid,
+    description: $description,
+    userId_expr: "auth.uid",
+    createdAt_expr: "request.time"
+  })
+}
+
+query GetNfcTags @auth(level: USER) {
+  nfcTags(where: {userId: {eq_expr: "auth.uid"}}) {
+    id
+    name
+    uid
+    description
+    createdAt
+    lastReadAt
+    lastWrittenAt
+  }
+}
+
+mutation UpdateNfcTag($id: UUID!, $name: String, $description: String) @auth(level: USER) {
+  nfcTag_update(
+    key: {id: $id}
+    data: {
+      name: $name,
+      description: $description
+    }
+  )
+}
+
+mutation DeleteNfcTag($id: UUID!) @auth(level: USER) {
+  nfcTag_delete(key: {id: $id})
+}
