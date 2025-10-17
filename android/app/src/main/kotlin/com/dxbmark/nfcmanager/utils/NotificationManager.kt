@@ -2,7 +2,7 @@ package com.dxbmark.nfcmanager.utils
 
 import android.app.Notification
 import android.app.NotificationChannel
-import android.app.NotificationManager
+import android.app.NotificationManager as AndroidNotificationManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
@@ -11,8 +11,7 @@ import android.os.Build
 import androidx.compose.ui.graphics.toArgb
 import androidx.core.app.NotificationCompat
 import com.dxbmark.nfcmanager.MainActivity
-// import com.dxbmark.nfcmanager.R // Remove this line as we are using android.R
-// import com.dxbmark.nfcmanager.utils.SecurityLevel // SecurityLevel is already imported by the specific import below
+import com.dxbmark.nfcmanager.R
 import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -24,7 +23,7 @@ import javax.inject.Singleton
 class NotificationManager @Inject constructor(
     @ApplicationContext private val context: Context
 ) {
-    private val notificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+    private val notificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as AndroidNotificationManager
     
     companion object {
         // TODO: Consider moving channel names and descriptions to string resources
@@ -173,6 +172,15 @@ class NotificationManager @Inject constructor(
     }
     
     /**
+     * Alias for showSecurityAlert for backward compatibility
+     */
+    fun sendSecurityAlert(
+        alertType: SecurityAlertType,
+        severity: SecurityLevel,
+        message: String
+    ) = showSecurityAlert(alertType, message, severity)
+    
+    /**
      * Cancels NFC status notification
      */
     fun cancelNfcStatusNotification() {
@@ -193,12 +201,12 @@ class NotificationManager @Inject constructor(
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             // TODO: Channel names and descriptions should be string resources
             // NFC Status Channel
-            val nfcStatusChannelName = "NFC Status"
-            val nfcStatusChannelDesc = "Shows current NFC status and security level"
+            val nfcStatusChannelName = context.getString(R.string.notification_channel_nfc_status_name)
+            val nfcStatusChannelDesc = context.getString(R.string.notification_channel_nfc_status_description)
             val nfcStatusChannel = NotificationChannel(
                 NFC_STATUS_CHANNEL_ID,
                 nfcStatusChannelName,
-                NotificationManager.IMPORTANCE_LOW
+                AndroidNotificationManager.IMPORTANCE_LOW
             ).apply {
                 description = nfcStatusChannelDesc
                 setShowBadge(false)
@@ -213,7 +221,7 @@ class NotificationManager @Inject constructor(
             val securityAlertChannel = NotificationChannel(
                 SECURITY_ALERT_CHANNEL_ID,
                 securityAlertChannelName,
-                NotificationManager.IMPORTANCE_HIGH
+                AndroidNotificationManager.IMPORTANCE_HIGH
             ).apply {
                 description = securityAlertChannelDesc
                 setShowBadge(true)

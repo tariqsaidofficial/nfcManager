@@ -1,5 +1,6 @@
 package com.dxbmark.nfcmanager.viewmodel
 
+import android.app.Activity
 import android.app.Application
 import android.content.Context
 import android.content.Intent
@@ -10,14 +11,18 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.dxbmark.nfcmanager.R
 import com.dxbmark.nfcmanager.data.database.entities.NFCEventEntity
+import com.dxbmark.nfcmanager.data.database.entities.NFCSettingsEntity
 import com.dxbmark.nfcmanager.data.repository.NFCRepository
 import com.dxbmark.nfcmanager.services.NfcMonitoringService
+import com.dxbmark.nfcmanager.utils.NFCUtils
 import com.dxbmark.nfcmanager.utils.NotificationManager
 import com.dxbmark.nfcmanager.utils.SecurityAlertType
 import com.dxbmark.nfcmanager.utils.SecurityLevel
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.util.Date
 import javax.inject.Inject
 
