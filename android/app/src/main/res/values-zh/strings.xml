@@ -1,5 +1,528 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="app_name">NFC Manager</string>
+
+    <string name="home_title">NFC 管理器</string>
+    <string name="nfc_monitoring">NFC 監控</string>
+    <string name="privacy_protection">隱私保護</string>
+
+    <string name="settings_title">設定</string>
+    <string name="reminder_interval">提醒間隔</string>
+    <string name="privacy_mode">隱私模式</string>
+    <string name="notifications">通知</string>
+
+    <string name="interval_5_seconds">5 秒</string>
+    <string name="interval_10_seconds">10 秒</string>
+    <string name="interval_15_seconds">15 秒</string>
+    <string name="interval_20_seconds">20 秒</string>
+    <string name="interval_30_seconds">30 秒</string>
+    <string name="interval_40_seconds">40 秒</string>
+    <string name="interval_50_seconds">50 秒</string>
+    <string name="interval_60_seconds">60 秒</string> <string name="custom_interval">自訂間隔</string>
+
+    <string name="nfc_enabled_too_long">NFC 已啟用過長時間。請考慮停用它以保護您的隱私。</string>
+    <string name="nfc_privacy_warning">NFC 可能被用於未經授權的支付或資料存取。</string>
+
+    <string name="activity_title">活動日誌</string>
+    <string name="nfc_events">NFC 事件</string>
+    <string name="activity_filter_date">活動日期篩選器</string>
+    <string name="activity_filter_type">活動類型篩選器</string>
+    <string name="activity_important_only">僅重要活動</string>
+    <string name="activity_no_events">沒有活動</string>
+    <string name="activity_search_hint">搜尋活動</string>
+
+    <string name="enabled">已啟用</string>
+    <string name="disabled">已停用</string>
+    <string name="ok">確定</string>
+    <string name="cancel">取消</string>
+    <string name="save">儲存</string>
+
+    <string name="settings_language_title">語言</string>
+    <string name="language_system_default">系統預設</string>
+    <string name="language_english">English</string>
+    <string name="language_arabic">العربية</string>
+    <string name="language_spanish">Español (Spanish)</string>
+    <string name="language_french">Français (French)</string>
+    <string name="language_german">Deutsch (German)</string>
+    <string name="language_chinese_mandarin">中文 (簡體)</string>
+    <string name="language_russian">Русский</string>
+    <string name="language_hindi">हिन्दी</string>
+    <string name="language_filipino">Filipino</string>
+
+    <string name="dialog_select_language_title">選擇語言</string>
+
+    <string name="interval_seconds_format">%1$ds</string> <string name="settings_custom_interval_label">自訂間隔 (5-300 秒)</string>
+    <string name="settings_error_interval_range">間隔必須是 5-300 之間的數字。</string>
+    <string name="notification_sound_title">通知音效</string>
+    <string name="notification_sound_use_system_default">使用系統預設音效</string>
+    <string name="notification_sound_choose_custom">選擇自訂音效</string>
+    <string name="notification_sound_current">當前通知音效</string>
+    <string name="notification_sound_pick">選擇通知音效</string>
+    <string name="notification_sound_updated_log">通知音效已更新日誌</string>
+    <string name="activity_clear_all">清除所有</string>
+    <string name="activity_filter_event_type">事件類型</string>
+    <string name="activity_export_csv">匯出 CSV</string>
+    <string name="activity_filter_date_range">日期範圍</string>
+
+    <string name="settings_toast_notification_perm_granted">已授予通知權限</string>
+    <string name="settings_toast_notification_perm_denied">已拒絕通知權限</string>
+    <string name="settings_toast_nfc_perm_granted">NFC 權限已授予。如需要，請再次切換監控。</string>
+    <string name="settings_toast_nfc_perm_denied">NFC 權限已拒絕。無法啟用背景監控。</string>
+
+    <string name="settings_screen_header_title">設定</string>
+    <string name="settings_section_display_title">顯示</string>
+    <string name="settings_section_language_region_title">語言與地區</string> <string name="settings_section_notifications_alerts_title">通知與警報</string>
+    <string name="settings_section_privacy_security_title">隱私與安全</string>
+    <string name="settings_section_performance_title">效能</string>
+
+    <string name="settings_item_theme_title">主題</string>
+    <string name="settings_item_dark_mode_title">深色模式</string>
+    <string name="settings_item_dark_mode_subtitle">輕鬆護眼</string>
+    <string name="settings_item_light_mode_title">淺色模式</string>
+    <string name="settings_item_light_mode_subtitle">經典外觀</string>
+    <string name="settings_item_accent_color_title">強調色</string>
+    <string name="settings_item_accent_color_subtitle">自訂應用程式介面顏色</string>
+
+    <string name="settings_item_auto_reminder_title">自動提醒</string>
+    <string name="settings_item_auto_reminder_subtitle">當 NFC 長時間啟用時發送隱私警報</string>
+
+    <string name="settings_item_reminder_interval_title">提醒間隔</string> <string name="settings_item_reminder_interval_subtitle">多久提醒一次 NFC 隱私</string> <string name="settings_item_reminder_interval_current_label">當前：%1$ds</string> <string name="settings_item_show_notifications_title">顯示通知</string>
+    <string name="settings_item_show_notifications_subtitle">顯示所有隱私和狀態通知</string>
+
+    <string name="settings_item_vibration_alerts_title">警報振動</string>
+    <string name="settings_item_vibration_alerts_subtitle">隱私警報的觸覺回饋</string>
+
+    <string name="settings_item_enable_sounds_title">啟用音效</string>
+    <string name="settings_item_enable_sounds_subtitle">播放警報和通知音效</string>
+
+    <string name="settings_item_notification_sound_title">通知音效</string>
+    <string name="settings_item_notification_sound_subtitle">自訂通知的特定音效</string>
+
+    <string name="settings_item_privacy_mode_title">隱私模式</string>
+    <string name="settings_item_privacy_mode_subtitle">增強的隱私保護</string>
+
+    <string name="settings_item_block_unknown_tags_title">阻止未知標籤</string>
+    <string name="settings_item_block_unknown_tags_subtitle">自動阻止無法識別的 NFC 標籤</string>
+
+    <string name="settings_item_background_monitoring_title">背景 NFC 監控</string>
+    <string name="settings_item_background_monitoring_subtitle">持續監控 NFC 狀態。需要 NFC 權限。</string>
+
+    <string name="settings_item_battery_optimization_title">電池最佳化</string>
+    <string name="settings_item_battery_optimization_subtitle">最佳化以獲得更好的電池壽命</string>
+    <string name="settings_item_performance_title">效能設定</string>
+    <string name="settings_item_performance_subtitle">調整應用程式的效能選項</string>
+    <string name="settings_item_monitoring_interval_title">監控間隔</string>
+    <string name="settings_item_monitoring_interval_subtitle">設定背景監控的頻率</string>
+
+    <string name="settings_button_export_settings">匯出設定</string>
+    <string name="settings_button_reset_defaults">重設為預設值</string>
+
+    <string name="settings_card_design_info_title">受 Nothing OS 啟發的設計</string>
+    <string name="settings_card_design_info_subtitle">使用官方 Android 工具構建：Kotlin、Jetpack Compose、Room 資料庫和 MVVM 架構。</string>
+
+    <string name="settings_cd_navigate">導覽</string> <string name="home_screen_title">NFC 管理器</string>
+    <string name="nfc_status_title">NFC 狀態</string>
+    <string name="nfc_not_supported">不支援</string>
+    <string name="nfc_hardware_not_found">此裝置上未找到 NFC 硬體。</string>
+    <string name="nfc_status_enabled">已啟用</string>
+    <string name="privacy_monitoring_active">隱私監控啟用中</string>
+    <string name="nfc_status_disabled">已停用</string>
+    <string name="tap_to_enable_nfc">點擊此處在系統設定中啟用 NFC。</string>
+    <string name="home_todays_activity_title">今日活動</string>
+    <string name="events_logged_format">已記錄 %1$d 個事件</string>
     <string name="view_all">查看全部</string>
-    <string name="activity_filter_date">Filter by date</string> <!-- TODO: Translate -->
+    <string name="enable_nfc_button">在設定中啟用 NFC</string>
+
+    <string name="activity_log_title">活動日誌</string>
+    <string name="export_success">事件匯出成功</string>
+    <string name="export_error">匯出事件錯誤：%1$s</string>
+    <string name="no_events_to_export">當前篩選器沒有可匯出的事件</string>
+    <string name="no_events_to_export_simple">沒有可匯出的事件</string>
+    <string name="event_singular">事件</string>
+    <string name="events_plural">事件</string>
+    <string name="no_matching_activity">沒有符合的活動</string>
+    <string name="no_activity_yet">尚未有活動</string>
+    <string name="adjust_filters_hint">嘗試調整您的篩選器。</string>
+    <string name="activity_logs_hint">活動日誌將顯示在此處。</string>
+    <string name="all_types_filter">所有類型</string>
+    <string name="events_found_format">找到 %1$d 個 %2$s</string>
+    <string name="events_recorded_format">記錄了 %1$d 個 %2$s</string>
+
+    <string name="sound_access_warning">無法保留聲音存取權限，以後可能無法正常運作。</string>
+    <string name="storage_permission_required">選擇自訂聲音需要儲存權限。</string>
+    <string name="notification_sound_screen_title">通知音效</string>
+    <string name="notification_sound_description">自訂 NFC 管理器通知的音效。從您的裝置中選擇自訂音效或使用系統預設音效。</string>
+    <string name="current_sound_label">當前音效</string>
+    <string name="sound_play_error_null">無法播放聲音：預設 URI 為空。</string>
+    <string name="sound_play_error_corrupted">無法播放聲音：鈴聲未找到或損壞。</string>
+    <string name="sound_play_error_general">播放聲音錯誤：%1$s</string>
+    <string name="choose_custom_sound">選擇自訂音效</string>
+    <string name="use_system_default_sound">使用系統預設音效</string>
+    <string name="sound_playing_indicator">播放中</string>
+    <string name="system_default_sound">系統預設</string>
+    <string name="custom_sound_label">自訂音效</string>
+    <string name="custom_sound_error">自訂音效 (錯誤)</string>
+    <string name="back_button">返回</string>
+    <string name="pick_sound_icon">選擇音效</string>
+    <string name="default_sound_icon">預設音效</string>
+
+    <string name="language_already_set">語言已設定為 %1$s。</string>
+    <string name="language_changed_log">語言已從 %1$s 更改為 %2$s</string>
+    <string name="language_updated_success">語言已更新為 %1$s。重新啟動以使更改生效。</string>
+    <string name="language_update_failed">更新語言失敗：%1$s</string>
+    <string name="settings_reset_log">所有設定已重設為預設值</string>
+    <string name="settings_reset_success">所有設定已成功重設為預設值</string>
+    <string name="settings_reset_failed">重設設定失敗：%1$s</string>
+    <string name="notification_sound_updated">通知音效已更新</string>
+    <string name="notification_sound_reset">通知音效已重設為預設值</string>
+    <string name="notification_sound_reset_button">重設為預設值</string>
+    <string name="notification_sound_update_failed">更新通知音效失敗：%1$s</string>
+    <string name="background_monitoring_enabled_log">背景 NFC 監控已啟用 (透過意圖)</string>
+    <string name="background_monitoring_enabled_success">背景 NFC 監控已啟用</string>
+    <string name="background_monitoring_enable_failed">啟用背景監控失敗：%1$s</string>
+    <string name="nfc_permission_required">啟用背景監控需要 NFC 權限。</string>
+    <string name="background_monitoring_disabled_log">背景 NFC 監控已停用 (透過意圖)</string>
+    <string name="background_monitoring_disabled_success">背景 NFC 監控已停用</string>
+    <string name="background_monitoring_disable_failed">停用背景監控失敗：%1$s</string>
+    <string name="auto_reminder_toggled_log">自動提醒 %1$s</string>
+    <string name="auto_reminder_toggled_success">自動提醒 %1$s</string>
+    <string name="auto_reminder_toggle_failed">切換自動提醒失敗：%1$s</string>
+    <string name="interval_out_of_range">間隔必須在 5 到 300 秒之間</string>
+    <string name="reminder_interval_updated_log">提醒間隔設定為 %1$ds</string>
+    <string name="reminder_interval_updated_success">提醒間隔已更新為 %1$d 秒</string>
+    <string name="reminder_interval_update_failed">更新間隔失敗：%1$s</string>
+    <string name="notifications_toggled_log">通知 %1$s</string>
+    <string name="notifications_toggled_success">通知 %1$s</string>
+    <string name="notifications_toggle_failed">切換通知失敗：%1$s</string>
+    <string name="vibration_toggled_log">振動 %1$s</string>
+    <string name="vibration_toggled_success">振動 %1$s</string>
+    <string name="vibration_toggle_failed">切換振動失敗：%1$s</string>
+    <string name="sound_toggled_log">聲音 (一般) %1$s</string>
+    <string name="sound_toggled_success">聲音 (一般) %1$s</string>
+    <string name="sound_toggle_failed">切換聲音失敗：%1$s</string>
+    <string name="theme_changed_log">%1$s 已啟用</string>
+    <string name="theme_changed_success">%1$s 已啟用</string>
+    <string name="theme_change_failed">設定主題失敗：%1$s</string>
+    <string name="dark_mode_text">深色模式</string>
+    <string name="light_mode_text">淺色模式</string>
+    <string name="accent_color_updated_log">強調色已更新</string>
+    <string name="accent_color_updated_success">強調色已更新</string>
+    <string name="accent_color_update_failed">更新顏色失敗：%1$s</string>
+    <string name="battery_optimization_toggled_log">電池最佳化 %1$s</string>
+    <string name="battery_optimization_toggled_success">電池最佳化 %1$s</string>
+    <string name="battery_optimization_toggle_failed">切換電池最佳化失敗：%1$s</string>
+    <string name="monitoring_interval_out_of_range">監控間隔必須在 1000 到 10000 毫秒之間</string>
+    <string name="monitoring_interval_updated_log">監控間隔設定為 %1$dms</string>
+    <string name="monitoring_interval_updated_success">監控間隔已更新</string>
+    <string name="monitoring_interval_update_failed">更新監控間隔失敗：%1$s</string>
+    <string name="privacy_mode_toggled_log">隱私模式 %1$s</string>
+    <string name="privacy_mode_toggled_success">隱私模式 %1$s</string>
+    <string name="privacy_mode_toggle_failed">切換隱私模式失敗：%1$s</string>
+    <string name="block_unknown_tags_toggled_log">阻止未知標籤 %1$s</string>
+    <string name="block_unknown_tags_toggled_success">未知標籤阻止 %1$s</string>
+    <string name="block_unknown_tags_toggle_failed">切換未知標籤阻止失敗：%1$s</string>
+    <string name="settings_exported_log">設定已匯出</string>
+    <string name="settings_exported_success">設定已成功匯出</string>
+    <string name="settings_export_failed">匯出設定失敗：%1$s</string>
+    <string name="data_cleanup_log">舊資料清理完成 (%1$d 天)</string>
+    <string name="data_cleanup_success">舊資料清理成功</string>
+    <string name="data_cleanup_failed">清理資料失敗：%1$s</string>
+    <string name="enabled_status">已啟用</string>
+    <string name="disabled_status">已停用</string>
+
+    <string name="date_filter_today">今天</string>
+    <string name="date_filter_last_7_days">過去 7 天</string>
+    <string name="date_filter_last_30_days">過去 30 天</string>
+    <string name="date_filter_all_time">所有時間</string>
+
+    <string name="mainviewmodel_initialized">MainViewModel 已初始化</string>
+    <string name="tag_scanned_format">標籤已掃描：%1$s (操作：%2$s)</string>
+    <string name="event_deleted">事件已刪除</string>
+    <string name="all_events_cleared">所有事件已清除</string>
+    <string name="all_events_cleared_success">所有事件已成功清除</string>
+    <string name="failed_to_delete_event">刪除事件失敗：%1$s</string>
+    <string name="failed_to_clear_events">清除所有事件失敗：%1$s</string>
+
+    <string name="nfc_not_supported_device">此裝置不支援 NFC</string>
+    <string name="privacy_alert_shown">已顯示隱私警報</string>
+    <string name="privacy_alert_dismissed">隱私警報已解除</string>
+    <string name="reminder_interval_set_log">提醒間隔設定為 %1$ds</string>
+    <string name="notifications_toggled_system_log">通知 %1$s</string>
+    <string name="vibration_toggled_system_log">振動 %1$s</string>
+
+    <string name="export_to_csv_icon">匯出為 CSV</string>
+    <string name="clear_all_logs_icon">清除所有日誌</string>
+
+    <string name="nav_nfc_manager">NFC 管理器</string>
+    <string name="nav_activity">活動</string>
+    <string name="nav_settings">設定</string>
+
+    <string name="language_name_english">英語</string>
+    <string name="language_name_arabic">阿拉伯語</string>
+    <string name="language_name_german">德語</string>
+    <string name="language_name_system_default">系統預設</string>
+
+    <string name="event_type_settings">設定</string>
+    <string name="event_type_system">系統</string>
+    <string name="event_type_privacy">隱私</string>
+    <string name="event_type_nfc_scan">NFC 掃描</string>
+    <string name="event_type_security">安全</string>
+
+    <string name="auto_reminder_enabled">自動提醒已啟用</string>
+    <string name="auto_reminder_disabled">自動提醒已停用</string>
+    <string name="notifications_enabled">通知已啟用</string>
+    <string name="notifications_disabled">通知已停用</string>
+    <string name="vibration_enabled">振動已啟用</string>
+    <string name="vibration_disabled">振動已停用</string>
+    <string name="sound_enabled">聲音 (一般) 已啟用</string>
+    <string name="sound_disabled">聲音 (一般) 已停用</string>
+    <string name="battery_optimization_enabled">電池最佳化已啟用</string>
+    <string name="battery_optimization_disabled">電池最佳化已停用</string>
+    <string name="privacy_mode_enabled">隱私模式已啟用</string>
+    <string name="privacy_mode_disabled">隱私模式已停用</string>
+    <string name="unknown_tag_blocking_enabled">阻止未知標籤已啟用</string>
+    <string name="unknown_tag_blocking_disabled">阻止未知標籤已停用</string>
+    <string name="settings_exported">設定已匯出</string>
+    <string name="reminder_interval_set">提醒間隔設定為 %1$ds</string>
+    <string name="nfc_hardware_enabled">NFC 硬體現已啟用</string>
+    <string name="nfc_hardware_disabled">NFC 硬體現已停用</string>
+
+    <string name="time_now">現在</string>
+
+    <string name="dark_mode_enabled">深色模式已啟用</string>
+    <string name="light_mode_enabled">淺色模式已啟用</string>
+    <string name="accent_color_updated">強調色已更新</string>
+    <string name="monitoring_interval_set">監控間隔設定為 %1$dms</string>
+    <string name="old_data_cleanup_completed">舊資料清理完成 (%1$d 天)</string>
+
+    <string name="old_data_cleanup_success">舊資料清理成功</string>
+
+    <string name="failed_to_disable_monitoring">停用背景監控失敗：%1$s</string>
+    <string name="failed_to_toggle_auto_reminder">切換自動提醒失敗：%1$s</string>
+    <string name="failed_to_update_interval">更新間隔失敗：%1$s</string>
+    <string name="failed_to_toggle_notifications">切換通知失敗：%1$s</string>
+    <string name="failed_to_toggle_vibration">切換振動失敗：%1$s</string>
+    <string name="failed_to_toggle_sound">切換聲音失敗：%1$s</string>
+    <string name="failed_to_set_theme">設定主題失敗：%1$s</string>
+    <string name="failed_to_update_color">更新顏色失敗：%1$s</string>
+    <string name="failed_to_toggle_battery_optimization">切換電池最佳化失敗：%1$s</string>
+    <string name="monitoring_interval_range_error">監控間隔必須在 1000 到 10000 毫秒之間</string>
+    <string name="failed_to_update_monitoring_interval">更新監控間隔失敗：%1$s</string>
+    <string name="failed_to_toggle_privacy_mode">切換隱私模式失敗：%1$s</string>
+    <string name="failed_to_toggle_unknown_tag_blocking">切換未知標籤阻止失敗：%1$s</string>
+    <string name="failed_to_export_settings">匯出設定失敗：%1$s</string>
+    <string name="failed_to_cleanup_data">清理資料失敗：%1$s</string>
+
+    <string name="about_title">關於</string>
+    <string name="about_app_title">關於 NFC 管理器</string>
+    <string name="about_app_description">NFC 管理器是一個以隱私為中心的 Android 應用程式，旨在幫助用戶監控和管理其 NFC (近距離無線通訊) 設定，並提高安全意識。當 NFC 長時間啟用時，應用程式會提醒用戶，有助於防止未經授權的存取並防範潛在的隱私漏洞。</string>
+    <string name="about_copyright">由 Tariq Said 懷著愛心打造 - 受 Nothing OS 啟發的設計</string>
+    <string name="about_contact_support_title">聯絡與支援</string>
+    <string name="about_email">電子郵件：support@dxbmark.com</string>
+    <string name="about_response_time">回應時間：24-48 小時</string>
+    <string name="about_languages">語言：英語、阿拉伯語</string>
+    <string name="about_timezone">時区：GMT+4 (阿聯酋)</string>
+    <string name="about_license_title">許可證</string>
+    <string name="about_license_text">根據 Apache 許可證 2.0 版授權</string>
+    <string name="about_copyright_text">版權所有 2025 Tariq Said。保留所有權利。</string>
+    <string name="about_license_link">查看許可證</string>
+    <string name="about_important_links_title">重要連結</string>
+    <string name="about_terms_service">服務條款</string>
+    <string name="about_privacy_policy">隱私政策</string>
+    <string name="about_full_changelog">完整變更日誌</string>
+    <string name="about_project_repository">項目儲存庫</string>
+    <string name="about_development_design_title">開發與設計</string>
+    <string name="about_development_credit">Tariq Said 設計和開發</string>
+    <string name="about_powered_by_dxbmark">由 DXBMark 提供技術支援</string>
+    <string name="about_tariq_linkedin">Tariq Said 的 LinkedIn</string>
+    <string name="about_tariq_github">Tariq Said 的 GitHub</string>
+    <string name="about_official_contributor_title">官方貢獻者</string>
+    <string name="about_mwheba_agency">MWHEBA 廣告代理</string>
+    <string name="about_security_highlights_title">安全亮點 (v%1$s)</string>
+    <string name="about_initial_security">- 初始安全實施</string>
+    <string name="about_local_storage">- 僅限本地資料儲存</string>
+    <string name="about_permission_access">- 基於權限的存取控制</string>
+    <string name="about_proguard_obfuscation">- 已啟用 ProGuard 混淆</string>
+    <string name="about_certificate_pinning">- 已實施憑證綁定</string>
+    <string name="navigate_back">返回</string>
+    <string name="settings_section_about_title">關於</string>
+    <string name="settings_item_about_title">關於 NFC 管理器</string>
+    <string name="settings_item_about_subtitle">應用程式資訊、隱私政策和支援</string>
+
+    <!-- Security Score Screen -->
+    <string name="security_score_screen_title">安全評分</string>
+    <string name="security_score_value_label">評分</string>
+    <string name="security_score_card_title">安全評分</string>
+    <string name="security_score_detail_title">安全詳情</string>
+    <string name="loading_security_score">正在計算評分…</string>
+    <string name="refresh_score_button">刷新評分</string>
+    <string name="security_level_excellent">優秀</string>
+    <string name="security_level_good">良好</string>
+    <string name="security_level_moderate">中等</string>
+    <string name="security_level_poor">較差</string>
+    <string name="security_level_critical">嚴重</string>
+    <string name="security_level_not_applicable">不適用</string>
+    <string name="security_level_desc_excellent">優秀的安全實踐！繼續保持。</string>
+    <string name="security_level_desc_good">良好的安全級別，有輕微改進空間。</string>
+    <string name="security_level_desc_moderate">中等安全性。請考慮建議。</string>
+    <string name="security_level_desc_poor">安全級別較差。需要立即採取行動。</string>
+    <string name="security_level_desc_critical">嚴重的安全問題。請查看建議。</string>
+    <string name="security_level_desc_not_applicable">NFC 狀態不適用或此設備不支援。</string>
+    <string name="security_level_breakdown_title">安全級別細分</string>
+    <string name="security_score_range_excellent">90-100</string>
+    <string name="security_score_range_good">75-89</string>
+    <string name="security_score_range_moderate">60-74</string>
+    <string name="security_score_range_poor">40-59</string>
+    <string name="security_score_range_critical">0-39</string>
+    <string name="security_score_range_not_applicable">不適用</string>
+    <string name="security_recommendations_title">安全建議</string>
+    <string name="security_tips_title">安全提示</string>
+    <string name="security_tip_disable_nfc">不使用時停用 NFC</string>
+    <string name="security_tip_cautious_tags">小心未知的 NFC 標籤</string>
+    <string name="security_tip_avoid_crowded_nfc">避免在擁擠的地方使用 NFC</string>
+    <string name="security_tip_review_log">定期查看您的 NFC 活動日誌</string>
+    <string name="security_tip_keep_device_updated">保持您的設備更新</string>
+
+    <!-- Security Recommendations -->
+    <string name="recommendations_title">建議</string>
+    <string name="violations_title">違規</string>
+    <string name="no_recommendations_yet">目前沒有具體建議。繼續保持良好工作！</string>
+    <string name="no_violations_detected">過去 7 天內未檢測到安全違規。</string>
+    <string name="security_score_violation_prefix">違規：</string>
+    <string name="recommendation_disable_nfc">不使用時停用 NFC</string>
+    <string name="recommendation_shorter_intervals">為 NFC 設定較短的提醒間隔</string>
+    <string name="recommendation_cautious_unknown_tags">小心未知或意外的 NFC 標籤</string>
+    <string name="recommendation_enable_unknown_tag_blocking">考慮在設定中啟用「阻止未知標籤」</string>
+    <string name="recommendation_avoid_crowded_areas_nfc">如果可能，避免在非常擁擠的公共場所使用 NFC</string>
+    <string name="recommendation_check_suspicious_devices">注意周圍環境並檢查可疑設備</string>
+    <string name="recommendation_review_nfc_usage">定期在活動日誌中查看您的 NFC 使用模式</string>
+    <string name="recommendation_enable_max_security_mode">為了最大安全性，請在設定中啟用隱私模式</string>
+    <string name="recommendation_keep_up_good_practices">繼續保持良好的安全實踐！</string>
+    <string name="recommendation_review_activity_log">定期查看您的 NFC 活動日誌以查找任何異常事件</string>
+    <string name="recommendation_nfc_disabled_secure">NFC 目前已停用，這增強了安全性。僅在需要使用 NFC 功能時啟用它。</string>
+    <string name="recommendation_nfc_disabled_no_data">NFC 目前已停用。沒有最近的活動可供分析。</string>
+    <string name="recommendation_enable_nfc_when_needed">僅在需要使用非接觸式功能（如付款或標籤讀取）時啟用 NFC。</string>
+    <string name="recommendation_nfc_currently_disabled">NFC 目前已停用。以下分數基於您最近的使用歷史。</string>
+
+    <!-- Security Violations -->
+    <string name="violation_long_nfc_usage_name">NFC 長時間啟用</string>
+    <string name="violation_unknown_tag_name">檢測到未知標籤</string>
+    <string name="violation_rapid_tag_detection_name">快速檢測到多個標籤</string>
+    <string name="violation_suspicious_activity_name">可疑的 NFC 活動模式</string>
+
+    <!-- Notification Manager -->
+    <string name="channel_nfc_status_name">NFC 狀態</string>
+    <string name="channel_nfc_status_description">顯示當前 NFC 狀態和安全級別</string>
+    <string name="channel_security_alert_name">安全警報</string>
+    <string name="channel_security_alert_description">安全警報和警告</string>
+    <string name="nfc_enabled_notification_title">NFC 已啟用</string>
+    <string name="nfc_disabled_notification_title">NFC 已停用</string>
+    <string name="nfc_enabled_for_label">已啟用：</string>
+    <string name="nfc_security_level_label">安全級別：</string>
+    <string name="nfc_status_label">狀態：</string>
+    <string name="notification_tap_to_open_details">點擊打開 NFC 管理器以獲取更多詳情。</string>
+    <string name="notification_tap_to_manage_settings">點擊打開 NFC 管理器以管理您的設定。</string>
+    <string name="notification_action_settings">設定</string>
+    <string name="notification_action_security_score">安全評分</string>
+    <string name="notification_action_review_settings">查看設定</string>
+    <string name="alert_title_nfc_enabled_long">⚠️ NFC 已啟用太長時間</string>
+    <string name="alert_title_unknown_tag">🔍 檢測到未知標籤</string>
+    <string name="alert_title_multiple_tags_rapid">⚡ 檢測到多個標籤</string>
+    <string name="alert_title_suspicious_activity">🚨 可疑活動</string>
+    <string name="notification_recommendation_label">建議：</string>
+    <string name="security_status_excellent">優秀的安全實踐</string>
+    <string name="security_status_good">良好的安全級別</string>
+    <string name="security_status_moderate">中等安全性 - 查看建議</string>
+    <string name="security_status_poor">安全性較差 - 需要立即採取行動</string>
+    <string name="security_status_critical">檢測到嚴重的安全問題</string>
+    <string name="security_status_not_applicable">安全級別不適用</string>
+    <string name="recommendation_alert_nfc_long">考慮在不使用時停用 NFC</string>
+    <string name="recommendation_alert_unknown_tag">小心未知的 NFC 標籤</string>
+    <string name="recommendation_alert_multiple_tags">使用 NFC 時避免擁擠的地方</string>
+    <string name="recommendation_alert_suspicious_activity">查看您的 NFC 使用模式</string>
+
+    <!-- Error Messages - Network -->
+    <string name="error_no_internet">沒有網路連接。請檢查您的網路設定。</string>
+    <string name="error_timeout">請求超時。請重試。</string>
+    <string name="error_server">伺服器錯誤：%1$d。請稍後重試。</string>
+    <string name="error_network_unknown">發生網路錯誤。請重試。</string>
+
+    <!-- Error Messages - Database -->
+    <string name="error_database_read">無法從資料庫讀取資料。</string>
+    <string name="error_database_write">無法將資料儲存到資料庫。</string>
+    <string name="error_database_delete">無法從資料庫刪除資料。</string>
+    <string name="error_database_corrupted">資料庫資料已損壞。請重新安裝應用程式。</string>
+    <string name="error_database_unknown">發生資料庫錯誤。</string>
+
+    <!-- Error Messages - NFC -->
+    <string name="error_nfc_read">無法讀取 NFC 標籤。請重試。</string>
+    <string name="error_nfc_write">無法寫入 NFC 標籤。請重試。</string>
+    <string name="error_nfc_tag_lost">NFC 標籤連接丟失。請將標籤保持靠近。</string>
+    <string name="error_nfc_unknown">發生 NFC 錯誤。請重試。</string>
+
+    <!-- Error Messages - Permission -->
+    <string name="error_permission_notification">警報需要通知權限。</string>
+    <string name="error_permission_unknown">權限被拒絕：%1$s</string>
+
+    <!-- Error Messages - Service -->
+    <string name="error_service_start">無法啟動監控服務。</string>
+    <string name="error_service_stop">無法停止監控服務。</string>
+    <string name="error_service_not_running">監控服務未運行。</string>
+    <string name="error_service_unknown">發生服務錯誤。</string>
+
+    <!-- Error Messages - Validation -->
+    <string name="error_validation_invalid">無效的輸入：%1$s</string>
+    <string name="error_validation_range">%1$s 必須在 %2$d 和 %3$d 之間</string>
+    <string name="error_validation_required">%1$s 是必需的</string>
+
+    <!-- Error Messages - File -->
+    <string name="error_file_not_found">找不到檔案：%1$s</string>
+    <string name="error_file_read">無法讀取檔案。</string>
+    <string name="error_file_write">無法寫入檔案。</string>
+    <string name="error_file_permission">檔案權限被拒絕。</string>
+    <string name="error_file_unknown">發生檔案錯誤。</string>
+
+    <!-- Additional UI Elements -->
+    <string name="arrow_right">→</string>
+    <string name="social_media_linkedin">LinkedIn</string>
+    <string name="social_media_github">GitHub</string>
+    <string name="partnership_title">合作夥伴</string>
+
+    <!-- Additional System Messages -->
+    <string name="retry_button">重試</string>
+    <string name="nfc_not_supported_error">此設備不支援 NFC。</string>
+    <string name="nfc_disabled_error_turn_on">NFC 已停用。請在您的設備設定中開啟 NFC 以啟用監控。</string>
+    <string name="error_calculating_score">計算評分時出錯：%1$s</string>
+    <string name="error_calculating_period_score">計算期間評分時出錯：%1$s</string>
+
+    <!-- Settings Items (Missing) -->
+
+    <!-- Onboarding Strings -->
+    <string name="onboarding_button_get_started">開始使用</string>
+    <string name="onboarding_button_next">下一步</string>
+    <string name="onboarding_button_previous">上一步</string>
+    <string name="onboarding_page0_title">歡迎使用 NFC 管理器</string>
+    <string name="onboarding_page0_description">透過智慧 NFC 監控和安全警報保護您的隱私</string>
+    <string name="onboarding_page0_feature1">即時 NFC 監控</string>
+    <string name="onboarding_page0_feature2">注重隱私的設計</string>
+    <string name="onboarding_page0_feature3">Nothing OS 風格 UI</string>
+    <string name="onboarding_page1_title">智慧監控</string>
+    <string name="onboarding_page1_description">進階通知系統讓您隨時了解 NFC 活動和安全狀態</string>
+    <string name="onboarding_page1_feature1">持續時間追蹤</string>
+    <string name="onboarding_page1_feature2">安全級別警報</string>
+    <string name="onboarding_page1_feature3">智慧通知</string>
+    <string name="onboarding_page2_title">安全評分</string>
+    <string name="onboarding_page2_description">使用我們的智慧評分系統追蹤您的安全級別並獲得個人化建議</string>
+    <string name="onboarding_page2_feature1">5 級安全評級</string>
+    <string name="onboarding_page2_feature2">個人化建議</string>
+    <string name="onboarding_page2_feature3">違規追蹤</string>
+    <string name="onboarding_page3_title">完全控制</string>
+    <string name="onboarding_page3_description">根據您的偏好自訂一切</string>
+    <string name="onboarding_page3_feature1">可自訂警報</string>
+    <string name="onboarding_page3_feature2">深色/淺色主題</string>
+    <string name="onboarding_page3_feature3">9 種語言</string>
+
+
+    <!-- Missing Strings -->
+
 </resources>
