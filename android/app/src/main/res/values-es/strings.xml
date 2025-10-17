@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources>
     <string name="app_name">NFC Manager</string>
 
@@ -360,7 +360,7 @@
     <string name="settings_item_about_subtitle">Información de la aplicación, política de privacidad y soporte</string>
     <string name="security_level_not_applicable">No aplicable</string>
 
-    <!-- Security Score Screen -->
+    
     <string name="security_score_screen_title">Puntuación de seguridad</string>
     <string name="security_score_value_label">Puntuación</string>
     <string name="security_level_desc_excellent">¡Excelentes prácticas de seguridad! Sigue así.</string>
@@ -384,7 +384,7 @@
     <string name="security_tip_review_log">Revisa regularmente tu registro de actividad NFC</string>
     <string name="security_tip_keep_device_updated">Mantén tu dispositivo actualizado</string>
 
-    <!-- Security Recommendations -->
+    
     <string name="recommendation_disable_nfc">Desactiva NFC cuando no lo uses</string>
     <string name="recommendation_shorter_intervals">Establece intervalos de recordatorio más cortos para NFC</string>
     <string name="recommendation_cautious_unknown_tags">Ten cuidado con etiquetas NFC desconocidas o inesperadas</string>
@@ -400,13 +400,13 @@
     <string name="recommendation_enable_nfc_when_needed">Activa NFC solo cuando necesites usar funciones sin contacto como pagos o lectura de etiquetas.</string>
     <string name="recommendation_nfc_currently_disabled">NFC está actualmente desactivado. La puntuación a continuación se basa en tu historial de uso reciente.</string>
 
-    <!-- Security Violations -->
+    
     <string name="violation_long_nfc_usage_name">Activación prolongada de NFC</string>
     <string name="violation_unknown_tag_name">Etiqueta desconocida detectada</string>
     <string name="violation_rapid_tag_detection_name">Detecciones rápidas de múltiples etiquetas</string>
     <string name="violation_suspicious_activity_name">Patrón de actividad NFC sospechoso</string>
 
-    <!-- Notification Manager -->
+    
     <string name="channel_nfc_status_name">Estado de NFC</string>
     <string name="channel_nfc_status_description">Muestra el estado actual de NFC y el nivel de seguridad</string>
     <string name="channel_security_alert_name">Alertas de seguridad</string>
@@ -437,61 +437,61 @@
     <string name="recommendation_alert_multiple_tags">Evita áreas concurridas al usar NFC</string>
     <string name="recommendation_alert_suspicious_activity">Revisa tus patrones de uso de NFC</string>
 
-    <!-- Error Messages - Network -->
+    
     <string name="error_no_internet">Sin conexión a internet. Por favor, verifica tu configuración de red.</string>
     <string name="error_timeout">Tiempo de espera agotado. Por favor, inténtalo de nuevo.</string>
     <string name="error_server">Error del servidor: %1$d. Por favor, inténtalo más tarde.</string>
     <string name="error_network_unknown">Ocurrió un error de red. Por favor, inténtalo de nuevo.</string>
 
-    <!-- Error Messages - Database -->
+    
     <string name="error_database_read">Error al leer datos de la base de datos.</string>
     <string name="error_database_write">Error al guardar datos en la base de datos.</string>
     <string name="error_database_delete">Error al eliminar datos de la base de datos.</string>
     <string name="error_database_corrupted">Los datos de la base de datos están corruptos. Por favor, reinstala la aplicación.</string>
     <string name="error_database_unknown">Ocurrió un error en la base de datos.</string>
 
-    <!-- Error Messages - NFC -->
+    
     <string name="error_nfc_read">Error al leer etiqueta NFC. Por favor, inténtalo de nuevo.</string>
     <string name="error_nfc_write">Error al escribir en etiqueta NFC. Por favor, inténtalo de nuevo.</string>
     <string name="error_nfc_tag_lost">Conexión con etiqueta NFC perdida. Por favor, mantén la etiqueta más cerca.</string>
     <string name="error_nfc_unknown">Ocurrió un error de NFC. Por favor, inténtalo de nuevo.</string>
 
-    <!-- Error Messages - Permission -->
+    
     <string name="error_permission_notification">Se requiere permiso de notificaciones para alertas.</string>
     <string name="error_permission_unknown">Permiso denegado: %1$s</string>
 
-    <!-- Error Messages - Service -->
+    
     <string name="error_service_start">Error al iniciar el servicio de monitoreo.</string>
     <string name="error_service_stop">Error al detener el servicio de monitoreo.</string>
     <string name="error_service_not_running">El servicio de monitoreo no está en ejecución.</string>
     <string name="error_service_unknown">Ocurrió un error en el servicio.</string>
 
-    <!-- Error Messages - Validation -->
+    
     <string name="error_validation_invalid">Entrada no válida para: %1$s</string>
     <string name="error_validation_range">%1$s debe estar entre %2$d y %3$d</string>
     <string name="error_validation_required">%1$s es requerido</string>
 
-    <!-- Error Messages - File -->
+    
     <string name="error_file_not_found">Archivo no encontrado: %1$s</string>
     <string name="error_file_read">Error al leer archivo.</string>
     <string name="error_file_write">Error al escribir archivo.</string>
     <string name="error_file_permission">Permiso de archivo denegado.</string>
     <string name="error_file_unknown">Ocurrió un error de archivo.</string>
 
-    <!-- Additional UI Elements -->
+    
     <string name="arrow_right">→</string>
     <string name="social_media_linkedin">LinkedIn</string>
     <string name="social_media_github">GitHub</string>
     <string name="partnership_title">Asociación</string>
 
-    <!-- Additional System Messages -->
+    
     <string name="retry_button">Reintentar</string>
     <string name="nfc_not_supported_error">NFC no está soportado en este dispositivo.</string>
     <string name="nfc_disabled_error_turn_on">NFC está desactivado. Por favor, activa NFC en la configuración de tu dispositivo para habilitar el monitoreo.</string>
     <string name="error_calculating_score">Error al calcular puntuación: %1$s</string>
     <string name="error_calculating_period_score">Error al calcular puntuación del período: %1$s</string>
 
-    <!-- Missing Security Score Strings -->
+    
     <string name="loading_security_score">Calculando puntuación…</string>
     <string name="refresh_score_button">Actualizar Puntuación</string>
     <string name="security_level_excellent">Excelente</string>
@@ -501,14 +501,14 @@
     <string name="security_level_critical">Crítico</string>
     <string name="security_score_detail_title">Detalles de Seguridad</string>
 
-    <!-- Missing Recommendations and Violations -->
+    
     <string name="recommendations_title">Recomendaciones</string>
     <string name="violations_title">Violaciones</string>
     <string name="no_recommendations_yet">No hay recomendaciones específicas en este momento. ¡Sigue con el buen trabajo!</string>
     <string name="no_violations_detected">No se detectaron violaciones de seguridad en los últimos 7 días.</string>
     <string name="security_score_violation_prefix">Violación: </string>
 
-    <!-- Missing Onboarding Strings -->
+    
     <string name="onboarding_button_get_started">Comenzar</string>
     <string name="onboarding_button_next">Siguiente</string>
     <string name="onboarding_button_previous">Anterior</string>
@@ -533,4 +533,4 @@
     <string name="onboarding_page3_feature2">Tema oscuro/claro</string>
     <string name="onboarding_page3_feature3">9 idiomas</string>
 
-</resources>
+<string name="onboarding_page4_title">Activar notificaciones</string><string name="onboarding_page4_description">Mantente protegido con alertas instantáneas cuando NFC esté activado. Permite notificaciones para recibir advertencias de seguridad importantes.</string><string name="onboarding_page4_feature1">Alertas instantáneas de estado NFC</string><string name="onboarding_page4_feature2">Advertencias de seguridad en tiempo real</string><string name="onboarding_page4_feature3">No te pierdas actualizaciones importantes</string><string name="onboarding_button_allow_notifications">Permitir notificaciones</string><string name="sound_selection_failed">Error al seleccionar sonido: %1$s</string></resources>

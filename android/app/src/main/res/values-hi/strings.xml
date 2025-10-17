@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources>
     <string name="app_name">एनएफसी मैनेजर</string>
 
@@ -319,7 +319,7 @@
     <string name="failed_to_update_monitoring_interval">मॉनिटरिंग अंतराल अपडेट करने में विफल: %1$s</string>
     <string name="failed_to_toggle_privacy_mode">गोपनीयता मोड चालू/बंद करने में विफल: %1$s</string>
     <string name="failed_to_toggle_unknown_tag_blocking">अज्ञात टैग ब्लॉकिंग चालू/बंद करने में विफल: %1$s</string>
-    <!-- The duplicate settings_export_failed string that was here has been removed -->
+    
     <string name="failed_to_cleanup_data">डेटा साफ करने में विफल: %1$s</string>
 
     <string name="about_title">के बारे में</string>
@@ -358,7 +358,7 @@
     <string name="settings_item_about_title">एनएफसी मैनेजर के बारे में</string>
     <string name="settings_item_about_subtitle">ऐप जानकारी, गोपनीयता नीति, और समर्थन</string>
 
-    <!-- Security Score Screen -->
+    
     <string name="security_score_screen_title">सुरक्षा स्कोर</string>
     <string name="security_score_value_label">स्कोर</string>
     <string name="security_level_desc_excellent">उत्कृष्ट सुरक्षा प्रथाएं! ऐसे ही जारी रखें।</string>
@@ -383,7 +383,7 @@
     <string name="security_tip_keep_device_updated">अपने डिवाइस को अपडेट रखें</string>
     <string name="security_level_not_applicable">लागू नहीं</string>
 
-    <!-- Security Recommendations -->
+    
     <string name="recommendation_disable_nfc">उपयोग में न होने पर एनएफसी अक्षम करें</string>
     <string name="recommendation_shorter_intervals">एनएफसी के लिए छोटे अनुस्मारक अंतराल सेट करें</string>
     <string name="recommendation_cautious_unknown_tags">अज्ञात या अप्रत्याशित एनएफसी टैग के साथ सावधान रहें</string>
@@ -399,13 +399,13 @@
     <string name="recommendation_enable_nfc_when_needed">केवल तभी एनएफसी सक्षम करें जब आपको संपर्क रहित सुविधाओं जैसे भुगतान या टैग पढ़ने की आवश्यकता हो।</string>
     <string name="recommendation_nfc_currently_disabled">एनएफसी वर्तमान में अक्षम है। नीचे दिया गया स्कोर आपके हालिया उपयोग इतिहास पर आधारित है।</string>
 
-    <!-- Security Violations -->
+    
     <string name="violation_long_nfc_usage_name">लंबे समय तक एनएफसी सक्रियण</string>
     <string name="violation_unknown_tag_name">अज्ञात टैग का पता चला</string>
     <string name="violation_rapid_tag_detection_name">तेजी से कई टैग का पता लगाना</string>
     <string name="violation_suspicious_activity_name">संदिग्ध एनएफसी गतिविधि पैटर्न</string>
 
-    <!-- Notification Manager -->
+    
     <string name="channel_nfc_status_name">एनएफसी स्थिति</string>
     <string name="channel_nfc_status_description">वर्तमान एनएफसी स्थिति और सुरक्षा स्तर दिखाता है</string>
     <string name="channel_security_alert_name">सुरक्षा अलर्ट</string>
@@ -436,63 +436,63 @@
     <string name="recommendation_alert_multiple_tags">एनएफसी का उपयोग करते समय भीड़भाड़ वाले क्षेत्रों से बचें</string>
     <string name="recommendation_alert_suspicious_activity">अपने एनएफसी उपयोग पैटर्न की समीक्षा करें</string>
 
-    <!-- Error Messages - Network -->
+    
     <string name="error_no_internet">कोई इंटरनेट कनेक्शन नहीं। कृपया अपनी नेटवर्क सेटिंग्स जांचें।</string>
     <string name="error_timeout">अनुरोध समय समाप्त। कृपया पुनः प्रयास करें।</string>
     <string name="error_server">सर्वर त्रुटि: %1$d। कृपया बाद में पुनः प्रयास करें।</string>
     <string name="error_network_unknown">नेटवर्क त्रुटि हुई। कृपया पुनः प्रयास करें।</string>
 
-    <!-- Error Messages - Database -->
+    
     <string name="error_database_read">डेटाबेस से डेटा पढ़ने में विफल।</string>
     <string name="error_database_write">डेटाबेस में डेटा सहेजने में विफल।</string>
     <string name="error_database_delete">डेटाबेस से डेटा हटाने में विफल।</string>
     <string name="error_database_corrupted">डेटाबेस डेटा दूषित है। कृपया ऐप को पुनः स्थापित करें।</string>
     <string name="error_database_unknown">डेटाबेस त्रुटि हुई।</string>
 
-    <!-- Error Messages - NFC -->
+    
     <string name="error_nfc_read">एनएफसी टैग पढ़ने में विफल। कृपया पुनः प्रयास करें।</string>
     <string name="error_nfc_write">एनएफसी टैग पर लिखने में विफल। कृपया पुनः प्रयास करें।</string>
     <string name="error_nfc_tag_lost">एनएफसी टैग कनेक्शन खो गया। कृपया टैग को करीब रखें।</string>
     <string name="error_nfc_unknown">एनएफसी त्रुटि हुई। कृपया पुनः प्रयास करें।</string>
 
-    <!-- Error Messages - Permission -->
+    
     <string name="error_permission_notification">अलर्ट के लिए सूचना अनुमति आवश्यक है।</string>
     <string name="error_permission_unknown">अनुमति अस्वीकृत: %1$s</string>
 
-    <!-- Error Messages - Service -->
+    
     <string name="error_service_start">मॉनिटरिंग सेवा शुरू करने में विफल।</string>
     <string name="error_service_stop">मॉनिटरिंग सेवा बंद करने में विफल।</string>
     <string name="error_service_not_running">मॉनिटरिंग सेवा चल नहीं रही है।</string>
     <string name="error_service_unknown">सेवा त्रुटि हुई।</string>
 
-    <!-- Error Messages - Validation -->
+    
     <string name="error_validation_invalid">के लिए अमान्य इनपुट: %1$s</string>
     <string name="error_validation_range">%1$s %2$d और %3$d के बीच होना चाहिए</string>
     <string name="error_validation_required">%1$s आवश्यक है</string>
 
-    <!-- Error Messages - File -->
+    
     <string name="error_file_not_found">फ़ाइल नहीं मिली: %1$s</string>
     <string name="error_file_read">फ़ाइल पढ़ने में विफल।</string>
     <string name="error_file_write">फ़ाइल लिखने में विफल।</string>
     <string name="error_file_permission">फ़ाइल अनुमति अस्वीकृत।</string>
     <string name="error_file_unknown">फ़ाइल त्रुटि हुई।</string>
 
-    <!-- Additional UI Elements -->
+    
     <string name="arrow_right">→</string>
     <string name="social_media_linkedin">LinkedIn</string>
     <string name="social_media_github">GitHub</string>
     <string name="partnership_title">साझेदारी</string>
 
-    <!-- Additional System Messages -->
+    
     <string name="retry_button">पुनः प्रयास करें</string>
     <string name="nfc_not_supported_error">एनएफसी इस डिवाइस पर समर्थित नहीं है।</string>
     <string name="nfc_disabled_error_turn_on">एनएफसी अक्षम है। कृपया मॉनिटरिंग सक्षम करने के लिए अपनी डिवाइस सेटिंग्स में एनएफसी चालू करें।</string>
     <string name="error_calculating_score">स्कोर की गणना करने में त्रुटि: %1$s</string>
     <string name="error_calculating_period_score">अवधि स्कोर की गणना करने में त्रुटि: %1$s</string>
 
-    <!-- Settings Items (Missing) -->
+    
 
-    <!-- Missing Onboarding Strings -->
+    
     <string name="onboarding_button_get_started">शुरू करें</string>
     <string name="onboarding_button_next">अगला</string>
     <string name="onboarding_button_previous">पिछला</string>
@@ -517,7 +517,7 @@
     <string name="onboarding_page3_feature2">डार्क/लाइट थीम</string>
     <string name="onboarding_page3_feature3">9 भाषाएं</string>
 
-    <!-- Missing Security Score Strings -->
+    
     <string name="security_score_card_title">सुरक्षा स्कोर</string>
     <string name="security_score_detail_title">सुरक्षा विवरण</string>
     <string name="loading_security_score">स्कोर की गणना हो रही है…</string>
@@ -528,7 +528,7 @@
     <string name="security_level_poor">खराब</string>
     <string name="security_level_critical">गंभीर</string>
 
-    <!-- Missing Recommendations and Violations -->
+    
     <string name="recommendations_title">सिफारिशें</string>
     <string name="violations_title">उल्लंघन</string>
     <string name="no_recommendations_yet">इस समय कोई विशिष्ट सिफारिशें नहीं हैं। अच्छा काम जारी रखें!</string>
@@ -536,4 +536,4 @@
     <string name="security_score_violation_prefix">उल्लंघन: </string>
     <string name="failed_to_export_settings">सेटिंग्स निर्यात करने में विफल: %1$s</string>
 
-</resources>
+<string name="onboarding_page4_title">सूचनाएं सक्षम करें</string><string name="onboarding_page4_description">NFC सक्षम होने पर तत्काल अलर्ट के साथ सुरक्षित रहें। महत्वपूर्ण सुरक्षा चेतावनियां प्राप्त करने के लिए सूचनाओं की अनुमति दें।</string><string name="onboarding_page4_feature1">तत्काल NFC स्थिति अलर्ट</string><string name="onboarding_page4_feature2">वास्तविक समय में सुरक्षा चेतावनियां</string><string name="onboarding_page4_feature3">महत्वपूर्ण अपडेट कभी न चूकें</string><string name="onboarding_button_allow_notifications">सूचनाओं की अनुमति दें</string><string name="sound_selection_failed">ध्वनि चयन विफल: %1$s</string></resources>

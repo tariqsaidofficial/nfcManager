@@ -1,20 +1,20 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources>
-    <!-- App Identity -->
+    
     <string name="app_name">NFC Manager</string>
 
-    <!-- Main Interface -->
+    
     <string name="home_title">NFC Manager</string>
     <string name="nfc_monitoring">NFC Monitoring</string>
     <string name="privacy_protection">Proteksyon ng Privacy</string>
 
-    <!-- Settings -->
+    
     <string name="settings_title">Mga Setting</string>
     <string name="reminder_interval">Agwat ng Paalala</string>
     <string name="privacy_mode">Privacy Mode</string>
     <string name="notifications">Mga Notification</string>
 
-    <!-- Alert Intervals -->
+    
     <string name="interval_5_seconds">5 segundo</string>
     <string name="interval_10_seconds">10 segundo</string>
     <string name="interval_15_seconds">15 segundo</string>
@@ -25,22 +25,22 @@
     <string name="interval_60_seconds">60 segundo</string>
     <string name="custom_interval">Custom na agwat</string>
 
-    <!-- Security Messages -->
+    
     <string name="nfc_enabled_too_long">Matagal nang nakabukas ang NFC. Isaalang-alang na i-disable ito para sa inyong privacy.</string>
     <string name="nfc_privacy_warning">Maaaring gamitin ang NFC para sa hindi awtorisadong bayad o pag-access sa data.</string>
 
-    <!-- Activity -->
+    
     <string name="activity_title">Activity Log</string>
     <string name="nfc_events">Mga NFC Event</string>
 
-    <!-- General -->
+    
     <string name="enabled">Nakabukas</string>
     <string name="disabled">Nakapatay</string>
     <string name="ok">OK</string>
     <string name="cancel">Kanselahin</string>
     <string name="save">I-save</string>
 
-    <!-- Language Settings -->
+    
     <string name="settings_language_title">Wika</string>
     <string name="language_system_default">System Default</string>
     <string name="language_english">Ingles</string>
@@ -49,7 +49,7 @@
     <string name="language_french">Français (Pranses)</string>
     <string name="language_german">Deutsch (Aleman)</string>
 
-    <!-- Dialog title for language selection -->
+    
     <string name="dialog_select_language_title">Pumili ng Wika</string>
 
     <string name="interval_seconds_format">%1$ds</string>
@@ -63,13 +63,13 @@
     <string name="activity_export_csv">I-export ang CSV</string>
     <string name="activity_filter_date_range">Hanay ng Petsa</string>
 
-    <!-- Toast Messages -->
+    
     <string name="settings_toast_notification_perm_granted">Nabigay ang pahintulot sa notification</string>
     <string name="settings_toast_notification_perm_denied">Hindi nabigay ang pahintulot sa notification</string>
     <string name="settings_toast_nfc_perm_granted">Nabigay ang NFC permission. Paki-toggle ulit ang monitoring kung kailangan.</string>
     <string name="settings_toast_nfc_perm_denied">Hindi nabigay ang NFC permission. Hindi ma-enable ang background monitoring.</string>
 
-    <!-- Screen and Section Titles -->
+    
     <string name="settings_screen_header_title">MGA SETTING</string>
     <string name="settings_section_display_title">DISPLAY</string>
     <string name="settings_section_language_region_title">WIKA AT REHIYON</string>
@@ -77,7 +77,7 @@
     <string name="settings_section_privacy_security_title">PRIVACY AT SECURITY</string>
     <string name="settings_section_performance_title">PERFORMANCE</string>
 
-    <!-- Theme Options -->
+    
     <string name="settings_item_theme_title">Theme</string>
     <string name="settings_item_dark_mode_title">Dark Mode</string>
     <string name="settings_item_dark_mode_subtitle">Madaling sa mata</string>
@@ -86,7 +86,7 @@
     <string name="settings_item_accent_color_title">Accent Color</string>
     <string name="settings_item_accent_color_subtitle">I-customize ang kulay ng app</string>
 
-    <!-- General Settings Items -->
+    
     <string name="settings_item_auto_reminder_title">Auto Reminder</string>
     <string name="settings_item_auto_reminder_subtitle">Privacy alerts kapag nanatiling nakabukas ang NFC</string>
     <string name="settings_item_reminder_interval_title">Agwat ng Paalala</string>
@@ -112,18 +112,18 @@
     <string name="settings_item_performance_subtitle">settings_item_performance_subtitle</string>
     <string name="settings_item_monitoring_interval_title">settings_item_monitoring_interval_title</string>
 
-    <!-- Buttons -->
+    
     <string name="settings_button_export_settings">I-EXPORT ANG MGA SETTING</string>
     <string name="settings_button_reset_defaults">I-RESET SA MGA DEFAULT</string>
 
-    <!-- Design Info Card -->
+    
     <string name="settings_card_design_info_title">Nothing OS Inspired Design</string>
     <string name="settings_card_design_info_subtitle">Ginawa gamit ang opisyal na Android tools: Kotlin, Jetpack Compose, Room Database, at MVVM architecture.</string>
 
-    <!-- Content Descriptions -->
+    
     <string name="settings_cd_navigate">Mag-navigate</string>
 
-    <!-- Home Screen Strings -->
+    
     <string name="home_screen_title">NFC MANAGER</string>
     <string name="nfc_status_title">NFC STATUS</string>
     <string name="nfc_not_supported">HINDI SUPPORTED</string>
@@ -137,7 +137,7 @@
     <string name="view_all">Tingnan Lahat</string>
     <string name="enable_nfc_button">I-ENABLE ANG NFC SA SETTINGS</string>
 
-    <!-- Activity Screen Strings -->
+    
     <string name="activity_log_title">ACTIVITY LOG</string>
     <string name="export_success">Matagumpay na na-export ang mga events</string>
     <string name="export_error">Error sa pag-export ng events: %1$s</string>
@@ -153,7 +153,7 @@
     <string name="events_found_format">Natagpuan ang %1$d %2$s</string>
     <string name="events_recorded_format">Naitala ang %1$d %2$s</string>
 
-    <!-- Notification Sound Settings Screen Strings -->
+    
     <string name="sound_access_warning">Hindi ma-persist ang sound access, maaaring hindi gumana mamaya.</string>
     <string name="storage_permission_required">Kailangan ang storage permission para pumili ng custom na tunog.</string>
     <string name="notification_sound_screen_title">Tunog ng Notification</string>
@@ -172,7 +172,7 @@
     <string name="pick_sound_icon">Pumili ng Tunog</string>
     <string name="default_sound_icon">Default na Tunog</string>
 
-    <!-- ViewModel Messages -->
+    
     <string name="language_already_set">Naka-set na ang wika sa %1$s.</string>
     <string name="language_changed_log">Nabago ang wika mula sa %1$s patungo sa %2$s</string>
     <string name="language_updated_success">Na-update ang wika sa %1$s. Nagre-restart para sa mga pagbabago.</string>
@@ -237,13 +237,13 @@
     <string name="enabled_status">naka-enable</string>
     <string name="disabled_status">naka-disable</string>
 
-    <!-- Date Filter Options -->
+    
     <string name="date_filter_today">Ngayon</string>
     <string name="date_filter_last_7_days">Nakaraang 7 Araw</string>
     <string name="date_filter_last_30_days">Nakaraang 30 Araw</string>
     <string name="date_filter_all_time">Buong Panahon</string>
 
-    <!-- System Messages -->
+    
     <string name="mainviewmodel_initialized">Na-initialize ang MainViewModel</string>
     <string name="tag_scanned_format">Na-scan ang Tag: %1$s (Action: %2$s)</string>
     <string name="event_deleted">Na-delete ang event</string>
@@ -252,7 +252,7 @@
     <string name="failed_to_delete_event">Nabigo ang pag-delete ng event: %1$s</string>
     <string name="failed_to_clear_events">Nabigo ang pag-clear ng lahat ng events: %1$s</string>
 
-    <!-- Additional System Messages -->
+    
     <string name="nfc_not_supported_device">Hindi supported ang NFC sa device na ito</string>
     <string name="privacy_alert_shown">Ipinakita ang privacy alert</string>
     <string name="privacy_alert_dismissed">Na-dismiss ang privacy alert</string>
@@ -260,29 +260,29 @@
     <string name="notifications_toggled_system_log">Mga notification %1$s</string>
     <string name="vibration_toggled_system_log">Vibration %1$s</string>
 
-    <!-- Content Descriptions -->
+    
     <string name="export_to_csv_icon">I-export sa CSV</string>
     <string name="clear_all_logs_icon">I-clear Lahat ng Logs</string>
 
-    <!-- Bottom Navigation -->
+    
     <string name="nav_nfc_manager">NFC MANAGER</string>
     <string name="nav_activity">AKTIBIDAD</string>
     <string name="nav_settings">MGA SETTING</string>
 
-    <!-- Language Names for Logging -->
+    
     <string name="language_name_english">Ingles</string>
     <string name="language_name_arabic">Arabo</string>
     <string name="language_name_german">Aleman</string>
     <string name="language_name_system_default">System Default</string>
 
-    <!-- Event Types -->
+    
     <string name="event_type_settings">MGA SETTING</string>
     <string name="event_type_system">SISTEMA</string>
     <string name="event_type_privacy">PRIVACY</string>
     <string name="event_type_nfc_scan">NFC SCAN</string>
     <string name="event_type_security">SECURITY</string>
 
-    <!-- Settings Messages -->
+    
     <string name="auto_reminder_enabled">Na-enable ang auto-reminder</string>
     <string name="auto_reminder_disabled">Na-disable ang auto-reminder</string>
     <string name="notifications_enabled">Na-enable ang mga notification</string>
@@ -302,20 +302,20 @@
     <string name="nfc_hardware_enabled">Nakabukas na ngayon ang NFC hardware</string>
     <string name="nfc_hardware_disabled">Nakapatay na ngayon ang NFC hardware</string>
 
-    <!-- Time Format -->
+    
     <string name="time_now">ngayon</string>
 
-    <!-- Additional Settings Messages -->
+    
     <string name="dark_mode_enabled">Na-enable ang dark mode</string>
     <string name="light_mode_enabled">Na-enable ang light mode</string>
     <string name="accent_color_updated">Na-update ang accent color</string>
     <string name="monitoring_interval_set">Naka-set ang monitoring interval sa %1$dms</string>
     <string name="old_data_cleanup_completed">Tapos na ang paglinis ng lumang data (%1$d araw)</string>
 
-    <!-- Additional Success Messages -->
+    
     <string name="old_data_cleanup_success">Matagumpay na nalinis ang lumang data</string>
 
-    <!-- Error Messages -->
+    
     <string name="failed_to_disable_monitoring">Nabigo ang pag-disable ng background monitoring: %1$s</string>
     <string name="failed_to_toggle_auto_reminder">Nabigo ang pag-toggle ng auto-reminder: %1$s</string>
     <string name="failed_to_update_interval">Nabigo ang pag-update ng interval: %1$s</string>
@@ -332,7 +332,7 @@
     <string name="failed_to_export_settings">Nabigo ang pag-export ng settings: %1$s</string>
     <string name="failed_to_cleanup_data">Nabigo ang paglinis ng data: %1$s</string>
 
-    <!-- About Screen -->
+    
     <string name="about_title">Tungkol</string>
     <string name="about_app_title">Tungkol sa NFC Manager</string>
     <string name="about_app_description">Ang NFC Manager ay isang privacy-focused na Android application na nakatuon sa pagtulong sa mga user na subaybayan at pamahalaan ang kanilang NFC (Near Field Communication) settings na may enhanced security awareness. Nag-aalerto ang app sa mga user kapag nanatiling naka-enable ang NFC sa mahabang panahon, nakakatulong na maiwasan ang hindi awtorisadong access at nagpoprotekta laban sa mga potensyal na vulnerability sa privacy.</string>
@@ -369,19 +369,19 @@
     <string name="settings_item_about_title">Tungkol sa NFC Manager</string>
     <string name="settings_item_about_subtitle">Info ng app, privacy policy, at support</string>
 
-    <!-- Activity Screen (Additional) -->
+    
     <string name="activity_search_hint">Maghanap sa activity logs...</string>
     <string name="activity_filter_type">I-filter ayon sa uri</string>
     <string name="activity_filter_date">I-filter ayon sa petsa</string>
     <string name="activity_important_only">Mahahalaga lang</string>
     <string name="activity_no_events">Walang natagpuang events</string>
 
-    <!-- Notification Sound Settings Screen (Additional) -->
+    
     <string name="notification_sound_current">Kasalukuyang tunog ng notification</string>
     <string name="notification_sound_pick">Pumili ng tunog ng notification</string>
     <string name="notification_sound_updated_log">Na-update ang tunog ng notification</string>
 
-    <!-- Security Score Screen -->
+    
     <string name="security_score_screen_title">Security Score</string>
     <string name="security_score_value_label">Score</string>
     <string name="security_score_card_title">Security Score</string>
@@ -415,7 +415,7 @@
     <string name="security_tip_review_log">Regular na suriin ang iyong NFC activity log</string>
     <string name="security_tip_keep_device_updated">Panatilihing updated ang iyong device</string>
 
-    <!-- Security Recommendations -->
+    
     <string name="recommendations_title">Mga Rekomendasyon</string>
     <string name="violations_title">Mga Paglabag</string>
     <string name="no_recommendations_yet">Walang partikular na rekomendasyon sa ngayon. Ipagpatuloy ang magandang trabaho!</string>
@@ -436,13 +436,13 @@
     <string name="recommendation_enable_nfc_when_needed">I-enable lamang ang NFC kapag kailangan mo ng mga contactless na feature tulad ng mga pagbabayad o pagbasa ng tag.</string>
     <string name="recommendation_nfc_currently_disabled">Ang NFC ay kasalukuyang naka-disable. Ang score sa ibaba ay batay sa iyong kamakailang kasaysayan ng paggamit.</string>
 
-    <!-- Security Violations -->
+    
     <string name="violation_long_nfc_usage_name">Matagal na Pag-activate ng NFC</string>
     <string name="violation_unknown_tag_name">Natukoy ang Hindi Kilalang Tag</string>
     <string name="violation_rapid_tag_detection_name">Mabilis na Pagtukoy ng Maraming Tag</string>
     <string name="violation_suspicious_activity_name">Kahina-hinalang Pattern ng Aktibidad ng NFC</string>
 
-    <!-- Notification Manager -->
+    
     <string name="channel_nfc_status_name">Status ng NFC</string>
     <string name="channel_nfc_status_description">Nagpapakita ng kasalukuyang status ng NFC at antas ng seguridad</string>
     <string name="channel_security_alert_name">Mga Alert sa Seguridad</string>
@@ -473,64 +473,64 @@
     <string name="recommendation_alert_multiple_tags">Iwasan ang matataong lugar kapag gumagamit ng NFC</string>
     <string name="recommendation_alert_suspicious_activity">Suriin ang iyong mga pattern ng paggamit ng NFC</string>
 
-    <!-- Error Messages - Network -->
+    
     <string name="error_no_internet">Walang koneksyon sa internet. Pakisuri ang iyong mga setting ng network.</string>
     <string name="error_timeout">Nag-timeout ang request. Pakisubukan muli.</string>
     <string name="error_server">Error sa server: %1$d. Pakisubukan muli mamaya.</string>
     <string name="error_network_unknown">Nagkaroon ng error sa network. Pakisubukan muli.</string>
 
-    <!-- Error Messages - Database -->
+    
     <string name="error_database_read">Nabigo ang pagbasa ng data mula sa database.</string>
     <string name="error_database_write">Nabigo ang pag-save ng data sa database.</string>
     <string name="error_database_delete">Nabigo ang pagtanggal ng data mula sa database.</string>
     <string name="error_database_corrupted">Ang data ng database ay sira. Paki-reinstall ang app.</string>
     <string name="error_database_unknown">Nagkaroon ng error sa database.</string>
 
-    <!-- Error Messages - NFC -->
+    
     <string name="error_nfc_read">Nabigo ang pagbasa ng NFC tag. Pakisubukan muli.</string>
     <string name="error_nfc_write">Nabigo ang pagsulat sa NFC tag. Pakisubukan muli.</string>
     <string name="error_nfc_tag_lost">Nawala ang koneksyon sa NFC tag. Pakiusap panatilihing malapit ang tag.</string>
     <string name="error_nfc_unknown">Nagkaroon ng error sa NFC. Pakisubukan muli.</string>
 
-    <!-- Error Messages - Permission -->
+    
     <string name="error_permission_notification">Kailangan ang notification permission para sa mga alert.</string>
     <string name="error_permission_unknown">Tinanggihan ang permission: %1$s</string>
 
-    <!-- Error Messages - Service -->
+    
     <string name="error_service_start">Nabigo ang paglunsad ng monitoring service.</string>
     <string name="error_service_stop">Nabigo ang paghinto ng monitoring service.</string>
     <string name="error_service_not_running">Ang monitoring service ay hindi tumatakbo.</string>
     <string name="error_service_unknown">Nagkaroon ng error sa service.</string>
 
-    <!-- Error Messages - Validation -->
+    
     <string name="error_validation_invalid">Hindi wastong input para sa: %1$s</string>
     <string name="error_validation_range">Ang %1$s ay dapat nasa pagitan ng %2$d at %3$d</string>
     <string name="error_validation_required">Kinakailangan ang %1$s</string>
 
-    <!-- Error Messages - File -->
+    
     <string name="error_file_not_found">Hindi natagpuan ang file: %1$s</string>
     <string name="error_file_read">Nabigo ang pagbasa ng file.</string>
     <string name="error_file_write">Nabigo ang pagsulat ng file.</string>
     <string name="error_file_permission">Tinanggihan ang permission sa file.</string>
     <string name="error_file_unknown">Nagkaroon ng error sa file.</string>
 
-    <!-- Additional UI Elements -->
+    
     <string name="arrow_right">→</string>
     <string name="social_media_linkedin">LinkedIn</string>
     <string name="social_media_github">GitHub</string>
     <string name="partnership_title">Partnership</string>
 
-    <!-- Additional System Messages -->
+    
     <string name="retry_button">Subukan Muli</string>
     <string name="nfc_not_supported_error">Ang NFC ay hindi suportado sa device na ito.</string>
     <string name="nfc_disabled_error_turn_on">Ang NFC ay naka-disable. Pakiusap i-on ang NFC sa iyong mga setting ng device upang ma-enable ang monitoring.</string>
     <string name="error_calculating_score">Error sa pagkalkula ng score: %1$s</string>
     <string name="error_calculating_period_score">Error sa pagkalkula ng period score: %1$s</string>
 
-    <!-- Settings Items (Missing) -->
+    
     <string name="settings_item_monitoring_interval_subtitle">Dalas ng pagsuri sa status ng NFC</string>
 
-    <!-- Onboarding Strings -->
+    
     <string name="onboarding_button_get_started">Magsimula</string>
     <string name="onboarding_button_next">Susunod</string>
     <string name="onboarding_button_previous">Nakaraan</string>
@@ -556,10 +556,10 @@
     <string name="onboarding_page3_feature3">9 na wika</string>
 
 
-    <!-- Missing Strings -->
+    
     <string name="language_chinese_mandarin">Chinese (Mandarin)</string>
     <string name="language_filipino">Filipino</string>
     <string name="language_hindi">Hindi</string>
     <string name="language_russian">Russian</string>
 
-</resources>
+<string name="onboarding_page4_title">I-enable ang Notifications</string><string name="onboarding_page4_description">Manatiling protektado sa instant na mga alerto kapag naka-enable ang NFC. Payagan ang notifications para makatanggap ng mahahalagang security warnings.</string><string name="onboarding_page4_feature1">Instant na NFC status alerts</string><string name="onboarding_page4_feature2">Real-time security warnings</string><string name="onboarding_page4_feature3">Huwag palampasin ang mahahalagang updates</string><string name="onboarding_button_allow_notifications">Payagan ang Notifications</string><string name="sound_selection_failed">Nabigo ang pagpili ng tunog: %1$s</string></resources>

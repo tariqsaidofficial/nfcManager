@@ -1,219 +1,536 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources>
-    <!-- App Identity -->
     <string name="app_name">NFC Manager</string>
 
-    <!-- Main Interface -->
     <string name="home_title">NFC Manager</string>
-    <string name="nfc_monitoring">NFC Monitoring</string>
-    <string name="privacy_protection">Privacy Protection</string>
+    <string name="nfc_monitoring">NFC-À proposwachung</string>
+    <string name="privacy_protection">Datenschutz</string>
 
-    <!-- Settings -->
-    <string name="settings_title">Settings</string>
-    <string name="reminder_interval">Reminder Interval</string>
-    <string name="privacy_mode">Privacy Mode</string>
+    <string name="settings_title">Paramètres</string>
+    <string name="reminder_interval">Intervalle de rappel</string>
+    <string name="privacy_mode">Privatsphäre-Modus</string>
     <string name="notifications">Notifications</string>
 
-    <!-- Alert Intervals -->
-    <string name="interval_5_seconds">5 seconds</string>
-    <string name="interval_10_seconds">10 seconds</string>
-    <string name="interval_15_seconds">15 seconds</string>
-    <string name="interval_20_seconds">20 seconds</string>
-    <string name="interval_30_seconds">30 seconds</string>
-    <string name="interval_40_seconds">40 seconds</string>
-    <string name="interval_50_seconds">50 seconds</string>
-    <string name="interval_60_seconds">60 seconds</string> <!-- Or "1 minute" if preferred -->
-    <string name="custom_interval">Custom interval</string>
+    <string name="interval_5_seconds">5 secondes</string>
+    <string name="interval_10_seconds">10 secondes</string>
+    <string name="interval_15_seconds">15 secondes</string>
+    <string name="interval_20_seconds">20 secondes</string>
+    <string name="interval_30_seconds">30 secondes</string>
+    <string name="interval_40_seconds">40 secondes</string>
+    <string name="interval_50_seconds">50 secondes</string>
+    <string name="interval_60_seconds">60 secondes</string>
+    <string name="custom_interval">Benutzerdefiniertes Intervall</string>
 
-    <!-- Security Messages -->
-    <string name="nfc_enabled_too_long">NFC has been enabled for too long. Consider disabling it to protect your privacy.</string>
-    <string name="nfc_privacy_warning">NFC can be used for unauthorized payments or data access.</string>
+    <string name="nfc_enabled_too_long">NFC ist zu lange aktiviert. Erwägen Sie, es zu deaktivieren, um Ihre Privatsphäre zu schützen.</string>
+    <string name="nfc_privacy_warning">NFC kann für unbefugte Zahlungen oder Datenzugriffe verwendet werden.</string>
 
-    <!-- Activity -->
-    <string name="activity_title">Activity Log</string>
-    <string name="nfc_events">NFC Events</string>
+    <string name="activity_title">Aktivitätsprotokoll</string>
+    <string name="nfc_events">NFC-événementse</string>
+    <string name="activity_filter_date">Nach Datum filtern</string>
+    <string name="activity_filter_type">Nach Typ filtern</string>
+    <string name="activity_important_only">Nur wichtige</string>
+    <string name="activity_no_events">Keine événementse</string>
+    <string name="activity_search_hint">Suchen...</string>
 
-    <!-- General -->
-    <string name="enabled">Enabled</string>
-    <string name="disabled">Disabled</string>
+    <string name="enabled">Activé</string>
+    <string name="disabled">Désactivé</string>
     <string name="ok">OK</string>
-    <string name="cancel">Cancel</string>
-    <string name="save">Save</string>
+    <string name="cancel">Annuler</string>
+    <string name="save">Enregistrer</string>
 
-    <!-- Language Settings -->
-    <string name="settings_language_title">Language</string>
-    <string name="language_system_default">System Default</string>
+    <string name="settings_language_title">Langue</string>
+    <string name="language_system_default">Systemstandard</string>
     <string name="language_english">English</string>
     <string name="language_arabic">العربية</string>
     <string name="language_spanish">Español (Spanish)</string>
     <string name="language_french">Français (French)</string>
-    <string name="language_russian">Русский (Russian)</string>
-    <string name="language_chinese_mandarin">中文 (简体)</string> <!-- Mandarin Chinese (Simplified) -->
-    <string name="language_hindi">हिन्दी (Hindi)</string>
+    <string name="language_german">Deutsch (German)</string>
+    <string name="language_chinese_mandarin">中文 (简体)</string>
+    <string name="language_russian">Русский</string>
+    <string name="language_hindi">हिन्दी</string>
     <string name="language_filipino">Filipino</string>
 
-    <!-- Dialog title for language selection -->
-    <string name="dialog_select_language_title">Select Language</string>
+    <string name="dialog_select_language_title">Langue auswählen</string>
 
-    <!-- Settings Screen (New additions from grep) -->
-    <string name="interval_seconds_format">%1$ds</string> <!-- For dynamic interval display e.g., "10s" -->
-    <string name="settings_custom_interval_label">Custom Interval (5-300 seconds)</string>
-    <string name="settings_error_interval_range">Interval must be a number between 5-300.</string>
+    <string name="interval_seconds_format">%1$ds</string>
+    <string name="settings_custom_interval_label">Benutzerdefiniertes Intervall (5-300 secondes)</string>
+    <string name="settings_error_interval_range">Das Intervall muss eine Zahl zwischen 5 und 300 sein.</string>
+    <string name="notification_sound_title">Benachrichtigungston</string>
+    <string name="notification_sound_use_system_default">Systemstandardton verwenden</string>
+    <string name="notification_sound_choose_custom">Benutzerdefinierten Son wählen</string>
+    <string name="notification_sound_current">Aktueller Son</string>
+    <string name="notification_sound_pick">Son wählen</string>
+    <string name="notification_sound_updated_log">Benachrichtigungston aktualisiert</string>
+    <string name="activity_clear_all">Alles löschen</string>
+    <string name="activity_filter_event_type">événementtyp</string>
+    <string name="activity_export_csv">CSV exportieren</string>
+    <string name="activity_filter_date_range">Datumsbereich</string>
 
-    <!-- Notification Sound Settings Screen (New additions from grep) -->
-    <string name="notification_sound_title">Notification Sound</string>
-    <string name="notification_sound_use_system_default">Use System Default Sound</string>
-    <string name="notification_sound_choose_custom">Choose Custom Sound</string>
+    <string name="settings_toast_notification_perm_granted">Benachrichtigungsberechtigung erteilt</string>
+    <string name="settings_toast_notification_perm_denied">Benachrichtigungsberechtigung verweigert</string>
+    <string name="settings_toast_nfc_perm_granted">NFC-Berechtigung erteilt. Bitte schalten Sie die À proposwachung bei Bedarf wieder ein.</string>
+    <string name="settings_toast_nfc_perm_denied">NFC-Berechtigung verweigert. Surveillance en arrière-plan kann nicht aktiviert werden.</string>
 
-    <!-- Activity Screen (New additions from grep) -->
-    <string name="activity_filter_event_type">Type d\'Événement</string>
-    <string name="activity_export_csv">Exporter CSV</string>
-    <string name="activity_filter_date_range">Plage de Dates</string>
+    <string name="settings_screen_header_title">EINSTELLUNGEN</string>
+    <string name="settings_section_display_title">ANZEIGE</string>
+    <string name="settings_section_language_region_title">SPRACHE &amp; REGION</string>
+    <string name="settings_section_notifications_alerts_title">BENACHRICHTIGUNGEN &amp; ALARME</string>
+    <string name="settings_section_privacy_security_title">DATENSCHUTZ &amp; SICHERHEIT</string>
+    <string name="settings_section_performance_title">LEISTUNG</string>
 
-    <!-- Traductions manquantes - complétant la traduction française -->
+    <string name="settings_item_theme_title">Thema</string>
+    <string name="settings_item_dark_mode_title">Mode sombre</string>
+    <string name="settings_item_dark_mode_subtitle">Augenfreundlich</string>
+    <string name="settings_item_light_mode_title">Mode clair</string>
+    <string name="settings_item_light_mode_subtitle">Klassisches Désactivésehen</string>
+    <string name="settings_item_accent_color_title">Akzentfarbe</string>
+    <string name="settings_item_accent_color_subtitle">Ändern Sie die Hauptfarbe der App</string>
+
+    <string name="settings_item_auto_reminder_title">Auto-Erinnerung</string>
+    <string name="settings_item_auto_reminder_subtitle">Datenschutzwarnungen, wenn NFC aktiviert bleibt</string>
+
+    <string name="settings_item_reminder_interval_title">Intervalle de rappel</string>
+    <string name="settings_item_reminder_interval_subtitle">Wie oft an den NFC-Datenschutz erinnert werden soll</string>
+    <string name="settings_item_reminder_interval_current_label">Aktuell: %1$ds</string>
+
+    <string name="settings_item_show_notifications_title">Notifications anzeigen</string>
+    <string name="settings_item_show_notifications_subtitle">Alle Datenschutz- und Statusbenachrichtigungen anzeigen</string>
+
+    <string name="settings_item_vibration_alerts_title">Vibration für Alarme</string>
+    <string name="settings_item_vibration_alerts_subtitle">Haptisches Feedback für Datenschutzalarme</string>
+
+    <string name="settings_item_enable_sounds_title">Töne aktivieren</string>
+    <string name="settings_item_enable_sounds_subtitle">Töne für Alarme und Notifications abspielen</string>
+
+    <string name="settings_item_notification_sound_title">Benachrichtigungston</string>
+    <string name="settings_item_notification_sound_subtitle">Passen Sie den spezifischen Son für Notifications an</string>
+
+    <string name="settings_item_privacy_mode_title">Privatsphäre-Modus</string>
+    <string name="settings_item_privacy_mode_subtitle">Erhöhter Datenschutz</string>
+
+    <string name="settings_item_block_unknown_tags_title">Bloquer les tags inconnus</string>
+    <string name="settings_item_block_unknown_tags_subtitle">Unbekannte NFC-Tags automatisch blockieren</string>
+
+    <string name="settings_item_background_monitoring_title">Hintergrund-NFC-À proposwachung</string>
+    <string name="settings_item_background_monitoring_subtitle">À proposwacht kontinuierlich den NFC-Status. Erfordert NFC-Berechtigung.</string>
+
+    <string name="settings_item_battery_optimization_title">Optimisation de la batterie</string>
+    <string name="settings_item_battery_optimization_subtitle">Optimieren für eine bessere Akkulaufzeit</string>
+    <string name="settings_item_performance_title">Leistung</string>
+    <string name="settings_item_performance_subtitle">Activé Gleichgewicht zwischen Flüssigkeit und Akkulaufzeit</string>
+    <string name="settings_item_monitoring_interval_title">À proposwachungsintervall</string>
+    <string name="settings_item_monitoring_interval_subtitle">Die Geschwindigkeit der NFC-Statusprüfung</string>
+
+    <string name="settings_button_export_settings">EINSTELLUNGEN EXPORTIEREN</string>
+    <string name="settings_button_reset_defaults">AUF STANDARD ZURÜCKSETZEN</string>
+
+    <string name="settings_card_design_info_title">Von Nothing OS inspiriertes Thème</string>
+    <string name="settings_card_design_info_subtitle">Erstellt mit offiziellen Android-Tools: Kotlin, Jetpack Compose, Room Database und MVVM-Architektur.</string>
+
+    <string name="settings_cd_navigate">Navigieren</string>
+
+    <string name="home_screen_title">GESTIONNAIRE NFC</string>
+    <string name="nfc_status_title">STATUT NFC</string>
+    <string name="nfc_not_supported">NON PRIS EN CHARGE</string>
+    <string name="nfc_hardware_not_found">Matériel NFC introuvable sur cet appareil.</string>
+    <string name="nfc_status_enabled">ACTIVÉ</string>
+    <string name="privacy_monitoring_active">Surveillance de la confidentialité active</string>
+    <string name="nfc_status_disabled">DEACTIVÉ</string>
+    <string name="tap_to_enable_nfc">Appuyez ici pour activer NFC dans les paramètres système.</string>
+    <string name="home_todays_activity_title">ACTIVITÉ D'AUJOURD'HUI</string>
     <string name="events_logged_format">%1$d événements enregistrés</string>
     <string name="view_all">Tout voir</string>
-    <string name="activity_log_title">JOURNAL D\'ACTIVITÉ</string>
-    <string name="activity_clear_all">Effacer Tout</string>
-    <string name="activity_search_hint">Rechercher des événements...</string>
-    <string name="activity_filter_type">Filtrer par type</string>
-    <string name="activity_filter_date">Filtrer par date</string>
-    <string name="activity_important_only">Importants seulement</string>
-    <string name="activity_no_events">Aucun événement trouvé</string>
-    <string name="events_found_format">%1$d %2$s trouvés</string>
+    <string name="enable_nfc_button">ACTIVER NFC DANS LES PARAMÈTRES</string>
+    <string name="security_score_card_title">Score de sécurité</string>
+
+    <string name="activity_log_title">JOURNAL D'ACTIVITÉ</string>
+    <string name="export_success">Événements exportés avec succès</string>
+    <string name="export_error">Erreur lors de l'exportation des événements: %1$s</string>
+    <string name="no_events_to_export">Aucun événement à exporter für den aktuellen Filter</string>
+    <string name="no_events_to_export_simple">Aucun événement à exporter</string>
     <string name="event_singular">événement</string>
-    <string name="events_plural">événements</string>
+    <string name="events_plural">événementse</string>
+    <string name="no_matching_activity">Keine passende Aktivität</string>
+    <string name="no_activity_yet">Aucune activité pour le moment</string>
+    <string name="adjust_filters_hint">Essayez d'ajuster vos filtres.</string>
+    <string name="activity_logs_hint">Les journaux d'activité s'afficheront ici.</string>
+    <string name="all_types_filter">Tous les types</string>
+    <string name="events_found_format">%1$d %2$s gefunden</string>
+    <string name="events_recorded_format">%1$d %2$s aufgezeichnet</string>
 
-    <!-- Écran des Paramètres de Son de Notification -->
-    <string name="notification_sound_screen_title">Son de Notification</string>
-    <string name="notification_sound_current">Son actuel</string>
-    <string name="notification_sound_pick">Choisir un son</string>
-    <string name="notification_sound_reset_button">Rétablir par défaut</string>
-    <string name="sound_access_warning">Impossible de maintenir l\'accès au son, il pourrait ne pas fonctionner plus tard.</string>
-    <string name="system_default_sound">Défaut du Système</string>
-    <string name="pick_sound_icon">Choisir un son</string>
+    <string name="sound_access_warning">Der Sonzugriff konnte nicht gespeichert werden, er funktioniert möglicherweise später nicht.</string>
+    <string name="storage_permission_required">Speicherberechtigung ist erforderlich, um einen benutzerdefinierten Son auszuwählen.</string>
+    <string name="notification_sound_screen_title">Benachrichtigungston</string>
+    <string name="notification_sound_description">Passen Sie den Son an, der für NFC Manager-Notifications abgespielt wird. Wählen Sie einen benutzerdefinierten Son von Ihrem Gerät oder verwenden Sie den Systemstandard.</string>
+    <string name="current_sound_label">Aktueller Son</string>
+    <string name="sound_play_error_null">Son kann nicht abgespielt werden: Standard-URI ist null.</string>
+    <string name="sound_play_error_corrupted">Son kann nicht abgespielt werden: Klingelton nicht gefunden oder beschädigt.</string>
+    <string name="sound_play_error_general">Fehler beim Abspielen des Sons: %1$s</string>
+    <string name="choose_custom_sound">Benutzerdefinierten Son wählen</string>
+    <string name="use_system_default_sound">Systemstandardton verwenden</string>
+    <string name="sound_playing_indicator">Wird abgespielt</string>
+    <string name="system_default_sound">Systemstandard</string>
+    <string name="custom_sound_label">Benutzerdefinierter Son</string>
+    <string name="custom_sound_error">Benutzerdefinierter Son (Fehler)</string>
+    <string name="back_button">Précédent</string>
+    <string name="pick_sound_icon">Son wählen</string>
+    <string name="default_sound_icon">Standardton</string>
 
-    <!-- Messages ViewModel -->
-    <string name="language_already_set">La langue est déjà définie sur %1$s.</string>
-    <string name="language_updated_success">Langue mise à jour vers %1$s</string>
-    <string name="language_update_failed">Échec de la mise à jour de la langue : %1$s</string>
-    <string name="language_changed_log">Langue changée de %1$s vers %2$s</string>
-    <string name="settings_reset_log">Paramètres réinitialisés</string>
-    <string name="notification_sound_updated">Son de notification mis à jour</string>
-    <string name="notification_sound_reset">Son de notification réinitialisé par défaut</string>
-    <string name="notification_sound_updated_log">Son de notification mis à jour vers %1$s</string>
-    <string name="notification_sound_update_failed">Échec de la mise à jour du son de notification : %1$s</string>
-    <string name="background_monitoring_enabled_log">Surveillance NFC en arrière-plan activée</string>
-    <string name="background_monitoring_disabled_log">Surveillance NFC en arrière-plan désactivée</string>
-    <string name="background_monitoring_enabled_success">Surveillance NFC en arrière-plan activée</string>
-    <string name="background_monitoring_disabled_success">Surveillance NFC en arrière-plan désactivée</string>
-    <string name="background_monitoring_enable_failed">Échec de l\'activation de la surveillance en arrière-plan : %1$s</string>
-    <string name="auto_reminder_toggled_success">Rappel automatique %1$s</string>
-    <string name="auto_reminder_toggled_log">Rappel automatique %1$s</string>
-    <string name="enabled_status">activé</string>
-    <string name="disabled_status">désactivé</string>
+    <string name="language_already_set">Langue ist bereits auf %1$s eingestellt.</string>
+    <string name="language_changed_log">Langue von %1$s auf %2$s geändert</string>
+    <string name="language_updated_success">Langue auf %1$s aktualisiert. Wird neu gestartet, damit die Änderungen wirksam werden.</string>
+    <string name="language_update_failed">Fehler beim Aktualisieren der Langue: %1$s</string>
+    <string name="settings_reset_log">Alle Paramètres wurden auf Standard zurückgesetzt</string>
+    <string name="settings_reset_success">Alle Paramètres wurden auf Standard zurückgesetzt</string>
+    <string name="settings_reset_failed">Fehler beim Précédentsetzen der Paramètres: %1$s</string>
+    <string name="notification_sound_updated">Benachrichtigungston aktualisiert</string>
+    <string name="notification_sound_reset">Benachrichtigungston auf Standard zurückgesetzt</string>
+    <string name="notification_sound_reset_button">Auf Standard zurücksetzen</string>
+    <string name="notification_sound_update_failed">Fehler beim Aktualisieren des Benachrichtigungstons: %1$s</string>
+    <string name="background_monitoring_enabled_log">Hintergrund-NFC-À proposwachung aktiviert (via Intent)</string>
+    <string name="background_monitoring_enabled_success">Hintergrund-NFC-À proposwachung aktiviert</string>
+    <string name="background_monitoring_enable_failed">Fehler beim Aktivieren der Surveillance en arrière-plan: %1$s</string>
+    <string name="nfc_permission_required">NFC-Berechtigung zum Aktivieren der Surveillance en arrière-plan erforderlich.</string>
+    <string name="background_monitoring_disabled_log">Hintergrund-NFC-À proposwachung deaktiviert (via Intent)</string>
+    <string name="background_monitoring_disabled_success">Hintergrund-NFC-À proposwachung deaktiviert</string>
+    <string name="background_monitoring_disable_failed">Fehler beim Deaktivieren der Surveillance en arrière-plan: %1$s</string>
+    <string name="auto_reminder_toggled_log">Auto-Erinnerung %1$s</string>
+    <string name="auto_reminder_toggled_success">Auto-Erinnerung %1$s</string>
+    <string name="auto_reminder_toggle_failed">Fehler beim Umschalten der Auto-Erinnerung: %1$s</string>
+    <string name="interval_out_of_range">Intervall muss zwischen 5 und 300 secondes liegen</string>
+    <string name="reminder_interval_updated_log">Intervalle de rappel auf %1$ds gesetzt</string>
+    <string name="reminder_interval_updated_success">Intervalle de rappel auf %1$d secondes aktualisiert</string>
+    <string name="reminder_interval_update_failed">Fehler beim Aktualisieren des Intervalls: %1$s</string>
+    <string name="notifications_toggled_log">Notifications %1$s</string>
+    <string name="notifications_toggled_success">Notifications %1$s</string>
+    <string name="notifications_toggle_failed">Fehler beim Umschalten der Notifications: %1$s</string>
+    <string name="vibration_toggled_log">Vibration %1$s</string>
+    <string name="vibration_toggled_success">Vibration %1$s</string>
+    <string name="vibration_toggle_failed">Fehler beim Umschalten der Vibration: %1$s</string>
+    <string name="sound_toggled_log">Son (allgemein) %1$s</string>
+    <string name="sound_toggled_success">Son (allgemein) %1$s</string>
+    <string name="sound_toggle_failed">Fehler beim Umschalten des Sons: %1$s</string>
+    <string name="theme_changed_log">%1$s aktiviert</string>
+    <string name="theme_changed_success">%1$s aktiviert</string>
+    <string name="theme_change_failed">Fehler beim Festlegen des Themas: %1$s</string>
+    <string name="dark_mode_text">Mode sombre</string>
+    <string name="light_mode_text">Mode clair</string>
+    <string name="accent_color_updated_log">Akzentfarbe aktualisiert</string>
+    <string name="accent_color_updated_success">Akzentfarbe aktualisiert</string>
+    <string name="accent_color_update_failed">Fehler beim Aktualisieren der Farbe: %1$s</string>
+    <string name="battery_optimization_toggled_log">Optimisation de la batterie %1$s</string>
+    <string name="battery_optimization_toggled_success">Optimisation de la batterie %1$s</string>
+    <string name="battery_optimization_toggle_failed">Fehler beim Umschalten der Optimisation de la batterie: %1$s</string>
+    <string name="monitoring_interval_out_of_range">À proposwachungsintervall muss zwischen 1000 und 10000 Millisekunden liegen</string>
+    <string name="monitoring_interval_updated_log">À proposwachungsintervall auf %1$dms gesetzt</string>
+    <string name="monitoring_interval_updated_success">À proposwachungsintervall aktualisiert</string>
+    <string name="monitoring_interval_update_failed">Fehler beim Aktualisieren des À proposwachungsintervalls: %1$s</string>
+    <string name="privacy_mode_toggled_log">Privatsphäre-Modus %1$s</string>
+    <string name="privacy_mode_toggled_success">Privatsphäre-Modus %1$s</string>
+    <string name="privacy_mode_toggle_failed">Fehler beim Umschalten des Privatsphäre-Modus: %1$s</string>
+    <string name="block_unknown_tags_toggled_log">Blockierung unbekannter Tags %1$s</string>
+    <string name="block_unknown_tags_toggled_success">Blockierung unbekannter Tags %1$s</string>
+    <string name="block_unknown_tags_toggle_failed">Fehler beim Umschalten der Blockierung unbekannter Tags: %1$s</string>
+    <string name="settings_exported_log">Paramètres exportiert</string>
+    <string name="settings_exported_success">Paramètres erfolgreich exportiert</string>
+    <string name="settings_export_failed">Fehler beim Exporter der Paramètres: %1$s</string>
+    <string name="data_cleanup_log">Bereinigung alter Daten abgeschlossen (%1$d jours)</string>
+    <string name="data_cleanup_success">Alte Daten erfolgreich bereinigt</string>
+    <string name="data_cleanup_failed">Fehler beim Bereinigen der Daten: %1$s</string>
+    <string name="enabled_status">aktiviert</string>
+    <string name="disabled_status">deaktiviert</string>
 
-    <!-- Titres des Sections de Paramètres -->
-    <string name="settings_section_language_region_title">LANGUE ET RÉGION</string>
+    <string name="date_filter_today">Heute</string>
+    <string name="date_filter_last_7_days">Letzte 7 jours</string>
+    <string name="date_filter_last_30_days">Letzte 30 jours</string>
+    <string name="date_filter_all_time">Gesamte Zeit</string>
 
-    <!-- Options de Filtre de Date -->
-    <string name="date_filter_today">Aujourd\'hui</string>
-    <string name="date_filter_last_7_days">7 derniers jours</string>
-    <string name="date_filter_last_30_days">30 derniers jours</string>
-    <string name="date_filter_all_time">Tout le temps</string>
+    <string name="mainviewmodel_initialized">MainViewModel initialisiert</string>
+    <string name="tag_scanned_format">Tag gescannt: %1$s (Aktion: %2$s)</string>
+    <string name="event_deleted">événement gelöscht</string>
+    <string name="all_events_cleared">Alle événementse gelöscht</string>
+    <string name="all_events_cleared_success">Alle événementse erfolgreich gelöscht</string>
+    <string name="failed_to_delete_event">Fehler beim Supprimer des événementses: %1$s</string>
+    <string name="failed_to_clear_events">Fehler beim Supprimer aller événementse: %1$s</string>
 
-    <!-- Messages Système -->
-    <string name="mainviewmodel_initialized">MainViewModel initialisé</string>
-    <string name="nfc_not_supported_device">NFC non pris en charge sur cet appareil</string>
-    <string name="event_deleted">Événement supprimé</string>
-    <string name="all_events_cleared">Tous les événements effacés</string>
-    <string name="all_events_cleared_success">Tous les événements effacés avec succès</string>
-    <string name="failed_to_delete_event">Échec de la suppression de l\'événement : %1$s</string>
-    <string name="failed_to_clear_events">Échec de l\'effacement des événements : %1$s</string>
-    <string name="tag_scanned_format">Tag scanné : %1$s, action : %2$s</string>
-    <string name="privacy_alert_shown">Alerte de confidentialité affichée</string>
-    <string name="privacy_alert_dismissed">Alerte de confidentialité fermée</string>
-    <string name="reminder_interval_set_log">Intervalle de rappel défini à %1$ds</string>
+    <string name="nfc_not_supported_device">NFC wird auf diesem Gerät nicht unterstützt</string>
+    <string name="privacy_alert_shown">Datenschutzalarm angezeigt</string>
+    <string name="privacy_alert_dismissed">Datenschutzalarm verworfen</string>
+    <string name="reminder_interval_set_log">Intervalle de rappel auf %1$ds gesetzt</string>
     <string name="notifications_toggled_system_log">Notifications %1$s</string>
     <string name="vibration_toggled_system_log">Vibration %1$s</string>
 
-    <!-- Descriptions de Contenu -->
-    <string name="export_to_csv_icon">Exporter vers CSV</string>
-    <string name="clear_all_logs_icon">Effacer tous les journaux</string>
+    <string name="export_to_csv_icon">Nach CSV exportieren</string>
+    <string name="clear_all_logs_icon">Alle Protokolle löschen</string>
 
-    <!-- Navigation Inférieure -->
-    <string name="nav_nfc_manager">NFC MANAGER</string>
-    <string name="nav_activity">ACTIVITÉ</string>
-    <string name="nav_settings">PARAMÈTRES</string>
+    <string name="nav_nfc_manager">GESTIONNAIRE NFC</string>
+    <string name="nav_activity">AKTIVITÄT</string>
+    <string name="nav_settings">EINSTELLUNGEN</string>
 
-    <!-- Noms de Langues pour Journalisation -->
-    <string name="language_name_english">Anglais</string>
-    <string name="language_name_arabic">Arabe</string>
-    <string name="language_name_german">Allemand</string>
-    <string name="language_name_system_default">Défaut du Système</string>
+    <string name="language_name_english">English</string>
+    <string name="language_name_arabic">Arabic</string>
+    <string name="language_name_german">German</string>
+    <string name="language_name_system_default">Systemstandard</string>
 
-    <!-- Types d\'Événements -->
-    <string name="event_type_settings">PARAMÈTRES</string>
-    <string name="event_type_system">SYSTÈME</string>
-    <string name="event_type_privacy">CONFIDENTIALITÉ</string>
-    <string name="event_type_nfc_scan">SCAN NFC</string>
-    <string name="event_type_security">SÉCURITÉ</string>
+    <string name="event_type_settings">EINSTELLUNGEN</string>
+    <string name="event_type_system">SYSTEM</string>
+    <string name="event_type_privacy">DATENSCHUTZ</string>
+    <string name="event_type_nfc_scan">NFC-SCAN</string>
+    <string name="event_type_security">SICHERHEIT</string>
 
-    <!-- Messages de Paramètres -->
-    <string name="auto_reminder_enabled">Rappel automatique activé</string>
-    <string name="auto_reminder_disabled">Rappel automatique désactivé</string>
-    <string name="notifications_enabled">Notifications activées</string>
-    <string name="notifications_disabled">Notifications désactivées</string>
-    <string name="vibration_enabled">Vibration activée</string>
-    <string name="vibration_disabled">Vibration désactivée</string>
-    <string name="sound_enabled">Son (général) activé</string>
-    <string name="sound_disabled">Son (général) désactivé</string>
-    <string name="battery_optimization_enabled">Optimisation de la batterie activée</string>
-    <string name="battery_optimization_disabled">Optimisation de la batterie désactivée</string>
-    <string name="privacy_mode_enabled">Mode confidentialité activé</string>
-    <string name="privacy_mode_disabled">Mode confidentialité désactivé</string>
-    <string name="unknown_tag_blocking_enabled">Blocage des tags inconnus activé</string>
-    <string name="unknown_tag_blocking_disabled">Blocage des tags inconnus désactivé</string>
-    <string name="settings_exported">Paramètres exportés</string>
-    <string name="reminder_interval_set">Intervalle de rappel défini à %1$ds</string>
-    <string name="nfc_hardware_enabled">Matériel NFC maintenant activé</string>
-    <string name="nfc_hardware_disabled">Matériel NFC maintenant désactivé</string>
+    <string name="auto_reminder_enabled">Auto-Erinnerung aktiviert</string>
+    <string name="auto_reminder_disabled">Auto-Erinnerung deaktiviert</string>
+    <string name="notifications_enabled">Notifications aktiviert</string>
+    <string name="notifications_disabled">Notifications deaktiviert</string>
+    <string name="vibration_enabled">Vibration aktiviert</string>
+    <string name="vibration_disabled">Vibration deaktiviert</string>
+    <string name="sound_enabled">Son (allgemein) aktiviert</string>
+    <string name="sound_disabled">Son (allgemein) deaktiviert</string>
+    <string name="battery_optimization_enabled">Optimisation de la batterie aktiviert</string>
+    <string name="battery_optimization_disabled">Optimisation de la batterie deaktiviert</string>
+    <string name="privacy_mode_enabled">Privatsphäre-Modus aktiviert</string>
+    <string name="privacy_mode_disabled">Privatsphäre-Modus deaktiviert</string>
+    <string name="unknown_tag_blocking_enabled">Blockierung unbekannter Tags aktiviert</string>
+    <string name="unknown_tag_blocking_disabled">Blockierung unbekannter Tags deaktiviert</string>
+    <string name="settings_exported">Paramètres exportiert</string>
+    <string name="reminder_interval_set">Intervalle de rappel auf %1$ds gesetzt</string>
+    <string name="nfc_hardware_enabled">NFC-Hardware jetzt aktiviert</string>
+    <string name="nfc_hardware_disabled">NFC-Hardware jetzt deaktiviert</string>
 
-    <!-- Format de Temps -->
-    <string name="time_now">maintenant</string>
+    <string name="time_now">jetzt</string>
 
-    <!-- Messages de Paramètres Supplémentaires -->
-    <string name="dark_mode_enabled">Mode sombre activé</string>
-    <string name="light_mode_enabled">Mode clair activé</string>
-    <string name="accent_color_updated">Couleur d\'accent mise à jour</string>
-    <string name="monitoring_interval_set">Intervalle de surveillance défini à %1$dms</string>
-    <string name="old_data_cleanup_completed">Nettoyage des anciennes données terminé (%1$d jours)</string>
+    <string name="dark_mode_enabled">Mode sombre aktiviert</string>
+    <string name="light_mode_enabled">Mode clair aktiviert</string>
+    <string name="accent_color_updated">Akzentfarbe aktualisiert</string>
+    <string name="monitoring_interval_set">À proposwachungsintervall auf %1$dms gesetzt</string>
+    <string name="old_data_cleanup_completed">Bereinigung alter Daten abgeschlossen (%1$d jours)</string>
 
-    <!-- Messages de Succès Supplémentaires -->
-    <string name="monitoring_interval_updated_success">Intervalle de surveillance mis à jour</string>
-    <string name="old_data_cleanup_success">Anciennes données nettoyées avec succès</string>
+    <string name="old_data_cleanup_success">Alte Daten erfolgreich bereinigt</string>
 
-    <!-- Messages d\'Erreur -->
-    <string name="failed_to_disable_monitoring">Échec de la désactivation de la surveillance en arrière-plan : %1$s</string>
-    <string name="failed_to_toggle_auto_reminder">Échec du basculement du rappel automatique : %1$s</string>
-    <string name="failed_to_update_interval">Échec de la mise à jour de l\'intervalle : %1$s</string>
-    <string name="failed_to_toggle_notifications">Échec du basculement des notifications : %1$s</string>
-    <string name="failed_to_toggle_vibration">Échec du basculement de la vibration : %1$s</string>
-    <string name="failed_to_toggle_sound">Échec du basculement du son : %1$s</string>
-    <string name="failed_to_set_theme">Échec de la définition du thème : %1$s</string>
-    <string name="failed_to_update_color">Échec de la mise à jour de la couleur : %1$s</string>
-    <string name="failed_to_toggle_battery_optimization">Échec du basculement de l\'optimisation de la batterie : %1$s</string>
-    <string name="monitoring_interval_range_error">L\'intervalle de surveillance doit être entre 1000 et 10000 millisecondes</string>
-    <string name="failed_to_update_monitoring_interval">Échec de la mise à jour de l\'intervalle de surveillance : %1$s</string>
-    <string name="failed_to_toggle_privacy_mode">Échec du basculement du mode confidentialité : %1$s</string>
-    <string name="failed_to_toggle_unknown_tag_blocking">Échec du basculement du blocage des tags inconnus : %1$s</string>
-    <string name="failed_to_export_settings">Échec de l\'exportation des paramètres : %1$s</string>
-    <string name="failed_to_cleanup_data">Échec du nettoyage des données : %1$s</string>
-    <string name="security_level_not_applicable">Non Applicable</string>
+    <string name="failed_to_disable_monitoring">Fehler beim Deaktivieren der Surveillance en arrière-plan: %1$s</string>
+    <string name="failed_to_toggle_auto_reminder">Fehler beim Umschalten der Auto-Erinnerung: %1$s</string>
+    <string name="failed_to_update_interval">Fehler beim Aktualisieren des Intervalls: %1$s</string>
+    <string name="failed_to_toggle_notifications">Fehler beim Umschalten der Notifications: %1$s</string>
+    <string name="failed_to_toggle_vibration">Fehler beim Umschalten der Vibration: %1$s</string>
+    <string name="failed_to_toggle_sound">Fehler beim Umschalten des Sons: %1$s</string>
+    <string name="failed_to_set_theme">Fehler beim Festlegen des Themas: %1$s</string>
+    <string name="failed_to_update_color">Fehler beim Aktualisieren der Farbe: %1$s</string>
+    <string name="failed_to_toggle_battery_optimization">Fehler beim Umschalten der Optimisation de la batterie: %1$s</string>
+    <string name="monitoring_interval_range_error">À proposwachungsintervall muss zwischen 1000 und 10000 Millisekunden liegen</string>
+    <string name="failed_to_update_monitoring_interval">Fehler beim Aktualisieren des À proposwachungsintervalls: %1$s</string>
+    <string name="failed_to_toggle_privacy_mode">Fehler beim Umschalten des Privatsphäre-Modus: %1$s</string>
+    <string name="failed_to_toggle_unknown_tag_blocking">Fehler beim Umschalten der Blockierung unbekannter Tags: %1$s</string>
+    <string name="failed_to_export_settings">Fehler beim Exporter der Paramètres: %1$s</string>
+    <string name="failed_to_cleanup_data">Fehler beim Bereinigen der Daten: %1$s</string>
+
+    <string name="about_title">À propos</string>
+    <string name="about_app_title">À propos NFC Manager</string>
+    <string name="about_app_description">NFC Manager ist eine datenschutzorientierte Android-Anwendung, die Benutzern hilft, ihre NFC-Paramètres (Near Field Communication) mit erhöhter Sécurité zu überwachen und zu verwalten. Die App benachrichtigt Benutzer, wenn NFC über einen längeren Zeitraum aktiviert bleibt, was dazu beiträgt, unbefugten Zugriff zu verhindern und vor potenziellen Datenschutzschwachstellen zu schützen.</string>
+    <string name="about_copyright">Mit ❤️ von Tariq Said erstellt - Nothing OS inspiriertes Thème</string>
+    <string name="about_contact_support_title">Kontakt &amp; Support</string>
+    <string name="about_email">E-Mail: support@dxbmark.com</string>
+    <string name="about_response_time">Antwortzeit: 24-48 heures</string>
+    <string name="about_languages">Languen: English, Arabic</string>
+    <string name="about_timezone">Zeitzone: GMT+4 (VAE)</string>
+    <string name="about_license_title">Licence</string>
+    <string name="about_license_text">Licenceiert unter der Apache-Licence, Version 2.0</string>
+    <string name="about_copyright_text">Copyright 2025 Tariq Said. Alle Rechte vorbehalten.</string>
+    <string name="about_license_link">Licence anzeigen</string>
+    <string name="about_important_links_title">Wichtige Links</string>
+    <string name="about_terms_service">Conditions d'utilisation</string>
+    <string name="about_privacy_policy">Datenschutzerklärung</string>
+    <string name="about_full_changelog">Vollständiges Änderungsprotokoll</string>
+    <string name="about_project_repository">Projekt-Repository</string>
+    <string name="about_development_design_title">Entwicklung &amp; Thème</string>
+    <string name="about_development_credit">Entwickelt und entworfen von Tariq Said</string>
+    <string name="about_powered_by_dxbmark">Angetrieben von DXBMark</string>
+    <string name="about_tariq_linkedin">Tariq Said auf LinkedIn</string>
+    <string name="about_tariq_github">Tariq Said auf GitHub</string>
+    <string name="about_official_contributor_title">Offizieller Mitwirkender</string>
+    <string name="about_mwheba_agency">MWHEBA Werbeagentur</string>
+    <string name="about_security_highlights_title">Sécurités-Highlights (v%1$s)</string>
+    <string name="about_initial_security">- Erstmalige Sécuritésimplementierung</string>
+    <string name="about_local_storage">- Nur lokale Datenspeicherung</string>
+    <string name="about_permission_access">- Berechtigungsbasierte Zugriffskontrolle</string>
+    <string name="about_proguard_obfuscation">- ProGuard-Verschleierung aktiviert</string>
+    <string name="about_certificate_pinning">- Zertifikats-Pinning implementiert</string>
+    <string name="navigate_back">Précédent navigieren</string>
+    <string name="settings_section_about_title">ÜBER</string>
+    <string name="settings_item_about_title">À propos NFC Manager</string>
+    <string name="settings_item_about_subtitle">App-Info, Datenschutzerklärung und Support</string>
+    <string name="security_level_not_applicable">Non applicable</string>
+
     
-    <!-- Security Score Recommendations -->
-    <string name="recommendation_nfc_disabled_secure">NFC est actuellement désactivé, ce qui améliore la sécurité. Activez-le uniquement lorsque vous devez utiliser les fonctions NFC.</string>
-    <string name="recommendation_nfc_disabled_no_data">NFC est actuellement désactivé. Aucune activité récente à analyser.</string>
-    <string name="recommendation_enable_nfc_when_needed">Activez NFC uniquement lorsque vous devez utiliser des fonctions sans contact comme les paiements ou la lecture de tags.</string>
-    <string name="recommendation_nfc_currently_disabled">NFC est actuellement désactivé. Le score ci-dessous est basé sur votre historique d\'utilisation récent.</string>
-</resources>
+    <string name="security_score_screen_title">Score de sécurité</string>
+    <string name="security_score_value_label">Bewertung</string>
+    <string name="security_level_desc_excellent">Excellente Sécuritéspraktiken! Suivant so.</string>
+    <string name="security_level_desc_good">Bones Sécuritésniveau mit kleineren Verbesserungen erforderlich.</string>
+    <string name="security_level_desc_moderate">Modérée Sécurité. Bitte folgen Sie den Empfehlungen.</string>
+    <string name="security_level_desc_poor">Mauvaises Sécuritésniveau. Sofortiges Handeln erforderlich.</string>
+    <string name="security_level_desc_critical">Critiquee Sécuritésprobleme. Bitte überprüfen Sie die Empfehlungen.</string>
+    <string name="security_level_desc_not_applicable">NFC-Status ist nicht zutreffend oder wird auf diesem Gerät nicht unterstützt.</string>
+    <string name="security_level_breakdown_title">Aufschlüsselung des Sécuritésniveaus</string>
+    <string name="security_score_range_excellent">90-100</string>
+    <string name="security_score_range_good">75-89</string>
+    <string name="security_score_range_moderate">60-74</string>
+    <string name="security_score_range_poor">40-59</string>
+    <string name="security_score_range_critical">0-39</string>
+    <string name="security_score_range_not_applicable">N/V</string>
+    <string name="security_recommendations_title">Sécuritésempfehlungen</string>
+    <string name="security_tips_title">Sécuritéstipps</string>
+    <string name="security_tip_disable_nfc">NFC deaktivieren, wenn nicht in Gebrauch</string>
+    <string name="security_tip_cautious_tags">Vorsicht bei unbekannten NFC-Tags</string>
+    <string name="security_tip_avoid_crowded_nfc">Vermeiden Sie NFC in überfüllten Bereichen</string>
+    <string name="security_tip_review_log">À proposprüfen Sie regelmäßig Ihr NFC-Aktivitätsprotokoll</string>
+    <string name="security_tip_keep_device_updated">Halten Sie Ihr Gerät auf dem neuesten Stand</string>
+
+    
+    <string name="recommendation_disable_nfc">NFC deaktivieren, wenn nicht in Gebrauch</string>
+    <string name="recommendation_shorter_intervals">Kürzere Intervalle de rappele für NFC festlegen</string>
+    <string name="recommendation_cautious_unknown_tags">Vorsicht bei unbekannten oder unerwarteten NFC-Tags</string>
+    <string name="recommendation_enable_unknown_tag_blocking">Erwägen Sie, \"Bloquer les tags inconnus\" in den Paramètres zu aktivieren</string>
+    <string name="recommendation_avoid_crowded_areas_nfc">Vermeiden Sie nach Möglichkeit die Verwendung von NFC in sehr überfüllten öffentlichen Bereichen</string>
+    <string name="recommendation_check_suspicious_devices">Achten Sie auf Ihre Umgebung und überprüfen Sie verdächtige Geräte</string>
+    <string name="recommendation_review_nfc_usage">À proposprüfen Sie regelmäßig Ihre NFC-Nutzungsmuster im Aktivitätsprotokoll</string>
+    <string name="recommendation_enable_max_security_mode">Für maximalen Schutz aktivieren Sie den Mode confidentialité in den Paramètres</string>
+    <string name="recommendation_keep_up_good_practices">Behalten Sie die guten Sécuritéspraktiken bei!</string>
+    <string name="recommendation_review_activity_log">À proposprüfen Sie regelmäßig Ihr NFC-Aktivitätsprotokoll auf ungewöhnliche événementse</string>
+    <string name="recommendation_nfc_disabled_secure">NFC ist derzeit deaktiviert, was die Sécurité erhöht. Aktivieren Sie es nur, wenn Sie NFC-Funktionen verwenden müssen.</string>
+    <string name="recommendation_nfc_disabled_no_data">NFC ist derzeit deaktiviert. Keine aktuellen Aktivitäten zum Analysieren.</string>
+    <string name="recommendation_enable_nfc_when_needed">Aktivieren Sie NFC nur, wenn Sie kontaktlose Funktionen wie Zahlungen oder Tag-Lesen benötigen.</string>
+    <string name="recommendation_nfc_currently_disabled">NFC ist derzeit deaktiviert. Die unten stehende Bewertung basiert auf Ihrem letzten Nutzungsverlauf.</string>
+
+    
+    <string name="violation_long_nfc_usage_name">Längere NFC-Aktivierung</string>
+    <string name="violation_unknown_tag_name">Unbekanntes Tag erkannt</string>
+    <string name="violation_rapid_tag_detection_name">Schnelle Mehrfach-Tag-Erkennungen</string>
+    <string name="violation_suspicious_activity_name">Verdächtiges NFC-Aktivitätsmuster</string>
+
+    
+    <string name="channel_nfc_status_name">NFC-Status</string>
+    <string name="channel_nfc_status_description">Zeigt aktuellen NFC-Status und Sécuritésniveau an</string>
+    <string name="channel_security_alert_name">Sécuritéswarnungen</string>
+    <string name="channel_security_alert_description">Sécuritéswarnungen und -hinweise</string>
+    <string name="nfc_enabled_notification_title">NFC aktiviert</string>
+    <string name="nfc_disabled_notification_title">NFC deaktiviert</string>
+    <string name="nfc_enabled_for_label">Activé seit: </string>
+    <string name="nfc_security_level_label">Sécuritésniveau: </string>
+    <string name="nfc_status_label">Status: </string>
+    <string name="notification_tap_to_open_details">Tippen Sie, um NFC Manager für weitere Details zu öffnen.</string>
+    <string name="notification_tap_to_manage_settings">Tippen Sie, um NFC Manager zu öffnen und Ihre Paramètres zu verwalten.</string>
+    <string name="notification_action_settings">Paramètres</string>
+    <string name="notification_action_security_score">Score de sécurité</string>
+    <string name="notification_action_review_settings">Paramètres überprüfen</string>
+    <string name="alert_title_nfc_enabled_long">⚠️ NFC zu lange aktiviert</string>
+    <string name="alert_title_unknown_tag">🔍 Unbekanntes Tag erkannt</string>
+    <string name="alert_title_multiple_tags_rapid">⚡ Mehrere Tags erkannt</string>
+    <string name="alert_title_suspicious_activity">🚨 Verdächtige Aktivität</string>
+    <string name="notification_recommendation_label">Empfehlung: </string>
+    <string name="security_status_excellent">Excellente Sécuritéspraktiken</string>
+    <string name="security_status_good">Bones Sécuritésniveau</string>
+    <string name="security_status_moderate">Modérée Sécurité - Empfehlungen überprüfen</string>
+    <string name="security_status_poor">Mauvaise Sécurité - sofortiges Handeln erforderlich</string>
+    <string name="security_status_critical">Critiquee Sécuritésprobleme erkannt</string>
+    <string name="security_status_not_applicable">Sécuritésniveau nicht zutreffend</string>
+    <string name="recommendation_alert_nfc_long">Erwägen Sie, NFC zu deaktivieren, wenn es nicht verwendet wird</string>
+    <string name="recommendation_alert_unknown_tag">Vorsicht bei unbekannten NFC-Tags</string>
+    <string name="recommendation_alert_multiple_tags">Vermeiden Sie überfüllte Bereiche bei der Verwendung von NFC</string>
+    <string name="recommendation_alert_suspicious_activity">À proposprüfen Sie Ihre NFC-Nutzungsmuster</string>
+
+    
+    <string name="error_no_internet">Keine Internetverbindung. Bitte überprüfen Sie Ihre Netzwerkeinstellungen.</string>
+    <string name="error_timeout">Zeitüberschreitung der Anfrage. Bitte versuchen Sie es erneut.</string>
+    <string name="error_server">Serverfehler: %1$d. Bitte versuchen Sie es später erneut.</string>
+    <string name="error_network_unknown">Netzwerkfehler aufgetreten. Bitte versuchen Sie es erneut.</string>
+
+    
+    <string name="error_database_read">Fehler beim Lesen von Daten aus der Datenbank.</string>
+    <string name="error_database_write">Fehler beim Enregistrer von Daten in der Datenbank.</string>
+    <string name="error_database_delete">Fehler beim Supprimer von Daten aus der Datenbank.</string>
+    <string name="error_database_corrupted">Datenbankdaten sind beschädigt. Bitte installieren Sie die App neu.</string>
+    <string name="error_database_unknown">Datenbankfehler aufgetreten.</string>
+
+    
+    <string name="error_nfc_read">Fehler beim Lesen des NFC-Tags. Bitte versuchen Sie es erneut.</string>
+    <string name="error_nfc_write">Fehler beim Schreiben auf NFC-Tag. Bitte versuchen Sie es erneut.</string>
+    <string name="error_nfc_tag_lost">NFC-Tag-Verbindung verloren. Bitte halten Sie das Tag näher.</string>
+    <string name="error_nfc_unknown">NFC-Fehler aufgetreten. Bitte versuchen Sie es erneut.</string>
+
+    
+    <string name="error_permission_notification">Benachrichtigungsberechtigung ist für Warnungen erforderlich.</string>
+    <string name="error_permission_unknown">Berechtigung verweigert: %1$s</string>
+
+    
+    <string name="error_service_start">Fehler beim Starten des À proposwachungsdienstes.</string>
+    <string name="error_service_stop">Fehler beim Stoppen des À proposwachungsdienstes.</string>
+    <string name="error_service_not_running">À proposwachungsdienst läuft nicht.</string>
+    <string name="error_service_unknown">Dienstfehler aufgetreten.</string>
+
+    
+    <string name="error_validation_invalid">Ungültige Activégabe für: %1$s</string>
+    <string name="error_validation_range">%1$s muss zwischen %2$d und %3$d liegen</string>
+    <string name="error_validation_required">%1$s ist erforderlich</string>
+
+    
+    <string name="error_file_not_found">Datei nicht gefunden: %1$s</string>
+    <string name="error_file_read">Fehler beim Lesen der Datei.</string>
+    <string name="error_file_write">Fehler beim Schreiben der Datei.</string>
+    <string name="error_file_permission">Dateiberechtigung verweigert.</string>
+    <string name="error_file_unknown">Dateifehler aufgetreten.</string>
+
+    
+    <string name="arrow_right">→</string>
+    <string name="social_media_linkedin">LinkedIn</string>
+    <string name="social_media_github">GitHub</string>
+    <string name="partnership_title">Partnerschaft</string>
+
+    
+    <string name="retry_button">Wiederholen</string>
+    <string name="nfc_not_supported_error">NFC wird auf diesem Gerät nicht unterstützt.</string>
+    <string name="nfc_disabled_error_turn_on">NFC ist deaktiviert. Bitte aktivieren Sie NFC in Ihren Geräteeinstellungen, um die À proposwachung zu aktivieren.</string>
+    <string name="error_calculating_score">Fehler beim Berechnen der Bewertung: %1$s</string>
+    <string name="error_calculating_period_score">Fehler beim Berechnen der Periodenbewertung: %1$s</string>
+
+    
+    <string name="loading_security_score">Bewertung wird berechnet…</string>
+    <string name="refresh_score_button">Bewertung aktualisieren</string>
+    <string name="security_level_excellent">Excellent</string>
+    <string name="security_level_good">Bon</string>
+    <string name="security_level_moderate">Modéré</string>
+    <string name="security_level_poor">Mauvais</string>
+    <string name="security_level_critical">Critique</string>
+    <string name="security_score_detail_title">Sécuritésdetails</string>
+
+    
+    <string name="recommendations_title">Empfehlungen</string>
+    <string name="violations_title">Verstöße</string>
+    <string name="no_recommendations_yet">Derzeit keine spezifischen Empfehlungen. Machen Sie weiter so!</string>
+    <string name="no_violations_detected">In den letzten 7 joursn wurden keine Sécuritésverstöße festgestellt.</string>
+    <string name="security_score_violation_prefix">Verstoß: </string>
+
+    
+    <string name="onboarding_button_get_started">Loslegen</string>
+    <string name="onboarding_button_next">Suivant</string>
+    <string name="onboarding_button_previous">Précédent</string>
+    <string name="onboarding_page0_title">Willkommen bei NFC Manager</string>
+    <string name="onboarding_page0_description">Schützen Sie Ihre Privatsphäre mit intelligenter NFC-À proposwachung und Sécuritéswarnungen</string>
+    <string name="onboarding_page0_feature1">Echtzeit-NFC-À proposwachung</string>
+    <string name="onboarding_page0_feature2">Datenschutzorientiertes Thème</string>
+    <string name="onboarding_page0_feature3">Nothing OS inspirierte UI</string>
+    <string name="onboarding_page1_title">Intelligente À proposwachung</string>
+    <string name="onboarding_page1_description">Das erweiterte Benachrichtigungssystem hält Sie über NFC-Aktivitäten und Sécuritésstatus informiert</string>
+    <string name="onboarding_page1_feature1">Dauerverfolgung</string>
+    <string name="onboarding_page1_feature2">Sécuritésstufen-Warnungen</string>
+    <string name="onboarding_page1_feature3">Intelligente Notifications</string>
+    <string name="onboarding_page2_title">Score de sécurité</string>
+    <string name="onboarding_page2_description">Verfolgen Sie Ihr Sécuritésniveau mit unserem intelligenten Bewertungssystem und erhalten Sie personalisierte Empfehlungen</string>
+    <string name="onboarding_page2_feature1">5-stufige Score de sécurité</string>
+    <string name="onboarding_page2_feature2">Personalisierte Empfehlungen</string>
+    <string name="onboarding_page2_feature3">Verstoßverfolgung</string>
+    <string name="onboarding_page3_title">Volle Kontrolle</string>
+    <string name="onboarding_page3_description">Passen Sie alles nach Ihren Vorlieben an</string>
+    <string name="onboarding_page3_feature1">Anpassbare Warnungen</string>
+    <string name="onboarding_page3_feature2">Dunkles/Helles Thème</string>
+    <string name="onboarding_page3_feature3">9 Languen</string>
+
+<string name="onboarding_page4_title">Activer les notifications</string><string name="onboarding_page4_description">Restez protégé avec des alertes instantanées lorsque NFC est activé. Autorisez les notifications pour recevoir des avertissements de sécurité importants.</string><string name="onboarding_page4_feature1">Alertes instantanées de statut NFC</string><string name="onboarding_page4_feature2">Avertissements de sécurité en temps réel</string><string name="onboarding_page4_feature3">Ne manquez jamais les mises à jour importantes</string><string name="onboarding_button_allow_notifications">Autoriser les notifications</string><string name="sound_selection_failed">Échec de la sélection du son: %1$s</string></resources>

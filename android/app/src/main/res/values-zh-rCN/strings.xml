@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources>
     <string name="app_name">NFC Manager</string>
 
@@ -349,7 +349,7 @@
     <string name="settings_item_about_title">關於 NFC 管理器</string>
     <string name="settings_item_about_subtitle">應用程式資訊、隱私政策和支援</string>
 
-    <!-- Security Score Screen -->
+    
     <string name="security_score_screen_title">安全評分</string>
     <string name="security_score_value_label">評分</string>
     <string name="security_score_card_title">安全評分</string>
@@ -383,7 +383,7 @@
     <string name="security_tip_review_log">定期查看您的 NFC 活動日誌</string>
     <string name="security_tip_keep_device_updated">保持您的設備更新</string>
 
-    <!-- Security Recommendations -->
+    
     <string name="recommendations_title">建議</string>
     <string name="violations_title">違規</string>
     <string name="no_recommendations_yet">目前沒有具體建議。繼續保持良好工作！</string>
@@ -404,13 +404,13 @@
     <string name="recommendation_enable_nfc_when_needed">僅在需要使用非接觸式功能（如付款或標籤讀取）時啟用 NFC。</string>
     <string name="recommendation_nfc_currently_disabled">NFC 目前已停用。以下分數基於您最近的使用歷史。</string>
 
-    <!-- Security Violations -->
+    
     <string name="violation_long_nfc_usage_name">NFC 長時間啟用</string>
     <string name="violation_unknown_tag_name">檢測到未知標籤</string>
     <string name="violation_rapid_tag_detection_name">快速檢測到多個標籤</string>
     <string name="violation_suspicious_activity_name">可疑的 NFC 活動模式</string>
 
-    <!-- Notification Manager -->
+    
     <string name="channel_nfc_status_name">NFC 狀態</string>
     <string name="channel_nfc_status_description">顯示當前 NFC 狀態和安全級別</string>
     <string name="channel_security_alert_name">安全警報</string>
@@ -441,63 +441,63 @@
     <string name="recommendation_alert_multiple_tags">使用 NFC 時避免擁擠的地方</string>
     <string name="recommendation_alert_suspicious_activity">查看您的 NFC 使用模式</string>
 
-    <!-- Error Messages - Network -->
+    
     <string name="error_no_internet">沒有網路連接。請檢查您的網路設定。</string>
     <string name="error_timeout">請求超時。請重試。</string>
     <string name="error_server">伺服器錯誤：%1$d。請稍後重試。</string>
     <string name="error_network_unknown">發生網路錯誤。請重試。</string>
 
-    <!-- Error Messages - Database -->
+    
     <string name="error_database_read">無法從資料庫讀取資料。</string>
     <string name="error_database_write">無法將資料儲存到資料庫。</string>
     <string name="error_database_delete">無法從資料庫刪除資料。</string>
     <string name="error_database_corrupted">資料庫資料已損壞。請重新安裝應用程式。</string>
     <string name="error_database_unknown">發生資料庫錯誤。</string>
 
-    <!-- Error Messages - NFC -->
+    
     <string name="error_nfc_read">無法讀取 NFC 標籤。請重試。</string>
     <string name="error_nfc_write">無法寫入 NFC 標籤。請重試。</string>
     <string name="error_nfc_tag_lost">NFC 標籤連接丟失。請將標籤保持靠近。</string>
     <string name="error_nfc_unknown">發生 NFC 錯誤。請重試。</string>
 
-    <!-- Error Messages - Permission -->
+    
     <string name="error_permission_notification">警報需要通知權限。</string>
     <string name="error_permission_unknown">權限被拒絕：%1$s</string>
 
-    <!-- Error Messages - Service -->
+    
     <string name="error_service_start">無法啟動監控服務。</string>
     <string name="error_service_stop">無法停止監控服務。</string>
     <string name="error_service_not_running">監控服務未運行。</string>
     <string name="error_service_unknown">發生服務錯誤。</string>
 
-    <!-- Error Messages - Validation -->
+    
     <string name="error_validation_invalid">無效的輸入：%1$s</string>
     <string name="error_validation_range">%1$s 必須在 %2$d 和 %3$d 之間</string>
     <string name="error_validation_required">%1$s 是必需的</string>
 
-    <!-- Error Messages - File -->
+    
     <string name="error_file_not_found">找不到檔案：%1$s</string>
     <string name="error_file_read">無法讀取檔案。</string>
     <string name="error_file_write">無法寫入檔案。</string>
     <string name="error_file_permission">檔案權限被拒絕。</string>
     <string name="error_file_unknown">發生檔案錯誤。</string>
 
-    <!-- Additional UI Elements -->
+    
     <string name="arrow_right">→</string>
     <string name="social_media_linkedin">LinkedIn</string>
     <string name="social_media_github">GitHub</string>
     <string name="partnership_title">合作夥伴</string>
 
-    <!-- Additional System Messages -->
+    
     <string name="retry_button">重試</string>
     <string name="nfc_not_supported_error">此設備不支援 NFC。</string>
     <string name="nfc_disabled_error_turn_on">NFC 已停用。請在您的設備設定中開啟 NFC 以啟用監控。</string>
     <string name="error_calculating_score">計算評分時出錯：%1$s</string>
     <string name="error_calculating_period_score">計算期間評分時出錯：%1$s</string>
 
-    <!-- Settings Items (Missing) -->
+    
 
-    <!-- Onboarding Strings -->
+    
     <string name="onboarding_button_get_started">開始使用</string>
     <string name="onboarding_button_next">下一步</string>
     <string name="onboarding_button_previous">上一步</string>
@@ -523,6 +523,6 @@
     <string name="onboarding_page3_feature3">9 種語言</string>
 
 
-    <!-- Missing Strings -->
+    
 
-</resources>
+<string name="onboarding_page4_title">啟用通知</string><string name="onboarding_page4_description">啟用 NFC 時透過即時警報保持受保護。允許通知以接收重要的安全警告。</string><string name="onboarding_page4_feature1">即時 NFC 狀態警報</string><string name="onboarding_page4_feature2">即時安全警告</string><string name="onboarding_page4_feature3">永不錯過重要更新</string><string name="onboarding_button_allow_notifications">允許通知</string><string name="sound_selection_failed">選擇聲音失敗：%1$s</string></resources>

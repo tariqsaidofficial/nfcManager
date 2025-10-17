@@ -414,6 +414,8 @@
     <string name="onboarding_button_previous">السابق</string>
     <string name="onboarding_button_next">التالي</string>
     <string name="onboarding_button_get_started">ابدأ الآن</string>
+    <string name="onboarding_button_allow_notifications">السماح بالإشعارات</string>
+    <string name="sound_selection_failed">فشل اختيار الصوت: %1$s</string>
 
     <string name="onboarding_page0_title">مرحباً بك في مدير NFC</string>
     <string name="onboarding_page0_description">احمِ خصوصيتك مع مراقبة NFC الذكية وتنبيهات الأمان</string>
