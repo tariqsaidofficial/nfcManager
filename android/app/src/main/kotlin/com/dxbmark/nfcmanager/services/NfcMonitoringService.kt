@@ -97,9 +97,9 @@ class NfcMonitoringService : Service() {
         private const val SETTINGS_CACHE_DURATION = 30_000L // 30 seconds
         private const val MONITORING_CHECK_INTERVAL = 5_000L // 5 seconds
         
-        // Alert thresholds
-        private const val LONG_USAGE_THRESHOLD = 15 * 60 * 1000L // 15 minutes
-        private const val ALERT_COOLDOWN = 5 * 60 * 1000L // 5 minutes between alerts
+        // Alert thresholds - NFC is dangerous, alert early and often!
+        private const val FIRST_ALERT_THRESHOLD = 2 * 60 * 1000L // 2 minutes - first warning
+        private const val ALERT_INTERVAL = 2 * 60 * 1000L // Alert every 2 minutes after first warning
 
         const val ACTION_START_MONITORING = "com.dxbmark.nfcmanager.services.ACTION_START_MONITORING"
         const val ACTION_STOP_MONITORING = "com.dxbmark.nfcmanager.services.ACTION_STOP_MONITORING"
@@ -305,13 +305,19 @@ class NfcMonitoringService : Service() {
     
     /**
      * Check NFC usage duration and send alerts if needed
-     * Sends periodic reminders based on user settings
+     * NFC is dangerous - alert early and often to protect users!
+     * Works in conjunction with Auto Reminder setting
      */
     private suspend fun checkAndSendAlerts() {
         try {
             val settings = getSettings()
             
-            // Only send alerts if notifications are enabled
+            // Only send alerts if Auto Reminder is enabled
+            if (!settings.autoReminderEnabled) {
+                return
+            }
+            
+            // Also respect general notification settings
             if (!settings.showNotifications) {
                 return
             }
@@ -321,39 +327,37 @@ class NfcMonitoringService : Service() {
                 currentTime - nfcEnabledStartTime
             } else 0
             
-            // Check if enough time has passed since last alert (cooldown)
+            // NFC is dangerous! Start alerting after just 2 minutes
+            if (usageDuration < FIRST_ALERT_THRESHOLD) {
+                return // Not yet time for first alert
+            }
+            
+            // Check if enough time has passed since last alert
             val timeSinceLastAlert = currentTime - lastAlertTime
-            if (timeSinceLastAlert < ALERT_COOLDOWN) {
-                return // Still in cooldown period
+            if (lastAlertTime > 0 && timeSinceLastAlert < ALERT_INTERVAL) {
+                return // Still in cooldown period (2 minutes between alerts)
             }
             
-            // Send periodic reminders based on usage duration
-            val shouldSendAlert = when {
-                usageDuration >= 60 * 60 * 1000 -> true // Every 5 min after 1 hour
-                usageDuration >= 30 * 60 * 1000 -> true // Every 5 min after 30 min
-                usageDuration >= LONG_USAGE_THRESHOLD -> true // Every 5 min after 15 min
-                else -> false
+            // Calculate severity based on duration
+            val minutes = usageDuration / 60000
+            val severity = when {
+                minutes >= 10 -> SecurityLevel.CRITICAL  // 10+ minutes = CRITICAL
+                minutes >= 5 -> SecurityLevel.POOR       // 5-9 minutes = POOR
+                else -> SecurityLevel.MODERATE           // 2-4 minutes = MODERATE
             }
             
-            if (shouldSendAlert) {
-                val minutes = usageDuration / 60000
-                val severity = when {
-                    minutes >= 60 -> SecurityLevel.CRITICAL
-                    minutes >= 30 -> SecurityLevel.POOR
-                    else -> SecurityLevel.MODERATE
-                }
-                
-                withContext(Dispatchers.Main) {
-                    appNotificationManager.sendSecurityAlert(
-                        alertType = com.dxbmark.nfcmanager.utils.SecurityAlertType.NFC_ENABLED_TOO_LONG,
-                        severity = severity,
-                        message = "NFC has been enabled for $minutes minutes"
-                    )
-                }
-                lastAlertTime = currentTime
-                alertCount++
-                AppLogger.service("Security alert sent - NFC enabled for $minutes minutes (Alert #$alertCount)")
+            // Send the alert
+            withContext(Dispatchers.Main) {
+                appNotificationManager.sendSecurityAlert(
+                    alertType = com.dxbmark.nfcmanager.utils.SecurityAlertType.NFC_ENABLED_TOO_LONG,
+                    severity = severity,
+                    message = "NFC has been enabled for $minutes minutes. Consider disabling it to protect your bank cards and personal data."
+                )
             }
+            
+            lastAlertTime = currentTime
+            alertCount++
+            AppLogger.service("Security alert sent - NFC enabled for $minutes minutes (Alert #$alertCount, Severity: $severity)")
         } catch (e: Exception) {
             AppLogger.e(TAG, "Error checking and sending alerts", e)
         }

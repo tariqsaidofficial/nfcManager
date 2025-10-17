@@ -65,17 +65,18 @@ fun OnboardingScreen(
             )
         }
         
-        // Page indicators
+        // Page indicators (dots)
         Row(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(16.dp),
-            horizontalArrangement = Arrangement.Center
+            horizontalArrangement = Arrangement.Center,
+            verticalAlignment = Alignment.CenterVertically
         ) {
-            repeat(5) { index -> // Changed from 4 to 5
+            repeat(5) { index ->
                 Box(
                     modifier = Modifier
-                        .size(8.dp)
+                        .size(if (index == pagerState.currentPage) 10.dp else 8.dp)
                         .clip(CircleShape)
                         .background(
                             color = if (index == pagerState.currentPage) {
@@ -85,7 +86,10 @@ fun OnboardingScreen(
                             }
                         )
                 )
-                if (index < 3) Spacer(modifier = Modifier.width(8.dp))
+                // Add spacer between dots (but not after the last one)
+                if (index < 4) {
+                    Spacer(modifier = Modifier.width(8.dp))
+                }
             }
         }
         
