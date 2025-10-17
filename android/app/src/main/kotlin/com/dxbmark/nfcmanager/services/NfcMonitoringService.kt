@@ -79,11 +79,15 @@ class NfcMonitoringService : Service() {
     private var wakeLock: PowerManager.WakeLock? = null
     
     // Utilities
-    private val privacyScoreCalculator = PrivacyScoreCalculator()
+    private val privacyScoreCalculator by lazy { PrivacyScoreCalculator(applicationContext) }
     
     // Cached settings to reduce DB queries
     private var cachedSettings: NFCSettingsEntity? = null
     private var lastSettingsUpdate: Long = 0
+    
+    // Alert tracking
+    private var lastAlertTime: Long = 0
+    private var alertCount: Int = 0
     
     companion object {
         private const val TAG = "NfcMonitoringService"
@@ -92,6 +96,10 @@ class NfcMonitoringService : Service() {
         private const val WAKELOCK_TAG = "NfcManager:MonitoringWakeLock"
         private const val SETTINGS_CACHE_DURATION = 30_000L // 30 seconds
         private const val MONITORING_CHECK_INTERVAL = 5_000L // 5 seconds
+        
+        // Alert thresholds
+        private const val LONG_USAGE_THRESHOLD = 15 * 60 * 1000L // 15 minutes
+        private const val ALERT_COOLDOWN = 5 * 60 * 1000L // 5 minutes between alerts
 
         const val ACTION_START_MONITORING = "com.dxbmark.nfcmanager.services.ACTION_START_MONITORING"
         const val ACTION_STOP_MONITORING = "com.dxbmark.nfcmanager.services.ACTION_STOP_MONITORING"
@@ -279,6 +287,9 @@ class NfcMonitoringService : Service() {
                         break
                     }
                     
+                    // Check for long usage and send alert if needed
+                    checkAndSendAlerts()
+                    
                     // Update notification periodically
                     updateNfcStatusNotification()
                     
@@ -289,6 +300,47 @@ class NfcMonitoringService : Service() {
                     break
                 }
             }
+        }
+    }
+    
+    /**
+     * Check NFC usage duration and send alerts if needed
+     */
+    private suspend fun checkAndSendAlerts() {
+        try {
+            val settings = getSettings()
+            
+            // Only send alerts if notifications are enabled
+            if (!settings.showNotifications) {
+                return
+            }
+            
+            val currentTime = System.currentTimeMillis()
+            val usageDuration = if (nfcEnabledStartTime > 0) {
+                currentTime - nfcEnabledStartTime
+            } else 0
+            
+            // Check if enough time has passed since last alert (cooldown)
+            val timeSinceLastAlert = currentTime - lastAlertTime
+            if (timeSinceLastAlert < ALERT_COOLDOWN) {
+                return // Still in cooldown period
+            }
+            
+            // Check for long usage
+            if (usageDuration >= LONG_USAGE_THRESHOLD) {
+                withContext(Dispatchers.Main) {
+                    appNotificationManager.sendSecurityAlert(
+                        alertType = com.dxbmark.nfcmanager.utils.SecurityAlertType.NFC_ENABLED_TOO_LONG,
+                        severity = SecurityLevel.MODERATE,
+                        message = "NFC has been enabled for ${usageDuration / 60000} minutes"
+                    )
+                }
+                lastAlertTime = currentTime
+                alertCount++
+                AppLogger.service("Security alert sent - Long NFC usage detected")
+            }
+        } catch (e: Exception) {
+            AppLogger.e(TAG, "Error checking and sending alerts", e)
         }
     }
     

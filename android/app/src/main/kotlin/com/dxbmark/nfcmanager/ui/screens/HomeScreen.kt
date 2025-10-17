@@ -26,6 +26,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.sp // Required for sp unit
 import androidx.navigation.NavController
 import com.dxbmark.nfcmanager.R
+import com.dxbmark.nfcmanager.data.database.entities.NFCEventEntity
 import com.dxbmark.nfcmanager.ui.components.AppRoutes // Make sure AppRoutes is imported
 import com.dxbmark.nfcmanager.ui.theme.NothingTextStyles
 // import com.dxbmark.nfcmanager.utils.SecurityLevel // Not directly used in this file anymore
@@ -151,7 +152,9 @@ fun HomeScreen(
                             text = stringResource(R.string.nfc_status_enabled),
                             style = NothingTextStyles.NFCStatusLarge,
                             color = MaterialTheme.colorScheme.primary,
-                            textAlign = TextAlign.Center
+                            textAlign = TextAlign.Center,
+                            softWrap = false,
+                            maxLines = 1
                         )
                         Spacer(modifier = Modifier.height(8.dp))
                         Text(
@@ -190,17 +193,44 @@ fun HomeScreen(
             Column(
                 modifier = Modifier.padding(20.dp)
             ) {
-                Text(
-                    text = stringResource(R.string.home_todays_activity_title),
-                    style = NothingTextStyles.SmallCaps,
-                    color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f)
-                )
-                Spacer(modifier = Modifier.height(8.dp))
-                Text(
-                    text = stringResource(R.string.events_logged_format, todayEventCount),
-                    style = MaterialTheme.typography.titleMedium,
-                    color = MaterialTheme.colorScheme.onSurface
-                )
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Column {
+                        Text(
+                            text = stringResource(R.string.home_todays_activity_title),
+                            style = NothingTextStyles.SmallCaps,
+                            color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f)
+                        )
+                        Spacer(modifier = Modifier.height(4.dp))
+                        Text(
+                            text = stringResource(R.string.events_logged_format, todayEventCount),
+                            style = MaterialTheme.typography.titleMedium,
+                            color = MaterialTheme.colorScheme.onSurface
+                        )
+                    }
+                    if (todayEventCount > 0) {
+                        TextButton(
+                            onClick = { navController.navigate(AppRoutes.ACTIVITY) }
+                        ) {
+                            Text(stringResource(R.string.view_all))
+                        }
+                    }
+                }
+                
+                // Show recent events (last 5)
+                if (todayEventCount > 0) {
+                    Spacer(modifier = Modifier.height(16.dp))
+                    HorizontalDivider()
+                    Spacer(modifier = Modifier.height(12.dp))
+                    
+                    recentEvents.take(5).forEach { event ->
+                        RecentEventItem(event = event)
+                        Spacer(modifier = Modifier.height(8.dp))
+                    }
+                }
             }
         }
         
@@ -291,12 +321,12 @@ fun SecurityScoreQuickCard(
                     color = securityScore.level.color
                 )
             }
-            
-            Text(
-                text = stringResource(R.string.arrow_right),
-                style = MaterialTheme.typography.titleLarge,
-                color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f)
-            )
         }
+        Text(
+            text = java.text.SimpleDateFormat("HH:mm", java.util.Locale.getDefault())
+                .format(event.timestamp),
+            style = MaterialTheme.typography.bodySmall,
+            color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f)
+        )
     }
 }

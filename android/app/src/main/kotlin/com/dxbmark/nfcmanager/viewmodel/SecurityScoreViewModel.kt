@@ -9,24 +9,22 @@ import com.dxbmark.nfcmanager.data.repository.NFCRepository
 import com.dxbmark.nfcmanager.utils.PrivacyScoreCalculator
 import com.dxbmark.nfcmanager.utils.SecurityLevel
 import com.dxbmark.nfcmanager.utils.SecurityScore
-import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class SecurityScoreViewModel @Inject constructor(
-    private val application: Application,
+    private val app: Application,
     private val repository: NFCRepository
 ) : ViewModel() {
 
-    private val privacyScoreCalculator = PrivacyScoreCalculator()
+    private val privacyScoreCalculator = PrivacyScoreCalculator(app.applicationContext)
 
     private val _isLoading = MutableStateFlow(true)
     val isLoading: StateFlow<Boolean> = _isLoading.asStateFlow()
 
     // SecurityScore expects List<String> for recommendations and violations
-    private val _securityScore = MutableStateFlow(
         SecurityScore(
             score = 0,
             level = SecurityLevel.NOT_APPLICABLE,

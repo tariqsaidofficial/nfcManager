@@ -1,21 +1,23 @@
 package com.dxbmark.nfcmanager.viewmodel
 
-import android.app.Activity
 import android.app.Application
-import android.nfc.NfcAdapter // Added import
-import android.util.Log // Import Log
+import android.content.Context
+import android.content.Intent
+import android.nfc.NfcAdapter
+import android.provider.Settings
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.dxbmark.nfcmanager.R
 import com.dxbmark.nfcmanager.data.database.entities.NFCEventEntity
-import com.dxbmark.nfcmanager.data.database.entities.NFCSettingsEntity
 import com.dxbmark.nfcmanager.data.repository.NFCRepository
-import com.dxbmark.nfcmanager.utils.NFCUtils // Assuming NFCUtils is reliable
+import com.dxbmark.nfcmanager.services.NfcMonitoringService
+import com.dxbmark.nfcmanager.utils.NotificationManager
+import com.dxbmark.nfcmanager.utils.SecurityAlertType
+import com.dxbmark.nfcmanager.utils.SecurityLevel
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import java.util.Date
 import javax.inject.Inject
 
@@ -41,7 +43,8 @@ import javax.inject.Inject
 @HiltViewModel
 class MainViewModel @Inject constructor(
     private val app: Application, // Changed to private val to use it in methods
-    private val repository: NFCRepository
+    private val repository: NFCRepository,
+    private val notificationManager: NotificationManager
 ) : AndroidViewModel(app) {
 
     /** Private mutable state for UI updates */
@@ -170,6 +173,22 @@ class MainViewModel @Inject constructor(
             tagType = action,
             isImportant = true
         )
+        
+        // Send notification alert for tag detection
+        viewModelScope.launch {
+            try {
+                val settings = repository.getSettings().first()
+                if (settings.showNotifications) {
+                    notificationManager.sendSecurityAlert(
+                        alertType = SecurityAlertType.UNKNOWN_TAG_DETECTED,
+                        severity = SecurityLevel.MODERATE,
+                        message = "NFC Tag detected: $tagIdHex"
+                    )
+                }
+            } catch (e: Exception) {
+                Log.e("MainViewModel", "Failed to send tag detection alert", e)
+            }
+        }
     }
 
     fun deleteEvent(event: NFCEventEntity) {

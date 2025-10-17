@@ -3,13 +3,17 @@ package com.dxbmark.nfcmanager.utils
 import androidx.compose.ui.graphics.Color
 import com.dxbmark.nfcmanager.data.database.entities.NFCEventEntity
 // import com.dxbmark.nfcmanager.ui.theme.NothingColors // Original import, check if still needed or replaced by direct Color values.
-import com.dxbmark.nfcmanager.R // Added import for R class
+
+import android.content.Context
+import com.dxbmark.nfcmanager.R
+import com.dxbmark.nfcmanager.data.database.entities.NFCEventEntity
+import java.util.concurrent.TimeUnit
 
 /**
  * Calculator for privacy and security scores
  * Analyzes NFC events and provides security recommendations
  */
-class PrivacyScoreCalculator {
+class PrivacyScoreCalculator(private val context: Context) {
     
     /**
      * Calculates security score based on NFC events
@@ -69,8 +73,7 @@ class PrivacyScoreCalculator {
     }
     
     /**
-     * Generates security recommendations based on violations
-     * THIS FUNCTION WILL BE MODIFIED LATER TO USE STRING RESOURCES
+     * Generates security recommendations based on violations using string resources
      */
     private fun generateRecommendations(violations: List<SecurityViolation>): List<String> {
         val recommendations = mutableListOf<String>()
@@ -78,27 +81,27 @@ class PrivacyScoreCalculator {
         violations.forEach { violation ->
             when (violation) {
                 SecurityViolation.LONG_NFC_USAGE -> {
-                    recommendations.add("Disable NFC when not in use") // Placeholder
-                    recommendations.add("Set shorter reminder intervals") // Placeholder
+                    recommendations.add(context.getString(R.string.recommendation_disable_nfc))
+                    recommendations.add(context.getString(R.string.recommendation_shorter_intervals))
                 }
                 SecurityViolation.UNKNOWN_TAG -> {
-                    recommendations.add("Be cautious with unknown NFC tags") // Placeholder
-                    recommendations.add("Enable unknown tag blocking") // Placeholder
+                    recommendations.add(context.getString(R.string.recommendation_cautious_unknown_tags))
+                    recommendations.add(context.getString(R.string.recommendation_enable_unknown_tag_blocking))
                 }
                 SecurityViolation.RAPID_TAG_DETECTION -> {
-                    recommendations.add("Avoid crowded areas when using NFC") // Placeholder
-                    recommendations.add("Check for suspicious devices nearby") // Placeholder
+                    recommendations.add(context.getString(R.string.recommendation_avoid_crowded_areas_nfc))
+                    recommendations.add(context.getString(R.string.recommendation_check_suspicious_devices))
                 }
                 SecurityViolation.SUSPICIOUS_ACTIVITY -> {
-                    recommendations.add("Review your NFC usage patterns") // Placeholder
-                    recommendations.add("Enable maximum security mode") // Placeholder
+                    recommendations.add(context.getString(R.string.recommendation_review_nfc_usage))
+                    recommendations.add(context.getString(R.string.recommendation_enable_max_security_mode))
                 }
             }
         }
         
         if (recommendations.isEmpty()) {
-            recommendations.add("Keep up the good security practices!") // Placeholder - This will use R.string.recommendation_keep_up_good_practices
-            recommendations.add("Regularly review your NFC activity log") // Placeholder - This will use R.string.recommendation_review_activity_log
+            recommendations.add(context.getString(R.string.recommendation_keep_up_good_practices))
+            recommendations.add(context.getString(R.string.recommendation_review_activity_log))
         }
         
         return recommendations.distinct()

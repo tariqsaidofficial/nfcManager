@@ -53,7 +53,9 @@ fun SecurityScoreScreen(
         
         if (isLoading) {
             Box(
-                modifier = Modifier.fillMaxWidth(),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(400.dp),
                 contentAlignment = Alignment.Center
             ) {
                 CircularProgressIndicator()
