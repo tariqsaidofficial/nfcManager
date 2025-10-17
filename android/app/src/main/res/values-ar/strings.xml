@@ -437,6 +437,14 @@
     <string name="onboarding_page3_feature1">حماية خصوصية كاملة</string>
     <string name="onboarding_page3_feature2">تخزين بيانات محلي فقط</string>
     <string name="onboarding_page3_feature3">لا يوجد نقل بيانات خارجي</string>
+    
+    <!-- Onboarding Page 4 - Notification Permission -->
+    <string name="onboarding_page4_title">تفعيل الإشعارات</string>
+    <string name="onboarding_page4_description">ابقَ محمياً مع التنبيهات الفورية عند تفعيل NFC. اسمح بالإشعارات للحصول على أقصى استفادة من مدير NFC.</string>
+    <string name="onboarding_page4_feature1">تنبيهات فورية لحالة NFC</string>
+    <string name="onboarding_page4_feature2">تحذيرات أمنية في الوقت الفعلي</string>
+    <string name="onboarding_page4_feature3">لا تفوت التحديثات المهمة</string>
+    <string name="onboarding_button_allow_notifications">السماح بالإشعارات</string>
 
     <!-- Security Score Screen -->
     <string name="security_score_screen_title">مقياس الأمان</string>

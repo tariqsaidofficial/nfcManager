@@ -459,6 +459,14 @@
     <string name="onboarding_page3_feature1">Complete privacy protection</string>
     <string name="onboarding_page3_feature2">Local data storage only</string>
     <string name="onboarding_page3_feature3">No external data transmission</string>
+    
+    <!-- Onboarding Page 4 - Notification Permission -->
+    <string name="onboarding_page4_title">Enable Notifications</string>
+    <string name="onboarding_page4_description">Stay protected with instant alerts when NFC is enabled. Allow notifications to get the most out of NFC Manager.</string>
+    <string name="onboarding_page4_feature1">Instant NFC status alerts</string>
+    <string name="onboarding_page4_feature2">Security warnings in real-time</string>
+    <string name="onboarding_page4_feature3">Never miss important updates</string>
+    <string name="onboarding_button_allow_notifications">Allow Notifications</string>
 
     <!-- === NEW STRINGS START HERE === -->
     <!-- SecurityScoreScreen.kt -->

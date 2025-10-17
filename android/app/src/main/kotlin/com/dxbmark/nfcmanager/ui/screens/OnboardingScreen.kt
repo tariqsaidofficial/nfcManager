@@ -1,5 +1,9 @@
 package com.dxbmark.nfcmanager.ui.screens
 
+import android.Manifest
+import android.os.Build
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -14,6 +18,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -32,8 +37,19 @@ import kotlinx.coroutines.launch
 fun OnboardingScreen(
     onComplete: () -> Unit
 ) {
-    val pagerState = rememberPagerState(pageCount = { 4 })
+    val context = LocalContext.current
+    val pagerState = rememberPagerState(pageCount = { 5 }) // Changed from 4 to 5
     val coroutineScope = rememberCoroutineScope()
+    var notificationPermissionGranted by remember { mutableStateOf(false) }
+    
+    // Notification permission launcher (Android 13+)
+    val notificationPermissionLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.RequestPermission()
+    ) { isGranted ->
+        notificationPermissionGranted = isGranted
+        // Complete onboarding after permission request
+        onComplete()
+    }
     
     Column(
         modifier = Modifier.fillMaxSize()
@@ -56,7 +72,7 @@ fun OnboardingScreen(
                 .padding(16.dp),
             horizontalArrangement = Arrangement.Center
         ) {
-            repeat(4) { index ->
+            repeat(5) { index -> // Changed from 4 to 5
                 Box(
                     modifier = Modifier
                         .size(8.dp)
@@ -101,12 +117,22 @@ fun OnboardingScreen(
             
             Button(
                 onClick = {
-                    if (pagerState.currentPage < 3) {
-                        coroutineScope.launch {
-                            pagerState.animateScrollToPage(pagerState.currentPage + 1)
+                    when {
+                        pagerState.currentPage < 4 -> {
+                            // Navigate to next page
+                            coroutineScope.launch {
+                                pagerState.animateScrollToPage(pagerState.currentPage + 1)
+                            }
                         }
-                    } else {
-                        onComplete()
+                        pagerState.currentPage == 4 -> {
+                            // Last page - request notification permission
+                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                                notificationPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
+                            } else {
+                                // For Android 12 and below, notifications are enabled by default
+                                onComplete()
+                            }
+                        }
                     }
                 },
                 colors = ButtonDefaults.buttonColors(
@@ -114,7 +140,12 @@ fun OnboardingScreen(
                     contentColor = NothingColors.PureWhite
                 )
             ) {
-                Text(if (pagerState.currentPage < 3) stringResource(R.string.onboarding_button_next) else stringResource(R.string.onboarding_button_get_started))
+                Text(
+                    when (pagerState.currentPage) {
+                        4 -> stringResource(R.string.onboarding_button_allow_notifications)
+                        else -> stringResource(R.string.onboarding_button_next)
+                    }
+                )
             }
         }
     }
@@ -171,7 +202,18 @@ fun OnboardingPage(
                 stringResource(R.string.onboarding_page3_feature3)
             )
         }
-        else -> { // Fallback, should not happen with pageCount = 4
+        4 -> {
+            // New page for notification permission
+            title = stringResource(R.string.onboarding_page4_title)
+            description = stringResource(R.string.onboarding_page4_description)
+            icon = Icons.Default.NotificationsActive
+            features = listOf(
+                stringResource(R.string.onboarding_page4_feature1),
+                stringResource(R.string.onboarding_page4_feature2),
+                stringResource(R.string.onboarding_page4_feature3)
+            )
+        }
+        else -> { // Fallback
             title = ""
             description = ""
             icon = Icons.Default.Info
