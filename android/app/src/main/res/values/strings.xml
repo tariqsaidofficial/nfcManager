@@ -562,5 +562,11 @@
     <string name="error_file_unknown">File error occurred.</string>
     
     <!-- === NEW STRINGS END HERE === -->
+    
+    <!-- Additional UI Elements -->
+    <string name="arrow_right">→</string>
+    <string name="social_media_linkedin">LinkedIn</string>
+    <string name="social_media_github">GitHub</string>
+    <string name="partnership_title">Partnership</string>
 
 </resources>

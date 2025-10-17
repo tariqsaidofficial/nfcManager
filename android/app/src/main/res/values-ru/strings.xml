@@ -161,6 +161,7 @@
     <string name="notification_sound_screen_title">Звук уведомления</string>
     <string name="notification_sound_description">Настройте звук, воспроизводимый для уведомлений NFC Manager. Выберите пользовательский звук с вашего устройства или используйте системный по умолчанию.</string>
     <string name="current_sound_label">Текущий звук</string>
+    <string name="security_score_card_title">Оценка безопасности</string>
     <string name="sound_play_error_null">Невозможно воспроизвести звук: URI по умолчанию равен нулю.</string>
     <string name="sound_play_error_corrupted">Невозможно воспроизвести звук: Мелодия не найдена или повреждена.</string>
     <string name="sound_play_error_general">Ошибка воспроизведения звука: %1$s</string>
@@ -356,4 +357,176 @@
     <string name="settings_section_about_title">О ПРИЛОЖЕНИИ</string>
     <string name="settings_item_about_title">О приложении NFC Manager</string>
     <string name="settings_item_about_subtitle">Информация о приложении, политика конфиденциальности и поддержка</string>
+
+    <!-- Security Score Screen -->
+    <string name="security_score_screen_title">Оценка безопасности</string>
+    <string name="security_score_value_label">Оценка</string>
+    <string name="security_level_desc_excellent">Отличные методы обеспечения безопасности! Продолжайте в том же духе.</string>
+    <string name="security_level_desc_good">Хороший уровень безопасности с незначительными улучшениями.</string>
+    <string name="security_level_desc_moderate">Умеренная безопасность. Рассмотрите рекомендации.</string>
+    <string name="security_level_desc_poor">Низкий уровень безопасности. Требуются немедленные действия.</string>
+    <string name="security_level_desc_critical">Критические проблемы безопасности. Пожалуйста, ознакомьтесь с рекомендациями.</string>
+    <string name="security_level_desc_not_applicable">Статус NFC не применим или не поддерживается на этом устройстве.</string>
+    <string name="security_level_breakdown_title">Разбивка уровня безопасности</string>
+    <string name="security_score_range_excellent">90-100</string>
+    <string name="security_score_range_good">75-89</string>
+    <string name="security_score_range_moderate">60-74</string>
+    <string name="security_score_range_poor">40-59</string>
+    <string name="security_score_range_critical">0-39</string>
+    <string name="security_score_range_not_applicable">Н/Д</string>
+    <string name="security_recommendations_title">Рекомендации по безопасности</string>
+    <string name="security_tips_title">Советы по безопасности</string>
+    <string name="security_tip_disable_nfc">Отключайте NFC, когда не используете</string>
+    <string name="security_tip_cautious_tags">Будьте осторожны с неизвестными NFC-метками</string>
+    <string name="security_tip_avoid_crowded_nfc">Избегайте использования NFC в людных местах</string>
+    <string name="security_tip_review_log">Регулярно проверяйте журнал активности NFC</string>
+    <string name="security_tip_keep_device_updated">Поддерживайте устройство в актуальном состоянии</string>
+    <string name="security_level_not_applicable">Не применимо</string>
+
+    <!-- Security Recommendations -->
+    <string name="recommendation_disable_nfc">Отключайте NFC, когда не используете</string>
+    <string name="recommendation_shorter_intervals">Установите более короткие интервалы напоминаний для NFC</string>
+    <string name="recommendation_cautious_unknown_tags">Будьте осторожны с неизвестными или неожиданными NFC-метками</string>
+    <string name="recommendation_enable_unknown_tag_blocking">Рассмотрите возможность включения \"Блокировать неизвестные метки\" в настройках</string>
+    <string name="recommendation_avoid_crowded_areas_nfc">По возможности избегайте использования NFC в очень людных общественных местах</string>
+    <string name="recommendation_check_suspicious_devices">Будьте внимательны к окружению и проверяйте подозрительные устройства</string>
+    <string name="recommendation_review_nfc_usage">Регулярно проверяйте свои шаблоны использования NFC в журнале активности</string>
+    <string name="recommendation_enable_max_security_mode">Для максимальной защиты включите режим конфиденциальности в настройках</string>
+    <string name="recommendation_keep_up_good_practices">Продолжайте следовать хорошим методам обеспечения безопасности!</string>
+    <string name="recommendation_review_activity_log">Регулярно проверяйте журнал активности NFC на наличие необычных событий</string>
+    <string name="recommendation_nfc_disabled_secure">NFC в настоящее время отключен, что повышает безопасность. Включайте его только при необходимости использования функций NFC.</string>
+
+    <!-- Security Violations -->
+    <string name="violation_long_nfc_usage_name">Длительная активация NFC</string>
+    <string name="violation_unknown_tag_name">Обнаружена неизвестная метка</string>
+    <string name="violation_rapid_tag_detection_name">Быстрое обнаружение нескольких меток</string>
+    <string name="violation_suspicious_activity_name">Подозрительный шаблон активности NFC</string>
+
+    <!-- Notification Manager -->
+    <string name="channel_nfc_status_name">Статус NFC</string>
+    <string name="channel_nfc_status_description">Показывает текущий статус NFC и уровень безопасности</string>
+    <string name="channel_security_alert_name">Оповещения безопасности</string>
+    <string name="channel_security_alert_description">Оповещения и предупреждения безопасности</string>
+    <string name="nfc_enabled_notification_title">NFC включен</string>
+    <string name="nfc_disabled_notification_title">NFC отключен</string>
+    <string name="nfc_enabled_for_label">Включен в течение: </string>
+    <string name="nfc_security_level_label">Уровень безопасности: </string>
+    <string name="nfc_status_label">Статус: </string>
+    <string name="notification_tap_to_open_details">Нажмите, чтобы открыть NFC Manager для получения дополнительной информации.</string>
+    <string name="notification_tap_to_manage_settings">Нажмите, чтобы открыть NFC Manager для управления настройками.</string>
+    <string name="notification_action_settings">Настройки</string>
+    <string name="notification_action_security_score">Оценка безопасности</string>
+    <string name="notification_action_review_settings">Просмотреть настройки</string>
+    <string name="alert_title_nfc_enabled_long">⚠️ NFC включен слишком долго</string>
+    <string name="alert_title_unknown_tag">🔍 Обнаружена неизвестная метка</string>
+    <string name="alert_title_multiple_tags_rapid">⚡ Обнаружено несколько меток</string>
+    <string name="alert_title_suspicious_activity">🚨 Подозрительная активность</string>
+    <string name="notification_recommendation_label">Рекомендация: </string>
+    <string name="security_status_excellent">Отличные методы обеспечения безопасности</string>
+    <string name="security_status_good">Хороший уровень безопасности</string>
+    <string name="security_status_moderate">Умеренная безопасность - ознакомьтесь с рекомендациями</string>
+    <string name="security_status_poor">Низкая безопасность - требуются немедленные действия</string>
+    <string name="security_status_critical">Обнаружены критические проблемы безопасности</string>
+    <string name="security_status_not_applicable">Уровень безопасности не применим</string>
+    <string name="recommendation_alert_nfc_long">Рассмотрите возможность отключения NFC, когда не используете</string>
+    <string name="recommendation_alert_unknown_tag">Будьте осторожны с неизвестными NFC-метками</string>
+    <string name="recommendation_alert_multiple_tags">Избегайте людных мест при использовании NFC</string>
+    <string name="recommendation_alert_suspicious_activity">Проверьте свои шаблоны использования NFC</string>
+
+    <!-- Error Messages - Network -->
+    <string name="error_no_internet">Нет подключения к интернету. Пожалуйста, проверьте настройки сети.</string>
+    <string name="error_timeout">Время ожидания запроса истекло. Пожалуйста, попробуйте еще раз.</string>
+    <string name="error_server">Ошибка сервера: %1$d. Пожалуйста, попробуйте позже.</string>
+    <string name="error_network_unknown">Произошла ошибка сети. Пожалуйста, попробуйте еще раз.</string>
+
+    <!-- Error Messages - Database -->
+    <string name="error_database_read">Не удалось прочитать данные из базы данных.</string>
+    <string name="error_database_write">Не удалось сохранить данные в базу данных.</string>
+    <string name="error_database_delete">Не удалось удалить данные из базы данных.</string>
+    <string name="error_database_corrupted">Данные базы данных повреждены. Пожалуйста, переустановите приложение.</string>
+    <string name="error_database_unknown">Произошла ошибка базы данных.</string>
+
+    <!-- Error Messages - NFC -->
+    <string name="error_nfc_read">Не удалось прочитать NFC-метку. Пожалуйста, попробуйте еще раз.</string>
+    <string name="error_nfc_write">Не удалось записать на NFC-метку. Пожалуйста, попробуйте еще раз.</string>
+    <string name="error_nfc_tag_lost">Соединение с NFC-меткой потеряно. Пожалуйста, держите метку ближе.</string>
+    <string name="error_nfc_unknown">Произошла ошибка NFC. Пожалуйста, попробуйте еще раз.</string>
+
+    <!-- Error Messages - Permission -->
+    <string name="error_permission_notification">Требуется разрешение на уведомления для оповещений.</string>
+    <string name="error_permission_unknown">Разрешение отклонено: %1$s</string>
+
+    <!-- Error Messages - Service -->
+    <string name="error_service_start">Не удалось запустить службу мониторинга.</string>
+    <string name="error_service_stop">Не удалось остановить службу мониторинга.</string>
+    <string name="error_service_not_running">Служба мониторинга не запущена.</string>
+    <string name="error_service_unknown">Произошла ошибка службы.</string>
+
+    <!-- Error Messages - Validation -->
+    <string name="error_validation_invalid">Недопустимый ввод для: %1$s</string>
+    <string name="error_validation_range">%1$s должно быть между %2$d и %3$d</string>
+    <string name="error_validation_required">%1$s обязательно</string>
+
+    <!-- Error Messages - File -->
+    <string name="error_file_not_found">Файл не найден: %1$s</string>
+    <string name="error_file_read">Не удалось прочитать файл.</string>
+    <string name="error_file_write">Не удалось записать файл.</string>
+    <string name="error_file_permission">Разрешение на файл отклонено.</string>
+    <string name="error_file_unknown">Произошла ошибка файла.</string>
+
+    <!-- Additional UI Elements -->
+    <string name="arrow_right">→</string>
+    <string name="social_media_linkedin">LinkedIn</string>
+    <string name="social_media_github">GitHub</string>
+    <string name="partnership_title">Партнерство</string>
+
+    <!-- Additional System Messages -->
+    <string name="retry_button">Повторить</string>
+    <string name="nfc_not_supported_error">NFC не поддерживается на этом устройстве.</string>
+    <string name="nfc_disabled_error_turn_on">NFC отключен. Пожалуйста, включите NFC в настройках устройства для активации мониторинга.</string>
+    <string name="error_calculating_score">Ошибка при расчете оценки: %1$s</string>
+    <string name="error_calculating_period_score">Ошибка при расчете оценки периода: %1$s</string>
+
+    <!-- Missing Security Score Strings -->
+    <string name="loading_security_score">Расчет оценки…</string>
+    <string name="refresh_score_button">Обновить оценку</string>
+    <string name="security_level_excellent">Отлично</string>
+    <string name="security_level_good">Хорошо</string>
+    <string name="security_level_moderate">Умеренно</string>
+    <string name="security_level_poor">Плохо</string>
+    <string name="security_level_critical">Критично</string>
+    <string name="security_score_detail_title">Детали безопасности</string>
+
+    <!-- Missing Recommendations and Violations -->
+    <string name="recommendations_title">Рекомендации</string>
+    <string name="violations_title">Нарушения</string>
+    <string name="no_recommendations_yet">В настоящее время нет конкретных рекомендаций. Продолжайте в том же духе!</string>
+    <string name="no_violations_detected">За последние 7 дней нарушений безопасности не обнаружено.</string>
+    <string name="security_score_violation_prefix">Нарушение: </string>
+
+    <!-- Missing Onboarding Strings -->
+    <string name="onboarding_button_get_started">Начать</string>
+    <string name="onboarding_button_next">Далее</string>
+    <string name="onboarding_button_previous">Назад</string>
+    <string name="onboarding_page0_title">Добро пожаловать в NFC Manager</string>
+    <string name="onboarding_page0_description">Защитите свою конфиденциальность с помощью интеллектуального мониторинга NFC и оповещений безопасности</string>
+    <string name="onboarding_page0_feature1">Мониторинг NFC в реальном времени</string>
+    <string name="onboarding_page0_feature2">Дизайн, ориентированный на конфиденциальность</string>
+    <string name="onboarding_page0_feature3">UI в стиле Nothing OS</string>
+    <string name="onboarding_page1_title">Интеллектуальный мониторинг</string>
+    <string name="onboarding_page1_description">Расширенная система уведомлений держит вас в курсе активности NFC и статуса безопасности</string>
+    <string name="onboarding_page1_feature1">Отслеживание длительности</string>
+    <string name="onboarding_page1_feature2">Оповещения уровня безопасности</string>
+    <string name="onboarding_page1_feature3">Умные уведомления</string>
+    <string name="onboarding_page2_title">Оценка безопасности</string>
+    <string name="onboarding_page2_description">Отслеживайте свой уровень безопасности с помощью нашей интеллектуальной системы оценки и получайте персонализированные рекомендации</string>
+    <string name="onboarding_page2_feature1">5-уровневая оценка безопасности</string>
+    <string name="onboarding_page2_feature2">Персонализированные рекомендации</string>
+    <string name="onboarding_page2_feature3">Отслеживание нарушений</string>
+    <string name="onboarding_page3_title">Полный контроль</string>
+    <string name="onboarding_page3_description">Настройте все в соответствии с вашими предпочтениями</string>
+    <string name="onboarding_page3_feature1">Настраиваемые оповещения</string>
+    <string name="onboarding_page3_feature2">Темная/светлая тема</string>
+    <string name="onboarding_page3_feature3">9 языков</string>
+
 </resources>

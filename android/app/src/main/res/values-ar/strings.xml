@@ -437,4 +437,140 @@
     <string name="onboarding_page3_feature2">تخزين بيانات محلي فقط</string>
     <string name="onboarding_page3_feature3">لا يوجد نقل بيانات خارجي</string>
 
+    <!-- Security Score Screen -->
+    <string name="security_score_screen_title">مقياس الأمان</string>
+    <string name="security_score_value_label">النتيجة</string>
+    <string name="security_level_desc_excellent">ممارسات أمان ممتازة! استمر على هذا النحو.</string>
+    <string name="security_level_desc_good">مستوى أمان جيد مع تحسينات طفيفة مطلوبة.</string>
+    <string name="security_level_desc_moderate">أمان متوسط. يُرجى النظر في اتباع التوصيات.</string>
+    <string name="security_level_desc_poor">مستوى أمان ضعيف. يلزم اتخاذ إجراء فوري.</string>
+    <string name="security_level_desc_critical">مشاكل أمان حرجة. يُرجى مراجعة التوصيات.</string>
+    <string name="security_level_desc_not_applicable">حالة NFC غير قابلة للتطبيق أو غير مدعومة على هذا الجهاز.</string>
+    <string name="security_level_breakdown_title">تفصيل مستوى الأمان</string>
+    <string name="security_score_range_excellent">90-100</string>
+    <string name="security_score_range_good">75-89</string>
+    <string name="security_score_range_moderate">60-74</string>
+    <string name="security_score_range_poor">40-59</string>
+    <string name="security_score_range_critical">0-39</string>
+    <string name="security_score_range_not_applicable">غير متاح</string>
+    <string name="security_recommendations_title">توصيات الأمان</string>
+    <string name="security_tips_title">نصائح الأمان</string>
+    <string name="security_tip_disable_nfc">قم بتعطيل NFC عند عدم الاستخدام</string>
+    <string name="security_tip_cautious_tags">كن حذراً مع علامات NFC غير المعروفة</string>
+    <string name="security_tip_avoid_crowded_nfc">تجنب استخدام NFC في الأماكن المزدحمة</string>
+    <string name="security_tip_review_log">راجع سجل نشاط NFC بانتظام</string>
+    <string name="security_tip_keep_device_updated">حافظ على تحديث جهازك</string>
+
+    <!-- Security Recommendations -->
+    <string name="recommendation_disable_nfc">قم بتعطيل NFC عند عدم الاستخدام</string>
+    <string name="recommendation_shorter_intervals">اضبط فترات تذكير أقصر لـ NFC</string>
+    <string name="recommendation_cautious_unknown_tags">كن حذراً مع علامات NFC غير المعروفة أو غير المتوقعة</string>
+    <string name="recommendation_enable_unknown_tag_blocking">فكر في تفعيل \"حظر العلامات غير المعروفة\" في الإعدادات</string>
+    <string name="recommendation_avoid_crowded_areas_nfc">تجنب استخدام NFC في الأماكن العامة المزدحمة جداً إن أمكن</string>
+    <string name="recommendation_check_suspicious_devices">كن على دراية بمحيطك وتحقق من الأجهزة المشبوهة</string>
+    <string name="recommendation_review_nfc_usage">راجع أنماط استخدام NFC بانتظام في سجل الأنشطة</string>
+    <string name="recommendation_enable_max_security_mode">للحماية القصوى، قم بتفعيل وضع الخصوصية في الإعدادات</string>
+    <string name="recommendation_keep_up_good_practices">استمر في ممارسات الأمان الجيدة!</string>
+    <string name="recommendation_review_activity_log">راجع سجل نشاط NFC بانتظام لأي أحداث غير عادية</string>
+    <string name="recommendation_nfc_disabled_secure">NFC معطل حالياً، مما يعزز الأمان. قم بتفعيله فقط عند الحاجة لاستخدام ميزات NFC.</string>
+
+    <!-- Security Violations -->
+    <string name="violation_long_nfc_usage_name">تفعيل NFC لفترة طويلة</string>
+    <string name="violation_unknown_tag_name">اكتشاف علامة غير معروفة</string>
+    <string name="violation_rapid_tag_detection_name">اكتشاف علامات متعددة سريعة</string>
+    <string name="violation_suspicious_activity_name">نمط نشاط NFC مشبوه</string>
+
+    <!-- Notification Manager -->
+    <string name="channel_nfc_status_name">حالة NFC</string>
+    <string name="channel_nfc_status_description">يعرض حالة NFC الحالية ومستوى الأمان</string>
+    <string name="channel_security_alert_name">تنبيهات الأمان</string>
+    <string name="channel_security_alert_description">تنبيهات وتحذيرات الأمان</string>
+    <string name="nfc_enabled_notification_title">NFC مُفعّل</string>
+    <string name="nfc_disabled_notification_title">NFC مُعطّل</string>
+    <string name="nfc_enabled_for_label">مُفعّل لمدة: </string>
+    <string name="nfc_security_level_label">مستوى الأمان: </string>
+    <string name="nfc_status_label">الحالة: </string>
+    <string name="notification_tap_to_open_details">اضغط لفتح مدير NFC لمزيد من التفاصيل.</string>
+    <string name="notification_tap_to_manage_settings">اضغط لفتح مدير NFC لإدارة إعداداتك.</string>
+    <string name="notification_action_settings">الإعدادات</string>
+    <string name="notification_action_security_score">مقياس الأمان</string>
+    <string name="notification_action_review_settings">مراجعة الإعدادات</string>
+    <string name="alert_title_nfc_enabled_long">⚠️ NFC مُفعّل لفترة طويلة</string>
+    <string name="alert_title_unknown_tag">🔍 اكتشاف علامة غير معروفة</string>
+    <string name="alert_title_multiple_tags_rapid">⚡ اكتشاف علامات متعددة</string>
+    <string name="alert_title_suspicious_activity">🚨 نشاط مشبوه</string>
+    <string name="notification_recommendation_label">التوصية: </string>
+    <string name="security_status_excellent">ممارسات أمان ممتازة</string>
+    <string name="security_status_good">مستوى أمان جيد</string>
+    <string name="security_status_moderate">أمان متوسط - راجع التوصيات</string>
+    <string name="security_status_poor">أمان ضعيف - يلزم اتخاذ إجراء فوري</string>
+    <string name="security_status_critical">اكتشاف مشاكل أمان حرجة</string>
+    <string name="security_status_not_applicable">مستوى الأمان غير قابل للتطبيق</string>
+    <string name="recommendation_alert_nfc_long">فكر في تعطيل NFC عند عدم الاستخدام</string>
+    <string name="recommendation_alert_unknown_tag">كن حذراً مع علامات NFC غير المعروفة</string>
+    <string name="recommendation_alert_multiple_tags">تجنب الأماكن المزدحمة عند استخدام NFC</string>
+    <string name="recommendation_alert_suspicious_activity">راجع أنماط استخدام NFC الخاصة بك</string>
+
+    <!-- Error Messages - Network -->
+    <string name="error_no_internet">لا يوجد اتصال بالإنترنت. يُرجى التحقق من إعدادات الشبكة.</string>
+    <string name="error_timeout">انتهت مهلة الطلب. يُرجى المحاولة مرة أخرى.</string>
+    <string name="error_server">خطأ في الخادم: %1$d. يُرجى المحاولة لاحقاً.</string>
+    <string name="error_network_unknown">حدث خطأ في الشبكة. يُرجى المحاولة مرة أخرى.</string>
+
+    <!-- Error Messages - Database -->
+    <string name="error_database_read">فشل قراءة البيانات من قاعدة البيانات.</string>
+    <string name="error_database_write">فشل حفظ البيانات في قاعدة البيانات.</string>
+    <string name="error_database_delete">فشل حذف البيانات من قاعدة البيانات.</string>
+    <string name="error_database_corrupted">بيانات قاعدة البيانات تالفة. يُرجى إعادة تثبيت التطبيق.</string>
+    <string name="error_database_unknown">حدث خطأ في قاعدة البيانات.</string>
+
+    <!-- Error Messages - NFC -->
+    <string name="error_nfc_read">فشل قراءة علامة NFC. يُرجى المحاولة مرة أخرى.</string>
+    <string name="error_nfc_write">فشل الكتابة إلى علامة NFC. يُرجى المحاولة مرة أخرى.</string>
+    <string name="error_nfc_tag_lost">فُقد اتصال علامة NFC. يُرجى إبقاء العلامة أقرب.</string>
+    <string name="error_nfc_unknown">حدث خطأ في NFC. يُرجى المحاولة مرة أخرى.</string>
+
+    <!-- Error Messages - Permission -->
+    <string name="error_permission_notification">إذن الإشعارات مطلوب للتنبيهات.</string>
+    <string name="error_permission_unknown">تم رفض الإذن: %1$s</string>
+
+    <!-- Error Messages - Service -->
+    <string name="error_service_start">فشل بدء خدمة المراقبة.</string>
+    <string name="error_service_stop">فشل إيقاف خدمة المراقبة.</string>
+    <string name="error_service_not_running">خدمة المراقبة غير قيد التشغيل.</string>
+    <string name="error_service_unknown">حدث خطأ في الخدمة.</string>
+
+    <!-- Error Messages - Validation -->
+    <string name="error_validation_invalid">إدخال غير صالح لـ: %1$s</string>
+    <string name="error_validation_range">يجب أن يكون %1$s بين %2$d و %3$d</string>
+    <string name="error_validation_required">%1$s مطلوب</string>
+
+    <!-- Error Messages - File -->
+    <string name="error_file_not_found">الملف غير موجود: %1$s</string>
+    <string name="error_file_read">فشل قراءة الملف.</string>
+    <string name="error_file_write">فشل كتابة الملف.</string>
+    <string name="error_file_permission">تم رفض إذن الملف.</string>
+    <string name="error_file_unknown">حدث خطأ في الملف.</string>
+
+    <!-- Additional UI Elements -->
+    <string name="arrow_right">←</string>
+    <string name="social_media_linkedin">لينكد إن</string>
+    <string name="social_media_github">جيت هاب</string>
+    <string name="partnership_title">الشراكة</string>
+
+    <!-- Additional System Messages -->
+    <string name="retry_button">إعادة المحاولة</string>
+    <string name="nfc_not_supported_error">NFC غير مدعوم على هذا الجهاز.</string>
+    <string name="nfc_disabled_error_turn_on">NFC معطل. يُرجى تشغيل NFC في إعدادات جهازك لتفعيل المراقبة.</string>
+    <string name="error_calculating_score">خطأ في حساب النتيجة: %1$s</string>
+    <string name="error_calculating_period_score">خطأ في حساب نتيجة الفترة: %1$s</string>
+
+    <!-- Settings Items (Missing) -->
+    <string name="settings_item_accent_color_title">لون التمييز</string>
+    <string name="settings_item_accent_color_subtitle">تخصيص لون التطبيق</string>
+    <string name="settings_item_monitoring_interval_title">فاصل المراقبة</string>
+    <string name="settings_item_monitoring_interval_subtitle">تكرار فحص حالة NFC</string>
+    <string name="settings_item_performance_title">الأداء</string>
+    <string name="settings_item_performance_subtitle">تحسين أداء التطبيق</string>
+
 </resources>

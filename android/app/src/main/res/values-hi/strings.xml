@@ -356,4 +356,180 @@
     <string name="settings_section_about_title">के बारे में</string>
     <string name="settings_item_about_title">एनएफसी मैनेजर के बारे में</string>
     <string name="settings_item_about_subtitle">ऐप जानकारी, गोपनीयता नीति, और समर्थन</string>
+
+    <!-- Security Score Screen -->
+    <string name="security_score_screen_title">सुरक्षा स्कोर</string>
+    <string name="security_score_value_label">स्कोर</string>
+    <string name="security_level_desc_excellent">उत्कृष्ट सुरक्षा प्रथाएं! ऐसे ही जारी रखें।</string>
+    <string name="security_level_desc_good">मामूली सुधार की आवश्यकता के साथ अच्छा सुरक्षा स्तर।</string>
+    <string name="security_level_desc_moderate">मध्यम सुरक्षा। सिफारिशों का पालन करने पर विचार करें।</string>
+    <string name="security_level_desc_poor">खराब सुरक्षा स्तर। तत्काल कार्रवाई आवश्यक है।</string>
+    <string name="security_level_desc_critical">गंभीर सुरक्षा समस्याएं। कृपया सिफारिशों की समीक्षा करें।</string>
+    <string name="security_level_desc_not_applicable">एनएफसी स्थिति लागू नहीं है या इस डिवाइस पर समर्थित नहीं है।</string>
+    <string name="security_level_breakdown_title">सुरक्षा स्तर विवरण</string>
+    <string name="security_score_range_excellent">90-100</string>
+    <string name="security_score_range_good">75-89</string>
+    <string name="security_score_range_moderate">60-74</string>
+    <string name="security_score_range_poor">40-59</string>
+    <string name="security_score_range_critical">0-39</string>
+    <string name="security_score_range_not_applicable">लागू नहीं</string>
+    <string name="security_recommendations_title">सुरक्षा सिफारिशें</string>
+    <string name="security_tips_title">सुरक्षा सुझाव</string>
+    <string name="security_tip_disable_nfc">उपयोग में न होने पर एनएफसी अक्षम करें</string>
+    <string name="security_tip_cautious_tags">अज्ञात एनएफसी टैग के साथ सावधान रहें</string>
+    <string name="security_tip_avoid_crowded_nfc">भीड़भाड़ वाले क्षेत्रों में एनएफसी का उपयोग करने से बचें</string>
+    <string name="security_tip_review_log">नियमित रूप से अपने एनएफसी गतिविधि लॉग की समीक्षा करें</string>
+    <string name="security_tip_keep_device_updated">अपने डिवाइस को अपडेट रखें</string>
+    <string name="security_level_not_applicable">लागू नहीं</string>
+
+    <!-- Security Recommendations -->
+    <string name="recommendation_disable_nfc">उपयोग में न होने पर एनएफसी अक्षम करें</string>
+    <string name="recommendation_shorter_intervals">एनएफसी के लिए छोटे अनुस्मारक अंतराल सेट करें</string>
+    <string name="recommendation_cautious_unknown_tags">अज्ञात या अप्रत्याशित एनएफसी टैग के साथ सावधान रहें</string>
+    <string name="recommendation_enable_unknown_tag_blocking">सेटिंग्स में \"अज्ञात टैग ब्लॉक करें\" सक्षम करने पर विचार करें</string>
+    <string name="recommendation_avoid_crowded_areas_nfc">यदि संभव हो तो बहुत भीड़भाड़ वाले सार्वजनिक क्षेत्रों में एनएफसी का उपयोग करने से बचें</string>
+    <string name="recommendation_check_suspicious_devices">अपने परिवेश के प्रति जागरूक रहें और संदिग्ध उपकरणों की जांच करें</string>
+    <string name="recommendation_review_nfc_usage">गतिविधि लॉग में नियमित रूप से अपने एनएफसी उपयोग पैटर्न की समीक्षा करें</string>
+    <string name="recommendation_enable_max_security_mode">अधिकतम सुरक्षा के लिए, सेटिंग्स में गोपनीयता मोड सक्षम करें</string>
+    <string name="recommendation_keep_up_good_practices">अच्छी सुरक्षा प्रथाओं को जारी रखें!</string>
+    <string name="recommendation_review_activity_log">किसी भी असामान्य घटनाओं के लिए नियमित रूप से अपने एनएफसी गतिविधि लॉग की समीक्षा करें</string>
+    <string name="recommendation_nfc_disabled_secure">एनएफसी वर्तमान में अक्षम है, जो सुरक्षा बढ़ाता है। इसे केवल तभी सक्षम करें जब आपको एनएफसी सुविधाओं का उपयोग करने की आवश्यकता हो।</string>
+
+    <!-- Security Violations -->
+    <string name="violation_long_nfc_usage_name">लंबे समय तक एनएफसी सक्रियण</string>
+    <string name="violation_unknown_tag_name">अज्ञात टैग का पता चला</string>
+    <string name="violation_rapid_tag_detection_name">तेजी से कई टैग का पता लगाना</string>
+    <string name="violation_suspicious_activity_name">संदिग्ध एनएफसी गतिविधि पैटर्न</string>
+
+    <!-- Notification Manager -->
+    <string name="channel_nfc_status_name">एनएफसी स्थिति</string>
+    <string name="channel_nfc_status_description">वर्तमान एनएफसी स्थिति और सुरक्षा स्तर दिखाता है</string>
+    <string name="channel_security_alert_name">सुरक्षा अलर्ट</string>
+    <string name="channel_security_alert_description">सुरक्षा अलर्ट और चेतावनियां</string>
+    <string name="nfc_enabled_notification_title">एनएफसी सक्षम</string>
+    <string name="nfc_disabled_notification_title">एनएफसी अक्षम</string>
+    <string name="nfc_enabled_for_label">के लिए सक्षम: </string>
+    <string name="nfc_security_level_label">सुरक्षा स्तर: </string>
+    <string name="nfc_status_label">स्थिति: </string>
+    <string name="notification_tap_to_open_details">अधिक विवरण के लिए एनएफसी मैनेजर खोलने के लिए टैप करें।</string>
+    <string name="notification_tap_to_manage_settings">अपनी सेटिंग्स प्रबंधित करने के लिए एनएफसी मैनेजर खोलने के लिए टैप करें।</string>
+    <string name="notification_action_settings">सेटिंग्स</string>
+    <string name="notification_action_security_score">सुरक्षा स्कोर</string>
+    <string name="notification_action_review_settings">सेटिंग्स की समीक्षा करें</string>
+    <string name="alert_title_nfc_enabled_long">⚠️ एनएफसी बहुत लंबे समय से सक्षम है</string>
+    <string name="alert_title_unknown_tag">🔍 अज्ञात टैग का पता चला</string>
+    <string name="alert_title_multiple_tags_rapid">⚡ कई टैग का पता चला</string>
+    <string name="alert_title_suspicious_activity">🚨 संदिग्ध गतिविधि</string>
+    <string name="notification_recommendation_label">सिफारिश: </string>
+    <string name="security_status_excellent">उत्कृष्ट सुरक्षा प्रथाएं</string>
+    <string name="security_status_good">अच्छा सुरक्षा स्तर</string>
+    <string name="security_status_moderate">मध्यम सुरक्षा - सिफारिशों की समीक्षा करें</string>
+    <string name="security_status_poor">खराब सुरक्षा - तत्काल कार्रवाई आवश्यक</string>
+    <string name="security_status_critical">गंभीर सुरक्षा समस्याओं का पता चला</string>
+    <string name="security_status_not_applicable">सुरक्षा स्तर लागू नहीं</string>
+    <string name="recommendation_alert_nfc_long">उपयोग में न होने पर एनएफसी अक्षम करने पर विचार करें</string>
+    <string name="recommendation_alert_unknown_tag">अज्ञात एनएफसी टैग के साथ सावधान रहें</string>
+    <string name="recommendation_alert_multiple_tags">एनएफसी का उपयोग करते समय भीड़भाड़ वाले क्षेत्रों से बचें</string>
+    <string name="recommendation_alert_suspicious_activity">अपने एनएफसी उपयोग पैटर्न की समीक्षा करें</string>
+
+    <!-- Error Messages - Network -->
+    <string name="error_no_internet">कोई इंटरनेट कनेक्शन नहीं। कृपया अपनी नेटवर्क सेटिंग्स जांचें।</string>
+    <string name="error_timeout">अनुरोध समय समाप्त। कृपया पुनः प्रयास करें।</string>
+    <string name="error_server">सर्वर त्रुटि: %1$d। कृपया बाद में पुनः प्रयास करें।</string>
+    <string name="error_network_unknown">नेटवर्क त्रुटि हुई। कृपया पुनः प्रयास करें।</string>
+
+    <!-- Error Messages - Database -->
+    <string name="error_database_read">डेटाबेस से डेटा पढ़ने में विफल।</string>
+    <string name="error_database_write">डेटाबेस में डेटा सहेजने में विफल।</string>
+    <string name="error_database_delete">डेटाबेस से डेटा हटाने में विफल।</string>
+    <string name="error_database_corrupted">डेटाबेस डेटा दूषित है। कृपया ऐप को पुनः स्थापित करें।</string>
+    <string name="error_database_unknown">डेटाबेस त्रुटि हुई।</string>
+
+    <!-- Error Messages - NFC -->
+    <string name="error_nfc_read">एनएफसी टैग पढ़ने में विफल। कृपया पुनः प्रयास करें।</string>
+    <string name="error_nfc_write">एनएफसी टैग पर लिखने में विफल। कृपया पुनः प्रयास करें।</string>
+    <string name="error_nfc_tag_lost">एनएफसी टैग कनेक्शन खो गया। कृपया टैग को करीब रखें।</string>
+    <string name="error_nfc_unknown">एनएफसी त्रुटि हुई। कृपया पुनः प्रयास करें।</string>
+
+    <!-- Error Messages - Permission -->
+    <string name="error_permission_notification">अलर्ट के लिए सूचना अनुमति आवश्यक है।</string>
+    <string name="error_permission_unknown">अनुमति अस्वीकृत: %1$s</string>
+
+    <!-- Error Messages - Service -->
+    <string name="error_service_start">मॉनिटरिंग सेवा शुरू करने में विफल।</string>
+    <string name="error_service_stop">मॉनिटरिंग सेवा बंद करने में विफल।</string>
+    <string name="error_service_not_running">मॉनिटरिंग सेवा चल नहीं रही है।</string>
+    <string name="error_service_unknown">सेवा त्रुटि हुई।</string>
+
+    <!-- Error Messages - Validation -->
+    <string name="error_validation_invalid">के लिए अमान्य इनपुट: %1$s</string>
+    <string name="error_validation_range">%1$s %2$d और %3$d के बीच होना चाहिए</string>
+    <string name="error_validation_required">%1$s आवश्यक है</string>
+
+    <!-- Error Messages - File -->
+    <string name="error_file_not_found">फ़ाइल नहीं मिली: %1$s</string>
+    <string name="error_file_read">फ़ाइल पढ़ने में विफल।</string>
+    <string name="error_file_write">फ़ाइल लिखने में विफल।</string>
+    <string name="error_file_permission">फ़ाइल अनुमति अस्वीकृत।</string>
+    <string name="error_file_unknown">फ़ाइल त्रुटि हुई।</string>
+
+    <!-- Additional UI Elements -->
+    <string name="arrow_right">→</string>
+    <string name="social_media_linkedin">LinkedIn</string>
+    <string name="social_media_github">GitHub</string>
+    <string name="partnership_title">साझेदारी</string>
+
+    <!-- Additional System Messages -->
+    <string name="retry_button">पुनः प्रयास करें</string>
+    <string name="nfc_not_supported_error">एनएफसी इस डिवाइस पर समर्थित नहीं है।</string>
+    <string name="nfc_disabled_error_turn_on">एनएफसी अक्षम है। कृपया मॉनिटरिंग सक्षम करने के लिए अपनी डिवाइस सेटिंग्स में एनएफसी चालू करें।</string>
+    <string name="error_calculating_score">स्कोर की गणना करने में त्रुटि: %1$s</string>
+    <string name="error_calculating_period_score">अवधि स्कोर की गणना करने में त्रुटि: %1$s</string>
+
+    <!-- Settings Items (Missing) -->
+
+    <!-- Missing Onboarding Strings -->
+    <string name="onboarding_button_get_started">शुरू करें</string>
+    <string name="onboarding_button_next">अगला</string>
+    <string name="onboarding_button_previous">पिछला</string>
+    <string name="onboarding_page0_title">एनएफसी मैनेजर में आपका स्वागत है</string>
+    <string name="onboarding_page0_description">स्मार्ट एनएफसी मॉनिटरिंग और सुरक्षा अलर्ट के साथ अपनी गोपनीयता की रक्षा करें</string>
+    <string name="onboarding_page0_feature1">रीयल-टाइम एनएफसी मॉनिटरिंग</string>
+    <string name="onboarding_page0_feature2">गोपनीयता-केंद्रित डिज़ाइन</string>
+    <string name="onboarding_page0_feature3">Nothing OS प्रेरित UI</string>
+    <string name="onboarding_page1_title">स्मार्ट मॉनिटरिंग</string>
+    <string name="onboarding_page1_description">उन्नत सूचना प्रणाली आपको एनएफसी गतिविधि और सुरक्षा स्थिति के बारे में सूचित रखती है</string>
+    <string name="onboarding_page1_feature1">अवधि ट्रैकिंग</string>
+    <string name="onboarding_page1_feature2">सुरक्षा स्तर अलर्ट</string>
+    <string name="onboarding_page1_feature3">स्मार्ट सूचनाएं</string>
+    <string name="onboarding_page2_title">सुरक्षा स्कोर</string>
+    <string name="onboarding_page2_description">हमारी बुद्धिमान स्कोरिंग प्रणाली के साथ अपने सुरक्षा स्तर को ट्रैक करें और व्यक्तिगत सिफारिशें प्राप्त करें</string>
+    <string name="onboarding_page2_feature1">5-स्तरीय सुरक्षा रेटिंग</string>
+    <string name="onboarding_page2_feature2">व्यक्तिगत सिफारिशें</string>
+    <string name="onboarding_page2_feature3">उल्लंघन ट्रैकिंग</string>
+    <string name="onboarding_page3_title">पूर्ण नियंत्रण</string>
+    <string name="onboarding_page3_description">अपनी प्राथमिकताओं के अनुसार सब कुछ अनुकूलित करें</string>
+    <string name="onboarding_page3_feature1">अनुकूलन योग्य अलर्ट</string>
+    <string name="onboarding_page3_feature2">डार्क/लाइट थीम</string>
+    <string name="onboarding_page3_feature3">9 भाषाएं</string>
+
+    <!-- Missing Security Score Strings -->
+    <string name="security_score_card_title">सुरक्षा स्कोर</string>
+    <string name="security_score_detail_title">सुरक्षा विवरण</string>
+    <string name="loading_security_score">स्कोर की गणना हो रही है…</string>
+    <string name="refresh_score_button">स्कोर रीफ्रेश करें</string>
+    <string name="security_level_excellent">उत्कृष्ट</string>
+    <string name="security_level_good">अच्छा</string>
+    <string name="security_level_moderate">मध्यम</string>
+    <string name="security_level_poor">खराब</string>
+    <string name="security_level_critical">गंभीर</string>
+
+    <!-- Missing Recommendations and Violations -->
+    <string name="recommendations_title">सिफारिशें</string>
+    <string name="violations_title">उल्लंघन</string>
+    <string name="no_recommendations_yet">इस समय कोई विशिष्ट सिफारिशें नहीं हैं। अच्छा काम जारी रखें!</string>
+    <string name="no_violations_detected">पिछले 7 दिनों में कोई सुरक्षा उल्लंघन नहीं पाया गया।</string>
+    <string name="security_score_violation_prefix">उल्लंघन: </string>
+    <string name="failed_to_export_settings">सेटिंग्स निर्यात करने में विफल: %1$s</string>
+
 </resources>

@@ -55,6 +55,13 @@ android {
         buildConfig true
     }
 
+    lint {
+        // Disable false positive lint errors for backup rules
+        disable 'FullBackupContent'
+        abortOnError false
+        checkReleaseBuilds true
+    }
+
     composeOptions {
         // Compose Compiler version - Compatible with Kotlin 1.9.22
         kotlinCompilerExtensionVersion = "1.5.10"

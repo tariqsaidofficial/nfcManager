@@ -83,8 +83,8 @@
     <string name="settings_item_dark_mode_subtitle">Madaling sa mata</string>
     <string name="settings_item_light_mode_title">Light Mode</string>
     <string name="settings_item_light_mode_subtitle">Klasikong hitsura</string>
-    <string name="settings_item_accent_color_title">settings_item_accent_color_title</string>
-    <string name="settings_item_accent_color_subtitle">settings_item_accent_color_subtitle</string>
+    <string name="settings_item_accent_color_title">Accent Color</string>
+    <string name="settings_item_accent_color_subtitle">I-customize ang kulay ng app</string>
 
     <!-- General Settings Items -->
     <string name="settings_item_auto_reminder_title">Auto Reminder</string>
@@ -379,5 +379,183 @@
     <string name="notification_sound_current">Kasalukuyang tunog ng notification</string>
     <string name="notification_sound_pick">Pumili ng tunog ng notification</string>
     <string name="notification_sound_updated_log">Na-update ang tunog ng notification</string>
+
+    <!-- Security Score Screen -->
+    <string name="security_score_screen_title">Security Score</string>
+    <string name="security_score_value_label">Score</string>
+    <string name="security_score_card_title">Security Score</string>
+    <string name="security_score_detail_title">Detalye ng Seguridad</string>
+    <string name="loading_security_score">Kinakalkula ang score…</string>
+    <string name="refresh_score_button">I-refresh ang Score</string>
+    <string name="security_level_excellent">Napakahusay</string>
+    <string name="security_level_good">Mabuti</string>
+    <string name="security_level_moderate">Katamtaman</string>
+    <string name="security_level_poor">Mahina</string>
+    <string name="security_level_critical">Kritikal</string>
+    <string name="security_level_not_applicable">Hindi Naaangkop</string>
+    <string name="security_level_desc_excellent">Napakahusay na mga gawi sa seguridad! Ipagpatuloy ang magandang trabaho.</string>
+    <string name="security_level_desc_good">Mabuting antas ng seguridad na may kaunting pagpapabuti.</string>
+    <string name="security_level_desc_moderate">Katamtamang seguridad. Isaalang-alang ang mga rekomendasyon.</string>
+    <string name="security_level_desc_poor">Mahinang antas ng seguridad. Kailangan ng agarang aksyon.</string>
+    <string name="security_level_desc_critical">Kritikal na mga isyu sa seguridad. Pakiusap suriin ang mga rekomendasyon.</string>
+    <string name="security_level_desc_not_applicable">Ang status ng NFC ay hindi naaangkop o hindi suportado sa device na ito.</string>
+    <string name="security_level_breakdown_title">Breakdown ng Antas ng Seguridad</string>
+    <string name="security_score_range_excellent">90-100</string>
+    <string name="security_score_range_good">75-89</string>
+    <string name="security_score_range_moderate">60-74</string>
+    <string name="security_score_range_poor">40-59</string>
+    <string name="security_score_range_critical">0-39</string>
+    <string name="security_score_range_not_applicable">N/A</string>
+    <string name="security_recommendations_title">Mga Rekomendasyon sa Seguridad</string>
+    <string name="security_tips_title">Mga Tip sa Seguridad</string>
+    <string name="security_tip_disable_nfc">I-disable ang NFC kapag hindi ginagamit</string>
+    <string name="security_tip_cautious_tags">Mag-ingat sa mga hindi kilalang NFC tag</string>
+    <string name="security_tip_avoid_crowded_nfc">Iwasan ang paggamit ng NFC sa matataong lugar</string>
+    <string name="security_tip_review_log">Regular na suriin ang iyong NFC activity log</string>
+    <string name="security_tip_keep_device_updated">Panatilihing updated ang iyong device</string>
+
+    <!-- Security Recommendations -->
+    <string name="recommendations_title">Mga Rekomendasyon</string>
+    <string name="violations_title">Mga Paglabag</string>
+    <string name="no_recommendations_yet">Walang partikular na rekomendasyon sa ngayon. Ipagpatuloy ang magandang trabaho!</string>
+    <string name="no_violations_detected">Walang natukoy na paglabag sa seguridad sa nakaraang 7 araw.</string>
+    <string name="security_score_violation_prefix">Paglabag: </string>
+    <string name="recommendation_disable_nfc">I-disable ang NFC kapag hindi ginagamit</string>
+    <string name="recommendation_shorter_intervals">Magtakda ng mas maikling reminder interval para sa NFC</string>
+    <string name="recommendation_cautious_unknown_tags">Mag-ingat sa mga hindi kilala o hindi inaasahang NFC tag</string>
+    <string name="recommendation_enable_unknown_tag_blocking">Isaalang-alang na i-enable ang \"Block Unknown Tags\" sa settings</string>
+    <string name="recommendation_avoid_crowded_areas_nfc">Iwasan ang paggamit ng NFC sa napakataong pampublikong lugar kung maaari</string>
+    <string name="recommendation_check_suspicious_devices">Maging alerto sa iyong kapaligiran at suriin ang mga kahina-hinalang device</string>
+    <string name="recommendation_review_nfc_usage">Regular na suriin ang iyong mga pattern ng paggamit ng NFC sa activity log</string>
+    <string name="recommendation_enable_max_security_mode">Para sa maximum na seguridad, i-enable ang privacy mode sa settings</string>
+    <string name="recommendation_keep_up_good_practices">Ipagpatuloy ang mabuting mga gawi sa seguridad!</string>
+    <string name="recommendation_review_activity_log">Regular na suriin ang iyong NFC activity log para sa anumang hindi pangkaraniwang event</string>
+    <string name="recommendation_nfc_disabled_secure">Ang NFC ay kasalukuyang naka-disable, na nagpapahusay ng seguridad. I-enable lamang ito kapag kailangan mong gumamit ng mga feature ng NFC.</string>
+
+    <!-- Security Violations -->
+    <string name="violation_long_nfc_usage_name">Matagal na Pag-activate ng NFC</string>
+    <string name="violation_unknown_tag_name">Natukoy ang Hindi Kilalang Tag</string>
+    <string name="violation_rapid_tag_detection_name">Mabilis na Pagtukoy ng Maraming Tag</string>
+    <string name="violation_suspicious_activity_name">Kahina-hinalang Pattern ng Aktibidad ng NFC</string>
+
+    <!-- Notification Manager -->
+    <string name="channel_nfc_status_name">Status ng NFC</string>
+    <string name="channel_nfc_status_description">Nagpapakita ng kasalukuyang status ng NFC at antas ng seguridad</string>
+    <string name="channel_security_alert_name">Mga Alert sa Seguridad</string>
+    <string name="channel_security_alert_description">Mga alert at babala sa seguridad</string>
+    <string name="nfc_enabled_notification_title">Naka-enable ang NFC</string>
+    <string name="nfc_disabled_notification_title">Naka-disable ang NFC</string>
+    <string name="nfc_enabled_for_label">Naka-enable para sa: </string>
+    <string name="nfc_security_level_label">Antas ng Seguridad: </string>
+    <string name="nfc_status_label">Status: </string>
+    <string name="notification_tap_to_open_details">I-tap upang buksan ang NFC Manager para sa higit pang detalye.</string>
+    <string name="notification_tap_to_manage_settings">I-tap upang buksan ang NFC Manager upang pamahalaan ang iyong mga setting.</string>
+    <string name="notification_action_settings">Mga Setting</string>
+    <string name="notification_action_security_score">Security Score</string>
+    <string name="notification_action_review_settings">Suriin ang Mga Setting</string>
+    <string name="alert_title_nfc_enabled_long">⚠️ Ang NFC ay naka-enable nang masyadong matagal</string>
+    <string name="alert_title_unknown_tag">🔍 Natukoy ang Hindi Kilalang Tag</string>
+    <string name="alert_title_multiple_tags_rapid">⚡ Natukoy ang Maraming Tag</string>
+    <string name="alert_title_suspicious_activity">🚨 Kahina-hinalang Aktibidad</string>
+    <string name="notification_recommendation_label">Rekomendasyon: </string>
+    <string name="security_status_excellent">Napakahusay na mga gawi sa seguridad</string>
+    <string name="security_status_good">Mabuting antas ng seguridad</string>
+    <string name="security_status_moderate">Katamtamang seguridad - suriin ang mga rekomendasyon</string>
+    <string name="security_status_poor">Mahinang seguridad - kailangan ng agarang aksyon</string>
+    <string name="security_status_critical">Natukoy ang mga kritikal na isyu sa seguridad</string>
+    <string name="security_status_not_applicable">Hindi naaangkop ang antas ng seguridad</string>
+    <string name="recommendation_alert_nfc_long">Isaalang-alang na i-disable ang NFC kapag hindi ginagamit</string>
+    <string name="recommendation_alert_unknown_tag">Mag-ingat sa mga hindi kilalang NFC tag</string>
+    <string name="recommendation_alert_multiple_tags">Iwasan ang matataong lugar kapag gumagamit ng NFC</string>
+    <string name="recommendation_alert_suspicious_activity">Suriin ang iyong mga pattern ng paggamit ng NFC</string>
+
+    <!-- Error Messages - Network -->
+    <string name="error_no_internet">Walang koneksyon sa internet. Pakisuri ang iyong mga setting ng network.</string>
+    <string name="error_timeout">Nag-timeout ang request. Pakisubukan muli.</string>
+    <string name="error_server">Error sa server: %1$d. Pakisubukan muli mamaya.</string>
+    <string name="error_network_unknown">Nagkaroon ng error sa network. Pakisubukan muli.</string>
+
+    <!-- Error Messages - Database -->
+    <string name="error_database_read">Nabigo ang pagbasa ng data mula sa database.</string>
+    <string name="error_database_write">Nabigo ang pag-save ng data sa database.</string>
+    <string name="error_database_delete">Nabigo ang pagtanggal ng data mula sa database.</string>
+    <string name="error_database_corrupted">Ang data ng database ay sira. Paki-reinstall ang app.</string>
+    <string name="error_database_unknown">Nagkaroon ng error sa database.</string>
+
+    <!-- Error Messages - NFC -->
+    <string name="error_nfc_read">Nabigo ang pagbasa ng NFC tag. Pakisubukan muli.</string>
+    <string name="error_nfc_write">Nabigo ang pagsulat sa NFC tag. Pakisubukan muli.</string>
+    <string name="error_nfc_tag_lost">Nawala ang koneksyon sa NFC tag. Pakiusap panatilihing malapit ang tag.</string>
+    <string name="error_nfc_unknown">Nagkaroon ng error sa NFC. Pakisubukan muli.</string>
+
+    <!-- Error Messages - Permission -->
+    <string name="error_permission_notification">Kailangan ang notification permission para sa mga alert.</string>
+    <string name="error_permission_unknown">Tinanggihan ang permission: %1$s</string>
+
+    <!-- Error Messages - Service -->
+    <string name="error_service_start">Nabigo ang paglunsad ng monitoring service.</string>
+    <string name="error_service_stop">Nabigo ang paghinto ng monitoring service.</string>
+    <string name="error_service_not_running">Ang monitoring service ay hindi tumatakbo.</string>
+    <string name="error_service_unknown">Nagkaroon ng error sa service.</string>
+
+    <!-- Error Messages - Validation -->
+    <string name="error_validation_invalid">Hindi wastong input para sa: %1$s</string>
+    <string name="error_validation_range">Ang %1$s ay dapat nasa pagitan ng %2$d at %3$d</string>
+    <string name="error_validation_required">Kinakailangan ang %1$s</string>
+
+    <!-- Error Messages - File -->
+    <string name="error_file_not_found">Hindi natagpuan ang file: %1$s</string>
+    <string name="error_file_read">Nabigo ang pagbasa ng file.</string>
+    <string name="error_file_write">Nabigo ang pagsulat ng file.</string>
+    <string name="error_file_permission">Tinanggihan ang permission sa file.</string>
+    <string name="error_file_unknown">Nagkaroon ng error sa file.</string>
+
+    <!-- Additional UI Elements -->
+    <string name="arrow_right">→</string>
+    <string name="social_media_linkedin">LinkedIn</string>
+    <string name="social_media_github">GitHub</string>
+    <string name="partnership_title">Partnership</string>
+
+    <!-- Additional System Messages -->
+    <string name="retry_button">Subukan Muli</string>
+    <string name="nfc_not_supported_error">Ang NFC ay hindi suportado sa device na ito.</string>
+    <string name="nfc_disabled_error_turn_on">Ang NFC ay naka-disable. Pakiusap i-on ang NFC sa iyong mga setting ng device upang ma-enable ang monitoring.</string>
+    <string name="error_calculating_score">Error sa pagkalkula ng score: %1$s</string>
+    <string name="error_calculating_period_score">Error sa pagkalkula ng period score: %1$s</string>
+
+    <!-- Settings Items (Missing) -->
+    <string name="settings_item_monitoring_interval_subtitle">Dalas ng pagsuri sa status ng NFC</string>
+
+    <!-- Onboarding Strings -->
+    <string name="onboarding_button_get_started">Magsimula</string>
+    <string name="onboarding_button_next">Susunod</string>
+    <string name="onboarding_button_previous">Nakaraan</string>
+    <string name="onboarding_page0_title">Maligayang pagdating sa NFC Manager</string>
+    <string name="onboarding_page0_description">Protektahan ang iyong privacy gamit ang smart NFC monitoring at mga alert sa seguridad</string>
+    <string name="onboarding_page0_feature1">Real-time NFC monitoring</string>
+    <string name="onboarding_page0_feature2">Privacy-focused na disenyo</string>
+    <string name="onboarding_page0_feature3">Nothing OS inspired UI</string>
+    <string name="onboarding_page1_title">Smart Monitoring</string>
+    <string name="onboarding_page1_description">Ang advanced notification system ay nagpapanatiling informed ka tungkol sa NFC activity at status ng seguridad</string>
+    <string name="onboarding_page1_feature1">Duration tracking</string>
+    <string name="onboarding_page1_feature2">Mga alert sa antas ng seguridad</string>
+    <string name="onboarding_page1_feature3">Mga smart notification</string>
+    <string name="onboarding_page2_title">Security Score</string>
+    <string name="onboarding_page2_description">Subaybayan ang iyong antas ng seguridad gamit ang aming intelligent scoring system at makatanggap ng personalized na mga rekomendasyon</string>
+    <string name="onboarding_page2_feature1">5-level na security rating</string>
+    <string name="onboarding_page2_feature2">Personalized na mga rekomendasyon</string>
+    <string name="onboarding_page2_feature3">Violation tracking</string>
+    <string name="onboarding_page3_title">Kumpletong Kontrol</string>
+    <string name="onboarding_page3_description">I-customize ang lahat ayon sa iyong mga kagustuhan</string>
+    <string name="onboarding_page3_feature1">Customizable na mga alert</string>
+    <string name="onboarding_page3_feature2">Dark/Light theme</string>
+    <string name="onboarding_page3_feature3">9 na wika</string>
+
+
+    <!-- Missing Strings -->
+    <string name="language_chinese_mandarin">Chinese (Mandarin)</string>
+    <string name="language_filipino">Filipino</string>
+    <string name="language_hindi">Hindi</string>
+    <string name="language_russian">Russian</string>
 
 </resources>

@@ -1,0 +1,6 @@
+
+# Release keystore and credentials
+nfcmanager-release.keystore
+KEYSTORE_CREDENTIALS.txt
+gradle.properties
+app/mapping.txt

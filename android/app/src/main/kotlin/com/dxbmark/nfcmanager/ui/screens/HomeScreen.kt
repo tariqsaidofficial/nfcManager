@@ -265,7 +265,7 @@ fun SecurityScoreQuickCard(
             }
             
             Text(
-                text = "→",
+                text = stringResource(R.string.arrow_right),
                 style = MaterialTheme.typography.titleLarge,
                 color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f)
             )

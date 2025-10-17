@@ -347,4 +347,178 @@
     <string name="settings_section_about_title">關於</string>
     <string name="settings_item_about_title">關於 NFC 管理器</string>
     <string name="settings_item_about_subtitle">應用程式資訊、隱私政策和支援</string>
+
+    <!-- Security Score Screen -->
+    <string name="security_score_screen_title">安全評分</string>
+    <string name="security_score_value_label">評分</string>
+    <string name="security_score_card_title">安全評分</string>
+    <string name="security_score_detail_title">安全詳情</string>
+    <string name="loading_security_score">正在計算評分…</string>
+    <string name="refresh_score_button">刷新評分</string>
+    <string name="security_level_excellent">優秀</string>
+    <string name="security_level_good">良好</string>
+    <string name="security_level_moderate">中等</string>
+    <string name="security_level_poor">較差</string>
+    <string name="security_level_critical">嚴重</string>
+    <string name="security_level_not_applicable">不適用</string>
+    <string name="security_level_desc_excellent">優秀的安全實踐！繼續保持。</string>
+    <string name="security_level_desc_good">良好的安全級別，有輕微改進空間。</string>
+    <string name="security_level_desc_moderate">中等安全性。請考慮建議。</string>
+    <string name="security_level_desc_poor">安全級別較差。需要立即採取行動。</string>
+    <string name="security_level_desc_critical">嚴重的安全問題。請查看建議。</string>
+    <string name="security_level_desc_not_applicable">NFC 狀態不適用或此設備不支援。</string>
+    <string name="security_level_breakdown_title">安全級別細分</string>
+    <string name="security_score_range_excellent">90-100</string>
+    <string name="security_score_range_good">75-89</string>
+    <string name="security_score_range_moderate">60-74</string>
+    <string name="security_score_range_poor">40-59</string>
+    <string name="security_score_range_critical">0-39</string>
+    <string name="security_score_range_not_applicable">不適用</string>
+    <string name="security_recommendations_title">安全建議</string>
+    <string name="security_tips_title">安全提示</string>
+    <string name="security_tip_disable_nfc">不使用時停用 NFC</string>
+    <string name="security_tip_cautious_tags">小心未知的 NFC 標籤</string>
+    <string name="security_tip_avoid_crowded_nfc">避免在擁擠的地方使用 NFC</string>
+    <string name="security_tip_review_log">定期查看您的 NFC 活動日誌</string>
+    <string name="security_tip_keep_device_updated">保持您的設備更新</string>
+
+    <!-- Security Recommendations -->
+    <string name="recommendations_title">建議</string>
+    <string name="violations_title">違規</string>
+    <string name="no_recommendations_yet">目前沒有具體建議。繼續保持良好工作！</string>
+    <string name="no_violations_detected">過去 7 天內未檢測到安全違規。</string>
+    <string name="security_score_violation_prefix">違規：</string>
+    <string name="recommendation_disable_nfc">不使用時停用 NFC</string>
+    <string name="recommendation_shorter_intervals">為 NFC 設定較短的提醒間隔</string>
+    <string name="recommendation_cautious_unknown_tags">小心未知或意外的 NFC 標籤</string>
+    <string name="recommendation_enable_unknown_tag_blocking">考慮在設定中啟用「阻止未知標籤」</string>
+    <string name="recommendation_avoid_crowded_areas_nfc">如果可能，避免在非常擁擠的公共場所使用 NFC</string>
+    <string name="recommendation_check_suspicious_devices">注意周圍環境並檢查可疑設備</string>
+    <string name="recommendation_review_nfc_usage">定期在活動日誌中查看您的 NFC 使用模式</string>
+    <string name="recommendation_enable_max_security_mode">為了最大安全性，請在設定中啟用隱私模式</string>
+    <string name="recommendation_keep_up_good_practices">繼續保持良好的安全實踐！</string>
+    <string name="recommendation_review_activity_log">定期查看您的 NFC 活動日誌以查找任何異常事件</string>
+    <string name="recommendation_nfc_disabled_secure">NFC 目前已停用，這增強了安全性。僅在需要使用 NFC 功能時啟用它。</string>
+
+    <!-- Security Violations -->
+    <string name="violation_long_nfc_usage_name">NFC 長時間啟用</string>
+    <string name="violation_unknown_tag_name">檢測到未知標籤</string>
+    <string name="violation_rapid_tag_detection_name">快速檢測到多個標籤</string>
+    <string name="violation_suspicious_activity_name">可疑的 NFC 活動模式</string>
+
+    <!-- Notification Manager -->
+    <string name="channel_nfc_status_name">NFC 狀態</string>
+    <string name="channel_nfc_status_description">顯示當前 NFC 狀態和安全級別</string>
+    <string name="channel_security_alert_name">安全警報</string>
+    <string name="channel_security_alert_description">安全警報和警告</string>
+    <string name="nfc_enabled_notification_title">NFC 已啟用</string>
+    <string name="nfc_disabled_notification_title">NFC 已停用</string>
+    <string name="nfc_enabled_for_label">已啟用：</string>
+    <string name="nfc_security_level_label">安全級別：</string>
+    <string name="nfc_status_label">狀態：</string>
+    <string name="notification_tap_to_open_details">點擊打開 NFC 管理器以獲取更多詳情。</string>
+    <string name="notification_tap_to_manage_settings">點擊打開 NFC 管理器以管理您的設定。</string>
+    <string name="notification_action_settings">設定</string>
+    <string name="notification_action_security_score">安全評分</string>
+    <string name="notification_action_review_settings">查看設定</string>
+    <string name="alert_title_nfc_enabled_long">⚠️ NFC 已啟用太長時間</string>
+    <string name="alert_title_unknown_tag">🔍 檢測到未知標籤</string>
+    <string name="alert_title_multiple_tags_rapid">⚡ 檢測到多個標籤</string>
+    <string name="alert_title_suspicious_activity">🚨 可疑活動</string>
+    <string name="notification_recommendation_label">建議：</string>
+    <string name="security_status_excellent">優秀的安全實踐</string>
+    <string name="security_status_good">良好的安全級別</string>
+    <string name="security_status_moderate">中等安全性 - 查看建議</string>
+    <string name="security_status_poor">安全性較差 - 需要立即採取行動</string>
+    <string name="security_status_critical">檢測到嚴重的安全問題</string>
+    <string name="security_status_not_applicable">安全級別不適用</string>
+    <string name="recommendation_alert_nfc_long">考慮在不使用時停用 NFC</string>
+    <string name="recommendation_alert_unknown_tag">小心未知的 NFC 標籤</string>
+    <string name="recommendation_alert_multiple_tags">使用 NFC 時避免擁擠的地方</string>
+    <string name="recommendation_alert_suspicious_activity">查看您的 NFC 使用模式</string>
+
+    <!-- Error Messages - Network -->
+    <string name="error_no_internet">沒有網路連接。請檢查您的網路設定。</string>
+    <string name="error_timeout">請求超時。請重試。</string>
+    <string name="error_server">伺服器錯誤：%1$d。請稍後重試。</string>
+    <string name="error_network_unknown">發生網路錯誤。請重試。</string>
+
+    <!-- Error Messages - Database -->
+    <string name="error_database_read">無法從資料庫讀取資料。</string>
+    <string name="error_database_write">無法將資料儲存到資料庫。</string>
+    <string name="error_database_delete">無法從資料庫刪除資料。</string>
+    <string name="error_database_corrupted">資料庫資料已損壞。請重新安裝應用程式。</string>
+    <string name="error_database_unknown">發生資料庫錯誤。</string>
+
+    <!-- Error Messages - NFC -->
+    <string name="error_nfc_read">無法讀取 NFC 標籤。請重試。</string>
+    <string name="error_nfc_write">無法寫入 NFC 標籤。請重試。</string>
+    <string name="error_nfc_tag_lost">NFC 標籤連接丟失。請將標籤保持靠近。</string>
+    <string name="error_nfc_unknown">發生 NFC 錯誤。請重試。</string>
+
+    <!-- Error Messages - Permission -->
+    <string name="error_permission_notification">警報需要通知權限。</string>
+    <string name="error_permission_unknown">權限被拒絕：%1$s</string>
+
+    <!-- Error Messages - Service -->
+    <string name="error_service_start">無法啟動監控服務。</string>
+    <string name="error_service_stop">無法停止監控服務。</string>
+    <string name="error_service_not_running">監控服務未運行。</string>
+    <string name="error_service_unknown">發生服務錯誤。</string>
+
+    <!-- Error Messages - Validation -->
+    <string name="error_validation_invalid">無效的輸入：%1$s</string>
+    <string name="error_validation_range">%1$s 必須在 %2$d 和 %3$d 之間</string>
+    <string name="error_validation_required">%1$s 是必需的</string>
+
+    <!-- Error Messages - File -->
+    <string name="error_file_not_found">找不到檔案：%1$s</string>
+    <string name="error_file_read">無法讀取檔案。</string>
+    <string name="error_file_write">無法寫入檔案。</string>
+    <string name="error_file_permission">檔案權限被拒絕。</string>
+    <string name="error_file_unknown">發生檔案錯誤。</string>
+
+    <!-- Additional UI Elements -->
+    <string name="arrow_right">→</string>
+    <string name="social_media_linkedin">LinkedIn</string>
+    <string name="social_media_github">GitHub</string>
+    <string name="partnership_title">合作夥伴</string>
+
+    <!-- Additional System Messages -->
+    <string name="retry_button">重試</string>
+    <string name="nfc_not_supported_error">此設備不支援 NFC。</string>
+    <string name="nfc_disabled_error_turn_on">NFC 已停用。請在您的設備設定中開啟 NFC 以啟用監控。</string>
+    <string name="error_calculating_score">計算評分時出錯：%1$s</string>
+    <string name="error_calculating_period_score">計算期間評分時出錯：%1$s</string>
+
+    <!-- Settings Items (Missing) -->
+
+    <!-- Onboarding Strings -->
+    <string name="onboarding_button_get_started">開始使用</string>
+    <string name="onboarding_button_next">下一步</string>
+    <string name="onboarding_button_previous">上一步</string>
+    <string name="onboarding_page0_title">歡迎使用 NFC 管理器</string>
+    <string name="onboarding_page0_description">透過智慧 NFC 監控和安全警報保護您的隱私</string>
+    <string name="onboarding_page0_feature1">即時 NFC 監控</string>
+    <string name="onboarding_page0_feature2">注重隱私的設計</string>
+    <string name="onboarding_page0_feature3">Nothing OS 風格 UI</string>
+    <string name="onboarding_page1_title">智慧監控</string>
+    <string name="onboarding_page1_description">進階通知系統讓您隨時了解 NFC 活動和安全狀態</string>
+    <string name="onboarding_page1_feature1">持續時間追蹤</string>
+    <string name="onboarding_page1_feature2">安全級別警報</string>
+    <string name="onboarding_page1_feature3">智慧通知</string>
+    <string name="onboarding_page2_title">安全評分</string>
+    <string name="onboarding_page2_description">使用我們的智慧評分系統追蹤您的安全級別並獲得個人化建議</string>
+    <string name="onboarding_page2_feature1">5 級安全評級</string>
+    <string name="onboarding_page2_feature2">個人化建議</string>
+    <string name="onboarding_page2_feature3">違規追蹤</string>
+    <string name="onboarding_page3_title">完全控制</string>
+    <string name="onboarding_page3_description">根據您的偏好自訂一切</string>
+    <string name="onboarding_page3_feature1">可自訂警報</string>
+    <string name="onboarding_page3_feature2">深色/淺色主題</string>
+    <string name="onboarding_page3_feature3">9 種語言</string>
+
+
+    <!-- Missing Strings -->
+
 </resources>

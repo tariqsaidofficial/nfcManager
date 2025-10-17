@@ -107,23 +107,22 @@ fun AboutScreen(
                 // Social Media Links with Icons
                 Row(
                     horizontalArrangement = Arrangement.Center,
-                    verticalAlignment = Alignment.CenterVertically,
                     modifier = Modifier.fillMaxWidth()
                 ) {
                     // LinkedIn
                     SocialMediaLink(
                         iconRes = R.drawable.ic_linkedin,
-                        text = "LinkedIn",
+                        text = stringResource(R.string.social_media_linkedin),
                         url = "https://linkedin.com/in/tariqsaidofficial",
                         uriHandler = uriHandler
                     )
                     
-                    Spacer(modifier = Modifier.width(24.dp))
+                    Spacer(modifier = Modifier.width(16.dp))
                     
                     // GitHub
                     SocialMediaLink(
                         iconRes = R.drawable.ic_github,
-                        text = "GitHub",
+                        text = stringResource(R.string.social_media_github),
                         url = "https://github.com/tariqsaidofficial",
                         uriHandler = uriHandler
                     )
@@ -133,7 +132,7 @@ fun AboutScreen(
                 
                 // Company Logos Section - Redesigned
                 Text(
-                    text = "Partnership",
+                    text = stringResource(R.string.partnership_title),
                     style = MaterialTheme.typography.titleMedium,
                     textAlign = TextAlign.Center,
                     fontWeight = FontWeight.Bold,

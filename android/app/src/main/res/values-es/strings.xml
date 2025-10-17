@@ -357,5 +357,176 @@
     <string name="settings_section_about_title">ACERCA DE</string>
     <string name="settings_item_about_title">Acerca de NFC Manager</string>
     <string name="settings_item_about_subtitle">Información de la aplicación, política de privacidad y soporte</string>
-    <string name="security_level_not_applicable">Not Applicable</string>
+    <string name="security_level_not_applicable">No aplicable</string>
+
+    <!-- Security Score Screen -->
+    <string name="security_score_screen_title">Puntuación de seguridad</string>
+    <string name="security_score_value_label">Puntuación</string>
+    <string name="security_level_desc_excellent">¡Excelentes prácticas de seguridad! Sigue así.</string>
+    <string name="security_level_desc_good">Buen nivel de seguridad con mejoras menores necesarias.</string>
+    <string name="security_level_desc_moderate">Seguridad moderada. Considera seguir las recomendaciones.</string>
+    <string name="security_level_desc_poor">Nivel de seguridad deficiente. Se requiere acción inmediata.</string>
+    <string name="security_level_desc_critical">Problemas de seguridad críticos. Por favor, revisa las recomendaciones.</string>
+    <string name="security_level_desc_not_applicable">El estado de NFC no es aplicable o no está soportado en este dispositivo.</string>
+    <string name="security_level_breakdown_title">Desglose del nivel de seguridad</string>
+    <string name="security_score_range_excellent">90-100</string>
+    <string name="security_score_range_good">75-89</string>
+    <string name="security_score_range_moderate">60-74</string>
+    <string name="security_score_range_poor">40-59</string>
+    <string name="security_score_range_critical">0-39</string>
+    <string name="security_score_range_not_applicable">N/A</string>
+    <string name="security_recommendations_title">Recomendaciones de seguridad</string>
+    <string name="security_tips_title">Consejos de seguridad</string>
+    <string name="security_tip_disable_nfc">Desactiva NFC cuando no lo uses</string>
+    <string name="security_tip_cautious_tags">Ten cuidado con etiquetas NFC desconocidas</string>
+    <string name="security_tip_avoid_crowded_nfc">Evita usar NFC en áreas concurridas</string>
+    <string name="security_tip_review_log">Revisa regularmente tu registro de actividad NFC</string>
+    <string name="security_tip_keep_device_updated">Mantén tu dispositivo actualizado</string>
+
+    <!-- Security Recommendations -->
+    <string name="recommendation_disable_nfc">Desactiva NFC cuando no lo uses</string>
+    <string name="recommendation_shorter_intervals">Establece intervalos de recordatorio más cortos para NFC</string>
+    <string name="recommendation_cautious_unknown_tags">Ten cuidado con etiquetas NFC desconocidas o inesperadas</string>
+    <string name="recommendation_enable_unknown_tag_blocking">Considera activar \"Bloquear etiquetas desconocidas\" en ajustes</string>
+    <string name="recommendation_avoid_crowded_areas_nfc">Evita usar NFC en áreas públicas muy concurridas si es posible</string>
+    <string name="recommendation_check_suspicious_devices">Sé consciente de tu entorno y verifica dispositivos sospechosos</string>
+    <string name="recommendation_review_nfc_usage">Revisa regularmente tus patrones de uso de NFC en el registro de actividad</string>
+    <string name="recommendation_enable_max_security_mode">Para máxima protección, activa el modo de privacidad en ajustes</string>
+    <string name="recommendation_keep_up_good_practices">¡Mantén las buenas prácticas de seguridad!</string>
+    <string name="recommendation_review_activity_log">Revisa regularmente tu registro de actividad NFC para detectar eventos inusuales</string>
+    <string name="recommendation_nfc_disabled_secure">NFC está actualmente desactivado, lo que mejora la seguridad. Actívalo solo cuando necesites usar funciones NFC.</string>
+
+    <!-- Security Violations -->
+    <string name="violation_long_nfc_usage_name">Activación prolongada de NFC</string>
+    <string name="violation_unknown_tag_name">Etiqueta desconocida detectada</string>
+    <string name="violation_rapid_tag_detection_name">Detecciones rápidas de múltiples etiquetas</string>
+    <string name="violation_suspicious_activity_name">Patrón de actividad NFC sospechoso</string>
+
+    <!-- Notification Manager -->
+    <string name="channel_nfc_status_name">Estado de NFC</string>
+    <string name="channel_nfc_status_description">Muestra el estado actual de NFC y el nivel de seguridad</string>
+    <string name="channel_security_alert_name">Alertas de seguridad</string>
+    <string name="channel_security_alert_description">Alertas y advertencias de seguridad</string>
+    <string name="nfc_enabled_notification_title">NFC activado</string>
+    <string name="nfc_disabled_notification_title">NFC desactivado</string>
+    <string name="nfc_enabled_for_label">Activado durante: </string>
+    <string name="nfc_security_level_label">Nivel de seguridad: </string>
+    <string name="nfc_status_label">Estado: </string>
+    <string name="notification_tap_to_open_details">Toca para abrir NFC Manager para más detalles.</string>
+    <string name="notification_tap_to_manage_settings">Toca para abrir NFC Manager para gestionar tus ajustes.</string>
+    <string name="notification_action_settings">Ajustes</string>
+    <string name="notification_action_security_score">Puntuación de seguridad</string>
+    <string name="notification_action_review_settings">Revisar ajustes</string>
+    <string name="alert_title_nfc_enabled_long">⚠️ NFC activado demasiado tiempo</string>
+    <string name="alert_title_unknown_tag">🔍 Etiqueta desconocida detectada</string>
+    <string name="alert_title_multiple_tags_rapid">⚡ Múltiples etiquetas detectadas</string>
+    <string name="alert_title_suspicious_activity">🚨 Actividad sospechosa</string>
+    <string name="notification_recommendation_label">Recomendación: </string>
+    <string name="security_status_excellent">Excelentes prácticas de seguridad</string>
+    <string name="security_status_good">Buen nivel de seguridad</string>
+    <string name="security_status_moderate">Seguridad moderada - revisa recomendaciones</string>
+    <string name="security_status_poor">Seguridad deficiente - se requiere acción inmediata</string>
+    <string name="security_status_critical">Problemas de seguridad críticos detectados</string>
+    <string name="security_status_not_applicable">Nivel de seguridad no aplicable</string>
+    <string name="recommendation_alert_nfc_long">Considera desactivar NFC cuando no lo uses</string>
+    <string name="recommendation_alert_unknown_tag">Ten cuidado con etiquetas NFC desconocidas</string>
+    <string name="recommendation_alert_multiple_tags">Evita áreas concurridas al usar NFC</string>
+    <string name="recommendation_alert_suspicious_activity">Revisa tus patrones de uso de NFC</string>
+
+    <!-- Error Messages - Network -->
+    <string name="error_no_internet">Sin conexión a internet. Por favor, verifica tu configuración de red.</string>
+    <string name="error_timeout">Tiempo de espera agotado. Por favor, inténtalo de nuevo.</string>
+    <string name="error_server">Error del servidor: %1$d. Por favor, inténtalo más tarde.</string>
+    <string name="error_network_unknown">Ocurrió un error de red. Por favor, inténtalo de nuevo.</string>
+
+    <!-- Error Messages - Database -->
+    <string name="error_database_read">Error al leer datos de la base de datos.</string>
+    <string name="error_database_write">Error al guardar datos en la base de datos.</string>
+    <string name="error_database_delete">Error al eliminar datos de la base de datos.</string>
+    <string name="error_database_corrupted">Los datos de la base de datos están corruptos. Por favor, reinstala la aplicación.</string>
+    <string name="error_database_unknown">Ocurrió un error en la base de datos.</string>
+
+    <!-- Error Messages - NFC -->
+    <string name="error_nfc_read">Error al leer etiqueta NFC. Por favor, inténtalo de nuevo.</string>
+    <string name="error_nfc_write">Error al escribir en etiqueta NFC. Por favor, inténtalo de nuevo.</string>
+    <string name="error_nfc_tag_lost">Conexión con etiqueta NFC perdida. Por favor, mantén la etiqueta más cerca.</string>
+    <string name="error_nfc_unknown">Ocurrió un error de NFC. Por favor, inténtalo de nuevo.</string>
+
+    <!-- Error Messages - Permission -->
+    <string name="error_permission_notification">Se requiere permiso de notificaciones para alertas.</string>
+    <string name="error_permission_unknown">Permiso denegado: %1$s</string>
+
+    <!-- Error Messages - Service -->
+    <string name="error_service_start">Error al iniciar el servicio de monitoreo.</string>
+    <string name="error_service_stop">Error al detener el servicio de monitoreo.</string>
+    <string name="error_service_not_running">El servicio de monitoreo no está en ejecución.</string>
+    <string name="error_service_unknown">Ocurrió un error en el servicio.</string>
+
+    <!-- Error Messages - Validation -->
+    <string name="error_validation_invalid">Entrada no válida para: %1$s</string>
+    <string name="error_validation_range">%1$s debe estar entre %2$d y %3$d</string>
+    <string name="error_validation_required">%1$s es requerido</string>
+
+    <!-- Error Messages - File -->
+    <string name="error_file_not_found">Archivo no encontrado: %1$s</string>
+    <string name="error_file_read">Error al leer archivo.</string>
+    <string name="error_file_write">Error al escribir archivo.</string>
+    <string name="error_file_permission">Permiso de archivo denegado.</string>
+    <string name="error_file_unknown">Ocurrió un error de archivo.</string>
+
+    <!-- Additional UI Elements -->
+    <string name="arrow_right">→</string>
+    <string name="social_media_linkedin">LinkedIn</string>
+    <string name="social_media_github">GitHub</string>
+    <string name="partnership_title">Asociación</string>
+
+    <!-- Additional System Messages -->
+    <string name="retry_button">Reintentar</string>
+    <string name="nfc_not_supported_error">NFC no está soportado en este dispositivo.</string>
+    <string name="nfc_disabled_error_turn_on">NFC está desactivado. Por favor, activa NFC en la configuración de tu dispositivo para habilitar el monitoreo.</string>
+    <string name="error_calculating_score">Error al calcular puntuación: %1$s</string>
+    <string name="error_calculating_period_score">Error al calcular puntuación del período: %1$s</string>
+
+    <!-- Missing Security Score Strings -->
+    <string name="loading_security_score">Calculando puntuación…</string>
+    <string name="refresh_score_button">Actualizar Puntuación</string>
+    <string name="security_level_excellent">Excelente</string>
+    <string name="security_level_good">Bueno</string>
+    <string name="security_level_moderate">Moderado</string>
+    <string name="security_level_poor">Pobre</string>
+    <string name="security_level_critical">Crítico</string>
+    <string name="security_score_detail_title">Detalles de Seguridad</string>
+
+    <!-- Missing Recommendations and Violations -->
+    <string name="recommendations_title">Recomendaciones</string>
+    <string name="violations_title">Violaciones</string>
+    <string name="no_recommendations_yet">No hay recomendaciones específicas en este momento. ¡Sigue con el buen trabajo!</string>
+    <string name="no_violations_detected">No se detectaron violaciones de seguridad en los últimos 7 días.</string>
+    <string name="security_score_violation_prefix">Violación: </string>
+
+    <!-- Missing Onboarding Strings -->
+    <string name="onboarding_button_get_started">Comenzar</string>
+    <string name="onboarding_button_next">Siguiente</string>
+    <string name="onboarding_button_previous">Anterior</string>
+    <string name="onboarding_page0_title">Bienvenido a NFC Manager</string>
+    <string name="onboarding_page0_description">Protege tu privacidad con monitoreo inteligente de NFC y alertas de seguridad</string>
+    <string name="onboarding_page0_feature1">Monitoreo NFC en tiempo real</string>
+    <string name="onboarding_page0_feature2">Diseño enfocado en privacidad</string>
+    <string name="onboarding_page0_feature3">UI inspirada en Nothing OS</string>
+    <string name="onboarding_page1_title">Monitoreo Inteligente</string>
+    <string name="onboarding_page1_description">El sistema avanzado de notificaciones te mantiene informado sobre la actividad NFC y el estado de seguridad</string>
+    <string name="onboarding_page1_feature1">Seguimiento de duración</string>
+    <string name="onboarding_page1_feature2">Alertas de nivel de seguridad</string>
+    <string name="onboarding_page1_feature3">Notificaciones inteligentes</string>
+    <string name="onboarding_page2_title">Puntuación de Seguridad</string>
+    <string name="onboarding_page2_description">Rastrea tu nivel de seguridad con nuestro sistema de puntuación inteligente y recibe recomendaciones personalizadas</string>
+    <string name="onboarding_page2_feature1">Calificación de seguridad de 5 niveles</string>
+    <string name="onboarding_page2_feature2">Recomendaciones personalizadas</string>
+    <string name="onboarding_page2_feature3">Seguimiento de violaciones</string>
+    <string name="onboarding_page3_title">Control Total</string>
+    <string name="onboarding_page3_description">Personaliza todo según tus preferencias</string>
+    <string name="onboarding_page3_feature1">Alertas personalizables</string>
+    <string name="onboarding_page3_feature2">Tema oscuro/claro</string>
+    <string name="onboarding_page3_feature3">9 idiomas</string>
+
 </resources>
