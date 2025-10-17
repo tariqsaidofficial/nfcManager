@@ -134,6 +134,7 @@
     <string name="tap_to_enable_nfc">I-tap dito para i-enable ang NFC sa system settings.</string>
     <string name="home_todays_activity_title">AKTIBIDAD NGAYON</string>
     <string name="events_logged_format">%1$d events na naitala</string>
+    <string name="view_all">Tingnan Lahat</string>
     <string name="enable_nfc_button">I-ENABLE ANG NFC SA SETTINGS</string>
 
     <!-- Activity Screen Strings -->

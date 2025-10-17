@@ -305,6 +305,7 @@ class NfcMonitoringService : Service() {
     
     /**
      * Check NFC usage duration and send alerts if needed
+     * Sends periodic reminders based on user settings
      */
     private suspend fun checkAndSendAlerts() {
         try {
@@ -326,18 +327,32 @@ class NfcMonitoringService : Service() {
                 return // Still in cooldown period
             }
             
-            // Check for long usage
-            if (usageDuration >= LONG_USAGE_THRESHOLD) {
+            // Send periodic reminders based on usage duration
+            val shouldSendAlert = when {
+                usageDuration >= 60 * 60 * 1000 -> true // Every 5 min after 1 hour
+                usageDuration >= 30 * 60 * 1000 -> true // Every 5 min after 30 min
+                usageDuration >= LONG_USAGE_THRESHOLD -> true // Every 5 min after 15 min
+                else -> false
+            }
+            
+            if (shouldSendAlert) {
+                val minutes = usageDuration / 60000
+                val severity = when {
+                    minutes >= 60 -> SecurityLevel.CRITICAL
+                    minutes >= 30 -> SecurityLevel.POOR
+                    else -> SecurityLevel.MODERATE
+                }
+                
                 withContext(Dispatchers.Main) {
                     appNotificationManager.sendSecurityAlert(
                         alertType = com.dxbmark.nfcmanager.utils.SecurityAlertType.NFC_ENABLED_TOO_LONG,
-                        severity = SecurityLevel.MODERATE,
-                        message = "NFC has been enabled for ${usageDuration / 60000} minutes"
+                        severity = severity,
+                        message = "NFC has been enabled for $minutes minutes"
                     )
                 }
                 lastAlertTime = currentTime
                 alertCount++
-                AppLogger.service("Security alert sent - Long NFC usage detected")
+                AppLogger.service("Security alert sent - NFC enabled for $minutes minutes (Alert #$alertCount)")
             }
         } catch (e: Exception) {
             AppLogger.e(TAG, "Error checking and sending alerts", e)

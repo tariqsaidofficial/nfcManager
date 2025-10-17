@@ -139,6 +139,7 @@
     <string name="tap_to_enable_nfc">Нажмите здесь, чтобы включить NFC в системных настройках.</string>
     <string name="home_todays_activity_title">СЕГОДНЯШНЯЯ АКТИВНОСТЬ</string>
     <string name="events_logged_format">Зарегистрировано %1$d событий</string>
+    <string name="view_all">Посмотреть все</string>
     <string name="enable_nfc_button">ВКЛЮЧИТЬ NFC В НАСТРОЙКАХ</string>
 
     <string name="activity_log_title">ЖУРНАЛ АКТИВНОСТИ</string>

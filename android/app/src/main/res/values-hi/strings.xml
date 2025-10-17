@@ -139,6 +139,7 @@
     <string name="tap_to_enable_nfc">सिस्टम सेटिंग्स में एनएफसी सक्षम करने के लिए यहां टैप करें।</string>
     <string name="home_todays_activity_title">आज की गतिविधि</string>
     <string name="events_logged_format">%1$d घटनाक्रम लॉग किए गए</string>
+    <string name="view_all">सभी देखें</string>
     <string name="enable_nfc_button">सेटिंग्स में एनएफसी सक्षम करें</string>
 
     <string name="activity_log_title">गतिविधि लॉग</string>

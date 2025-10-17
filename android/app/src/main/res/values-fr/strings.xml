@@ -72,6 +72,7 @@
 
     <!-- Traductions manquantes - complétant la traduction française -->
     <string name="events_logged_format">%1$d événements enregistrés</string>
+    <string name="view_all">Tout voir</string>
     <string name="activity_log_title">JOURNAL D\'ACTIVITÉ</string>
     <string name="activity_clear_all">Effacer Tout</string>
     <string name="activity_search_hint">Rechercher des événements...</string>

@@ -130,6 +130,7 @@
     <string name="tap_to_enable_nfc">點擊此處在系統設定中啟用 NFC。</string>
     <string name="home_todays_activity_title">今日活動</string>
     <string name="events_logged_format">已記錄 %1$d 個事件</string>
+    <string name="view_all">查看全部</string>
     <string name="enable_nfc_button">在設定中啟用 NFC</string>
 
     <string name="activity_log_title">活動日誌</string>

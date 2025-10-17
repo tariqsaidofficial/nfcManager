@@ -147,6 +147,7 @@
     <string name="tap_to_enable_nfc">اضغط هنا لتفعيل NFC في إعدادات النظام.</string>
     <string name="home_todays_activity_title">نشاط اليوم</string>
     <string name="events_logged_format">تم تسجيل %1$d أحداث</string>
+    <string name="view_all">عرض الكل</string>
     <string name="enable_nfc_button">تفعيل NFC في الإعدادات</string>
     <string name="security_score_card_title">مقياس الأمان</string>
 

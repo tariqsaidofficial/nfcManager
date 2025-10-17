@@ -139,6 +139,7 @@
     <string name="tap_to_enable_nfc">Tippen Sie hier, um NFC in den Systemeinstellungen zu aktivieren.</string>
     <string name="home_todays_activity_title">HEUTIGE AKTIVITÄT</string>
     <string name="events_logged_format">%1$d Ereignisse protokolliert</string>
+    <string name="view_all">Alle anzeigen</string>
     <string name="enable_nfc_button">NFC IN DEN EINSTELLUNGEN AKTIVIEREN</string>
     <string name="security_score_card_title">Sicherheitsbewertung</string>
 
