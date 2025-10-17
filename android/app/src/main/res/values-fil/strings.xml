@@ -431,6 +431,9 @@
     <string name="recommendation_keep_up_good_practices">Ipagpatuloy ang mabuting mga gawi sa seguridad!</string>
     <string name="recommendation_review_activity_log">Regular na suriin ang iyong NFC activity log para sa anumang hindi pangkaraniwang event</string>
     <string name="recommendation_nfc_disabled_secure">Ang NFC ay kasalukuyang naka-disable, na nagpapahusay ng seguridad. I-enable lamang ito kapag kailangan mong gumamit ng mga feature ng NFC.</string>
+    <string name="recommendation_nfc_disabled_no_data">Ang NFC ay kasalukuyang naka-disable. Walang kamakailang aktibidad na susuriin.</string>
+    <string name="recommendation_enable_nfc_when_needed">I-enable lamang ang NFC kapag kailangan mo ng mga contactless na feature tulad ng mga pagbabayad o pagbasa ng tag.</string>
+    <string name="recommendation_nfc_currently_disabled">Ang NFC ay kasalukuyang naka-disable. Ang score sa ibaba ay batay sa iyong kamakailang kasaysayan ng paggamit.</string>
 
     <!-- Security Violations -->
     <string name="violation_long_nfc_usage_name">Matagal na Pag-activate ng NFC</string>

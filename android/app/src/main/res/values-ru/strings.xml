@@ -395,6 +395,9 @@
     <string name="recommendation_keep_up_good_practices">Продолжайте следовать хорошим методам обеспечения безопасности!</string>
     <string name="recommendation_review_activity_log">Регулярно проверяйте журнал активности NFC на наличие необычных событий</string>
     <string name="recommendation_nfc_disabled_secure">NFC в настоящее время отключен, что повышает безопасность. Включайте его только при необходимости использования функций NFC.</string>
+    <string name="recommendation_nfc_disabled_no_data">NFC в настоящее время отключен. Нет недавней активности для анализа.</string>
+    <string name="recommendation_enable_nfc_when_needed">Включайте NFC только когда вам нужны бесконтактные функции, такие как платежи или чтение меток.</string>
+    <string name="recommendation_nfc_currently_disabled">NFC в настоящее время отключен. Оценка ниже основана на вашей недавней истории использования.</string>
 
     <!-- Security Violations -->
     <string name="violation_long_nfc_usage_name">Длительная активация NFC</string>

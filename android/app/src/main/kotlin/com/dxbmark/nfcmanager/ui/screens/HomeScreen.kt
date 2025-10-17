@@ -238,9 +238,12 @@ fun SecurityScoreQuickCard(
                 contentAlignment = Alignment.Center
             ) {
                 Text(
-                    text = "${securityScore.score}",
+                    text = if (securityScore.level == com.dxbmark.nfcmanager.utils.SecurityLevel.NOT_APPLICABLE) 
+                        stringResource(R.string.security_score_range_not_applicable) 
+                    else 
+                        "${securityScore.score}",
                     style = NothingTextStyles.HeaderTitle.copy(
-                        fontSize = 20.sp, // You can adjust this size later if needed
+                        fontSize = if (securityScore.level == com.dxbmark.nfcmanager.utils.SecurityLevel.NOT_APPLICABLE) 16.sp else 20.sp,
                         fontWeight = androidx.compose.ui.text.font.FontWeight.Bold
                     ),
                     color = securityScore.level.color

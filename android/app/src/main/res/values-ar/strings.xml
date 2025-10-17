@@ -473,6 +473,9 @@
     <string name="recommendation_keep_up_good_practices">استمر في ممارسات الأمان الجيدة!</string>
     <string name="recommendation_review_activity_log">راجع سجل نشاط NFC بانتظام لأي أحداث غير عادية</string>
     <string name="recommendation_nfc_disabled_secure">NFC معطل حالياً، مما يعزز الأمان. قم بتفعيله فقط عند الحاجة لاستخدام ميزات NFC.</string>
+    <string name="recommendation_nfc_disabled_no_data">NFC معطل حالياً. لا يوجد نشاط حديث لتحليله.</string>
+    <string name="recommendation_enable_nfc_when_needed">قم بتفعيل NFC فقط عند الحاجة لاستخدام ميزات اللاتلامس مثل المدفوعات أو قراءة العلامات.</string>
+    <string name="recommendation_nfc_currently_disabled">NFC معطل حالياً. النتيجة أدناه مبنية على سجل استخدامك الأخير.</string>
 
     <!-- Security Violations -->
     <string name="violation_long_nfc_usage_name">تفعيل NFC لفترة طويلة</string>

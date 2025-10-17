@@ -394,6 +394,9 @@
     <string name="recommendation_keep_up_good_practices">अच्छी सुरक्षा प्रथाओं को जारी रखें!</string>
     <string name="recommendation_review_activity_log">किसी भी असामान्य घटनाओं के लिए नियमित रूप से अपने एनएफसी गतिविधि लॉग की समीक्षा करें</string>
     <string name="recommendation_nfc_disabled_secure">एनएफसी वर्तमान में अक्षम है, जो सुरक्षा बढ़ाता है। इसे केवल तभी सक्षम करें जब आपको एनएफसी सुविधाओं का उपयोग करने की आवश्यकता हो।</string>
+    <string name="recommendation_nfc_disabled_no_data">एनएफसी वर्तमान में अक्षम है। विश्लेषण के लिए कोई हालिया गतिविधि नहीं।</string>
+    <string name="recommendation_enable_nfc_when_needed">केवल तभी एनएफसी सक्षम करें जब आपको संपर्क रहित सुविधाओं जैसे भुगतान या टैग पढ़ने की आवश्यकता हो।</string>
+    <string name="recommendation_nfc_currently_disabled">एनएफसी वर्तमान में अक्षम है। नीचे दिया गया स्कोर आपके हालिया उपयोग इतिहास पर आधारित है।</string>
 
     <!-- Security Violations -->
     <string name="violation_long_nfc_usage_name">लंबे समय तक एनएफसी सक्रियण</string>

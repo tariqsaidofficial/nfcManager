@@ -28,10 +28,10 @@ class OnboardingViewModel @Inject constructor(
         Log.e("OnboardingViewModel", "=== OnboardingViewModel.init() STARTED ===")
         // Initialize with default values to prevent crashes
         _isOnboardingCompleted.value = false
-        _isLoading.value = false
-        Log.e("OnboardingViewModel", "Initial values set - completed: false, loading: false")
-        // Don't check status immediately to prevent crashes
-        // checkOnboardingStatus()
+        _isLoading.value = true
+        Log.e("OnboardingViewModel", "Initial values set - completed: false, loading: true")
+        // Check onboarding status from database
+        checkOnboardingStatus()
         Log.e("OnboardingViewModel", "=== OnboardingViewModel.init() COMPLETED ===")
     }
 

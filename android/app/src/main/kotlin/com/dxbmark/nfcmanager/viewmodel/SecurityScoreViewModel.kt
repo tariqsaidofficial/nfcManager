@@ -48,6 +48,7 @@ class SecurityScoreViewModel @Inject constructor(
 
             try {
                 if (nfcAdapter == null) {
+                    // Device doesn't support NFC
                     _securityScore.value = SecurityScore(
                         score = 0,
                         level = SecurityLevel.NOT_APPLICABLE,
@@ -55,18 +56,38 @@ class SecurityScoreViewModel @Inject constructor(
                         recommendations = listOf(context.getString(R.string.nfc_not_supported_device))
                     )
                 } else if (!nfcAdapter.isEnabled) {
-                    _securityScore.value = SecurityScore(
-                        score = 100,
-                        level = SecurityLevel.EXCELLENT,
-                        violations = emptyList(),
-                        recommendations = listOf(context.getString(R.string.recommendation_nfc_disabled_secure))
-                    )
-                    repository.updateSecurityScore(100, SecurityLevel.EXCELLENT.name)
-                } else {
+                    // NFC is disabled - check historical data to provide meaningful score
                     val recentEvents = repository.getEventsFromLastDays(7).first()
-                    // privacyScoreCalculator.calculateSecurityScore() already returns SecurityScore with List<String>
+                    
+                    if (recentEvents.isEmpty()) {
+                        // No recent activity - NFC has been off, show neutral state
+                        _securityScore.value = SecurityScore(
+                            score = 0,
+                            level = SecurityLevel.NOT_APPLICABLE,
+                            violations = emptyList(),
+                            recommendations = listOf(
+                                context.getString(R.string.recommendation_nfc_disabled_no_data),
+                                context.getString(R.string.recommendation_enable_nfc_when_needed)
+                            )
+                        )
+                        repository.updateSecurityScore(0, SecurityLevel.NOT_APPLICABLE.name)
+                    } else {
+                        // Has historical data - calculate based on past usage
+                        val calculatedScore = privacyScoreCalculator.calculateSecurityScore(recentEvents)
+                        val adjustedRecommendations = mutableListOf<String>()
+                        adjustedRecommendations.add(context.getString(R.string.recommendation_nfc_currently_disabled))
+                        adjustedRecommendations.addAll(calculatedScore.recommendations)
+                        
+                        _securityScore.value = calculatedScore.copy(
+                            recommendations = adjustedRecommendations
+                        )
+                        repository.updateSecurityScore(calculatedScore.score, calculatedScore.level.name)
+                    }
+                } else {
+                    // NFC is enabled - calculate score based on recent events
+                    val recentEvents = repository.getEventsFromLastDays(7).first()
                     val calculatedScore = privacyScoreCalculator.calculateSecurityScore(recentEvents)
-                    _securityScore.value = calculatedScore // Use directly
+                    _securityScore.value = calculatedScore
                     repository.updateSecurityScore(calculatedScore.score, calculatedScore.level.name)
                 }
             } catch (e: Exception) {

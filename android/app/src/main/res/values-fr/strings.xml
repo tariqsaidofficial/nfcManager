@@ -208,5 +208,11 @@
     <string name="failed_to_toggle_unknown_tag_blocking">Échec du basculement du blocage des tags inconnus : %1$s</string>
     <string name="failed_to_export_settings">Échec de l\'exportation des paramètres : %1$s</string>
     <string name="failed_to_cleanup_data">Échec du nettoyage des données : %1$s</string>
-    <string name="security_level_not_applicable">Not Applicable</string>
+    <string name="security_level_not_applicable">Non Applicable</string>
+    
+    <!-- Security Score Recommendations -->
+    <string name="recommendation_nfc_disabled_secure">NFC est actuellement désactivé, ce qui améliore la sécurité. Activez-le uniquement lorsque vous devez utiliser les fonctions NFC.</string>
+    <string name="recommendation_nfc_disabled_no_data">NFC est actuellement désactivé. Aucune activité récente à analyser.</string>
+    <string name="recommendation_enable_nfc_when_needed">Activez NFC uniquement lorsque vous devez utiliser des fonctions sans contact comme les paiements ou la lecture de tags.</string>
+    <string name="recommendation_nfc_currently_disabled">NFC est actuellement désactivé. Le score ci-dessous est basé sur votre historique d\'utilisation récent.</string>
 </resources>

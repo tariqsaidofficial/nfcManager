@@ -486,6 +486,9 @@
 
     <!-- SecurityScoreViewModel.kt -->
     <string name="recommendation_nfc_disabled_secure">NFC is currently disabled, which enhances security. Enable it only when you need to use NFC features.</string>
+    <string name="recommendation_nfc_disabled_no_data">NFC is currently disabled. No recent activity to analyze.</string>
+    <string name="recommendation_enable_nfc_when_needed">Enable NFC only when you need to use contactless features like payments or tag reading.</string>
+    <string name="recommendation_nfc_currently_disabled">NFC is currently disabled. The score below is based on your recent usage history.</string>
     <string name="error_calculating_score">Error calculating score: %1$s</string>
     <string name="error_calculating_period_score">Error calculating period score: %1$s</string>
 

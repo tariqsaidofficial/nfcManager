@@ -395,6 +395,9 @@
     <string name="recommendation_keep_up_good_practices">¡Mantén las buenas prácticas de seguridad!</string>
     <string name="recommendation_review_activity_log">Revisa regularmente tu registro de actividad NFC para detectar eventos inusuales</string>
     <string name="recommendation_nfc_disabled_secure">NFC está actualmente desactivado, lo que mejora la seguridad. Actívalo solo cuando necesites usar funciones NFC.</string>
+    <string name="recommendation_nfc_disabled_no_data">NFC está actualmente desactivado. No hay actividad reciente para analizar.</string>
+    <string name="recommendation_enable_nfc_when_needed">Activa NFC solo cuando necesites usar funciones sin contacto como pagos o lectura de etiquetas.</string>
+    <string name="recommendation_nfc_currently_disabled">NFC está actualmente desactivado. La puntuación a continuación se basa en tu historial de uso reciente.</string>
 
     <!-- Security Violations -->
     <string name="violation_long_nfc_usage_name">Activación prolongada de NFC</string>

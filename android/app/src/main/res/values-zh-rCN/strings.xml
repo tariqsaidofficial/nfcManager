@@ -399,6 +399,9 @@
     <string name="recommendation_keep_up_good_practices">繼續保持良好的安全實踐！</string>
     <string name="recommendation_review_activity_log">定期查看您的 NFC 活動日誌以查找任何異常事件</string>
     <string name="recommendation_nfc_disabled_secure">NFC 目前已停用，這增強了安全性。僅在需要使用 NFC 功能時啟用它。</string>
+    <string name="recommendation_nfc_disabled_no_data">NFC 目前已停用。沒有最近的活動可供分析。</string>
+    <string name="recommendation_enable_nfc_when_needed">僅在需要使用非接觸式功能（如付款或標籤讀取）時啟用 NFC。</string>
+    <string name="recommendation_nfc_currently_disabled">NFC 目前已停用。以下分數基於您最近的使用歷史。</string>
 
     <!-- Security Violations -->
     <string name="violation_long_nfc_usage_name">NFC 長時間啟用</string>

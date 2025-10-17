@@ -1,8 +1,8 @@
 apply plugin: "com.android.application"
 apply plugin: "org.jetbrains.kotlin.android"
-// apply plugin: "kotlin-kapt" // Temporarily disabled - Kotlin version conflict
-// apply plugin: "dagger.hilt.android.plugin" // Temporarily disabled - Kotlin version conflict
-// apply plugin: "com.google.gms.google-services" // Temporarily disabled - Kotlin version conflict
+apply plugin: "kotlin-kapt"
+apply plugin: "dagger.hilt.android.plugin"
+// apply plugin: "com.google.gms.google-services" // Temporarily disabled - Firebase not needed yet
 
 /**
  * Official Android configuration for NFC Manager
@@ -72,8 +72,8 @@ android {
         applicationId 'com.dxbmark.nfcmanager'
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 1
-        versionName "1.0.0"
+        versionCode 2
+        versionName "1.0.1"
         
         // NFC Manager specific configurations
         multiDexEnabled true
@@ -162,11 +162,11 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.7.0'
     implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.7.0'
     
-    // Room Database (Temporarily disabled - kapt conflict)
-    // def room_version = "2.6.1"
-    // implementation "androidx.room:room-runtime:$room_version"
-    // implementation "androidx.room:room-ktx:$room_version"
-    // kapt "androidx.room:room-compiler:$room_version"
+    // Room Database
+    def room_version = "2.6.1"
+    implementation "androidx.room:room-runtime:$room_version"
+    implementation "androidx.room:room-ktx:$room_version"
+    kapt "androidx.room:room-compiler:$room_version"
     
     // Navigation Component (Official Navigation - Updated to 2.7.7)
     implementation 'androidx.navigation:navigation-compose:2.7.7'
@@ -177,10 +177,10 @@ dependencies {
     // Kotlin Coroutines (Asynchronous Programming)
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3'
 
-    // Hilt Dependencies (Temporarily disabled - Kotlin version conflict)
-    // implementation "com.google.dagger:hilt-android:$rootProject.hilt_version"
-    // kapt "com.google.dagger:hilt-compiler:$rootProject.hilt_version"
-    // implementation 'androidx.hilt:hilt-navigation-compose:1.2.0' // Added for Hilt Compose Navigation
+    // Hilt Dependencies
+    implementation "com.google.dagger:hilt-android:$rootProject.hilt_version"
+    kapt "com.google.dagger:hilt-compiler:$rootProject.hilt_version"
+    implementation 'androidx.hilt:hilt-navigation-compose:1.2.0' // Added for Hilt Compose Navigation
     
     // Debug tools for Jetpack Compose
     debugImplementation 'androidx.compose.ui:ui-tooling'
