@@ -2,6 +2,7 @@ apply plugin: "com.android.application"
 apply plugin: "org.jetbrains.kotlin.android"
 apply plugin: "kotlin-kapt"
 apply plugin: "dagger.hilt.android.plugin" // Added Hilt plugin
+apply plugin: "com.google.gms.google-services" // Google Services plugin for Firebase
 
 /**
  * Official Android configuration for NFC Manager
@@ -102,7 +103,7 @@ android {
             signingConfig signingConfigs.debug
             minifyEnabled false
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
-            applicationIdSuffix ".debug"
+            // applicationIdSuffix ".debug" // Removed for Firebase compatibility
             debuggable true
         }
         release {
@@ -184,6 +185,18 @@ dependencies {
     // Debug tools for Jetpack Compose
     debugImplementation 'androidx.compose.ui:ui-tooling'
     debugImplementation 'androidx.compose.ui:ui-test-manifest'
+
+    // Firebase BoM (Bill of Materials) - Manages all Firebase library versions
+    implementation platform('com.google.firebase:firebase-bom:34.4.0')
+    
+    // Firebase Analytics (no version needed when using BoM)
+    implementation 'com.google.firebase:firebase-analytics'
+    
+    // Firebase Crashlytics (optional - for crash reporting)
+    // implementation 'com.google.firebase:firebase-crashlytics'
+    
+    // Firebase Performance Monitoring (optional)
+    // implementation 'com.google.firebase:firebase-perf'
 
 }
 

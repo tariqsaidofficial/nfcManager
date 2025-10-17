@@ -33,6 +33,9 @@ buildscript {
         
         // Hilt Android Gradle Plugin
         classpath "com.google.dagger:hilt-android-gradle-plugin:$hilt_version"
+        
+        // Google Services Plugin for Firebase (Latest version)
+        classpath 'com.google.gms:google-services:4.4.4'
     }
 }
 

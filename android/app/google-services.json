@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "523060321831",
+    "project_id": "nfc-manager-6ff95",
+    "storage_bucket": "nfc-manager-6ff95.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:523060321831:android:dd5052b2ba66b71916f802",
+        "android_client_info": {
+          "package_name": "com.dxbmark.nfcmanager"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBG9bGulJtBE4kVOe1kmIq30okASEEXjbo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
