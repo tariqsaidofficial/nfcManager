@@ -188,6 +188,7 @@
     <string name="sound_play_error_null">Cannot play sound: Default URI is null.</string>
     <string name="sound_play_error_corrupted">Cannot play sound: Ringtone not found or corrupted.</string>
     <string name="sound_play_error_general">Error playing sound: %1$s</string>
+    <string name="sound_selection_failed">Failed to select sound: %1$s</string>
     <string name="choose_custom_sound">Choose Custom Sound</string>
     <string name="use_system_default_sound">Use System Default Sound</string>
     <string name="sound_playing_indicator">Playing</string>

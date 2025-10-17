@@ -175,6 +175,7 @@
     <string name="sound_play_error_null">لا يمكن تشغيل الصوت: URI الافتراضي فارغ.</string>
     <string name="sound_play_error_corrupted">لا يمكن تشغيل الصوت: النغمة غير موجودة أو تالفة.</string>
     <string name="sound_play_error_general">خطأ في تشغيل الصوت: %1$s</string>
+    <string name="sound_selection_failed">فشل في اختيار الصوت: %1$s</string>
     <string name="choose_custom_sound">اختيار صوت مخصص</string>
     <string name="use_system_default_sound">استخدام صوت النظام الافتراضي</string>
     <string name="sound_playing_indicator">قيد التشغيل</string>

@@ -1,6 +1,11 @@
 package com.dxbmark.nfcmanager.ui.screens
 
 import android.app.Activity
+import android.content.BroadcastReceiver
+import android.content.Context
+import android.content.Intent
+import android.content.IntentFilter
+import android.nfc.NfcAdapter
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -42,6 +47,7 @@ fun HomeScreen(
     val context = LocalContext.current
     val lifecycleOwner = LocalLifecycleOwner.current
 
+    // Observe lifecycle events
     DisposableEffect(lifecycleOwner) {
         val observer = LifecycleEventObserver { _, event ->
             if (event == Lifecycle.Event.ON_RESUME) {
@@ -51,6 +57,25 @@ fun HomeScreen(
         lifecycleOwner.lifecycle.addObserver(observer)
         onDispose {
             lifecycleOwner.lifecycle.removeObserver(observer)
+        }
+    }
+
+    // Monitor NFC state changes in real-time
+    DisposableEffect(context) {
+        val nfcStateReceiver = object : BroadcastReceiver() {
+            override fun onReceive(context: Context?, intent: Intent?) {
+                if (intent?.action == NfcAdapter.ACTION_ADAPTER_STATE_CHANGED) {
+                    // NFC state changed, refresh the status
+                    viewModel.refreshNfcStatus()
+                }
+            }
+        }
+
+        val filter = IntentFilter(NfcAdapter.ACTION_ADAPTER_STATE_CHANGED)
+        context.registerReceiver(nfcStateReceiver, filter)
+
+        onDispose {
+            context.unregisterReceiver(nfcStateReceiver)
         }
     }
 

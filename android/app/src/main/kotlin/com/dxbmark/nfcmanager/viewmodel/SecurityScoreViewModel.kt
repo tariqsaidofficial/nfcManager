@@ -38,6 +38,18 @@ class SecurityScoreViewModel @Inject constructor(
 
     init {
         calculateSecurityScore()
+        // Observe NFC state changes and recalculate score
+        observeNfcStateChanges()
+    }
+    
+    private fun observeNfcStateChanges() {
+        viewModelScope.launch {
+            // Monitor settings changes that might indicate NFC state change
+            repository.getSettings().collect {
+                // Recalculate score when settings change
+                calculateSecurityScore()
+            }
+        }
     }
 
     fun calculateSecurityScore() {

@@ -42,12 +42,36 @@ fun NotificationSoundSettingsScreen(
 
     var currentRingtone by remember { mutableStateOf<Ringtone?>(null) }
     var isPlayingSound by remember { mutableStateOf(false) }
+    val snackbarHostState = remember { SnackbarHostState() }
 
     // Stop sound when the composable is disposed
     DisposableEffect(Unit) {
         onDispose {
             currentRingtone?.stop()
             isPlayingSound = false
+        }
+    }
+
+    // Observe success/error messages from ViewModel
+    LaunchedEffect(Unit) {
+        viewModel.successMessage.collectLatest { message ->
+            message?.let {
+                snackbarHostState.showSnackbar(
+                    message = it,
+                    duration = SnackbarDuration.Short
+                )
+            }
+        }
+    }
+
+    LaunchedEffect(Unit) {
+        viewModel.errorMessage.collectLatest { message ->
+            message?.let {
+                snackbarHostState.showSnackbar(
+                    message = it,
+                    duration = SnackbarDuration.Long
+                )
+            }
         }
     }
 
@@ -58,12 +82,21 @@ fun NotificationSoundSettingsScreen(
                 currentRingtone?.stop() // Stop any currently playing sound before changing
                 isPlayingSound = false
                 try {
+                    // Try to get persistent permission, but don't fail if not available
                     val takeFlags: Int = Intent.FLAG_GRANT_READ_URI_PERMISSION
-                    context.contentResolver.takePersistableUriPermission(it, takeFlags)
+                    try {
+                        context.contentResolver.takePersistableUriPermission(it, takeFlags)
+                    } catch (e: SecurityException) {
+                        // Some content providers don't support persistent permissions
+                        // This is OK - we'll still save the URI and it will work for this session
+                    }
                     viewModel.updateCustomNotificationSound(it.toString())
-                } catch (e: SecurityException) {
-                    viewModel.updateCustomNotificationSound(it.toString())
-                    Toast.makeText(context, context.getString(R.string.sound_access_warning), Toast.LENGTH_LONG).show()
+                } catch (e: Exception) {
+                    Toast.makeText(
+                        context, 
+                        context.getString(R.string.sound_selection_failed, e.localizedMessage ?: "Unknown error"), 
+                        Toast.LENGTH_LONG
+                    ).show()
                 }
             }
         }
@@ -89,7 +122,8 @@ fun NotificationSoundSettingsScreen(
                     titleContentColor = MaterialTheme.colorScheme.onPrimaryContainer,
                 )
             )
-        }
+        },
+        snackbarHost = { SnackbarHost(hostState = snackbarHostState) }
     ) { paddingValues ->
         Column(
             modifier = Modifier
