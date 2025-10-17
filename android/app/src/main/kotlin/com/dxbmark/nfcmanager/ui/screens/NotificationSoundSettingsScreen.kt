@@ -53,25 +53,25 @@ fun NotificationSoundSettingsScreen(
     }
 
     // Observe success/error messages from ViewModel
-    LaunchedEffect(Unit) {
-        viewModel.successMessage.collectLatest { message ->
-            message?.let {
-                snackbarHostState.showSnackbar(
-                    message = it,
-                    duration = SnackbarDuration.Short
-                )
-            }
+    val uiState by viewModel.uiState.collectAsState()
+    
+    LaunchedEffect(uiState.successMessage) {
+        uiState.successMessage?.let { message ->
+            snackbarHostState.showSnackbar(
+                message = message,
+                duration = SnackbarDuration.Short
+            )
+            viewModel.clearMessages()
         }
     }
 
-    LaunchedEffect(Unit) {
-        viewModel.errorMessage.collectLatest { message ->
-            message?.let {
-                snackbarHostState.showSnackbar(
-                    message = it,
-                    duration = SnackbarDuration.Long
-                )
-            }
+    LaunchedEffect(uiState.errorMessage) {
+        uiState.errorMessage?.let { message ->
+            snackbarHostState.showSnackbar(
+                message = message,
+                duration = SnackbarDuration.Long
+            )
+            viewModel.clearMessages()
         }
     }
 
