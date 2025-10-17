@@ -16,7 +16,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
-// import androidx.compose.ui.platform.LocalContext // This import will be unused after the change
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -25,6 +25,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.dxbmark.nfcmanager.BuildConfig
 import com.dxbmark.nfcmanager.R
 import com.dxbmark.nfcmanager.ui.theme.NothingTextStyles
 
@@ -33,9 +34,16 @@ import com.dxbmark.nfcmanager.ui.theme.NothingTextStyles
 fun AboutScreen(
     onNavigateBack: () -> Unit
 ) {
-    // val context = LocalContext.current // Removed this line
+    val context = LocalContext.current
     val uriHandler = LocalUriHandler.current
-    val appVersion = "1.0.0" // Hard-coded for now, can be replaced with BuildConfig.VERSION_NAME when available
+    
+    // Get version info from BuildConfig (automatically updated from build.gradle)
+    val appVersion = try {
+        val packageInfo = context.packageManager.getPackageInfo(context.packageName, 0)
+        packageInfo.versionName ?: BuildConfig.VERSION_NAME
+    } catch (e: Exception) {
+        BuildConfig.VERSION_NAME // Fallback to BuildConfig
+    }
 
     Scaffold(
         topBar = {
