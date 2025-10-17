@@ -9,6 +9,7 @@ import com.dxbmark.nfcmanager.data.repository.NFCRepository
 import com.dxbmark.nfcmanager.utils.PrivacyScoreCalculator
 import com.dxbmark.nfcmanager.utils.SecurityLevel
 import com.dxbmark.nfcmanager.utils.SecurityScore
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -25,11 +26,12 @@ class SecurityScoreViewModel @Inject constructor(
     val isLoading: StateFlow<Boolean> = _isLoading.asStateFlow()
 
     // SecurityScore expects List<String> for recommendations and violations
+    private val _securityScore = MutableStateFlow(
         SecurityScore(
             score = 0,
             level = SecurityLevel.NOT_APPLICABLE,
             violations = emptyList(), // Correct type: List<String>
-            recommendations = listOf(application.getString(R.string.loading_security_score)) // Correct type: List<String>
+            recommendations = listOf(app.getString(R.string.loading_security_score)) // Correct type: List<String>
         )
     )
     val securityScore: StateFlow<SecurityScore> = _securityScore.asStateFlow()
@@ -53,7 +55,7 @@ class SecurityScoreViewModel @Inject constructor(
     fun calculateSecurityScore() {
         viewModelScope.launch {
             _isLoading.value = true
-            val context = application.applicationContext
+            val context = app.applicationContext
             val nfcAdapter = NfcAdapter.getDefaultAdapter(context)
 
             try {
@@ -121,7 +123,7 @@ class SecurityScoreViewModel @Inject constructor(
     fun getSecurityScoreForPeriod(days: Int) {
         viewModelScope.launch {
             _isLoading.value = true
-            val context = application.applicationContext
+            val context = app.applicationContext
             try {
                 val events = repository.getEventsFromLastDays(days).first()
                 val calculatedScore = privacyScoreCalculator.calculateSecurityScore(events)
