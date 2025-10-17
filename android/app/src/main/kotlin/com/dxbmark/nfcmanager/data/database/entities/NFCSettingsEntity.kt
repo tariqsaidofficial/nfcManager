@@ -28,7 +28,8 @@ data class NFCSettingsEntity(
     val vibrationEnabled: Boolean = true,
     val soundEnabled: Boolean = true, // General toggle for if custom/default sounds play
     val notificationStyle: String = "standard",
-    val customNotificationSoundUri: String? = null, // <<< NEW FIELD: URI for custom notification sound
+    val customNotificationSoundUri: String? = null, // URI for custom notification sound
+    val showOngoingNotification: Boolean = true, // Allow dismissing status notification
 
     // Performance
     val batteryOptimized: Boolean = false,

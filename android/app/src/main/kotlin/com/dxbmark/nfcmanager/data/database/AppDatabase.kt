@@ -33,7 +33,7 @@ class Converters {
         NFCEventEntity::class,
         NFCSettingsEntity::class
     ],
-    version = 2,
+    version = 3,
     exportSchema = false,
     autoMigrations = []
 )
@@ -62,7 +62,7 @@ abstract class AppDatabase : RoomDatabase() {
                     DATABASE_NAME
                 )
                     .addCallback(DatabaseCallback())
-                    .addMigrations(MIGRATION_1_2)
+                    .addMigrations(MIGRATION_1_2, MIGRATION_2_3)
                     .fallbackToDestructiveMigration() // For development
                     .build()
                 
@@ -91,6 +91,13 @@ abstract class AppDatabase : RoomDatabase() {
                 db.execSQL("ALTER TABLE nfc_settings ADD COLUMN isOnboardingCompleted INTEGER NOT NULL DEFAULT 0")
                 db.execSQL("ALTER TABLE nfc_settings ADD COLUMN lastSecurityScore INTEGER NOT NULL DEFAULT 100")
                 db.execSQL("ALTER TABLE nfc_settings ADD COLUMN securityLevel TEXT NOT NULL DEFAULT 'EXCELLENT'")
+            }
+        }
+        
+        private val MIGRATION_2_3 = object : Migration(2, 3) {
+            override fun migrate(db: SupportSQLiteDatabase) {
+                // Add showOngoingNotification column for v1.0.2
+                db.execSQL("ALTER TABLE nfc_settings ADD COLUMN showOngoingNotification INTEGER NOT NULL DEFAULT 1")
             }
         }
         

@@ -40,11 +40,16 @@ class NotificationManager @Inject constructor(
     
     /**
      * Creates NFC status notification with duration and security level
+     * @param isEnabled Whether NFC is currently enabled
+     * @param enabledDuration Duration NFC has been enabled in milliseconds
+     * @param securityLevel Current security level
+     * @param showOngoing Whether to show as ongoing notification (can be disabled by user)
      */
     fun createNfcStatusNotification(
         isEnabled: Boolean,
         enabledDuration: Long,
-        securityLevel: SecurityLevel
+        securityLevel: SecurityLevel,
+        showOngoing: Boolean = true
     ): Notification {
         // TODO: Localize title strings
         val title = if (isEnabled) "NFC Enabled" else "NFC Disabled"
@@ -79,8 +84,9 @@ class NotificationManager @Inject constructor(
             .setStyle(NotificationCompat.BigTextStyle().bigText(bigText))
             .setSmallIcon(android.R.drawable.stat_sys_data_bluetooth) // Using a more relevant icon
             .setColor(securityLevel.color.toArgb())
-            .setOngoing(true)
+            .setOngoing(showOngoing) // Allow user to control ongoing status
             .setAutoCancel(false)
+            .setOnlyAlertOnce(true) // Prevent repeated alerts
             .setPriority(getNotificationPriority(securityLevel))
             .setCategory(NotificationCompat.CATEGORY_STATUS)
             .setContentIntent(createMainActivityPendingIntent())
