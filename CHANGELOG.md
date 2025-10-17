@@ -5,6 +5,55 @@ All notable changes to the NFC Manager project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.1] - 2025-10-17
+
+### 🐛 Bug Fixes & Improvements
+
+#### Security Score Enhancements
+
+- Fixed: Security Score now shows "N/A" when NFC is disabled without data
+- Improved: More accurate security assessment when NFC is enabled
+- Added: Better user feedback for different NFC states
+
+#### Onboarding Fix
+
+- Fixed: Onboarding screen no longer appears on every app launch
+- Improved: Properly saves completion state to database
+- Added: Respects Clear Cache/Storage settings
+
+#### Localization
+
+- Added: 3 new translation strings for all 9 supported languages
+- Updated: Complete translation coverage across all languages
+- Fixed: Inconsistent translations resolved
+
+#### Technical Updates
+
+- Version Code: 2 (increased from 1)
+- Version Name: 1.0.1
+- Dependencies updated:
+  - Enabled Hilt dependency injection
+  - Enabled Room database
+  - Updated Compose BOM to 2024.04.00
+
+#### Build System
+
+- Fixed: Enabled kapt annotation processing
+- Improved: Build configuration optimized
+- Added: Comprehensive release documentation
+
+### Known Issues
+
+- None critical - all major issues resolved
+
+### Credits
+
+- Development Team
+- Translation Contributors
+- Beta Testers
+
+---
+
 ## [1.0.0] - 2025-10-17
 
 ### 🎉 Official Release - Production Ready
