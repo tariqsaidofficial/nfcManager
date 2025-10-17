@@ -201,8 +201,8 @@ class NotificationManager @Inject constructor(
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             // TODO: Channel names and descriptions should be string resources
             // NFC Status Channel
-            val nfcStatusChannelName = context.getString(R.string.notification_channel_nfc_status_name)
-            val nfcStatusChannelDesc = context.getString(R.string.notification_channel_nfc_status_description)
+            val nfcStatusChannelName = "NFC Status"
+            val nfcStatusChannelDesc = "NFC status updates and monitoring"
             val nfcStatusChannel = NotificationChannel(
                 NFC_STATUS_CHANNEL_ID,
                 nfcStatusChannelName,

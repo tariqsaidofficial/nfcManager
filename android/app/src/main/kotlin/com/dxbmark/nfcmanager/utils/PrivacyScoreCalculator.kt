@@ -1,10 +1,7 @@
 package com.dxbmark.nfcmanager.utils
 
-import androidx.compose.ui.graphics.Color
-import com.dxbmark.nfcmanager.data.database.entities.NFCEventEntity
-// import com.dxbmark.nfcmanager.ui.theme.NothingColors // Original import, check if still needed or replaced by direct Color values.
-
 import android.content.Context
+import androidx.compose.ui.graphics.Color
 import com.dxbmark.nfcmanager.R
 import com.dxbmark.nfcmanager.data.database.entities.NFCEventEntity
 import java.util.concurrent.TimeUnit

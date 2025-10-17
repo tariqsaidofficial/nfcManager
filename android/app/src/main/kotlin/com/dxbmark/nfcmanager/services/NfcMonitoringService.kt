@@ -310,7 +310,7 @@ class NfcMonitoringService : Service() {
      */
     private suspend fun checkAndSendAlerts() {
         try {
-            val settings = getSettings()
+            val settings = nfcRepository.getSettingsSync()
             
             // Only send alerts if Auto Reminder is enabled
             if (!settings.autoReminderEnabled) {

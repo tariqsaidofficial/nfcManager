@@ -17,6 +17,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
@@ -45,6 +46,8 @@ fun HomeScreen(
 ) {
     val uiState by viewModel.uiState.collectAsState()
     val todayEventCount by viewModel.todayEventCount.collectAsState()
+    val todayEvents by viewModel.todayEvents.collectAsState()
+    val recentEvents = todayEvents.take(5)
     val context = LocalContext.current
     val lifecycleOwner = LocalLifecycleOwner.current
 
@@ -322,11 +325,34 @@ fun SecurityScoreQuickCard(
                 )
             }
         }
-        Text(
-            text = java.text.SimpleDateFormat("HH:mm", java.util.Locale.getDefault())
-                .format(event.timestamp),
-            style = MaterialTheme.typography.bodySmall,
-            color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f)
-        )
+    }
+}
+
+/**
+ * Recent event item component
+ */
+@Composable
+fun RecentEventItem(event: NFCEventEntity) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(vertical = 4.dp),
+        horizontalArrangement = Arrangement.SpaceBetween,
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Column(modifier = Modifier.weight(1f)) {
+            Text(
+                text = event.message,
+                style = MaterialTheme.typography.bodyMedium,
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis
+            )
+            Text(
+                text = java.text.SimpleDateFormat("HH:mm", java.util.Locale.getDefault())
+                    .format(event.timestamp),
+                style = MaterialTheme.typography.bodySmall,
+                color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f)
+            )
+        }
     }
 }
